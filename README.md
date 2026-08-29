@@ -7,10 +7,10 @@ Causais (CLDs). Pessoas podem trabalhar pela interface visual; agentes podem ope
 artefatos em Markdown, validar o modelo e usar o motor público sem depender de um harness
 específico.
 
-![Editor do LoopViewer mostrando a demonstração Sobrecarga de Filas](docs/images/loopviewer-editor.png)
+![Apresentação ilustrada do LoopViewer destacando o backlog](docs/images/loopviewer-present.png)
 
 O projeto está na série `0.x`, é distribuído sob a [licença MIT](LICENSE) e inclui apenas uma
-demonstração anônima: **Sobrecarga de Filas**.
+demonstração anônima e ilustrada: **Sobrecarga de Filas**.
 
 ## O que você consegue fazer
 
@@ -129,6 +129,10 @@ maior sem acoplar o conteúdo a mensagens privadas, memória de conversa ou APIs
 - `sobrecarga-filas.loop.md`: fonte legível do mapa;
 - `sobrecarga-filas.story.md`: fonte legível da narrativa;
 - `sobrecarga-filas.public.json`: modelo e Presentation V2 usados na primeira execução.
+
+As 11 ilustrações otimizadas da demo ficam em `assets/demo/sobrecarga-filas/`. Elas são semeadas
+como assets locais, referenciadas por IDs estáveis nos nós e possuem texto alternativo. Os dois nós
+de entrada contextual permanecem tipográficos para preservar a hierarquia visual do mapa.
 
 A demonstração mostra como backlog, handoffs, custo de coordenação, latência e atalhos formam
 feedbacks concorrentes. Ela é inteiramente anônima e não representa dados de uma organização real.

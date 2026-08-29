@@ -16,6 +16,7 @@ import { analyzeDensity, resolveDensityProfile } from "../src/core/density.js";
 import { classifyLoop, discoverLoops } from "../src/core/loops.js";
 import { applySavedLayout, extractLayout } from "../src/app/layoutStorage.js";
 import { examples } from "../src/models/examples.js";
+import { exampleAssets } from "../src/models/exampleAssets.js";
 import { createStandaloneHtml } from "../src/export/standalone.js";
 import { alignedNormal, arcLengthTable, bezierPoint, chordNormal, pointAtArcDistance } from "../src/geometry/index.js";
 
@@ -315,6 +316,14 @@ test("demo examples are valid CLD models", () => {
     const result = validateModel(model);
     assert.deepEqual(result.errors, [], model.id);
   }
+});
+
+test("illustrated demo nodes reference every bundled public asset", () => {
+  const assetIds = new Set(exampleAssets.map(asset => asset.id));
+  const mediaNodes = examples[0].nodes.filter(node => node.media);
+  assert.equal(mediaNodes.length, 11);
+  assert.ok(mediaNodes.every(node => assetIds.has(node.media.assetId)));
+  assert.ok(exampleAssets.every(asset => asset.mime_type === "image/webp" && asset.alt_text));
 });
 
 test("extracts and reapplies a saved editorial layout", () => {

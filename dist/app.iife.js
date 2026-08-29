@@ -12241,6 +12241,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "DCP",
         label: "Demandas em\nCanal Paralelo",
+        media: { assetId: "sobrecarga-filas-dcp", altText: "Demandas entrando por canais laterais e contornando a entrada principal", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 647.003,
           y: 761.223
@@ -12249,6 +12250,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "AFC",
         label: "Ades\xE3o ao\nFunil Corporativo",
+        media: { assetId: "sobrecarga-filas-afc", altText: "Pessoas escolhendo entrar por um funil organizado", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 60.75,
           y: 508.885
@@ -12257,6 +12259,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "CCD",
         label: "Custo de Coordena\xE7\xE3o\npor Demanda",
+        media: { assetId: "sobrecarga-filas-ccd", altText: "V\xE1rias m\xE3os tentando coordenar a mesma pasta de trabalho", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 566.812,
           y: 615.351
@@ -12265,6 +12268,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "VF",
         label: "Visibilidade\nda Fila",
+        media: { assetId: "sobrecarga-filas-vf", altText: "Uma fila de cart\xF5es vis\xEDvel dentro de uma bandeja transparente", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 293.081,
           y: 834.456
@@ -12273,6 +12277,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "BLD",
         label: "Backlog\ndas \xC1reas",
+        media: { assetId: "sobrecarga-filas-bld", altText: "Uma caixa de entrada transbordando com cart\xF5es de demandas acumuladas", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 915.097,
           y: 505.65
@@ -12281,6 +12286,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "TCD",
         label: "Tempo de Ciclo\nda Demanda",
+        media: { assetId: "sobrecarga-filas-tcd", altText: "Um cart\xE3o parado em uma esteira circular ao lado de uma ampulheta", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 134.413,
           y: 671.448
@@ -12289,6 +12295,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "CAR",
         label: "Atalho Hier\xE1rquico\n/ Carteirada",
+        media: { assetId: "sobrecarga-filas-car", altText: "Uma m\xE3o retirando um cart\xE3o da fila para coloc\xE1-lo \xE0 frente", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 378.536,
           y: 583.838
@@ -12297,6 +12304,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "CRF",
         label: "Demandas via\nFluxo Formal",
+        media: { assetId: "sobrecarga-filas-crf", altText: "Cart\xF5es avan\xE7ando por uma \xFAnica faixa formal e organizada", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 627.849,
           y: 332.955
@@ -12305,6 +12313,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "DRC",
         label: "Handoffs\nentre \xC1reas",
+        media: { assetId: "sobrecarga-filas-drc", altText: "Uma pasta sendo passada entre diferentes esta\xE7\xF5es de trabalho", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 848.658,
           y: 828.45
@@ -12313,6 +12322,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "ACE",
         label: "Efici\xEAncia dos\nAceleradores",
+        media: { assetId: "sobrecarga-filas-ace", altText: "Engrenagens e uma rampa movendo cart\xF5es com pouco atrito", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 353.632,
           y: 221.219
@@ -12321,6 +12331,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       {
         id: "SCL",
         label: "Satisfa\xE7\xE3o\ndo Cliente",
+        media: { assetId: "sobrecarga-filas-scl", altText: "Uma cliente recebendo uma demanda conclu\xEDda em um atendimento", size: 96, labelGap: 8, labelPlacement: "below", fit: "cover", focalPoint: { x: 0.5, y: 0.5 } },
         position: {
           x: 154.152,
           y: 303.577
