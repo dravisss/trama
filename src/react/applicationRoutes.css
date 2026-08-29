@@ -1,0 +1,927 @@
+/* Canonical application route composition. This layer owns cross-route layout, states and
+   responsive contracts after the shell migration. */
+@layer routes {
+
+/* Story Studio owns the story frame only while its mode is active. Keeping
+   the frame mounted for the bridge is fine; showing it in the map Inspector
+   is not. */
+#react-story-frame-root > section[data-dock-content="story"] { display: none; }
+body[data-ui-mode="story"] #react-story-frame-root > section[data-dock-content="story"] { display: flex; }
+
+/* One navigation rail for every non-presenting mode. The workspace can still
+   be discovered through the tooltip, while the canvas keeps its space. */
+body.explore-mode .app,
+body.editor-mode .app,
+body[data-ui-mode="story"] .app {
+  grid-template-columns: 72px minmax(0, 1fr);
+}
+
+body.explore-mode .react-app-navigation,
+body.editor-mode .react-app-navigation,
+body[data-ui-mode="story"] .react-app-navigation {
+  display: flex;
+  width: 72px;
+  box-sizing: border-box;
+  padding: 22px 9px;
+  overflow: visible;
+  border-right: 1px solid var(--lv-foundation-color-line);
+  background: linear-gradient(180deg, rgba(255,253,245,.98), rgba(248,245,235,.98));
+}
+body.explore-mode .react-app-navigation .app-navigation-brand > span:last-child,
+body.editor-mode .react-app-navigation .app-navigation-brand > span:last-child,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-brand > span:last-child,
+body.explore-mode .react-app-navigation .app-navigation-foot,
+body.editor-mode .react-app-navigation .app-navigation-foot,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-foot,
+body.explore-mode .react-app-navigation .app-navigation-links button > span:last-child:not(.ui-button-label),
+body.editor-mode .react-app-navigation .app-navigation-links button > span:last-child:not(.ui-button-label),
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button > span:last-child:not(.ui-button-label),
+body.explore-mode .react-app-navigation .app-navigation-links button > .ui-button-label > span:last-child,
+body.editor-mode .react-app-navigation .app-navigation-links button > .ui-button-label > span:last-child,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button > .ui-button-label > span:last-child { display: none; }
+body.explore-mode .react-app-navigation .app-navigation-brand,
+body.editor-mode .react-app-navigation .app-navigation-brand,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-brand { justify-content: center; padding: 0; }
+body.explore-mode .react-app-navigation .app-navigation-links,
+body.editor-mode .react-app-navigation .app-navigation-links,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links { margin-top: 34px; }
+body.explore-mode .react-app-navigation .app-navigation-links button,
+body.editor-mode .react-app-navigation .app-navigation-links button,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button {
+  position: relative;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  min-height: 48px;
+  padding: 0;
+}
+body.explore-mode .react-app-navigation .app-navigation-links button:hover::after,
+body.explore-mode .react-app-navigation .app-navigation-links button:focus-visible::after,
+body.editor-mode .react-app-navigation .app-navigation-links button:hover::after,
+body.editor-mode .react-app-navigation .app-navigation-links button:focus-visible::after,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button:hover::after,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button:focus-visible::after {
+  content: attr(aria-label);
+  position: absolute;
+  z-index: 80;
+  top: 50%;
+  left: calc(100% + 12px);
+  min-width: max-content;
+  padding: 7px 9px;
+  border: 1px solid var(--lv-foundation-color-line);
+  border-radius: 7px;
+  color: var(--lv-foundation-color-paper);
+  background: var(--lv-foundation-color-forest950);
+  box-shadow: var(--lv-foundation-shadow-sm);
+  font-size: 10px;
+  font-weight: 700;
+  transform: translateY(-50%);
+}
+
+/* The map should own the available canvas in Explore and Story Studio. */
+body.explore-mode .map-area,
+body[data-ui-mode="story"] .map-area { min-width: 0; min-height: 0; }
+body.explore-mode #cld-root,
+body[data-ui-mode="story"] #cld-root { position: absolute; inset: 0; width: 100%; height: 100%; }
+body.explore-mode .explore-detail-panel { min-width: 0; overflow: auto; }
+.explore-detail-close {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--lv-foundation-color-lineStrong, var(--lv-foundation-color-line));
+  border-radius: 8px;
+  color: var(--lv-foundation-color-forest900, var(--lv-foundation-color-ink));
+  background: rgba(255,253,245,.86);
+  cursor: pointer;
+  font: 700 10px/1 "Noto Sans", system-ui, sans-serif;
+}
+.explore-detail-close:hover { border-color: var(--lv-foundation-color-moss600); background: var(--lv-foundation-color-sage100); }
+
+/* Storyboard was a legacy editor-dock entry with no useful content. Story
+   authoring now has one owner: Story Studio in the main application rail. */
+body.editor-mode .editor-dock [data-dock-content="story"] { display: none; }
+
+/* Story Studio: leave enough vertical room for a complete horizontal story
+   rail and keep the map readable after the dock is mounted. */
+body.redesigned-ui[data-ui-mode="story"] .stage {
+  grid-template-columns: minmax(0, 1fr) minmax(370px, 410px);
+  grid-template-rows: minmax(0, 1fr) minmax(250px, 28vh);
+}
+body.redesigned-ui[data-ui-mode="story"] #react-story-timeline-shell-root { min-height: 250px; }
+body.redesigned-ui[data-ui-mode="story"] .story-timeline-v2 { min-height: 250px; }
+body.redesigned-ui[data-ui-mode="story"] .story-v2-inspector-header { padding-top: 11px; padding-bottom: 9px; }
+body.redesigned-ui[data-ui-mode="story"] .story-v2-panel { padding-bottom: 22px; }
+body.redesigned-ui[data-ui-mode="story"] .story-timeline-v2 .story-timeline-card {
+  flex-basis: 150px;
+  width: 150px;
+  min-width: 150px;
+  height: 68px;
+  min-height: 68px;
+}
+body.redesigned-ui[data-ui-mode="story"] .story-timeline-v2 .story-timeline-card-main { padding: 7px 8px 7px 24px; }
+body.redesigned-ui[data-ui-mode="story"] .story-timeline-v2 .story-timeline-title { font-size: 9px; line-height: 1.2; }
+body.redesigned-ui[data-ui-mode="story"] .story-timeline-v2 .story-timeline-scene { min-width: 220px; }
+body.redesigned-ui[data-ui-mode="story"] .story-timeline-v2 .story-timeline-scene-header { width: 220px; max-width: 220px; }
+body.redesigned-ui[data-ui-mode="story"] .story-timeline-edit-mobile { display: none; }
+body.redesigned-ui[data-ui-mode="story"] .story-mobile-inspector-close { display: none; }
+
+/* Projects is a project context, not a map context. */
+body.workspace-mode .react-topbar .actions { display: none; }
+body.workspace-mode .workspace-home { padding-top: 30px; }
+body.workspace-mode .workspace-project-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 360px)); }
+
+/* The legacy editor rule hides every `.topbar .actions` block. React's
+   topbar intentionally keeps the map command menu as the stable export and
+   import entry point, so restore that action group for the map route. */
+body.redesigned-ui[data-ui-mode="map"] .react-topbar .actions { display: flex; }
+
+/* Presenter: make the card and controls resilient on narrow screens. */
+body.story-mode .presentation-card { max-width: min(620px, calc(100vw - 48px)); box-sizing: border-box; }
+body.story-mode .presentation-actions { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 720px) {
+  body.redesigned-ui[data-ui-mode="story"] .app { grid-template-columns: 1fr; grid-template-rows: 58px 54px minmax(0, 1fr); }
+  body.redesigned-ui[data-ui-mode="story"] .react-app-navigation { display: flex; }
+  body.redesigned-ui[data-ui-mode="story"] .topbar { min-height: 58px; height: 58px; padding: 0 14px; }
+  body.redesigned-ui.story-mode .app { grid-template-columns: 1fr; grid-template-rows: 58px minmax(0, 1fr); }
+  body.redesigned-ui.story-mode .react-app-navigation { display: flex; }
+  body.redesigned-ui.story-mode .topbar { grid-column: 1; padding: 0 14px; }
+  body.redesigned-ui.story-mode .topbar .breadcrumb-shell { display: none; }
+  body.redesigned-ui.story-mode .topbar .brand h1 { font-size: 17px; }
+  body.redesigned-ui.story-mode .presentation-card,
+  body.redesigned-ui.story-mode .presentation-card[data-scene-type="title"],
+  body.redesigned-ui.story-mode .presentation-card[data-scene-type="text"],
+  body.redesigned-ui.story-mode .presentation-card[data-scene-type="image"] {
+    top: 74px;
+    right: 14px;
+    bottom: 92px;
+    left: 14px;
+    width: auto;
+    max-width: none;
+    height: auto;
+    max-height: calc(100vh - 178px);
+    overflow: auto;
+    padding: 18px 16px;
+    transform: none;
+  }
+  body.redesigned-ui.story-mode .presentation-card[data-scene-type="title"] h3,
+  body.redesigned-ui.story-mode .presentation-card h3 { font-size: clamp(25px, 8vw, 34px); line-height: 1.08; }
+  body.redesigned-ui.story-mode .presentation-body { font-size: 12px; }
+  body.redesigned-ui.story-mode .presentation-actions {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 6px;
+    min-height: auto;
+    padding: 9px;
+  }
+  body.redesigned-ui.story-mode .presentation-actions button { min-height: 38px; font-size: 10px; }
+  body.redesigned-ui.story-mode #presentation-next { grid-column: 2; order: initial; }
+  body.redesigned-ui.story-mode #presentation-previous { grid-column: 1; }
+  body.redesigned-ui.story-mode #presentation-presenter-toggle { display: none; }
+}
+
+@media (max-width: 720px) {
+  body.redesigned-ui[data-ui-mode="story"] .stage,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="visual"] .stage,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="markdown"] .stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(340px, 1fr) 250px;
+    display: grid;
+  }
+  body.redesigned-ui[data-ui-mode="story"] .map-area,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="visual"] .map-area,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="markdown"] .map-area {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 340px;
+  }
+  body.redesigned-ui[data-ui-mode="story"] .editor-dock.story-studio-open,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="visual"] .editor-dock.story-studio-open,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="markdown"] .editor-dock.story-studio-open {
+    position: absolute;
+    z-index: 12;
+    top: 0;
+    right: 0;
+    bottom: 250px;
+    left: 0;
+    grid-column: 1;
+    grid-row: 1;
+    width: auto;
+    height: min(66vh, 520px);
+  }
+  body.redesigned-ui[data-ui-mode="story"] .editor-dock.story-studio-open .dock-panel,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="visual"] .editor-dock.story-studio-open .dock-panel,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="markdown"] .editor-dock.story-studio-open .dock-panel {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    margin: 0;
+    left: 0;
+  }
+  /* On a phone the Inspector is a deliberate sheet, opened from the timeline
+     and closed through its own control or Escape. */
+  body.redesigned-ui[data-ui-mode="story"] .editor-dock.story-studio-open,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="visual"] .editor-dock.story-studio-open,
+  body.redesigned-ui[data-ui-mode="story"][data-story-editor-mode="markdown"] .editor-dock.story-studio-open {
+    display: none;
+  }
+  body.redesigned-ui[data-ui-mode="story"] #react-story-timeline-shell-root { grid-column: 1; grid-row: 2; }
+  body.redesigned-ui[data-ui-mode="story"] .story-timeline-v2 { min-height: 250px; padding: 10px; }
+  body.redesigned-ui[data-ui-mode="story"] .map-controls,
+  body.explore-mode .map-controls,
+  body.editor-mode .map-controls {
+    top: 12px;
+    right: 12px;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    max-width: calc(100% - 24px);
+    transform: none;
+  }
+body.redesigned-ui[data-ui-mode="story"] .map-controls button,
+body.explore-mode .map-controls button,
+body.editor-mode .map-controls button { min-width: 32px; min-height: 32px; padding: 0 8px; font-size: 10px; }
+}
+
+.story-selection-bar {
+  position: absolute;
+  z-index: 18;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: min(300px, calc(100% - 24px));
+  padding: 6px 8px;
+  border: 1px solid rgba(38, 72, 52, .16);
+  border-radius: 9px;
+  color: var(--lv-foundation-color-forest950);
+  background: rgba(255, 253, 245, .96);
+  box-shadow: var(--lv-foundation-shadow-sm);
+  font-size: 10px;
+}
+.story-selection-bar strong { white-space: nowrap; font-size: 9px; letter-spacing: .04em; text-transform: uppercase; }
+.story-selection-bar span { overflow: hidden; color: var(--lv-foundation-color-muted); text-overflow: ellipsis; white-space: nowrap; }
+.story-selection-bar button { min-height: 28px; padding: 0 8px; border: 1px solid var(--lv-foundation-color-line); border-radius: 6px; color: var(--lv-foundation-color-ink); background: var(--lv-foundation-color-paper); font-size: 10px; font-weight: 700; white-space: nowrap; }
+.story-selection-bar button:last-child { border-color: var(--lv-foundation-color-forest800); color: var(--lv-foundation-color-paper); background: var(--lv-foundation-color-forest800); }
+body:not([data-ui-mode="story"]) .story-selection-bar { display: none; }
+@media (max-width: 720px) {
+  .story-selection-bar { right: 10px; bottom: 10px; gap: 6px; max-width: calc(100% - 20px); padding: 6px 7px; }
+  .story-selection-bar strong { display: none; }
+  .story-selection-bar span { flex: 1; }
+}
+
+/* Final mobile overrides after the desktop rail contract. */
+@media (max-width: 720px) {
+  body.explore-mode .app { grid-template-columns: 1fr; grid-template-rows: 58px 54px minmax(0, 1fr); }
+  body.explore-mode .react-app-navigation { display: flex; }
+  body.explore-mode .react-topbar { grid-area: 1 / 1 / 2 / -1; min-height: 58px; height: 58px; padding: 0 14px; }
+  body.explore-mode .react-topbar .breadcrumb-shell { display: none; }
+  body.explore-mode .stage { grid-area: 3 / 1 / -1 / -1; grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr); width: 100%; }
+  body.explore-mode .map-area { grid-column: 1; grid-row: 1; width: 100%; min-width: 0; }
+  body.explore-mode .explore-detail-panel { position: absolute; z-index: 30; right: 10px; bottom: 10px; left: 10px; width: auto; max-height: min(68vh, 560px); box-sizing: border-box; padding: 46px 16px 16px; border: 1px solid var(--lv-foundation-color-line); border-radius: 14px; background: rgba(255,253,245,.98); box-shadow: var(--lv-foundation-shadow-lg); }
+  body.explore-mode.explore-panel-closed .explore-detail-panel { display: none; }
+  body.explore-mode .explore-detail-close { top: 10px; right: 12px; }
+  body.redesigned-ui[data-ui-mode="story"] .story-timeline-create-actions { gap: 5px; }
+  body.redesigned-ui[data-ui-mode="story"] .story-timeline-edit-mobile { display: inline-flex; order: -1; }
+  body.redesigned-ui[data-ui-mode="story"] .story-mobile-inspector-close { display: inline-flex; flex: 0 0 auto; min-height: 29px; padding: 0 9px; border: 1px solid var(--lv-foundation-color-line); border-radius: 7px; color: var(--lv-foundation-color-forest950); background: var(--lv-foundation-color-paper); font-size: 9px; font-weight: 800; }
+  body.redesigned-ui[data-ui-mode="story"] .story-mobile-inspector-close:hover { border-color: var(--lv-foundation-color-moss600); background: var(--lv-foundation-color-sage100); }
+  body.redesigned-ui[data-ui-mode="story"].story-inspector-mobile-open .editor-dock.story-studio-open { position: absolute; z-index: 20; inset: 0 0 250px; display: grid; width: auto; height: auto; border: 1px solid var(--lv-foundation-color-line); border-radius: 0 0 14px 14px; box-shadow: var(--lv-foundation-shadow-lg); }
+  body.redesigned-ui[data-ui-mode="story"].story-inspector-mobile-open .editor-dock.story-studio-open .dock-panel { display: flex; width: 100%; }
+}
+
+@media (max-width: 720px) {
+  /* The mode rail stays reachable on narrow screens; the editor dock owns
+     its own overlay when opened. */
+  body.redesigned-ui.editor-mode .react-app-navigation,
+  body.redesigned-ui[data-ui-mode="map"] .react-app-navigation { display: flex; }
+  body.redesigned-ui.editor-mode .app,
+  body.redesigned-ui[data-ui-mode="map"] .app { grid-template-columns: 1fr; grid-template-rows: 58px 54px minmax(0, 1fr); }
+  body.redesigned-ui.editor-mode .react-topbar,
+  body.redesigned-ui[data-ui-mode="map"] .react-topbar { grid-column: 1 / -1; }
+  body.redesigned-ui.editor-mode .react-topbar .actions,
+  body.redesigned-ui[data-ui-mode="map"] .react-topbar .actions { display: flex; }
+}
+
+@media (max-width: 720px) {
+  /* The React rail is the mobile mode switcher. It replaces the former
+     hidden vertical rail without reserving an empty top band. */
+  body.redesigned-ui .react-app-navigation {
+    grid-area: 2 / 1 / 3 / -1;
+    width: auto;
+    min-height: 54px;
+    padding: 4px 8px;
+    overflow: hidden;
+    flex-direction: row;
+    border-right: 0;
+    border-bottom: 1px solid var(--lv-foundation-color-line);
+  }
+  body.redesigned-ui .react-app-navigation .app-navigation-brand,
+  body.redesigned-ui .react-app-navigation .app-navigation-foot { display: none; }
+  body.redesigned-ui .react-app-navigation .app-navigation-links {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    gap: 4px;
+    overflow-x: auto;
+  }
+  body.redesigned-ui .react-app-navigation .app-navigation-links button {
+    flex: 0 0 auto;
+    grid-template-columns: 20px auto;
+    min-height: 44px;
+    padding: 0 10px;
+    text-align: left;
+  }
+  body.redesigned-ui .react-app-navigation .app-navigation-links button > span:last-child:not(.ui-button-label),
+  body.redesigned-ui .react-app-navigation .app-navigation-links button > .ui-button-label > span:last-child { display: inline; }
+  body.redesigned-ui.workspace-mode .react-topbar .brand { display: flex; }
+  body.redesigned-ui .react-topbar { grid-area: 1 / 1 / 2 / -1; min-height: 58px; height: 58px; }
+  body.redesigned-ui .react-topbar .brand h1 { font-size: 18px; }
+  body.redesigned-ui .react-topbar .brand p { display: none; }
+  body.redesigned-ui #workspace-home,
+  body.redesigned-ui .stage { grid-area: 3 / 1 / -1 / -1; }
+
+  /* Present is an immersive surface: its explicit Close action is the
+     return path, so the mode rail must not reappear and span the canvas. */
+  body.redesigned-ui.story-mode .react-app-navigation { display: none; }
+  body.redesigned-ui.story-mode .react-topbar { grid-area: 1 / 1 / 2 / -1; }
+  body.redesigned-ui.story-mode .stage { grid-area: 2 / 1 / -1 / -1; }
+}
+
+@media (max-width: 720px) {
+  body.redesigned-ui.story-mode[data-presentation-study="lower-third"] .presentation-card {
+    top: auto;
+    right: 12px;
+    bottom: 96px;
+    left: 12px;
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: 190px;
+    overflow: auto;
+    padding: 15px 16px 12px;
+    transform: none;
+  }
+  body.redesigned-ui.story-mode[data-presentation-study="floating-card"] .presentation-card {
+    top: auto;
+    right: 12px;
+    bottom: 96px;
+    left: 12px;
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: 250px;
+    overflow: auto;
+    transform: none;
+  }
+  body.redesigned-ui.story-mode[data-presentation-study="inline-path"] .presentation-card {
+    top: auto;
+    right: 50%;
+    bottom: 78px;
+    left: auto;
+    width: auto;
+    height: auto;
+    max-width: calc(100% - 28px);
+    transform: translateX(50%);
+  }
+  body.redesigned-ui.story-mode[data-presentation-study="lower-third"] .presentation-card .presentation-actions,
+  body.redesigned-ui.story-mode[data-presentation-study="floating-card"] .presentation-card .presentation-actions,
+  body.redesigned-ui.story-mode[data-presentation-study="inline-path"] .presentation-card .presentation-actions {
+    position: static;
+    display: flex;
+    width: auto;
+    min-height: 0;
+    margin: 12px 0 0;
+    padding: 0;
+  }
+  body.redesigned-ui.story-mode[data-presentation-study="lower-third"] .presentation-actions button,
+  body.redesigned-ui.story-mode[data-presentation-study="floating-card"] .presentation-actions button,
+  body.redesigned-ui.story-mode[data-presentation-study="inline-path"] .presentation-actions button { min-height: 36px; font-size: 10px; }
+  body.redesigned-ui.story-mode[data-presentation-study="inline-path"] .presentation-inline-annotation { max-width: calc(100% - 28px); }
+}
+/* Phase 1 study: the existing Presentation V2 card becomes a map-anchored
+   relation tooltip only when explicitly requested by the URL. The card and
+   connector live in the map-area stacking context; camera and arrow styling
+   remain owned by the existing player. */
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .stage,
+body.story-mode[data-presentation-study="relation-tooltip"] .stage {
+  padding-bottom: 0;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .map-area,
+body.story-mode[data-presentation-study="relation-tooltip"] .map-area {
+  margin-right: 0;
+  background: radial-gradient(circle at 50% 46%, var(--lv-foundation-color-editorialTones-tonefffefb), var(--lv-foundation-color-editorialTones-tonef7f4e9));
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] #cld-root,
+body.story-mode[data-presentation-study="relation-tooltip"] #cld-root {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card {
+  position: absolute;
+  z-index: 12;
+  top: var(--story-card-top, 24px);
+  right: auto;
+  bottom: auto;
+  left: var(--story-card-left, 24px);
+  display: block;
+  width: min(380px, calc(100% - 40px));
+  max-width: none;
+  height: auto;
+  max-height: calc(100% - 40px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 17px 18px 15px;
+  border: 1px solid rgba(200, 197, 184, .95);
+  border-radius: 12px 18px 12px 18px;
+  background: rgba(255, 253, 245, .97);
+  box-shadow: 0 18px 48px rgba(43, 58, 46, .2);
+  transform: none;
+  translate: none;
+  animation: relation-card-enter 430ms cubic-bezier(.2, .8, .2, 1) 180ms both;
+  transition: box-shadow 240ms ease, border-color 240ms ease;
+  backdrop-filter: blur(14px);
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card[data-focus-kind="path"],
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card[data-focus-kind="path"],
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card[data-focus-kind="set"],
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card[data-focus-kind="set"] {
+  width: min(400px, calc(100% - 40px));
+  border-radius: 16px;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card[data-focus-kind="loop"],
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card[data-focus-kind="loop"] {
+  width: min(420px, calc(100% - 40px));
+  border-color: rgba(111, 154, 91, .58);
+  box-shadow: 0 22px 58px rgba(43, 58, 46, .22), 0 0 0 1px rgba(111, 154, 91, .08);
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card[data-scene-change="true"] .inspector-eyebrow,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card[data-scene-change="true"] .inspector-eyebrow {
+  letter-spacing: .16em;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card::before,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card::before {
+  display: none;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-progress,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-progress {
+  margin: -17px -18px 12px;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > h3,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > h3 {
+  margin: 5px 0 0;
+  color: var(--lv-foundation-color-forest900);
+  font: 600 clamp(21px, 2.2vw, 28px)/1.08 "Noto Serif", Georgia, serif;
+  text-align: left;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-body,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-body {
+  max-width: none;
+  margin: 8px 0 0;
+  color: var(--lv-foundation-color-moss600);
+  font: 500 12px/1.52 "Noto Serif", Georgia, serif;
+  text-align: left;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-relation-meta,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-relation-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 13px;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--lv-foundation-color-muted) 22%, transparent);
+  color: var(--lv-foundation-color-muted);
+  font: 700 9px/1.3 "Noto Sans", system-ui, sans-serif;
+  letter-spacing: .02em;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-relation-meta[hidden],
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-relation-meta[hidden] {
+  display: none;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-relation-sign,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-relation-sign {
+  display: inline-grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(111, 154, 91, .42);
+  border-radius: 50%;
+  color: var(--lv-foundation-color-forest800);
+  background: var(--lv-foundation-color-sage100);
+  font-size: 12px;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: auto;
+  min-height: 0;
+  margin: 12px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions button,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 82px;
+  min-width: 82px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font: 700 11px/1 "Noto Serif", Georgia, serif;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions #presentation-previous,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions #presentation-previous {
+  color: var(--lv-foundation-color-forest800);
+  border-color: rgba(200, 197, 184, .9);
+  background: rgba(255, 253, 245, .5);
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions #presentation-previous:disabled,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions #presentation-previous:disabled {
+  opacity: .52;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions #presentation-next,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions #presentation-next {
+  color: var(--lv-foundation-color-paper);
+  border-color: var(--lv-foundation-color-moss600);
+  background: var(--lv-foundation-color-moss600);
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions button:focus-visible,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions button:focus-visible {
+  outline: 3px solid rgba(111, 154, 91, .32);
+  outline-offset: 2px;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions .presentation-action-icon,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions .presentation-action-icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.7;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] #presentation-presenter-toggle,
+body.story-mode[data-presentation-study="relation-tooltip"] #presentation-presenter-toggle {
+  display: none;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-connector,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-connector {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-line,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-line {
+  fill: none;
+  stroke: var(--lv-foundation-color-moss600);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 4 5;
+  opacity: .8;
+  animation: relation-connector-enter 520ms cubic-bezier(.2, .8, .2, 1) 280ms both;
+}
+body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-dot,
+body.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-dot {
+  fill: var(--lv-foundation-color-moss600);
+  stroke: var(--lv-foundation-color-paper);
+  stroke-width: 2;
+  animation: relation-dot-enter 260ms ease-out 270ms both;
+}
+
+@keyframes relation-card-enter {
+  from { opacity: 0; filter: blur(3px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+@keyframes relation-connector-enter {
+  from { opacity: 0; stroke-dashoffset: 24; }
+  to { opacity: .8; stroke-dashoffset: 0; }
+}
+
+@keyframes relation-dot-enter {
+  from { opacity: 0; transform: scale(.55); transform-origin: center; }
+  to { opacity: 1; transform: scale(1); transform-origin: center; }
+}
+
+/* Atlas editorial is a third, additive Presentation V2 profile. It shares
+   the semantic card/connector contract with relation-tooltip, but uses a
+   broader editorial card and keeps the camera clear on its occupied side. */
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .stage,
+body.story-mode[data-presentation-study="atlas-editorial"] .stage { padding-bottom: 0; }
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .map-area,
+body.story-mode[data-presentation-study="atlas-editorial"] .map-area {
+  margin-right: 0;
+  background:
+    radial-gradient(circle at 58% 42%, rgba(255, 255, 250, .98), rgba(239, 239, 225, .94) 56%, rgba(224, 230, 214, .9)),
+    var(--lv-foundation-color-editorialTones-tonef7f4e9);
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .map-area::after,
+body.story-mode[data-presentation-study="atlas-editorial"] .map-area::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 190px color-mix(in srgb, var(--lv-foundation-color-forest900) 10%, transparent),
+    inset 0 -80px 110px color-mix(in srgb, var(--lv-foundation-color-moss600) 5%, transparent);
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] #cld-root,
+body.story-mode[data-presentation-study="atlas-editorial"] #cld-root { inset: 0; width: 100%; height: 100%; }
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card {
+  position: absolute;
+  z-index: 12;
+  top: 22px;
+  right: auto;
+  bottom: auto;
+  left: 22px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: min(428px, calc(100% - 48px));
+  max-width: none;
+  height: auto;
+  min-height: 292px;
+  max-height: min(472px, calc(100% - 40px));
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(176, 190, 171, .96);
+  border-radius: 14px 24px 14px 24px;
+  background: rgba(255, 254, 248, .965);
+  box-shadow: 0 28px 74px rgba(27, 48, 34, .2), 0 4px 16px rgba(27, 48, 34, .07);
+  transform: none;
+  translate: none;
+  backdrop-filter: blur(18px) saturate(1.12);
+  animation: atlas-card-settle 580ms cubic-bezier(.16, .78, .2, 1) both;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card::before,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 42px;
+  bottom: 22px;
+  left: 0;
+  display: block;
+  width: 3px;
+  margin: 0;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(180deg, var(--lv-foundation-color-accentStrong), var(--lv-foundation-color-moss600));
+  opacity: .78;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-progress,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-progress {
+  flex: 0 0 3px;
+  height: 3px;
+  margin: 0;
+  border-radius: 0;
+  background: var(--lv-semantic-color-border-default);
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .inspector-eyebrow,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .inspector-eyebrow {
+  padding: 17px 21px 0 22px;
+  color: var(--lv-semantic-color-action-accent);
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > h3,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > h3 {
+  margin: 10px 21px 0 22px;
+  color: var(--lv-foundation-color-forest900);
+  font: 600 clamp(25px, 2.25vw, 33px)/1.05 "Noto Serif", Georgia, serif;
+  letter-spacing: -.02em;
+  text-align: left;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-body,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-body {
+  min-height: 0;
+  max-width: none;
+  margin: 8px 21px 0 22px;
+  overflow: auto;
+  color: var(--lv-foundation-color-moss600);
+  font: 500 13px/1.58 "Noto Serif", Georgia, serif;
+  text-align: left;
+  scrollbar-width: thin;
+  scrollbar-color: var(--lv-semantic-color-border-strong) transparent;
+  animation: atlas-copy-rise 430ms cubic-bezier(.16, .78, .2, 1) both;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-relation-meta,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-relation-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 14px 21px 0 22px;
+  padding-top: 11px;
+  border-top: 1px solid color-mix(in srgb, var(--lv-foundation-color-muted) 24%, transparent);
+  color: var(--lv-foundation-color-muted);
+  font: 700 9px/1.3 "Noto Sans", system-ui, sans-serif;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-relation-sign,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-relation-sign {
+  display: inline-grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(103, 145, 86, .44);
+  border-radius: 50%;
+  color: var(--lv-foundation-color-forest800);
+  background: var(--lv-foundation-color-sage100);
+  font-size: 13px;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-actions,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-actions {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: auto;
+  min-height: 0;
+  margin: auto 21px 0 22px;
+  padding: 14px 0 17px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-actions button,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 98px;
+  height: 38px;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 9px;
+  font: 700 11px/1 "Noto Serif", Georgia, serif;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-actions #presentation-next,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-actions #presentation-next {
+  color: var(--lv-foundation-color-paper);
+  border-color: var(--lv-foundation-color-forest800);
+  background: var(--lv-foundation-color-forest800);
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] #presentation-presenter-toggle,
+body.story-mode[data-presentation-study="atlas-editorial"] #presentation-presenter-toggle { display: none; }
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-connector,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-connector {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-line,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-line {
+  fill: none;
+  stroke: var(--lv-foundation-color-moss600);
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-dasharray: 3 6;
+  opacity: .9;
+  animation: atlas-connector-enter 520ms cubic-bezier(.2, .8, .2, 1) both, atlas-connector-flow 1.2s linear infinite;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-halo,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-halo {
+  fill: none;
+  stroke: rgba(255, 254, 248, .94);
+  stroke-width: 8;
+  stroke-linecap: round;
+  opacity: .92;
+}
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-dot,
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-dot {
+  fill: var(--lv-semantic-color-action-accent);
+  stroke: var(--lv-foundation-color-paper);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--lv-semantic-color-action-accent) 36%, transparent));
+  animation: relation-dot-enter 260ms ease-out 220ms both;
+}
+
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="fit-map"],
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="fit-map"] { animation-name: atlas-card-dissolve; }
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="fit-focus"],
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="fit-focus"] { animation-name: atlas-card-settle; }
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="fit-set"],
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="fit-set"] { animation-name: atlas-card-glide; }
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="follow-path"],
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="follow-path"] { animation-name: atlas-card-path; }
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="fixed"],
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="fixed"] { animation-name: atlas-card-fixed; }
+body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="split"],
+body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card[data-camera-mode="split"] { animation-name: atlas-card-split; }
+
+@keyframes atlas-card-settle {
+  from { opacity: 0; transform: translateY(10px) scale(.975); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+@keyframes atlas-card-dissolve { from { opacity: 0; filter: blur(5px); } to { opacity: 1; filter: blur(0); } }
+@keyframes atlas-card-glide { from { opacity: 0; filter: blur(3px); transform: translateX(12px); } to { opacity: 1; filter: blur(0); transform: translateX(0); } }
+@keyframes atlas-card-path { from { opacity: 0; filter: blur(3px); transform: translateX(-10px) scale(.985); } to { opacity: 1; filter: blur(0); transform: translateX(0) scale(1); } }
+@keyframes atlas-card-fixed { from { opacity: 0; filter: saturate(.7) blur(3px); } to { opacity: 1; filter: saturate(1) blur(0); } }
+@keyframes atlas-card-split { from { opacity: 0; filter: blur(3px); transform: translateX(22px); } to { opacity: 1; filter: blur(0); transform: translateX(0); } }
+@keyframes atlas-copy-rise { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes atlas-connector-enter {
+  from { opacity: 0; }
+  to { opacity: .86; }
+}
+@keyframes atlas-connector-flow { to { stroke-dashoffset: -18; } }
+
+@media (max-width: 720px) {
+  body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card,
+  body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card {
+    top: auto;
+    right: 12px;
+    bottom: 92px;
+    left: 12px;
+    width: auto;
+    max-height: min(300px, calc(100% - 120px));
+    min-height: 0;
+    padding: 0;
+  }
+  body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-progress,
+  body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card > .presentation-progress { margin: 0; }
+  body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card,
+  body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card {
+    width: min(340px, calc(100% - 28px));
+    max-height: calc(100% - 28px);
+    padding: 15px 16px 13px;
+  }
+  body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-progress,
+  body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-progress {
+    margin: -15px -16px 10px;
+  }
+  body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions,
+  body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > .presentation-actions {
+    gap: 5px;
+    margin-top: 11px;
+  }
+  body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > h3,
+  body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card > h3 {
+    font-size: 21px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-card,
+  body.story-mode[data-presentation-study="relation-tooltip"] .presentation-card,
+  body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-line,
+  body.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-line,
+  body.redesigned-ui.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-dot,
+  body.story-mode[data-presentation-study="relation-tooltip"] .presentation-tooltip-dot {
+    animation: none;
+  }
+  body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-card,
+  body.story-mode[data-presentation-study="atlas-editorial"] .presentation-card,
+  body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-line,
+  body.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-line,
+  body.redesigned-ui.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-dot,
+  body.story-mode[data-presentation-study="atlas-editorial"] .presentation-tooltip-dot {
+    animation: none;
+  }
+}
+
+.node-media-editor {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(67, 82, 67, 0.16);
+}
+
+.node-media-editor input[type="file"] {
+  min-width: 0;
+  font-size: 11px;
+}
+
+.node-media-editor .dock-help {
+  display: block;
+  line-height: 1.35;
+}
+
+.dock-secondary {
+  justify-self: start;
+  border: 1px solid rgba(67, 82, 67, 0.2);
+  border-radius: 8px;
+  padding: 6px 9px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+}

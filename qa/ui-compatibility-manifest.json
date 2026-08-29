@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "owner": "unified-product-design-system",
+  "contracts": [
+    {
+      "id": "react-shell-root",
+      "kind": "mount-point",
+      "selector": "#react-root",
+      "consumers": ["src/react/main.jsx", "src/app.js"],
+      "removal": "R8/T-061"
+    },
+    {
+      "id": "workspace-home-root",
+      "kind": "mount-point",
+      "selector": "#workspace-home",
+      "consumers": ["src/react/main.jsx", "src/app/workspaceDomBridge.js"],
+      "removal": "R8/T-061"
+    },
+    {
+      "id": "canvas-surface-root",
+      "kind": "mount-point",
+      "selector": "#react-canvas-surface-root",
+      "consumers": ["src/react/main.jsx", "src/app/engineBridge.js"],
+      "removal": "R8/T-054"
+    },
+    {
+      "id": "story-frame-root",
+      "kind": "mount-point",
+      "selector": "#react-story-frame-root",
+      "consumers": ["src/react/main.jsx", "src/app/storyStudio/domBridge.js"],
+      "removal": "R8/T-053"
+    },
+    {
+      "id": "save-status",
+      "kind": "public-id",
+      "selector": "#save-status",
+      "consumers": ["src/app.js", "src/app/workspaceDomBridge.js"],
+      "removal": "R9/T-061"
+    }
+  ]
+}

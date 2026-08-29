@@ -1,0 +1,3768 @@
+{
+  "format": "loopviewer-project",
+  "version": 1,
+  "exported_at": "2026-07-21T00:00:00.000Z",
+  "project": {
+    "id": "unified-ui-qa",
+    "title": "LoopViewer UI QA",
+    "description_md": "Fixture isolada e determinística para regressão visual, interação e publicação."
+  },
+  "loops": [
+    {
+      "id": "ui-qa-8",
+      "title": "Routing QA 8",
+      "summary": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+      "description_md": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+      "model": {
+        "id": "ui-qa-8",
+        "title": "Routing QA 8",
+        "description": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+        "nodes": [
+          {
+            "id": "factor-01",
+            "label": "Fator 01"
+          },
+          {
+            "id": "factor-02",
+            "label": "Fator 02"
+          },
+          {
+            "id": "factor-03",
+            "label": "Fator 03"
+          },
+          {
+            "id": "factor-04",
+            "label": "Fator 04"
+          },
+          {
+            "id": "factor-05",
+            "label": "Fator 05"
+          },
+          {
+            "id": "factor-06",
+            "label": "Fator 06"
+          },
+          {
+            "id": "factor-07",
+            "label": "Fator 07"
+          },
+          {
+            "id": "factor-08",
+            "label": "Fator 08"
+          }
+        ],
+        "edges": [
+          {
+            "id": "factor-01-factor-02",
+            "source": "factor-01",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-01 influencia factor-02."
+          },
+          {
+            "id": "factor-02-factor-03",
+            "source": "factor-02",
+            "target": "factor-03",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-02 influencia factor-03."
+          },
+          {
+            "id": "factor-03-factor-04",
+            "source": "factor-03",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-03 influencia factor-04."
+          },
+          {
+            "id": "factor-04-factor-05",
+            "source": "factor-04",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-04 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-06",
+            "source": "factor-05",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-05 influencia factor-06."
+          },
+          {
+            "id": "factor-06-factor-07",
+            "source": "factor-06",
+            "target": "factor-07",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-06 influencia factor-07."
+          },
+          {
+            "id": "factor-07-factor-08",
+            "source": "factor-07",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-07 influencia factor-08."
+          },
+          {
+            "id": "factor-08-factor-01",
+            "source": "factor-08",
+            "target": "factor-01",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-08 influencia factor-01."
+          },
+          {
+            "id": "factor-01-factor-03",
+            "source": "factor-01",
+            "target": "factor-03",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-03."
+          },
+          {
+            "id": "factor-03-factor-05",
+            "source": "factor-03",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-03 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-07",
+            "source": "factor-05",
+            "target": "factor-07",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-05 influencia factor-07."
+          },
+          {
+            "id": "factor-07-factor-01",
+            "source": "factor-07",
+            "target": "factor-01",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-07 influencia factor-01."
+          },
+          {
+            "id": "factor-01-factor-05",
+            "source": "factor-01",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-02",
+            "source": "factor-05",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-05 influencia factor-02."
+          }
+        ],
+        "loops": [
+          {
+            "id": "ui-qa-8-main-loop",
+            "edgeIds": [
+              "factor-01-factor-02",
+              "factor-02-factor-03",
+              "factor-03-factor-04",
+              "factor-04-factor-05",
+              "factor-05-factor-06",
+              "factor-06-factor-07",
+              "factor-07-factor-08",
+              "factor-08-factor-01"
+            ],
+            "type": "reinforcing",
+            "label": "Ciclo principal"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ui-qa-16",
+      "title": "Routing QA 16",
+      "summary": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+      "description_md": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+      "model": {
+        "id": "ui-qa-16",
+        "title": "Routing QA 16",
+        "description": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+        "nodes": [
+          {
+            "id": "factor-01",
+            "label": "Fator 01"
+          },
+          {
+            "id": "factor-02",
+            "label": "Fator 02"
+          },
+          {
+            "id": "factor-03",
+            "label": "Fator 03"
+          },
+          {
+            "id": "factor-04",
+            "label": "Fator 04"
+          },
+          {
+            "id": "factor-05",
+            "label": "Fator 05"
+          },
+          {
+            "id": "factor-06",
+            "label": "Fator 06"
+          },
+          {
+            "id": "factor-07",
+            "label": "Fator 07"
+          },
+          {
+            "id": "factor-08",
+            "label": "Fator 08"
+          },
+          {
+            "id": "factor-09",
+            "label": "Fator 09"
+          },
+          {
+            "id": "factor-10",
+            "label": "Fator 10"
+          },
+          {
+            "id": "factor-11",
+            "label": "Fator 11"
+          },
+          {
+            "id": "factor-12",
+            "label": "Fator 12"
+          },
+          {
+            "id": "factor-13",
+            "label": "Fator 13"
+          },
+          {
+            "id": "factor-14",
+            "label": "Fator 14"
+          },
+          {
+            "id": "factor-15",
+            "label": "Fator 15"
+          },
+          {
+            "id": "factor-16",
+            "label": "Fator 16"
+          }
+        ],
+        "edges": [
+          {
+            "id": "factor-01-factor-02",
+            "source": "factor-01",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-01 influencia factor-02."
+          },
+          {
+            "id": "factor-02-factor-03",
+            "source": "factor-02",
+            "target": "factor-03",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-02 influencia factor-03."
+          },
+          {
+            "id": "factor-03-factor-04",
+            "source": "factor-03",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-03 influencia factor-04."
+          },
+          {
+            "id": "factor-04-factor-05",
+            "source": "factor-04",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-04 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-06",
+            "source": "factor-05",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-05 influencia factor-06."
+          },
+          {
+            "id": "factor-06-factor-07",
+            "source": "factor-06",
+            "target": "factor-07",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-06 influencia factor-07."
+          },
+          {
+            "id": "factor-07-factor-08",
+            "source": "factor-07",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-07 influencia factor-08."
+          },
+          {
+            "id": "factor-08-factor-09",
+            "source": "factor-08",
+            "target": "factor-09",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-08 influencia factor-09."
+          },
+          {
+            "id": "factor-09-factor-10",
+            "source": "factor-09",
+            "target": "factor-10",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-09 influencia factor-10."
+          },
+          {
+            "id": "factor-10-factor-11",
+            "source": "factor-10",
+            "target": "factor-11",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-10 influencia factor-11."
+          },
+          {
+            "id": "factor-11-factor-12",
+            "source": "factor-11",
+            "target": "factor-12",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-11 influencia factor-12."
+          },
+          {
+            "id": "factor-12-factor-13",
+            "source": "factor-12",
+            "target": "factor-13",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-12 influencia factor-13."
+          },
+          {
+            "id": "factor-13-factor-14",
+            "source": "factor-13",
+            "target": "factor-14",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-13 influencia factor-14."
+          },
+          {
+            "id": "factor-14-factor-15",
+            "source": "factor-14",
+            "target": "factor-15",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-14 influencia factor-15."
+          },
+          {
+            "id": "factor-15-factor-16",
+            "source": "factor-15",
+            "target": "factor-16",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-15 influencia factor-16."
+          },
+          {
+            "id": "factor-16-factor-01",
+            "source": "factor-16",
+            "target": "factor-01",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-16 influencia factor-01."
+          },
+          {
+            "id": "factor-01-factor-04",
+            "source": "factor-01",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-04."
+          },
+          {
+            "id": "factor-03-factor-06",
+            "source": "factor-03",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-03 influencia factor-06."
+          },
+          {
+            "id": "factor-05-factor-08",
+            "source": "factor-05",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-05 influencia factor-08."
+          },
+          {
+            "id": "factor-07-factor-10",
+            "source": "factor-07",
+            "target": "factor-10",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-07 influencia factor-10."
+          },
+          {
+            "id": "factor-09-factor-12",
+            "source": "factor-09",
+            "target": "factor-12",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-09 influencia factor-12."
+          },
+          {
+            "id": "factor-11-factor-14",
+            "source": "factor-11",
+            "target": "factor-14",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-11 influencia factor-14."
+          },
+          {
+            "id": "factor-13-factor-16",
+            "source": "factor-13",
+            "target": "factor-16",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-13 influencia factor-16."
+          },
+          {
+            "id": "factor-15-factor-02",
+            "source": "factor-15",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-15 influencia factor-02."
+          },
+          {
+            "id": "factor-01-factor-09",
+            "source": "factor-01",
+            "target": "factor-09",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-09."
+          },
+          {
+            "id": "factor-09-factor-02",
+            "source": "factor-09",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-09 influencia factor-02."
+          }
+        ],
+        "loops": [
+          {
+            "id": "ui-qa-16-main-loop",
+            "edgeIds": [
+              "factor-01-factor-02",
+              "factor-02-factor-03",
+              "factor-03-factor-04",
+              "factor-04-factor-05",
+              "factor-05-factor-06",
+              "factor-06-factor-07",
+              "factor-07-factor-08",
+              "factor-08-factor-09",
+              "factor-09-factor-10",
+              "factor-10-factor-11",
+              "factor-11-factor-12",
+              "factor-12-factor-13",
+              "factor-13-factor-14",
+              "factor-14-factor-15",
+              "factor-15-factor-16",
+              "factor-16-factor-01"
+            ],
+            "type": "reinforcing",
+            "label": "Ciclo principal"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ui-qa-32",
+      "title": "Routing QA 32",
+      "summary": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+      "description_md": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+      "model": {
+        "id": "ui-qa-32",
+        "title": "Routing QA 32",
+        "description": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+        "nodes": [
+          {
+            "id": "factor-01",
+            "label": "Fator 01"
+          },
+          {
+            "id": "factor-02",
+            "label": "Fator 02"
+          },
+          {
+            "id": "factor-03",
+            "label": "Fator 03"
+          },
+          {
+            "id": "factor-04",
+            "label": "Fator 04"
+          },
+          {
+            "id": "factor-05",
+            "label": "Fator 05"
+          },
+          {
+            "id": "factor-06",
+            "label": "Fator 06"
+          },
+          {
+            "id": "factor-07",
+            "label": "Fator 07"
+          },
+          {
+            "id": "factor-08",
+            "label": "Fator 08"
+          },
+          {
+            "id": "factor-09",
+            "label": "Fator 09"
+          },
+          {
+            "id": "factor-10",
+            "label": "Fator 10"
+          },
+          {
+            "id": "factor-11",
+            "label": "Fator 11"
+          },
+          {
+            "id": "factor-12",
+            "label": "Fator 12"
+          },
+          {
+            "id": "factor-13",
+            "label": "Fator 13"
+          },
+          {
+            "id": "factor-14",
+            "label": "Fator 14"
+          },
+          {
+            "id": "factor-15",
+            "label": "Fator 15"
+          },
+          {
+            "id": "factor-16",
+            "label": "Fator 16"
+          },
+          {
+            "id": "factor-17",
+            "label": "Fator 17"
+          },
+          {
+            "id": "factor-18",
+            "label": "Fator 18"
+          },
+          {
+            "id": "factor-19",
+            "label": "Fator 19"
+          },
+          {
+            "id": "factor-20",
+            "label": "Fator 20"
+          },
+          {
+            "id": "factor-21",
+            "label": "Fator 21"
+          },
+          {
+            "id": "factor-22",
+            "label": "Fator 22"
+          },
+          {
+            "id": "factor-23",
+            "label": "Fator 23"
+          },
+          {
+            "id": "factor-24",
+            "label": "Fator 24"
+          },
+          {
+            "id": "factor-25",
+            "label": "Fator 25"
+          },
+          {
+            "id": "factor-26",
+            "label": "Fator 26"
+          },
+          {
+            "id": "factor-27",
+            "label": "Fator 27"
+          },
+          {
+            "id": "factor-28",
+            "label": "Fator 28"
+          },
+          {
+            "id": "factor-29",
+            "label": "Fator 29"
+          },
+          {
+            "id": "factor-30",
+            "label": "Fator 30"
+          },
+          {
+            "id": "factor-31",
+            "label": "Fator 31"
+          },
+          {
+            "id": "factor-32",
+            "label": "Fator 32"
+          }
+        ],
+        "edges": [
+          {
+            "id": "factor-01-factor-02",
+            "source": "factor-01",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-01 influencia factor-02."
+          },
+          {
+            "id": "factor-02-factor-03",
+            "source": "factor-02",
+            "target": "factor-03",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-02 influencia factor-03."
+          },
+          {
+            "id": "factor-03-factor-04",
+            "source": "factor-03",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-03 influencia factor-04."
+          },
+          {
+            "id": "factor-04-factor-05",
+            "source": "factor-04",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-04 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-06",
+            "source": "factor-05",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-05 influencia factor-06."
+          },
+          {
+            "id": "factor-06-factor-07",
+            "source": "factor-06",
+            "target": "factor-07",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-06 influencia factor-07."
+          },
+          {
+            "id": "factor-07-factor-08",
+            "source": "factor-07",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-07 influencia factor-08."
+          },
+          {
+            "id": "factor-08-factor-09",
+            "source": "factor-08",
+            "target": "factor-09",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-08 influencia factor-09."
+          },
+          {
+            "id": "factor-09-factor-10",
+            "source": "factor-09",
+            "target": "factor-10",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-09 influencia factor-10."
+          },
+          {
+            "id": "factor-10-factor-11",
+            "source": "factor-10",
+            "target": "factor-11",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-10 influencia factor-11."
+          },
+          {
+            "id": "factor-11-factor-12",
+            "source": "factor-11",
+            "target": "factor-12",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-11 influencia factor-12."
+          },
+          {
+            "id": "factor-12-factor-13",
+            "source": "factor-12",
+            "target": "factor-13",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-12 influencia factor-13."
+          },
+          {
+            "id": "factor-13-factor-14",
+            "source": "factor-13",
+            "target": "factor-14",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-13 influencia factor-14."
+          },
+          {
+            "id": "factor-14-factor-15",
+            "source": "factor-14",
+            "target": "factor-15",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-14 influencia factor-15."
+          },
+          {
+            "id": "factor-15-factor-16",
+            "source": "factor-15",
+            "target": "factor-16",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-15 influencia factor-16."
+          },
+          {
+            "id": "factor-16-factor-17",
+            "source": "factor-16",
+            "target": "factor-17",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-16 influencia factor-17."
+          },
+          {
+            "id": "factor-17-factor-18",
+            "source": "factor-17",
+            "target": "factor-18",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-17 influencia factor-18."
+          },
+          {
+            "id": "factor-18-factor-19",
+            "source": "factor-18",
+            "target": "factor-19",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-18 influencia factor-19."
+          },
+          {
+            "id": "factor-19-factor-20",
+            "source": "factor-19",
+            "target": "factor-20",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-19 influencia factor-20."
+          },
+          {
+            "id": "factor-20-factor-21",
+            "source": "factor-20",
+            "target": "factor-21",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-20 influencia factor-21."
+          },
+          {
+            "id": "factor-21-factor-22",
+            "source": "factor-21",
+            "target": "factor-22",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-21 influencia factor-22."
+          },
+          {
+            "id": "factor-22-factor-23",
+            "source": "factor-22",
+            "target": "factor-23",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-22 influencia factor-23."
+          },
+          {
+            "id": "factor-23-factor-24",
+            "source": "factor-23",
+            "target": "factor-24",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-23 influencia factor-24."
+          },
+          {
+            "id": "factor-24-factor-25",
+            "source": "factor-24",
+            "target": "factor-25",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-24 influencia factor-25."
+          },
+          {
+            "id": "factor-25-factor-26",
+            "source": "factor-25",
+            "target": "factor-26",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-25 influencia factor-26."
+          },
+          {
+            "id": "factor-26-factor-27",
+            "source": "factor-26",
+            "target": "factor-27",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-26 influencia factor-27."
+          },
+          {
+            "id": "factor-27-factor-28",
+            "source": "factor-27",
+            "target": "factor-28",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-27 influencia factor-28."
+          },
+          {
+            "id": "factor-28-factor-29",
+            "source": "factor-28",
+            "target": "factor-29",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-28 influencia factor-29."
+          },
+          {
+            "id": "factor-29-factor-30",
+            "source": "factor-29",
+            "target": "factor-30",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-29 influencia factor-30."
+          },
+          {
+            "id": "factor-30-factor-31",
+            "source": "factor-30",
+            "target": "factor-31",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-30 influencia factor-31."
+          },
+          {
+            "id": "factor-31-factor-32",
+            "source": "factor-31",
+            "target": "factor-32",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-31 influencia factor-32."
+          },
+          {
+            "id": "factor-32-factor-01",
+            "source": "factor-32",
+            "target": "factor-01",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-32 influencia factor-01."
+          },
+          {
+            "id": "factor-01-factor-04",
+            "source": "factor-01",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-04."
+          },
+          {
+            "id": "factor-03-factor-06",
+            "source": "factor-03",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-03 influencia factor-06."
+          },
+          {
+            "id": "factor-05-factor-08",
+            "source": "factor-05",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-05 influencia factor-08."
+          },
+          {
+            "id": "factor-07-factor-10",
+            "source": "factor-07",
+            "target": "factor-10",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-07 influencia factor-10."
+          },
+          {
+            "id": "factor-09-factor-12",
+            "source": "factor-09",
+            "target": "factor-12",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-09 influencia factor-12."
+          },
+          {
+            "id": "factor-11-factor-14",
+            "source": "factor-11",
+            "target": "factor-14",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-11 influencia factor-14."
+          },
+          {
+            "id": "factor-13-factor-16",
+            "source": "factor-13",
+            "target": "factor-16",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-13 influencia factor-16."
+          },
+          {
+            "id": "factor-15-factor-18",
+            "source": "factor-15",
+            "target": "factor-18",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-15 influencia factor-18."
+          },
+          {
+            "id": "factor-17-factor-20",
+            "source": "factor-17",
+            "target": "factor-20",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-17 influencia factor-20."
+          },
+          {
+            "id": "factor-19-factor-22",
+            "source": "factor-19",
+            "target": "factor-22",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-19 influencia factor-22."
+          },
+          {
+            "id": "factor-21-factor-24",
+            "source": "factor-21",
+            "target": "factor-24",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-21 influencia factor-24."
+          },
+          {
+            "id": "factor-23-factor-26",
+            "source": "factor-23",
+            "target": "factor-26",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-23 influencia factor-26."
+          },
+          {
+            "id": "factor-25-factor-28",
+            "source": "factor-25",
+            "target": "factor-28",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-25 influencia factor-28."
+          },
+          {
+            "id": "factor-27-factor-30",
+            "source": "factor-27",
+            "target": "factor-30",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-27 influencia factor-30."
+          },
+          {
+            "id": "factor-29-factor-32",
+            "source": "factor-29",
+            "target": "factor-32",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-29 influencia factor-32."
+          },
+          {
+            "id": "factor-31-factor-02",
+            "source": "factor-31",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-31 influencia factor-02."
+          },
+          {
+            "id": "factor-01-factor-17",
+            "source": "factor-01",
+            "target": "factor-17",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-17."
+          },
+          {
+            "id": "factor-17-factor-02",
+            "source": "factor-17",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-17 influencia factor-02."
+          }
+        ],
+        "loops": [
+          {
+            "id": "ui-qa-32-main-loop",
+            "edgeIds": [
+              "factor-01-factor-02",
+              "factor-02-factor-03",
+              "factor-03-factor-04",
+              "factor-04-factor-05",
+              "factor-05-factor-06",
+              "factor-06-factor-07",
+              "factor-07-factor-08",
+              "factor-08-factor-09",
+              "factor-09-factor-10",
+              "factor-10-factor-11",
+              "factor-11-factor-12",
+              "factor-12-factor-13",
+              "factor-13-factor-14",
+              "factor-14-factor-15",
+              "factor-15-factor-16",
+              "factor-16-factor-17",
+              "factor-17-factor-18",
+              "factor-18-factor-19",
+              "factor-19-factor-20",
+              "factor-20-factor-21",
+              "factor-21-factor-22",
+              "factor-22-factor-23",
+              "factor-23-factor-24",
+              "factor-24-factor-25",
+              "factor-25-factor-26",
+              "factor-26-factor-27",
+              "factor-27-factor-28",
+              "factor-28-factor-29",
+              "factor-29-factor-30",
+              "factor-30-factor-31",
+              "factor-31-factor-32",
+              "factor-32-factor-01"
+            ],
+            "type": "reinforcing",
+            "label": "Ciclo principal"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flagship-growth",
+      "title": "Flagship — Crescimento sob pressão",
+      "summary": "Mapa editorial com apresentação V2, três loops e mídia local.",
+      "description_md": "Mapa editorial com apresentação V2, três loops e mídia local.",
+      "model": {
+        "id": "flagship-growth",
+        "title": "Flagship — Crescimento sob pressão",
+        "nodes": [
+          {
+            "id": "demand",
+            "label": "Demanda",
+            "tags": [
+              "motor",
+              "growth"
+            ]
+          },
+          {
+            "id": "planning",
+            "label": "Planejamento",
+            "tags": [
+              "capacity"
+            ]
+          },
+          {
+            "id": "capacity",
+            "label": "Capacidade",
+            "tags": [
+              "capacity"
+            ]
+          },
+          {
+            "id": "availability",
+            "label": "Disponibilidade",
+            "tags": [
+              "service"
+            ]
+          },
+          {
+            "id": "pressure",
+            "label": "Pressão operacional",
+            "tags": [
+              "limit"
+            ]
+          },
+          {
+            "id": "adoption",
+            "label": "Adoção",
+            "tags": [
+              "growth"
+            ]
+          },
+          {
+            "id": "trust",
+            "label": "Confiança",
+            "tags": [
+              "outcome"
+            ]
+          },
+          {
+            "id": "support",
+            "label": "Suporte",
+            "tags": [
+              "capacity"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "id": "demand-planning",
+            "source": "demand",
+            "target": "planning",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "demand influencia planning."
+          },
+          {
+            "id": "planning-capacity",
+            "source": "planning",
+            "target": "capacity",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "planning influencia capacity."
+          },
+          {
+            "id": "capacity-availability",
+            "source": "capacity",
+            "target": "availability",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "capacity influencia availability."
+          },
+          {
+            "id": "availability-demand",
+            "source": "availability",
+            "target": "demand",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "availability influencia demand."
+          },
+          {
+            "id": "availability-pressure",
+            "source": "availability",
+            "target": "pressure",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "availability influencia pressure."
+          },
+          {
+            "id": "pressure-demand",
+            "source": "pressure",
+            "target": "demand",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "description": "pressure influencia demand."
+          },
+          {
+            "id": "availability-adoption",
+            "source": "availability",
+            "target": "adoption",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "availability influencia adoption."
+          },
+          {
+            "id": "adoption-demand",
+            "source": "adoption",
+            "target": "demand",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "adoption influencia demand."
+          },
+          {
+            "id": "support-trust",
+            "source": "support",
+            "target": "trust",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "support influencia trust."
+          },
+          {
+            "id": "trust-adoption",
+            "source": "trust",
+            "target": "adoption",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "trust influencia adoption."
+          },
+          {
+            "id": "capacity-support",
+            "source": "capacity",
+            "target": "support",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "capacity influencia support."
+          }
+        ],
+        "loops": [
+          {
+            "id": "R-growth",
+            "title": "Motor de crescimento",
+            "type": "reinforcing",
+            "edgeIds": [
+              "demand-planning",
+              "planning-capacity",
+              "capacity-availability",
+              "availability-demand"
+            ]
+          },
+          {
+            "id": "B-limit",
+            "title": "Limite operacional",
+            "type": "balancing",
+            "edgeIds": [
+              "capacity-availability",
+              "availability-pressure",
+              "pressure-demand",
+              "demand-planning",
+              "planning-capacity"
+            ]
+          },
+          {
+            "id": "R-adoption",
+            "title": "Adoção e confiança",
+            "type": "reinforcing",
+            "edgeIds": [
+              "availability-adoption",
+              "adoption-demand",
+              "demand-planning",
+              "planning-capacity",
+              "capacity-availability"
+            ]
+          }
+        ],
+        "description": "Mapa editorial com apresentação V2, três loops e mídia local."
+      }
+    }
+  ],
+  "maps": [
+    {
+      "id": "ui-qa-8",
+      "title": "Routing QA 8",
+      "description_md": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+      "model": {
+        "id": "ui-qa-8",
+        "title": "Routing QA 8",
+        "description": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+        "nodes": [
+          {
+            "id": "factor-01",
+            "label": "Fator 01"
+          },
+          {
+            "id": "factor-02",
+            "label": "Fator 02"
+          },
+          {
+            "id": "factor-03",
+            "label": "Fator 03"
+          },
+          {
+            "id": "factor-04",
+            "label": "Fator 04"
+          },
+          {
+            "id": "factor-05",
+            "label": "Fator 05"
+          },
+          {
+            "id": "factor-06",
+            "label": "Fator 06"
+          },
+          {
+            "id": "factor-07",
+            "label": "Fator 07"
+          },
+          {
+            "id": "factor-08",
+            "label": "Fator 08"
+          }
+        ],
+        "edges": [
+          {
+            "id": "factor-01-factor-02",
+            "source": "factor-01",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-01 influencia factor-02."
+          },
+          {
+            "id": "factor-02-factor-03",
+            "source": "factor-02",
+            "target": "factor-03",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-02 influencia factor-03."
+          },
+          {
+            "id": "factor-03-factor-04",
+            "source": "factor-03",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-03 influencia factor-04."
+          },
+          {
+            "id": "factor-04-factor-05",
+            "source": "factor-04",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-04 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-06",
+            "source": "factor-05",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-05 influencia factor-06."
+          },
+          {
+            "id": "factor-06-factor-07",
+            "source": "factor-06",
+            "target": "factor-07",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-06 influencia factor-07."
+          },
+          {
+            "id": "factor-07-factor-08",
+            "source": "factor-07",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-07 influencia factor-08."
+          },
+          {
+            "id": "factor-08-factor-01",
+            "source": "factor-08",
+            "target": "factor-01",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-08 influencia factor-01."
+          },
+          {
+            "id": "factor-01-factor-03",
+            "source": "factor-01",
+            "target": "factor-03",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-03."
+          },
+          {
+            "id": "factor-03-factor-05",
+            "source": "factor-03",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-03 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-07",
+            "source": "factor-05",
+            "target": "factor-07",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-05 influencia factor-07."
+          },
+          {
+            "id": "factor-07-factor-01",
+            "source": "factor-07",
+            "target": "factor-01",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-07 influencia factor-01."
+          },
+          {
+            "id": "factor-01-factor-05",
+            "source": "factor-01",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-02",
+            "source": "factor-05",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-05 influencia factor-02."
+          }
+        ],
+        "loops": [
+          {
+            "id": "ui-qa-8-main-loop",
+            "edgeIds": [
+              "factor-01-factor-02",
+              "factor-02-factor-03",
+              "factor-03-factor-04",
+              "factor-04-factor-05",
+              "factor-05-factor-06",
+              "factor-06-factor-07",
+              "factor-07-factor-08",
+              "factor-08-factor-01"
+            ],
+            "type": "reinforcing",
+            "label": "Ciclo principal"
+          }
+        ]
+      },
+      "source_loop_id": "ui-qa-8"
+    },
+    {
+      "id": "ui-qa-16",
+      "title": "Routing QA 16",
+      "description_md": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+      "model": {
+        "id": "ui-qa-16",
+        "title": "Routing QA 16",
+        "description": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+        "nodes": [
+          {
+            "id": "factor-01",
+            "label": "Fator 01"
+          },
+          {
+            "id": "factor-02",
+            "label": "Fator 02"
+          },
+          {
+            "id": "factor-03",
+            "label": "Fator 03"
+          },
+          {
+            "id": "factor-04",
+            "label": "Fator 04"
+          },
+          {
+            "id": "factor-05",
+            "label": "Fator 05"
+          },
+          {
+            "id": "factor-06",
+            "label": "Fator 06"
+          },
+          {
+            "id": "factor-07",
+            "label": "Fator 07"
+          },
+          {
+            "id": "factor-08",
+            "label": "Fator 08"
+          },
+          {
+            "id": "factor-09",
+            "label": "Fator 09"
+          },
+          {
+            "id": "factor-10",
+            "label": "Fator 10"
+          },
+          {
+            "id": "factor-11",
+            "label": "Fator 11"
+          },
+          {
+            "id": "factor-12",
+            "label": "Fator 12"
+          },
+          {
+            "id": "factor-13",
+            "label": "Fator 13"
+          },
+          {
+            "id": "factor-14",
+            "label": "Fator 14"
+          },
+          {
+            "id": "factor-15",
+            "label": "Fator 15"
+          },
+          {
+            "id": "factor-16",
+            "label": "Fator 16"
+          }
+        ],
+        "edges": [
+          {
+            "id": "factor-01-factor-02",
+            "source": "factor-01",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-01 influencia factor-02."
+          },
+          {
+            "id": "factor-02-factor-03",
+            "source": "factor-02",
+            "target": "factor-03",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-02 influencia factor-03."
+          },
+          {
+            "id": "factor-03-factor-04",
+            "source": "factor-03",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-03 influencia factor-04."
+          },
+          {
+            "id": "factor-04-factor-05",
+            "source": "factor-04",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-04 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-06",
+            "source": "factor-05",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-05 influencia factor-06."
+          },
+          {
+            "id": "factor-06-factor-07",
+            "source": "factor-06",
+            "target": "factor-07",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-06 influencia factor-07."
+          },
+          {
+            "id": "factor-07-factor-08",
+            "source": "factor-07",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-07 influencia factor-08."
+          },
+          {
+            "id": "factor-08-factor-09",
+            "source": "factor-08",
+            "target": "factor-09",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-08 influencia factor-09."
+          },
+          {
+            "id": "factor-09-factor-10",
+            "source": "factor-09",
+            "target": "factor-10",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-09 influencia factor-10."
+          },
+          {
+            "id": "factor-10-factor-11",
+            "source": "factor-10",
+            "target": "factor-11",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-10 influencia factor-11."
+          },
+          {
+            "id": "factor-11-factor-12",
+            "source": "factor-11",
+            "target": "factor-12",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-11 influencia factor-12."
+          },
+          {
+            "id": "factor-12-factor-13",
+            "source": "factor-12",
+            "target": "factor-13",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-12 influencia factor-13."
+          },
+          {
+            "id": "factor-13-factor-14",
+            "source": "factor-13",
+            "target": "factor-14",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-13 influencia factor-14."
+          },
+          {
+            "id": "factor-14-factor-15",
+            "source": "factor-14",
+            "target": "factor-15",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-14 influencia factor-15."
+          },
+          {
+            "id": "factor-15-factor-16",
+            "source": "factor-15",
+            "target": "factor-16",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-15 influencia factor-16."
+          },
+          {
+            "id": "factor-16-factor-01",
+            "source": "factor-16",
+            "target": "factor-01",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-16 influencia factor-01."
+          },
+          {
+            "id": "factor-01-factor-04",
+            "source": "factor-01",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-04."
+          },
+          {
+            "id": "factor-03-factor-06",
+            "source": "factor-03",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-03 influencia factor-06."
+          },
+          {
+            "id": "factor-05-factor-08",
+            "source": "factor-05",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-05 influencia factor-08."
+          },
+          {
+            "id": "factor-07-factor-10",
+            "source": "factor-07",
+            "target": "factor-10",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-07 influencia factor-10."
+          },
+          {
+            "id": "factor-09-factor-12",
+            "source": "factor-09",
+            "target": "factor-12",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-09 influencia factor-12."
+          },
+          {
+            "id": "factor-11-factor-14",
+            "source": "factor-11",
+            "target": "factor-14",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-11 influencia factor-14."
+          },
+          {
+            "id": "factor-13-factor-16",
+            "source": "factor-13",
+            "target": "factor-16",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-13 influencia factor-16."
+          },
+          {
+            "id": "factor-15-factor-02",
+            "source": "factor-15",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-15 influencia factor-02."
+          },
+          {
+            "id": "factor-01-factor-09",
+            "source": "factor-01",
+            "target": "factor-09",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-09."
+          },
+          {
+            "id": "factor-09-factor-02",
+            "source": "factor-09",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-09 influencia factor-02."
+          }
+        ],
+        "loops": [
+          {
+            "id": "ui-qa-16-main-loop",
+            "edgeIds": [
+              "factor-01-factor-02",
+              "factor-02-factor-03",
+              "factor-03-factor-04",
+              "factor-04-factor-05",
+              "factor-05-factor-06",
+              "factor-06-factor-07",
+              "factor-07-factor-08",
+              "factor-08-factor-09",
+              "factor-09-factor-10",
+              "factor-10-factor-11",
+              "factor-11-factor-12",
+              "factor-12-factor-13",
+              "factor-13-factor-14",
+              "factor-14-factor-15",
+              "factor-15-factor-16",
+              "factor-16-factor-01"
+            ],
+            "type": "reinforcing",
+            "label": "Ciclo principal"
+          }
+        ]
+      },
+      "source_loop_id": "ui-qa-16"
+    },
+    {
+      "id": "ui-qa-32",
+      "title": "Routing QA 32",
+      "description_md": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+      "model": {
+        "id": "ui-qa-32",
+        "title": "Routing QA 32",
+        "description": "Fixture determinística para validar posicionamento, curvatura, cruzamentos e persistência.",
+        "nodes": [
+          {
+            "id": "factor-01",
+            "label": "Fator 01"
+          },
+          {
+            "id": "factor-02",
+            "label": "Fator 02"
+          },
+          {
+            "id": "factor-03",
+            "label": "Fator 03"
+          },
+          {
+            "id": "factor-04",
+            "label": "Fator 04"
+          },
+          {
+            "id": "factor-05",
+            "label": "Fator 05"
+          },
+          {
+            "id": "factor-06",
+            "label": "Fator 06"
+          },
+          {
+            "id": "factor-07",
+            "label": "Fator 07"
+          },
+          {
+            "id": "factor-08",
+            "label": "Fator 08"
+          },
+          {
+            "id": "factor-09",
+            "label": "Fator 09"
+          },
+          {
+            "id": "factor-10",
+            "label": "Fator 10"
+          },
+          {
+            "id": "factor-11",
+            "label": "Fator 11"
+          },
+          {
+            "id": "factor-12",
+            "label": "Fator 12"
+          },
+          {
+            "id": "factor-13",
+            "label": "Fator 13"
+          },
+          {
+            "id": "factor-14",
+            "label": "Fator 14"
+          },
+          {
+            "id": "factor-15",
+            "label": "Fator 15"
+          },
+          {
+            "id": "factor-16",
+            "label": "Fator 16"
+          },
+          {
+            "id": "factor-17",
+            "label": "Fator 17"
+          },
+          {
+            "id": "factor-18",
+            "label": "Fator 18"
+          },
+          {
+            "id": "factor-19",
+            "label": "Fator 19"
+          },
+          {
+            "id": "factor-20",
+            "label": "Fator 20"
+          },
+          {
+            "id": "factor-21",
+            "label": "Fator 21"
+          },
+          {
+            "id": "factor-22",
+            "label": "Fator 22"
+          },
+          {
+            "id": "factor-23",
+            "label": "Fator 23"
+          },
+          {
+            "id": "factor-24",
+            "label": "Fator 24"
+          },
+          {
+            "id": "factor-25",
+            "label": "Fator 25"
+          },
+          {
+            "id": "factor-26",
+            "label": "Fator 26"
+          },
+          {
+            "id": "factor-27",
+            "label": "Fator 27"
+          },
+          {
+            "id": "factor-28",
+            "label": "Fator 28"
+          },
+          {
+            "id": "factor-29",
+            "label": "Fator 29"
+          },
+          {
+            "id": "factor-30",
+            "label": "Fator 30"
+          },
+          {
+            "id": "factor-31",
+            "label": "Fator 31"
+          },
+          {
+            "id": "factor-32",
+            "label": "Fator 32"
+          }
+        ],
+        "edges": [
+          {
+            "id": "factor-01-factor-02",
+            "source": "factor-01",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-01 influencia factor-02."
+          },
+          {
+            "id": "factor-02-factor-03",
+            "source": "factor-02",
+            "target": "factor-03",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-02 influencia factor-03."
+          },
+          {
+            "id": "factor-03-factor-04",
+            "source": "factor-03",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-03 influencia factor-04."
+          },
+          {
+            "id": "factor-04-factor-05",
+            "source": "factor-04",
+            "target": "factor-05",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-04 influencia factor-05."
+          },
+          {
+            "id": "factor-05-factor-06",
+            "source": "factor-05",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-05 influencia factor-06."
+          },
+          {
+            "id": "factor-06-factor-07",
+            "source": "factor-06",
+            "target": "factor-07",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-06 influencia factor-07."
+          },
+          {
+            "id": "factor-07-factor-08",
+            "source": "factor-07",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-07 influencia factor-08."
+          },
+          {
+            "id": "factor-08-factor-09",
+            "source": "factor-08",
+            "target": "factor-09",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-08 influencia factor-09."
+          },
+          {
+            "id": "factor-09-factor-10",
+            "source": "factor-09",
+            "target": "factor-10",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-09 influencia factor-10."
+          },
+          {
+            "id": "factor-10-factor-11",
+            "source": "factor-10",
+            "target": "factor-11",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-10 influencia factor-11."
+          },
+          {
+            "id": "factor-11-factor-12",
+            "source": "factor-11",
+            "target": "factor-12",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-11 influencia factor-12."
+          },
+          {
+            "id": "factor-12-factor-13",
+            "source": "factor-12",
+            "target": "factor-13",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-12 influencia factor-13."
+          },
+          {
+            "id": "factor-13-factor-14",
+            "source": "factor-13",
+            "target": "factor-14",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-13 influencia factor-14."
+          },
+          {
+            "id": "factor-14-factor-15",
+            "source": "factor-14",
+            "target": "factor-15",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-14 influencia factor-15."
+          },
+          {
+            "id": "factor-15-factor-16",
+            "source": "factor-15",
+            "target": "factor-16",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-15 influencia factor-16."
+          },
+          {
+            "id": "factor-16-factor-17",
+            "source": "factor-16",
+            "target": "factor-17",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-16 influencia factor-17."
+          },
+          {
+            "id": "factor-17-factor-18",
+            "source": "factor-17",
+            "target": "factor-18",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-17 influencia factor-18."
+          },
+          {
+            "id": "factor-18-factor-19",
+            "source": "factor-18",
+            "target": "factor-19",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-18 influencia factor-19."
+          },
+          {
+            "id": "factor-19-factor-20",
+            "source": "factor-19",
+            "target": "factor-20",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-19 influencia factor-20."
+          },
+          {
+            "id": "factor-20-factor-21",
+            "source": "factor-20",
+            "target": "factor-21",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-20 influencia factor-21."
+          },
+          {
+            "id": "factor-21-factor-22",
+            "source": "factor-21",
+            "target": "factor-22",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-21 influencia factor-22."
+          },
+          {
+            "id": "factor-22-factor-23",
+            "source": "factor-22",
+            "target": "factor-23",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-22 influencia factor-23."
+          },
+          {
+            "id": "factor-23-factor-24",
+            "source": "factor-23",
+            "target": "factor-24",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-23 influencia factor-24."
+          },
+          {
+            "id": "factor-24-factor-25",
+            "source": "factor-24",
+            "target": "factor-25",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-24 influencia factor-25."
+          },
+          {
+            "id": "factor-25-factor-26",
+            "source": "factor-25",
+            "target": "factor-26",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-25 influencia factor-26."
+          },
+          {
+            "id": "factor-26-factor-27",
+            "source": "factor-26",
+            "target": "factor-27",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-26 influencia factor-27."
+          },
+          {
+            "id": "factor-27-factor-28",
+            "source": "factor-27",
+            "target": "factor-28",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-27 influencia factor-28."
+          },
+          {
+            "id": "factor-28-factor-29",
+            "source": "factor-28",
+            "target": "factor-29",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-28 influencia factor-29."
+          },
+          {
+            "id": "factor-29-factor-30",
+            "source": "factor-29",
+            "target": "factor-30",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-29 influencia factor-30."
+          },
+          {
+            "id": "factor-30-factor-31",
+            "source": "factor-30",
+            "target": "factor-31",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-30 influencia factor-31."
+          },
+          {
+            "id": "factor-31-factor-32",
+            "source": "factor-31",
+            "target": "factor-32",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-31 influencia factor-32."
+          },
+          {
+            "id": "factor-32-factor-01",
+            "source": "factor-32",
+            "target": "factor-01",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-32 influencia factor-01."
+          },
+          {
+            "id": "factor-01-factor-04",
+            "source": "factor-01",
+            "target": "factor-04",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-04."
+          },
+          {
+            "id": "factor-03-factor-06",
+            "source": "factor-03",
+            "target": "factor-06",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-03 influencia factor-06."
+          },
+          {
+            "id": "factor-05-factor-08",
+            "source": "factor-05",
+            "target": "factor-08",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-05 influencia factor-08."
+          },
+          {
+            "id": "factor-07-factor-10",
+            "source": "factor-07",
+            "target": "factor-10",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-07 influencia factor-10."
+          },
+          {
+            "id": "factor-09-factor-12",
+            "source": "factor-09",
+            "target": "factor-12",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-09 influencia factor-12."
+          },
+          {
+            "id": "factor-11-factor-14",
+            "source": "factor-11",
+            "target": "factor-14",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-11 influencia factor-14."
+          },
+          {
+            "id": "factor-13-factor-16",
+            "source": "factor-13",
+            "target": "factor-16",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-13 influencia factor-16."
+          },
+          {
+            "id": "factor-15-factor-18",
+            "source": "factor-15",
+            "target": "factor-18",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-15 influencia factor-18."
+          },
+          {
+            "id": "factor-17-factor-20",
+            "source": "factor-17",
+            "target": "factor-20",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-17 influencia factor-20."
+          },
+          {
+            "id": "factor-19-factor-22",
+            "source": "factor-19",
+            "target": "factor-22",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-19 influencia factor-22."
+          },
+          {
+            "id": "factor-21-factor-24",
+            "source": "factor-21",
+            "target": "factor-24",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-21 influencia factor-24."
+          },
+          {
+            "id": "factor-23-factor-26",
+            "source": "factor-23",
+            "target": "factor-26",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-23 influencia factor-26."
+          },
+          {
+            "id": "factor-25-factor-28",
+            "source": "factor-25",
+            "target": "factor-28",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-25 influencia factor-28."
+          },
+          {
+            "id": "factor-27-factor-30",
+            "source": "factor-27",
+            "target": "factor-30",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-27 influencia factor-30."
+          },
+          {
+            "id": "factor-29-factor-32",
+            "source": "factor-29",
+            "target": "factor-32",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-29 influencia factor-32."
+          },
+          {
+            "id": "factor-31-factor-02",
+            "source": "factor-31",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-31 influencia factor-02."
+          },
+          {
+            "id": "factor-01-factor-17",
+            "source": "factor-01",
+            "target": "factor-17",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "type": "balancing",
+            "description": "factor-01 influencia factor-17."
+          },
+          {
+            "id": "factor-17-factor-02",
+            "source": "factor-17",
+            "target": "factor-02",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "type": "reinforcing",
+            "description": "factor-17 influencia factor-02."
+          }
+        ],
+        "loops": [
+          {
+            "id": "ui-qa-32-main-loop",
+            "edgeIds": [
+              "factor-01-factor-02",
+              "factor-02-factor-03",
+              "factor-03-factor-04",
+              "factor-04-factor-05",
+              "factor-05-factor-06",
+              "factor-06-factor-07",
+              "factor-07-factor-08",
+              "factor-08-factor-09",
+              "factor-09-factor-10",
+              "factor-10-factor-11",
+              "factor-11-factor-12",
+              "factor-12-factor-13",
+              "factor-13-factor-14",
+              "factor-14-factor-15",
+              "factor-15-factor-16",
+              "factor-16-factor-17",
+              "factor-17-factor-18",
+              "factor-18-factor-19",
+              "factor-19-factor-20",
+              "factor-20-factor-21",
+              "factor-21-factor-22",
+              "factor-22-factor-23",
+              "factor-23-factor-24",
+              "factor-24-factor-25",
+              "factor-25-factor-26",
+              "factor-26-factor-27",
+              "factor-27-factor-28",
+              "factor-28-factor-29",
+              "factor-29-factor-30",
+              "factor-30-factor-31",
+              "factor-31-factor-32",
+              "factor-32-factor-01"
+            ],
+            "type": "reinforcing",
+            "label": "Ciclo principal"
+          }
+        ]
+      },
+      "source_loop_id": "ui-qa-32"
+    },
+    {
+      "id": "flagship-growth",
+      "title": "Flagship — Crescimento sob pressão",
+      "description_md": "Mapa editorial com apresentação V2, três loops e mídia local.",
+      "model": {
+        "id": "flagship-growth",
+        "title": "Flagship — Crescimento sob pressão",
+        "nodes": [
+          {
+            "id": "demand",
+            "label": "Demanda",
+            "tags": [
+              "motor",
+              "growth"
+            ]
+          },
+          {
+            "id": "planning",
+            "label": "Planejamento",
+            "tags": [
+              "capacity"
+            ]
+          },
+          {
+            "id": "capacity",
+            "label": "Capacidade",
+            "tags": [
+              "capacity"
+            ]
+          },
+          {
+            "id": "availability",
+            "label": "Disponibilidade",
+            "tags": [
+              "service"
+            ]
+          },
+          {
+            "id": "pressure",
+            "label": "Pressão operacional",
+            "tags": [
+              "limit"
+            ]
+          },
+          {
+            "id": "adoption",
+            "label": "Adoção",
+            "tags": [
+              "growth"
+            ]
+          },
+          {
+            "id": "trust",
+            "label": "Confiança",
+            "tags": [
+              "outcome"
+            ]
+          },
+          {
+            "id": "support",
+            "label": "Suporte",
+            "tags": [
+              "capacity"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "id": "demand-planning",
+            "source": "demand",
+            "target": "planning",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "demand influencia planning."
+          },
+          {
+            "id": "planning-capacity",
+            "source": "planning",
+            "target": "capacity",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "planning influencia capacity."
+          },
+          {
+            "id": "capacity-availability",
+            "source": "capacity",
+            "target": "availability",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "capacity influencia availability."
+          },
+          {
+            "id": "availability-demand",
+            "source": "availability",
+            "target": "demand",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "availability influencia demand."
+          },
+          {
+            "id": "availability-pressure",
+            "source": "availability",
+            "target": "pressure",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "availability influencia pressure."
+          },
+          {
+            "id": "pressure-demand",
+            "source": "pressure",
+            "target": "demand",
+            "sourceSign": "+",
+            "targetSign": "-",
+            "description": "pressure influencia demand."
+          },
+          {
+            "id": "availability-adoption",
+            "source": "availability",
+            "target": "adoption",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "availability influencia adoption."
+          },
+          {
+            "id": "adoption-demand",
+            "source": "adoption",
+            "target": "demand",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "adoption influencia demand."
+          },
+          {
+            "id": "support-trust",
+            "source": "support",
+            "target": "trust",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "support influencia trust."
+          },
+          {
+            "id": "trust-adoption",
+            "source": "trust",
+            "target": "adoption",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "trust influencia adoption."
+          },
+          {
+            "id": "capacity-support",
+            "source": "capacity",
+            "target": "support",
+            "sourceSign": "+",
+            "targetSign": "+",
+            "description": "capacity influencia support."
+          }
+        ],
+        "loops": [
+          {
+            "id": "R-growth",
+            "title": "Motor de crescimento",
+            "type": "reinforcing",
+            "edgeIds": [
+              "demand-planning",
+              "planning-capacity",
+              "capacity-availability",
+              "availability-demand"
+            ]
+          },
+          {
+            "id": "B-limit",
+            "title": "Limite operacional",
+            "type": "balancing",
+            "edgeIds": [
+              "capacity-availability",
+              "availability-pressure",
+              "pressure-demand",
+              "demand-planning",
+              "planning-capacity"
+            ]
+          },
+          {
+            "id": "R-adoption",
+            "title": "Adoção e confiança",
+            "type": "reinforcing",
+            "edgeIds": [
+              "availability-adoption",
+              "adoption-demand",
+              "demand-planning",
+              "planning-capacity",
+              "capacity-availability"
+            ]
+          }
+        ],
+        "description": "Mapa editorial com apresentação V2, três loops e mídia local."
+      },
+      "source_loop_id": "flagship-growth"
+    }
+  ],
+  "views": [
+    {
+      "id": "ui-qa-8-matcha",
+      "map_id": "ui-qa-8",
+      "title": "Matcha QA",
+      "settings": {
+        "stylePackId": "matcha-editorial"
+      },
+      "rules": [],
+      "style_source": ""
+    },
+    {
+      "id": "ui-qa-16-matcha",
+      "map_id": "ui-qa-16",
+      "title": "Matcha QA",
+      "settings": {
+        "stylePackId": "matcha-editorial"
+      },
+      "rules": [],
+      "style_source": ""
+    },
+    {
+      "id": "ui-qa-32-matcha",
+      "map_id": "ui-qa-32",
+      "title": "Matcha QA",
+      "settings": {
+        "stylePackId": "matcha-editorial"
+      },
+      "rules": [],
+      "style_source": ""
+    },
+    {
+      "id": "flagship-growth-matcha",
+      "map_id": "flagship-growth",
+      "title": "Matcha QA",
+      "settings": {
+        "stylePackId": "matcha-editorial"
+      },
+      "rules": [],
+      "style_source": ""
+    }
+  ],
+  "presentations": [
+    {
+      "id": "flagship-growth-story",
+      "title": "Crescimento sob pressão — uma história do sistema",
+      "presentation": {
+        "schemaVersion": 2,
+        "id": "flagship-growth-story",
+        "title": "Crescimento sob pressão — uma história do sistema",
+        "summary": "Uma apresentação editorial que atravessa motores, limites, intervenção e consequência.",
+        "intent": "explain-and-persuade",
+        "audience": {
+          "type": "executive",
+          "knowledge": "introductory",
+          "expectedOutcome": "Escolher uma alavanca"
+        },
+        "settings": {
+          "autoplay": false,
+          "allowExplore": true,
+          "resumeAfterExplore": true,
+          "reducedMotion": "respect-system"
+        },
+        "chapters": [
+          {
+            "id": "setup",
+            "title": "Começar pelo padrão",
+            "role": "setup",
+            "summary": "Orientação e tensão inicial.",
+            "scenes": [
+              {
+                "id": "opening",
+                "type": "title",
+                "title": "A promessa de crescer",
+                "content": {
+                  "title": "A promessa de crescer",
+                  "bodyMd": "Crescer parece simples até o sistema responder.",
+                  "speakerNotesMd": "Nota do apresentador: A promessa de crescer."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "opening-context",
+                    "type": "focus",
+                    "title": "Onde começa a história",
+                    "narrationMd": "Começamos no mapa completo para reconhecer o terreno.",
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "opening-question",
+                    "type": "question",
+                    "title": "A pergunta-guia",
+                    "narrationMd": "O que mantém o crescimento vivo — e onde ele encontra seu limite?",
+                    "focus": {
+                      "kind": "node",
+                      "nodeId": "demand"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "map-overview",
+                "type": "stage",
+                "title": "O mapa em uma vista",
+                "content": {
+                  "title": "O mapa em uma vista",
+                  "bodyMd": "Veja as oito variáveis como um sistema conectado.",
+                  "speakerNotesMd": "Nota do apresentador: O mapa em uma vista."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "overview-map",
+                    "type": "focus",
+                    "title": "O sistema inteiro",
+                    "narrationMd": "O mapa combina crescimento, capacidade e consequências.",
+                    "focus": {
+                      "kind": "set",
+                      "nodeIds": [
+                        "demand",
+                        "planning",
+                        "capacity",
+                        "availability",
+                        "pressure",
+                        "adoption",
+                        "trust",
+                        "support"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "overview-growth",
+                    "type": "focus",
+                    "title": "O motor aparece",
+                    "narrationMd": "A demanda é o ponto de entrada do motor de crescimento.",
+                    "focus": {
+                      "kind": "node",
+                      "nodeId": "demand"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "overview-capacity",
+                    "type": "focus",
+                    "title": "A capacidade responde",
+                    "narrationMd": "Planejamento e capacidade traduzem desejo em serviço.",
+                    "focus": {
+                      "kind": "path",
+                      "edgeIds": [
+                        "demand-planning",
+                        "planning-capacity",
+                        "capacity-availability"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "evidence",
+                "type": "media",
+                "title": "Um sinal no mundo",
+                "content": {
+                  "title": "Um sinal no mundo",
+                  "bodyMd": "A evidência não substitui o modelo: ela dá textura à pergunta.",
+                  "speakerNotesMd": "Nota do apresentador: Um sinal no mundo.",
+                  "assetId": "flagship-cover",
+                  "altText": "Ilustração abstrata de crescimento e capacidade"
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "evidence-cover",
+                    "type": "reveal",
+                    "title": "A observação",
+                    "narrationMd": "Este marcador representa a observação que motivou a investigação.",
+                    "focus": {
+                      "kind": "node",
+                      "nodeId": "availability"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "evidence-return",
+                    "type": "focus",
+                    "title": "Voltar ao sistema",
+                    "narrationMd": "Agora conectamos a evidência à disponibilidade percebida.",
+                    "focus": {
+                      "kind": "edge",
+                      "edgeId": "capacity-availability"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tension",
+                "type": "narrative",
+                "title": "A tensão que merece atenção",
+                "content": {
+                  "title": "A tensão que merece atenção",
+                  "bodyMd": "A mesma dinâmica que acelera o crescimento também cria pressão.",
+                  "speakerNotesMd": "Nota do apresentador: A tensão que merece atenção."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "tension-pressure",
+                    "type": "focus",
+                    "title": "A pressão se acumula",
+                    "narrationMd": "Quando a disponibilidade cresce, a pressão operacional também pode crescer.",
+                    "focus": {
+                      "kind": "edge",
+                      "edgeId": "availability-pressure"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "tension-limit",
+                    "type": "traverse",
+                    "title": "O limite retorna ao motor",
+                    "narrationMd": "O limite reduz a demanda e fecha o ciclo de balanceamento.",
+                    "focus": {
+                      "kind": "path",
+                      "edgeIds": [
+                        "availability-pressure",
+                        "pressure-demand",
+                        "demand-planning",
+                        "planning-capacity",
+                        "capacity-availability"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "tension-choice",
+                    "type": "question",
+                    "title": "Qual dinâmica lidera?",
+                    "narrationMd": "Precisamos separar o motor do limite antes de escolher uma ação.",
+                    "focus": {
+                      "kind": "loop",
+                      "loopId": "B-limit"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "mechanism",
+            "title": "Atravessar os mecanismos",
+            "role": "mechanism",
+            "summary": "Loops, caminhos e handoffs.",
+            "scenes": [
+              {
+                "id": "growth-loop",
+                "type": "stage",
+                "title": "O motor de crescimento",
+                "content": {
+                  "title": "O motor de crescimento",
+                  "bodyMd": "O primeiro ciclo reforça a expansão.",
+                  "speakerNotesMd": "Nota do apresentador: O motor de crescimento."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "growth-intro",
+                    "type": "focus",
+                    "title": "Nomear o motor",
+                    "narrationMd": "A demanda inicia planejamento, capacidade e disponibilidade.",
+                    "focus": {
+                      "kind": "loop",
+                      "loopId": "R-growth"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "growth-path",
+                    "type": "traverse",
+                    "title": "Percorrer o reforço",
+                    "narrationMd": "Siga a cadeia até a disponibilidade devolver força à demanda.",
+                    "focus": {
+                      "kind": "path",
+                      "edgeIds": [
+                        "demand-planning",
+                        "planning-capacity",
+                        "capacity-availability",
+                        "availability-demand"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "growth-phase",
+                    "type": "focus",
+                    "title": "Fase de aceleração",
+                    "narrationMd": "Neste momento o motor está mais visível que o limite.",
+                    "focus": {
+                      "kind": "set",
+                      "loopIds": [
+                        "R-growth"
+                      ],
+                      "nodeIds": [
+                        "demand",
+                        "availability"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "limit-loop",
+                "type": "stage",
+                "title": "O limite operacional",
+                "content": {
+                  "title": "O limite operacional",
+                  "bodyMd": "O segundo ciclo não é um vilão: é um freio adaptativo.",
+                  "speakerNotesMd": "Nota do apresentador: O limite operacional."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "limit-intro",
+                    "type": "focus",
+                    "title": "Nomear o limite",
+                    "narrationMd": "Disponibilidade gera pressão, que reduz a demanda.",
+                    "focus": {
+                      "kind": "loop",
+                      "loopId": "B-limit"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "limit-path",
+                    "type": "traverse",
+                    "title": "Percorrer o balanceamento",
+                    "narrationMd": "O caminho do limite atravessa pressão e retorna ao motor.",
+                    "focus": {
+                      "kind": "path",
+                      "edgeIds": [
+                        "capacity-availability",
+                        "availability-pressure",
+                        "pressure-demand",
+                        "demand-planning",
+                        "planning-capacity"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "limit-role",
+                    "type": "focus",
+                    "title": "Função do limite",
+                    "narrationMd": "O balanceamento preserva o sistema quando a expansão excede a capacidade.",
+                    "focus": {
+                      "kind": "set",
+                      "loopIds": [
+                        "B-limit"
+                      ],
+                      "nodeIds": [
+                        "pressure",
+                        "capacity"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "adoption-loop",
+                "type": "stage",
+                "title": "Adoção e confiança",
+                "content": {
+                  "title": "Adoção e confiança",
+                  "bodyMd": "Um circuito lateral muda a qualidade do crescimento.",
+                  "speakerNotesMd": "Nota do apresentador: Adoção e confiança."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "adoption-intro",
+                    "type": "focus",
+                    "title": "Adoção entra na história",
+                    "narrationMd": "Disponibilidade também aumenta adoção.",
+                    "focus": {
+                      "kind": "loop",
+                      "loopId": "R-adoption"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "adoption-path",
+                    "type": "traverse",
+                    "title": "A ponte para a confiança",
+                    "narrationMd": "Adoção volta à demanda, enquanto suporte sustenta confiança.",
+                    "focus": {
+                      "kind": "path",
+                      "edgeIds": [
+                        "availability-adoption",
+                        "adoption-demand",
+                        "demand-planning",
+                        "planning-capacity",
+                        "capacity-availability"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "adoption-outcome",
+                    "type": "focus",
+                    "title": "Resultado percebido",
+                    "narrationMd": "O crescimento pode ser mais saudável quando confiança acompanha adoção.",
+                    "focus": {
+                      "kind": "node",
+                      "nodeId": "trust"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "handoff",
+                "type": "narrative",
+                "title": "Da expansão para a intervenção",
+                "content": {
+                  "title": "Da expansão para a intervenção",
+                  "bodyMd": "A história muda de escala: do padrão para uma escolha.",
+                  "speakerNotesMd": "Nota do apresentador: Da expansão para a intervenção."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "handoff-growth-limit",
+                    "type": "handoff",
+                    "title": "Motor para limite",
+                    "narrationMd": "O handoff acontece em capacity-availability, onde crescimento encontra pressão.",
+                    "focus": {
+                      "kind": "edge",
+                      "edgeId": "capacity-availability"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "handoff-limit-adoption",
+                    "type": "handoff",
+                    "title": "Limite para adoção",
+                    "narrationMd": "Agora seguimos a ponte entre serviço, adoção e confiança.",
+                    "focus": {
+                      "kind": "path",
+                      "edgeIds": [
+                        "availability-adoption",
+                        "adoption-demand"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "handoff-synthesis",
+                    "type": "focus",
+                    "title": "Preparar a escolha",
+                    "narrationMd": "Com os loops nomeados, podemos testar uma alavanca sem apagar o padrão.",
+                    "focus": {
+                      "kind": "set",
+                      "loopIds": [
+                        "R-growth",
+                        "B-limit",
+                        "R-adoption"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "synthesis",
+            "title": "Escolher e retornar",
+            "role": "synthesis",
+            "summary": "Intervenção, consequência e fechamento.",
+            "scenes": [
+              {
+                "id": "comparison",
+                "type": "comparison",
+                "title": "E se reforçarmos suporte?",
+                "content": {
+                  "title": "E se reforçarmos suporte?",
+                  "bodyMd": "Compare o padrão atual com uma intervenção qualitativa.",
+                  "speakerNotesMd": "Nota do apresentador: E se reforçarmos suporte?."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "comparison-baseline",
+                    "type": "focus",
+                    "title": "Linha de base",
+                    "narrationMd": "O padrão atual combina reforço e balanceamento.",
+                    "focus": {
+                      "kind": "loop",
+                      "loopId": "R-growth"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "comparison-intervention",
+                    "type": "intervention",
+                    "title": "Intervenção",
+                    "narrationMd": "Reforçar suporte pode proteger confiança sem alterar a topologia.",
+                    "focus": {
+                      "kind": "node",
+                      "nodeId": "support"
+                    },
+                    "intervention": {
+                      "kind": "qualitative",
+                      "target": {
+                        "nodeId": "support"
+                      },
+                      "label": "Reforçar suporte"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "comparison-consequence",
+                    "type": "consequence",
+                    "title": "Consequência",
+                    "narrationMd": "Observe se confiança sustenta adoção antes de a pressão dominar.",
+                    "focus": {
+                      "kind": "loop",
+                      "loopId": "R-adoption"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "consequence",
+                "type": "stage",
+                "title": "A consequência distribuída",
+                "content": {
+                  "title": "A consequência distribuída",
+                  "bodyMd": "A mudança em um ponto aparece em vários loops.",
+                  "speakerNotesMd": "Nota do apresentador: A consequência distribuída."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "consequence-support",
+                    "type": "focus",
+                    "title": "Suporte conecta",
+                    "narrationMd": "Suporte aumenta confiança e muda a adoção.",
+                    "focus": {
+                      "kind": "path",
+                      "edgeIds": [
+                        "support-trust",
+                        "trust-adoption",
+                        "adoption-demand"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "consequence-return",
+                    "type": "focus",
+                    "title": "Retorno ao motor",
+                    "narrationMd": "O efeito retorna à demanda, mas agora com uma condição diferente.",
+                    "focus": {
+                      "kind": "loop",
+                      "loopId": "R-growth"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "recommendation",
+                "type": "narrative",
+                "title": "Uma recomendação condicional",
+                "content": {
+                  "title": "Uma recomendação condicional",
+                  "bodyMd": "A alavanca depende da fase do sistema.",
+                  "speakerNotesMd": "Nota do apresentador: Uma recomendação condicional."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "recommendation-phase",
+                    "type": "focus",
+                    "title": "Ler a fase",
+                    "narrationMd": "Em aceleração, proteja capacidade; sob pressão, reduza o acúmulo.",
+                    "focus": {
+                      "kind": "set",
+                      "loopIds": [
+                        "R-growth",
+                        "B-limit"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "recommendation-guardrail",
+                    "type": "focus",
+                    "title": "Guardar a decisão",
+                    "narrationMd": "Monitore disponibilidade, pressão e confiança juntos.",
+                    "focus": {
+                      "kind": "set",
+                      "nodeIds": [
+                        "availability",
+                        "pressure",
+                        "trust"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "close",
+                "type": "title",
+                "title": "Voltar ao mapa",
+                "content": {
+                  "title": "Voltar ao mapa",
+                  "bodyMd": "A história termina onde a investigação continua.",
+                  "speakerNotesMd": "Nota do apresentador: Voltar ao mapa."
+                },
+                "mapRef": {
+                  "mapId": "flagship-growth"
+                },
+                "stage": {
+                  "camera": {
+                    "mode": "fit-focus",
+                    "padding": 180
+                  },
+                  "visibility": {
+                    "context": [
+                      "demand",
+                      "capacity"
+                    ]
+                  }
+                },
+                "transition": {
+                  "type": "dissolve",
+                  "durationMs": 320
+                },
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "beats": [
+                  {
+                    "id": "close-question",
+                    "type": "question",
+                    "title": "O que você testa primeiro?",
+                    "narrationMd": "Escolha uma hipótese, registre a fase e observe o loop que responde.",
+                    "focus": {
+                      "kind": "node",
+                      "nodeId": "support"
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  },
+                  {
+                    "id": "close-map",
+                    "type": "focus",
+                    "title": "Mapa completo",
+                    "narrationMd": "O valor está em enxergar as relações e retornar ao sistema.",
+                    "focus": {
+                      "kind": "set",
+                      "loopIds": [
+                        "R-growth",
+                        "B-limit",
+                        "R-adoption"
+                      ]
+                    },
+                    "timing": {
+                      "durationMs": 4200,
+                      "advance": "manual"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "flagship-cover",
+      "filename": "growth-cover.png",
+      "mime_type": "image/png",
+      "kind": "image",
+      "alt_text": "Imagem de cobertura da fixture de crescimento.",
+      "focal_x": 0.5,
+      "focal_y": 0.5,
+      "source_json": {
+        "kind": "qa-fixture"
+      },
+      "content_base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScL8mQAAAABJRU5ErkJggg=="
+    }
+  ]
+}

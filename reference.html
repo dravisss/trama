@@ -1,0 +1,1740 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ECE8DB">
+  <title>CLD Lab — Referência Visual</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1117;
+      --panel: rgba(21, 25, 35, 0.78);
+      --panel-strong: rgba(26, 31, 43, 0.94);
+      --line: rgba(255, 255, 255, 0.09);
+      --text: #f5f7ff;
+      --muted: #8e98ad;
+      --cyan: #45e6ff;
+      --violet: #9f7aea;
+      --green: #5ff2ae;
+      --red: #ff6b91;
+      --amber: #ffc857;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 16% 8%, rgba(69, 230, 255, 0.09), transparent 27%),
+        radial-gradient(circle at 84% 3%, rgba(159, 122, 234, 0.10), transparent 30%),
+        linear-gradient(145deg, #0f1117 0%, #11141d 52%, #0b0d12 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+    }
+
+    button { font: inherit; }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      gap: 14px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 235px;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(69, 230, 255, .45);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(69,230,255,.18), rgba(159,122,234,.13));
+      box-shadow: 0 0 24px rgba(69,230,255,.13), inset 0 0 18px rgba(255,255,255,.05);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      border: 2px solid;
+      border-radius: 50%;
+    }
+
+    .brand-mark::before {
+      inset: 8px;
+      border-color: var(--cyan) transparent var(--cyan) var(--cyan);
+      transform: rotate(28deg);
+    }
+
+    .brand-mark::after {
+      inset: 13px;
+      border-color: var(--violet) var(--violet) transparent var(--violet);
+      transform: rotate(-20deg);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.1;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .brand p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .04em;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(15,17,23,.68);
+      box-shadow: 0 12px 38px rgba(0,0,0,.18);
+    }
+
+    .tab {
+      position: relative;
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 15px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      transition: color .2s ease, background .2s ease, transform .2s ease;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+
+    .tab:hover { color: var(--text); }
+    .tab:active { transform: scale(.98); }
+
+    .tab.active {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(69,230,255,.16), rgba(159,122,234,.16));
+      box-shadow: inset 0 0 0 1px rgba(132,205,255,.21), 0 7px 20px rgba(0,0,0,.2);
+    }
+
+    .tab.active::after {
+      content: "";
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      bottom: 2px;
+      height: 2px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      box-shadow: 0 0 12px var(--cyan);
+    }
+
+    .actions { display: flex; gap: 8px; }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      padding: 0 12px;
+      color: #c8d0df;
+      background: rgba(21,25,35,.72);
+      cursor: pointer;
+      transition: border-color .2s ease, color .2s ease, background .2s ease;
+    }
+
+    .icon-btn:hover {
+      color: #fff;
+      border-color: rgba(69,230,255,.3);
+      background: rgba(31,38,52,.9);
+    }
+
+    .icon-btn svg { width: 15px; height: 15px; }
+    .icon-btn span { font-size: 11px; }
+
+    .stage {
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(69,230,255,.035), transparent 37%),
+        linear-gradient(160deg, rgba(22,26,36,.90), rgba(12,14,20,.92));
+      box-shadow: 0 24px 80px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      box-shadow: inset 0 0 90px rgba(0,0,0,.26);
+    }
+
+    #cy {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    #edge-annotations {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .edge-sign {
+      fill: #2B3A2E;
+      stroke: #F7F3E7;
+      stroke-width: 2.5px;
+      paint-order: stroke fill;
+      stroke-linejoin: round;
+      font-family: "Noto Sans", system-ui, sans-serif;
+      font-weight: 600;
+      text-anchor: middle;
+      dominant-baseline: central;
+      transition: opacity .16s ease;
+    }
+
+    .edge-sign.balancing { fill: #596452; }
+
+    .info-card {
+      position: absolute;
+      z-index: 4;
+      top: 18px;
+      left: 18px;
+      width: min(310px, calc(100% - 36px));
+      padding: 16px 17px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(29,34,47,.88), rgba(18,21,29,.78));
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 45px rgba(0,0,0,.25);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: var(--cyan);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 1px;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    .info-card h2 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+
+    .info-card p {
+      margin: 7px 0 0;
+      color: #9ba5b8;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .metrics {
+      display: flex;
+      gap: 14px;
+      margin-top: 13px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 4px;
+      color: #6f7b90;
+      font-size: 8px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .legend {
+      position: absolute;
+      z-index: 4;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: #9ca7ba;
+      background: rgba(16,19,27,.76);
+      backdrop-filter: blur(12px);
+      font-size: 9px;
+      letter-spacing: .06em;
+      pointer-events: none;
+    }
+
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      box-shadow: 0 0 9px currentColor;
+    }
+    .positive { color: var(--green); }
+    .negative { color: var(--red); }
+
+    .hint {
+      position: absolute;
+      z-index: 4;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      color: rgba(167,177,196,.55);
+      font-size: 9px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .loading {
+      position: absolute;
+      z-index: 8;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(15,17,23,.42);
+      backdrop-filter: blur(3px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s ease, visibility .2s ease;
+      pointer-events: none;
+    }
+
+    .loading.visible { opacity: 1; visibility: visible; }
+
+    .loader {
+      width: 32px;
+      height: 32px;
+      border: 2px solid rgba(255,255,255,.10);
+      border-top-color: var(--cyan);
+      border-right-color: var(--violet);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      box-shadow: 0 0 18px rgba(69,230,255,.13);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 900px) {
+      .app { padding: 12px; }
+      .topbar { align-items: flex-start; }
+      .brand { min-width: 0; }
+      .brand p, .icon-btn span { display: none; }
+      .tabs { overflow-x: auto; max-width: 62vw; }
+      .tab { padding: 9px 11px; }
+      .info-card { width: 250px; }
+    }
+
+    @media (max-width: 640px) {
+      .topbar { display: grid; grid-template-columns: 1fr auto; }
+      .tabs { grid-column: 1 / -1; grid-row: 2; max-width: 100%; width: 100%; }
+      .tab { flex: 1; }
+      .brand-mark { width: 34px; height: 34px; }
+      .info-card { top: 10px; left: 10px; width: 210px; padding: 12px; }
+      .info-card h2 { font-size: 16px; }
+      .info-card p { display: none; }
+      .legend { right: 10px; bottom: 10px; }
+      .hint { display: none; }
+    }
+  </style>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&family=Noto+Serif:wght@500;600&display=swap');
+
+    :root {
+      color-scheme: light;
+      --primary: #2B3A2E;
+      --secondary: #7A8A72;
+      --tertiary: #6F9A5B;
+      --neutral: #ECE8DB;
+      --surface: #F7F3E7;
+      --on-primary: #F7F3E7;
+      --line: #D8D4C7;
+      --line-strong: #C8C5B8;
+      --soft-green: #E4EADB;
+      --shadow: rgba(43, 58, 46, .10);
+    }
+
+    html, body {
+      background: var(--neutral);
+      color: var(--primary);
+      font-family: "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+    }
+
+    body { background: var(--neutral); }
+    body::before { display: none; }
+
+    button:focus-visible {
+      outline: 3px solid rgba(111, 154, 91, .25);
+      outline-offset: 3px;
+    }
+
+    .app {
+      padding: 24px;
+      gap: 18px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(210px, 1fr) auto minmax(210px, 1fr);
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      gap: 13px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: none;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      border: 0;
+      background: var(--primary);
+    }
+
+    .brand-mark::before {
+      inset: auto;
+      width: 2px;
+      height: 24px;
+      left: 20px;
+      top: 9px;
+      border-radius: 2px;
+      transform: rotate(31deg);
+    }
+
+    .brand-mark::after {
+      inset: auto;
+      width: 12px;
+      height: 7px;
+      left: 19px;
+      top: 9px;
+      border-radius: 100% 0 100% 0;
+      box-shadow: -8px 12px 0 var(--secondary);
+      transform: rotate(14deg);
+    }
+
+    .brand h1 {
+      font-family: "Noto Serif", Georgia, serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -.015em;
+      text-transform: none;
+    }
+
+    .brand p {
+      margin-top: 3px;
+      color: var(--secondary);
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .tabs {
+      justify-self: center;
+      gap: 4px;
+      padding: 4px;
+      border-color: var(--line);
+      border-radius: 12px;
+      background: rgba(247, 243, 231, .58);
+      box-shadow: none;
+    }
+
+    .tab {
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: var(--secondary);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .02em;
+      transition: color .18s ease, background .18s ease, transform .18s ease;
+    }
+
+    .tab:hover {
+      color: var(--primary);
+      background: rgba(43, 58, 46, .05);
+    }
+
+    .tab.active {
+      color: var(--on-primary);
+      background: var(--primary);
+      box-shadow: none;
+    }
+
+    .tab.active::after { display: none; }
+
+    .actions {
+      justify-self: end;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      min-height: 40px;
+      border-color: var(--line-strong);
+      border-radius: 12px;
+      padding: 0 14px;
+      color: var(--primary);
+      background: transparent;
+      transition: border-color .18s ease, background .18s ease, transform .18s ease;
+    }
+
+    .icon-btn:hover {
+      color: var(--primary);
+      border-color: var(--secondary);
+      background: rgba(247, 243, 231, .58);
+    }
+
+    .icon-btn:active { transform: translateY(1px); }
+    .icon-btn span { font-size: 11px; font-weight: 600; }
+
+    #relayout {
+      color: var(--on-primary);
+      border-color: var(--tertiary);
+      background: var(--tertiary);
+    }
+
+    #relayout:hover {
+      color: var(--on-primary);
+      border-color: #638B51;
+      background: #638B51;
+    }
+
+    .stage {
+      border-color: var(--line);
+      border-radius: 24px;
+      background: var(--surface);
+      box-shadow: 0 18px 50px var(--shadow);
+    }
+
+    .stage::after { display: none; }
+
+    .info-card {
+      top: 24px;
+      left: 24px;
+      width: min(330px, calc(100% - 48px));
+      padding: 24px;
+      border-color: var(--line);
+      border-radius: 24px;
+      background: rgba(247, 243, 231, .94);
+      backdrop-filter: none;
+      box-shadow: 0 12px 35px rgba(43, 58, 46, .08);
+    }
+
+    .eyebrow {
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--secondary);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+    }
+
+    .eyebrow::before {
+      width: 22px;
+      background: var(--secondary);
+      box-shadow: none;
+    }
+
+    .info-card h2 {
+      max-width: 270px;
+      font-family: "Noto Serif", Georgia, serif;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -.025em;
+    }
+
+    .info-card p {
+      margin-top: 12px;
+      color: var(--secondary);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .metrics {
+      gap: 22px;
+      margin-top: 20px;
+      padding-top: 17px;
+      border-color: var(--line);
+    }
+
+    .metric strong {
+      font-family: "Noto Serif", Georgia, serif;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .metric span {
+      margin-top: 6px;
+      color: var(--secondary);
+      font-size: 8px;
+      letter-spacing: .11em;
+    }
+
+    .legend {
+      right: 24px;
+      bottom: 24px;
+      gap: 18px;
+      padding: 11px 14px;
+      border-color: var(--line);
+      color: var(--secondary);
+      background: rgba(247, 243, 231, .92);
+      backdrop-filter: none;
+      font-size: 10px;
+      letter-spacing: 0;
+    }
+
+    .legend-dot {
+      width: 18px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+      box-shadow: none;
+    }
+
+    .positive { color: var(--primary); }
+    .negative { color: var(--secondary); }
+    .legend-dot.negative {
+      height: 0;
+      background: transparent;
+      border-top: 2px dashed currentColor;
+    }
+
+    .hint {
+      bottom: 27px;
+      color: var(--secondary);
+      opacity: .72;
+      font-size: 9px;
+      letter-spacing: .1em;
+    }
+
+    .loading {
+      background: rgba(247, 243, 231, .74);
+      backdrop-filter: none;
+    }
+
+    .loader {
+      border-color: var(--line);
+      border-top-color: var(--tertiary);
+      border-right-color: var(--line);
+      box-shadow: none;
+    }
+
+    @media (max-width: 900px) {
+      .app { padding: 16px; gap: 14px; }
+      .topbar { grid-template-columns: 1fr auto; align-items: center; }
+      .tabs {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        max-width: none;
+      }
+      .actions { grid-column: 2; grid-row: 1; }
+      .info-card { width: 280px; }
+    }
+
+    @media (max-width: 640px) {
+      .app { padding: 10px; }
+      .brand-mark { width: 34px; height: 34px; }
+      .brand-mark::before { left: 16px; top: 6px; }
+      .brand-mark::after { left: 15px; top: 6px; }
+      .info-card {
+        top: 12px;
+        left: 12px;
+        width: 220px;
+        padding: 16px;
+        border-radius: 18px;
+      }
+      .info-card h2 { font-size: 22px; }
+      .metrics { margin-top: 14px; padding-top: 13px; gap: 14px; }
+      .legend { right: 12px; bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <h1>CLD Lab</h1>
+          <p>Mapas sistêmicos · curvas inteligentes</p>
+        </div>
+      </div>
+
+      <nav class="tabs" aria-label="Selecionar mockup">
+        <button class="tab active" data-index="0">Mockup 1 (8 vars)</button>
+        <button class="tab" data-index="1">Mockup 2 (12 vars)</button>
+        <button class="tab" data-index="2">Mockup 3 (14 vars)</button>
+      </nav>
+
+      <div class="actions">
+        <button class="icon-btn" id="relayout" type="button" title="Recalcular layout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M20 7h-5V2"/><path d="M20 7a8.5 8.5 0 1 0 1 8"/>
+          </svg>
+          <span>Reorganizar</span>
+        </button>
+        <button class="icon-btn" id="fit" type="button" title="Ajustar à tela">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/>
+          </svg>
+          <span>Ajustar</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="stage" aria-label="Diagrama de loop causal interativo">
+      <div id="cy"></div>
+      <svg id="edge-annotations" aria-hidden="true"></svg>
+
+      <aside class="info-card">
+        <div class="eyebrow" id="scenario">Sistema produtivo</div>
+        <h2 id="title">Produção &amp; Demanda</h2>
+        <p id="description">Um ciclo operacional compacto com pressões de estoque e capacidade.</p>
+        <div class="metrics">
+          <div class="metric"><strong id="nodeCount">8</strong><span>Variáveis</span></div>
+          <div class="metric"><strong id="edgeCount">10</strong><span>Relações</span></div>
+          <div class="metric"><strong id="curveCount">0</strong><span>Desvios</span></div>
+        </div>
+      </aside>
+
+      <div class="legend" aria-hidden="true">
+        <div class="legend-item"><i class="legend-dot positive"></i><span>Reforço ++ / −−</span></div>
+        <div class="legend-item"><i class="legend-dot negative"></i><span>Equilíbrio +− / −+</span></div>
+      </div>
+      <div class="hint">Arraste os nós · use o scroll para zoom · clique para destacar relações</div>
+      <div class="loading visible" id="loading"><div class="loader"></div></div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <script src="https://unpkg.com/layout-base/layout-base.js"></script>
+  <script src="https://unpkg.com/cose-base/cose-base.js"></script>
+  <script src="https://unpkg.com/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.js"></script>
+  <script>
+    if (typeof cytoscapeCoseBilkent !== 'undefined') {
+      cytoscape.use(cytoscapeCoseBilkent);
+    }
+
+    const palette = [
+      ['#526653', '#F2F0E6'], ['#667762', '#E8ECDF'], ['#76836F', '#F5F1E5'],
+      ['#596B57', '#E4EADB'], ['#7A8A72', '#F1EEE3'], ['#485C4C', '#E9E7DC'],
+      ['#6A7865', '#EEF0E7'], ['#5D705A', '#F4F0E4'], ['#71806A', '#E5E9DF'],
+      ['#526653', '#F2F0E6'], ['#667762', '#E8ECDF'], ['#76836F', '#F5F1E5'],
+      ['#596B57', '#E4EADB'], ['#7A8A72', '#F1EEE3']
+    ];
+
+    const scenarios = [
+      {
+        eyebrow: 'Sistema produtivo',
+        title: 'Produção & Demanda',
+        description: 'Um ciclo operacional compacto com pressões de estoque e capacidade.',
+        layout: { idealEdgeLength: 180, nodeRepulsion: 60000 },
+        nodes: ['Demanda', 'Planejamento', 'Capacidade', 'Volume de Produção', 'Estoque', 'Preço', 'Vendas', 'Receita'],
+        edges: [
+          ['Demanda','Planejamento','+'], ['Planejamento','Capacidade','+'],
+          ['Capacidade','Volume de Produção','+'], ['Volume de Produção','Estoque','+'],
+          ['Estoque','Preço','-'], ['Preço','Vendas','-'], ['Vendas','Receita','+'],
+          ['Receita','Demanda','+'], ['Estoque','Planejamento','-'], ['Vendas','Estoque','-']
+        ]
+      },
+      {
+        eyebrow: 'Ecossistema digital',
+        title: 'Adoção de Tecnologia',
+        description: 'Aquisição, valor percebido e churn disputam a velocidade de crescimento.',
+        layout: { idealEdgeLength: 240, nodeRepulsion: 90000 },
+        nodes: ['Investimento em Marketing', 'Awareness', 'Leads', 'Novos Usuários', 'Base Ativa', 'Efeito de Rede', 'Valor Percebido', 'Engajamento', 'Receita Recorrente', 'Suporte', 'Fricção', 'Churn'],
+        edges: [
+          ['Investimento em Marketing','Awareness','+'], ['Awareness','Leads','+'],
+          ['Leads','Novos Usuários','+'], ['Novos Usuários','Base Ativa','+'],
+          ['Base Ativa','Efeito de Rede','+'], ['Efeito de Rede','Valor Percebido','+'],
+          ['Valor Percebido','Engajamento','+'], ['Engajamento','Receita Recorrente','+'],
+          ['Receita Recorrente','Investimento em Marketing','+'], ['Base Ativa','Suporte','-'],
+          ['Suporte','Fricção','-'], ['Fricção','Engajamento','-'],
+          ['Fricção','Churn','+'], ['Churn','Base Ativa','-'],
+          ['Churn','Receita Recorrente','-'], ['Suporte','Valor Percebido','+'],
+          ['Investimento em Marketing','Fricção','+'], ['Awareness','Churn','-']
+        ]
+      },
+      {
+        eyebrow: 'Teste de estresse',
+        title: 'Clima & Economia',
+        description: 'Choques climáticos atravessam energia, produção, preços e políticas públicas.',
+        layout: { idealEdgeLength: 280, nodeRepulsion: 120000 },
+        nodes: ['Emissões', 'Temperatura Global', 'Eventos Extremos', 'Infraestrutura', 'Produtividade', 'Oferta de Alimentos', 'Inflação', 'Taxa de Juros', 'Investimento', 'Energia Renovável', 'Combustíveis Fósseis', 'PIB', 'Pressão Política', 'Regulação'],
+        edges: [
+          ['Emissões','Temperatura Global','+'], ['Temperatura Global','Eventos Extremos','+'],
+          ['Eventos Extremos','Infraestrutura','-'], ['Infraestrutura','Produtividade','+'],
+          ['Produtividade','Oferta de Alimentos','+'], ['Oferta de Alimentos','Inflação','-'],
+          ['Inflação','Taxa de Juros','+'], ['Taxa de Juros','Investimento','-'],
+          ['Investimento','Energia Renovável','+'], ['Energia Renovável','Emissões','-'],
+          ['Combustíveis Fósseis','Emissões','+'], ['PIB','Combustíveis Fósseis','+'],
+          ['Produtividade','PIB','+'], ['Eventos Extremos','Pressão Política','+'],
+          ['Pressão Política','Regulação','+'], ['Regulação','Combustíveis Fósseis','-'],
+          ['Regulação','Energia Renovável','+'], ['Eventos Extremos','Oferta de Alimentos','-'],
+          ['Temperatura Global','Produtividade','-'], ['Inflação','Pressão Política','+'],
+          ['Taxa de Juros','PIB','-'], ['PIB','Investimento','+'],
+          ['Energia Renovável','Oferta de Alimentos','+'], ['Infraestrutura','Emissões','+'],
+          ['Investimento','Infraestrutura','+'], ['Combustíveis Fósseis','Inflação','+']
+        ]
+      }
+    ];
+
+    let cy = null;
+    let activeIndex = 0;
+    let dragFrame = null;
+    let curveComputationLocked = false;
+    let annotationFrame = null;
+    let annotationTimer = null;
+    let lastAnnotationRender = 0;
+    let lastCurveCompute = 0;
+
+    const slug = value => value.normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+
+    function buildElements(scenario) {
+      const nodes = scenario.nodes.map((label, index) => ({
+        data: {
+          id: slug(label),
+          label,
+          color: palette[index % palette.length][0],
+          fill: palette[index % palette.length][1]
+        }
+      }));
+
+      const edges = scenario.edges.map(([source, target, polarity], index) => {
+        const reinforcingPairs = [['+', '+'], ['−', '−']];
+        const balancingPairs = [['+', '−'], ['−', '+']];
+        const [sourceSign, targetSign] = polarity === '+'
+          ? reinforcingPairs[index % reinforcingPairs.length]
+          : balancingPairs[index % balancingPairs.length];
+
+        return {
+          data: {
+            id: `e-${activeIndex}-${index}`,
+            source: slug(source),
+            target: slug(target),
+            polarity,
+            sourceSign,
+            targetSign
+          },
+          classes: polarity === '+' ? 'positive-edge' : 'negative-edge'
+        };
+      });
+
+      return [...nodes, ...edges];
+    }
+
+    function graphCenter(graph) {
+      const nodes = graph.nodes();
+      if (!nodes.length) return { x: 0, y: 0 };
+      const total = nodes.reduce((acc, node) => {
+        const p = node.position();
+        acc.x += p.x;
+        acc.y += p.y;
+        return acc;
+      }, { x: 0, y: 0 });
+      return { x: total.x / nodes.length, y: total.y / nodes.length };
+    }
+
+    function localCentroid(edge, fallback) {
+      const source = edge.source();
+      const target = edge.target();
+      const excluded = new Set([source.id(), target.id()]);
+      const neighbors = source.neighborhood('node')
+        .union(target.neighborhood('node'))
+        .filter(node => !excluded.has(node.id()));
+
+      if (!neighbors.length) return fallback;
+
+      const total = neighbors.reduce((acc, node) => {
+        const p = node.position();
+        acc.x += p.x;
+        acc.y += p.y;
+        return acc;
+      }, { x: 0, y: 0 });
+
+      return { x: total.x / neighbors.length, y: total.y / neighbors.length };
+    }
+
+    function bezierPoint(source, target, cpDistance, t) {
+      const dx = target.x - source.x;
+      const dy = target.y - source.y;
+      const length = Math.hypot(dx, dy) || 1;
+      const midpoint = { x: (source.x + target.x) / 2, y: (source.y + target.y) / 2 };
+      const control = {
+        x: midpoint.x + (-dy / length) * cpDistance,
+        y: midpoint.y + (dx / length) * cpDistance
+      };
+      const mt = 1 - t;
+      return {
+        x: mt * mt * source.x + 2 * mt * t * control.x + t * t * target.x,
+        y: mt * mt * source.y + 2 * mt * t * control.y + t * t * target.y
+      };
+    }
+
+    function curvePolyline(source, target, cpDistance, steps = 28) {
+      return Array.from({ length: steps + 1 }, (_, index) =>
+        bezierPoint(source, target, cpDistance, index / steps)
+      );
+    }
+
+    function pointSegmentDistance(point, a, b) {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const lengthSquared = dx * dx + dy * dy;
+      if (!lengthSquared) return Math.hypot(point.x - a.x, point.y - a.y);
+      const t = Math.max(0, Math.min(1, ((point.x - a.x) * dx + (point.y - a.y) * dy) / lengthSquared));
+      return Math.hypot(point.x - (a.x + t * dx), point.y - (a.y + t * dy));
+    }
+
+    function orientation(a, b, c) {
+      return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+    }
+
+    function segmentsCross(a, b, c, d) {
+      const o1 = orientation(a, b, c);
+      const o2 = orientation(a, b, d);
+      const o3 = orientation(c, d, a);
+      const o4 = orientation(c, d, b);
+      return o1 * o2 < 0 && o3 * o4 < 0;
+    }
+
+    function segmentDistance(a, b, c, d) {
+      if (segmentsCross(a, b, c, d)) return 0;
+      return Math.min(
+        pointSegmentDistance(a, c, d),
+        pointSegmentDistance(b, c, d),
+        pointSegmentDistance(c, a, b),
+        pointSegmentDistance(d, a, b)
+      );
+    }
+
+    function curvesInteraction(pathA, pathB, sharesEndpoint) {
+      let crossings = 0;
+      let closeSegments = 0;
+      let minimum = Infinity;
+      const endpointGuard = sharesEndpoint ? 4 : 0;
+
+      for (let i = endpointGuard; i < pathA.length - 1 - endpointGuard; i++) {
+        for (let j = endpointGuard; j < pathB.length - 1 - endpointGuard; j++) {
+          const distance = segmentDistance(pathA[i], pathA[i + 1], pathB[j], pathB[j + 1]);
+          minimum = Math.min(minimum, distance);
+          if (distance === 0) crossings++;
+          else if (distance < 18) closeSegments++;
+        }
+      }
+
+      return { crossings, closeSegments, minimum };
+    }
+
+    function nodePenalty(graph, edge, path) {
+      let penalty = 0;
+      graph.nodes().forEach(node => {
+        if (node.id() === edge.source().id() || node.id() === edge.target().id()) return;
+        const position = node.position();
+        const minimum = Math.min(...path.map(point => Math.hypot(point.x - position.x, point.y - position.y)));
+        if (minimum < 53) penalty += 18000 + (53 - minimum) * 900;
+        else if (minimum < 76) penalty += (76 - minimum) * 180;
+      });
+      return penalty;
+    }
+
+    function outwardDirection(path, edge, nodeId) {
+      if (edge.source().id() === nodeId) {
+        return {
+          x: path[2].x - path[0].x,
+          y: path[2].y - path[0].y
+        };
+      }
+      const last = path.length - 1;
+      return {
+        x: path[last - 2].x - path[last].x,
+        y: path[last - 2].y - path[last].y
+      };
+    }
+
+    function angleBetweenVectors(a, b) {
+      const lengthA = Math.hypot(a.x, a.y) || 1;
+      const lengthB = Math.hypot(b.x, b.y) || 1;
+      const cosine = Math.max(-1, Math.min(1, (a.x * b.x + a.y * b.y) / (lengthA * lengthB)));
+      return Math.acos(cosine);
+    }
+
+    function portSeparationPenalty(graph, edge, path, pathCache) {
+      let penalty = 0;
+      [edge.source().id(), edge.target().id()].forEach(nodeId => {
+        const direction = outwardDirection(path, edge, nodeId);
+        pathCache.forEach((otherPath, otherId) => {
+          if (otherId === edge.id()) return;
+          const other = graph.getElementById(otherId);
+          if (!other.length) return;
+          if (other.source().id() !== nodeId && other.target().id() !== nodeId) return;
+          const otherDirection = outwardDirection(otherPath, other, nodeId);
+          const angle = angleBetweenVectors(direction, otherDirection);
+          if (angle < 0.18) penalty += 40000;
+          else if (angle < 0.32) penalty += (0.32 - angle) * 45000;
+          else if (angle < 0.48) penalty += (0.48 - angle) * 7000;
+        });
+      });
+      return penalty;
+    }
+
+    function candidateDistances(edge, center) {
+      const source = edge.source().position();
+      const target = edge.target().position();
+      const centroid = localCentroid(edge, center);
+      const midpoint = { x: (source.x + target.x) / 2, y: (source.y + target.y) / 2 };
+      const vector = { x: target.x - source.x, y: target.y - source.y };
+      const towardCentroid = { x: centroid.x - midpoint.x, y: centroid.y - midpoint.y };
+      const cross = vector.x * towardCentroid.y - vector.y * towardCentroid.x;
+      const outward = cross >= 0 ? -1 : 1;
+      const length = Math.hypot(vector.x, vector.y);
+      const scale = Math.max(45, Math.min(190, length * 0.38));
+      const amplitudes = [0.45, 0.62, 0.8, 1, 1.22, 1.48, 1.78].map(factor => Math.round(scale * factor));
+      return [...new Set(amplitudes.flatMap(value => [outward * value, -outward * value]))];
+    }
+
+    function scoreCurveCandidate(graph, edge, distance, pathCache, preferred) {
+      const source = edge.source().position();
+      const target = edge.target().position();
+      const path = curvePolyline(source, target, distance);
+      let score = nodePenalty(graph, edge, path);
+      score += portSeparationPenalty(graph, edge, path, pathCache);
+
+      pathCache.forEach((otherPath, otherId) => {
+        if (otherId === edge.id()) return;
+        const other = graph.getElementById(otherId);
+        if (!other.length) return;
+        const sharesEndpoint =
+          edge.source().id() === other.source().id() ||
+          edge.source().id() === other.target().id() ||
+          edge.target().id() === other.source().id() ||
+          edge.target().id() === other.target().id();
+        const interaction = curvesInteraction(path, otherPath, sharesEndpoint);
+        score += interaction.crossings * 50000;
+        score += interaction.closeSegments * 110;
+        if (!sharesEndpoint && interaction.minimum < 10) score += (10 - interaction.minimum) * 600;
+      });
+
+      score += Math.abs(distance) * 0.7;
+      score += Math.abs(distance - preferred) * 0.3;
+      return { score, path };
+    }
+
+    function computeSmartCurves(graph) {
+      if (!graph || graph.destroyed() || curveComputationLocked) return;
+      curveComputationLocked = true;
+
+      const center = graphCenter(graph);
+      const edges = graph.edges().toArray().sort((a, b) => {
+        const lengthA = Math.hypot(
+          a.target().position().x - a.source().position().x,
+          a.target().position().y - a.source().position().y
+        );
+        const lengthB = Math.hypot(
+          b.target().position().x - b.source().position().x,
+          b.target().position().y - b.source().position().y
+        );
+        return lengthB - lengthA;
+      });
+      const pathCache = new Map();
+      const chosenDistances = new Map();
+
+      edges.forEach(edge => {
+        const candidates = candidateDistances(edge, center);
+        const preferred = candidates[0];
+        let best = { score: Infinity, distance: preferred, path: [] };
+        candidates.forEach(distance => {
+          const candidate = scoreCurveCandidate(graph, edge, distance, pathCache, preferred);
+          if (candidate.score < best.score) best = { ...candidate, distance };
+        });
+        chosenDistances.set(edge.id(), best.distance);
+        pathCache.set(edge.id(), best.path);
+      });
+
+      for (let pass = 0; pass < 5; pass++) {
+        const passEdges = pass % 2 === 0 ? edges : [...edges].reverse();
+        passEdges.forEach(edge => {
+          const candidates = candidateDistances(edge, center);
+          const preferred = candidates[0];
+          let best = {
+            score: Infinity,
+            distance: chosenDistances.get(edge.id()),
+            path: pathCache.get(edge.id())
+          };
+          candidates.forEach(distance => {
+            const candidate = scoreCurveCandidate(graph, edge, distance, pathCache, preferred);
+            if (candidate.score < best.score) best = { ...candidate, distance };
+          });
+          chosenDistances.set(edge.id(), best.distance);
+          pathCache.set(edge.id(), best.path);
+        });
+      }
+
+      graph.batch(() => {
+        edges.forEach(edge => {
+          const distance = chosenDistances.get(edge.id());
+          edge.style({
+            'control-point-distances': distance,
+            'control-point-weights': 0.5
+          });
+          edge.data('curveDistance', Math.round(distance));
+          edge.removeData('annotationSide');
+        });
+      });
+
+      let routeCrossings = 0;
+      for (let i = 0; i < edges.length; i++) {
+        for (let j = i + 1; j < edges.length; j++) {
+          const edgeA = edges[i];
+          const edgeB = edges[j];
+          const sharesEndpoint =
+            edgeA.source().id() === edgeB.source().id() ||
+            edgeA.source().id() === edgeB.target().id() ||
+            edgeA.target().id() === edgeB.source().id() ||
+            edgeA.target().id() === edgeB.target().id();
+          routeCrossings += curvesInteraction(
+            pathCache.get(edgeA.id()),
+            pathCache.get(edgeB.id()),
+            sharesEndpoint
+          ).crossings;
+        }
+      }
+
+      const diverted = [...chosenDistances.values()].filter(value => Math.abs(value) > 120).length;
+      document.getElementById('curveCount').textContent = diverted;
+      document.getElementById('edge-annotations').dataset.routeCrossings = String(routeCrossings);
+      curveComputationLocked = false;
+      requestAnnotationRender();
+    }
+
+    function renderedCurvePolyline(edge, steps = 120) {
+      const source = edge.renderedSourceEndpoint();
+      const target = edge.renderedTargetEndpoint();
+      const controlPoints = edge.renderedControlPoints();
+      const control = controlPoints && controlPoints.length
+        ? controlPoints[0]
+        : {
+            x: (source.x + target.x) / 2,
+            y: (source.y + target.y) / 2
+          };
+
+      return Array.from({ length: steps + 1 }, (_, index) => {
+        const t = index / steps;
+        const mt = 1 - t;
+        return {
+          x: mt * mt * source.x + 2 * mt * t * control.x + t * t * target.x,
+          y: mt * mt * source.y + 2 * mt * t * control.y + t * t * target.y
+        };
+      });
+    }
+
+    function arcLengthTable(points) {
+      let total = 0;
+      return points.map((point, index) => {
+        if (index) total += Math.hypot(point.x - points[index - 1].x, point.y - points[index - 1].y);
+        return { ...point, length: total, index };
+      });
+    }
+
+    function pointAtArcDistance(table, distanceFromStart) {
+      const total = table[table.length - 1].length;
+      const wanted = Math.max(0, Math.min(total, distanceFromStart));
+      let upperIndex = table.findIndex(point => point.length >= wanted);
+      if (upperIndex <= 0) upperIndex = 1;
+      const upper = table[upperIndex];
+      const lower = table[upperIndex - 1];
+      const span = upper.length - lower.length || 1;
+      const ratio = (wanted - lower.length) / span;
+      const point = {
+        x: lower.x + (upper.x - lower.x) * ratio,
+        y: lower.y + (upper.y - lower.y) * ratio
+      };
+      const tangent = {
+        x: upper.x - lower.x,
+        y: upper.y - lower.y
+      };
+      const tangentLength = Math.hypot(tangent.x, tangent.y) || 1;
+      return {
+        point,
+        tangent: { x: tangent.x / tangentLength, y: tangent.y / tangentLength },
+        total
+      };
+    }
+
+    function alignedNormal(tangent, referenceNormal) {
+      const normalA = { x: -tangent.y, y: tangent.x };
+      const normalB = { x: tangent.y, y: -tangent.x };
+      const dotA = normalA.x * referenceNormal.x + normalA.y * referenceNormal.y;
+      const dotB = normalB.x * referenceNormal.x + normalB.y * referenceNormal.y;
+      return dotA >= dotB ? normalA : normalB;
+    }
+
+    function chordNormal(table, side) {
+      const source = table[0];
+      const target = table[table.length - 1];
+      const dx = target.x - source.x;
+      const dy = target.y - source.y;
+      const length = Math.hypot(dx, dy) || 1;
+      return {
+        x: (-dy / length) * side,
+        y: (dx / length) * side
+      };
+    }
+
+    function rectangleIntersects(a, b) {
+      return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+    }
+
+    function signBox(position, fontSize) {
+      const halfWidth = Math.max(4, fontSize * 0.48);
+      const halfHeight = Math.max(5, fontSize * 0.62);
+      return {
+        left: position.x - halfWidth,
+        right: position.x + halfWidth,
+        top: position.y - halfHeight,
+        bottom: position.y + halfHeight
+      };
+    }
+
+    function edgeIsFocused(edge) {
+      return (
+        edge.selected() ||
+        edge.hasClass('focused') ||
+        edge.hasClass('annotation-focus') ||
+        edge.source().selected() ||
+        edge.target().selected() ||
+        edge.source().hasClass('hovered') ||
+        edge.target().hasClass('hovered')
+      );
+    }
+
+    function semanticAnnotationProfile(graph) {
+      const zoom = graph.zoom();
+      const density = graph.edges().length / Math.max(1, graph.nodes().length);
+      const minimumFontSize = graph.nodes().length <= 8 ? 8 : 6.5;
+      const fontSize = Math.max(
+        minimumFontSize,
+        Math.min(11.5, 11.5 * zoom / Math.sqrt(Math.max(1, density * 0.82)))
+      );
+      return {
+        zoom,
+        fontSize,
+        lineClearance: Math.max(4, fontSize * 0.52),
+        hideAllUnfocused: zoom < 0.36,
+        hideCollisions: graph.nodes().length > 8 || zoom < 0.72
+      };
+    }
+
+    function anchoredSignPosition(table, endpoint, fontSize, annotationSide) {
+      const total = table[table.length - 1].length;
+      const along = endpoint === 'source'
+        ? Math.max(8, Math.min(13, fontSize + 2))
+        : Math.max(15, Math.min(21, fontSize + 9));
+      const sample = pointAtArcDistance(table, endpoint === 'source' ? along : total - along);
+      const normal = alignedNormal(sample.tangent, chordNormal(table, annotationSide));
+      const below = Math.max(5.5, Math.min(9, fontSize * 0.72));
+      return {
+        x: sample.point.x + normal.x * below,
+        y: sample.point.y + normal.y * below
+      };
+    }
+
+    function staticAnnotationPenalty(position, edge, endpoint, nodeBoxes, edgePaths, arrowPoints, profile) {
+      const box = signBox(position, profile.fontSize);
+      const ownNodeId = endpoint === 'source' ? edge.source().id() : edge.target().id();
+      let score = 0;
+
+      nodeBoxes.forEach(node => {
+        if (node.id !== ownNodeId && rectangleIntersects(box, node.box)) score += 10000;
+      });
+
+      for (const [otherId, path] of edgePaths.entries()) {
+        if (otherId === edge.id()) continue;
+        let minimum = Infinity;
+        for (let index = 0; index < path.length - 1; index++) {
+          minimum = Math.min(minimum, pointSegmentDistance(position, path[index], path[index + 1]));
+        }
+        if (minimum < profile.lineClearance) score += 5000 + (profile.lineClearance - minimum) * 800;
+      }
+
+      arrowPoints.forEach(arrow => {
+        if (arrow.edgeId === edge.id() && endpoint === 'target') return;
+        const distance = Math.hypot(position.x - arrow.x, position.y - arrow.y);
+        if (distance < profile.fontSize) score += 4000 + (profile.fontSize - distance) * 500;
+      });
+
+      return score;
+    }
+
+    function chooseAnnotationSide(edge, table, nodeBoxes, edgePaths, arrowPoints, profile) {
+      const candidates = [-1, 1].map(side => {
+        const sourcePosition = anchoredSignPosition(table, 'source', profile.fontSize, side);
+        const targetPosition = anchoredSignPosition(table, 'target', profile.fontSize, side);
+        const score =
+          staticAnnotationPenalty(sourcePosition, edge, 'source', nodeBoxes, edgePaths, arrowPoints, profile) +
+          staticAnnotationPenalty(targetPosition, edge, 'target', nodeBoxes, edgePaths, arrowPoints, profile);
+        return { side, score };
+      });
+
+      candidates.sort((a, b) => a.score - b.score || b.side - a.side);
+      return candidates[0].side;
+    }
+
+    function annotationCollides(spec, visibleBoxes, nodeBoxes, edgePaths, arrowPoints, profile) {
+      const box = spec.box;
+      const ownNodeId = spec.side === 'source' ? spec.edge.source().id() : spec.edge.target().id();
+
+      if (visibleBoxes.some(other => rectangleIntersects(box, other))) return true;
+      if (nodeBoxes.some(node => node.id !== ownNodeId && rectangleIntersects(box, node.box))) return true;
+
+      for (const [otherId, path] of edgePaths.entries()) {
+        if (otherId === spec.edge.id()) continue;
+        let minimum = Infinity;
+        for (let index = 0; index < path.length - 1; index++) {
+          minimum = Math.min(minimum, pointSegmentDistance(spec.position, path[index], path[index + 1]));
+        }
+        if (minimum < profile.lineClearance) return true;
+      }
+
+      return arrowPoints.some(arrow => {
+        if (arrow.edgeId === spec.edge.id() && spec.side === 'target') return false;
+        return Math.hypot(spec.position.x - arrow.x, spec.position.y - arrow.y) < profile.fontSize * 0.9;
+      });
+    }
+
+    function renderEdgeAnnotations() {
+      annotationFrame = null;
+      lastAnnotationRender = Date.now();
+      if (!cy || cy.destroyed()) return;
+
+      const svg = document.getElementById('edge-annotations');
+      const container = document.getElementById('cy');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      svg.replaceChildren();
+
+      const profile = semanticAnnotationProfile(cy);
+      svg.dataset.zoom = profile.zoom.toFixed(3);
+      svg.dataset.fontSize = profile.fontSize.toFixed(2);
+
+      const nodeBoxes = cy.nodes().map(node => {
+        const box = node.renderedBoundingBox({ includeLabels: true, includeOverlays: false });
+        return {
+          id: node.id(),
+          box: {
+            left: box.x1 - 3,
+            right: box.x2 + 3,
+            top: box.y1 - 3,
+            bottom: box.y2 + 3
+          }
+        };
+      });
+      const edgePaths = new Map();
+      const arrowPoints = [];
+      cy.edges().forEach(edge => {
+        const path = renderedCurvePolyline(edge);
+        edgePaths.set(edge.id(), path);
+        arrowPoints.push({ ...edge.renderedTargetEndpoint(), edgeId: edge.id() });
+      });
+
+      const signSpecs = [];
+      cy.edges().forEach(edge => {
+        const path = edgePaths.get(edge.id());
+        const table = arcLengthTable(path);
+        if (table[table.length - 1].length < 44) return;
+        let annotationSide = Number(edge.data('annotationSide'));
+        if (annotationSide !== -1 && annotationSide !== 1) {
+          annotationSide = chooseAnnotationSide(
+            edge,
+            table,
+            nodeBoxes,
+            edgePaths,
+            arrowPoints,
+            profile
+          );
+          edge.data('annotationSide', annotationSide);
+        }
+
+        ['source', 'target'].forEach(side => {
+          const position = anchoredSignPosition(table, side, profile.fontSize, annotationSide);
+          signSpecs.push({
+            edge,
+            side,
+            sign: edge.data(side === 'source' ? 'sourceSign' : 'targetSign'),
+            position,
+            box: signBox(position, profile.fontSize),
+            focused: edgeIsFocused(edge),
+            annotationSide
+          });
+        });
+      });
+
+      signSpecs.sort((a, b) => Number(b.focused) - Number(a.focused));
+      const visibleBoxes = [];
+      let hiddenCount = 0;
+      signSpecs.forEach(spec => {
+        const collision = annotationCollides(spec, visibleBoxes, nodeBoxes, edgePaths, arrowPoints, profile);
+        const hidden =
+          !spec.focused &&
+          (profile.hideAllUnfocused || (profile.hideCollisions && collision));
+        if (!hidden) visibleBoxes.push(spec.box);
+        else hiddenCount++;
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', spec.position.x.toFixed(2));
+        text.setAttribute('y', spec.position.y.toFixed(2));
+        text.setAttribute('class', `edge-sign${spec.edge.hasClass('negative-edge') ? ' balancing' : ''}`);
+        text.setAttribute('data-edge-id', spec.edge.id());
+        text.setAttribute('data-side', spec.side);
+        text.setAttribute('data-annotation-side', String(spec.annotationSide));
+        text.setAttribute('data-hidden-by-density', String(hidden));
+        text.setAttribute('font-size', profile.fontSize.toFixed(2));
+        text.setAttribute(
+          'opacity',
+          hidden ? '0' : spec.edge.hasClass('faded') && !spec.focused ? '0.12' : '1'
+        );
+        text.textContent = spec.sign;
+        svg.appendChild(text);
+      });
+      svg.dataset.hiddenSigns = String(hiddenCount);
+    }
+
+    function requestAnnotationRender() {
+      if (annotationFrame || annotationTimer) return;
+      const wait = Math.max(0, 55 - (Date.now() - lastAnnotationRender));
+      if (wait > 0) {
+        annotationTimer = window.setTimeout(() => {
+          annotationTimer = null;
+          annotationFrame = requestAnimationFrame(renderEdgeAnnotations);
+        }, wait);
+      } else {
+        annotationFrame = requestAnimationFrame(renderEdgeAnnotations);
+      }
+    }
+
+    function updatePanel(scenario) {
+      document.getElementById('scenario').textContent = scenario.eyebrow;
+      document.getElementById('title').textContent = scenario.title;
+      document.getElementById('description').textContent = scenario.description;
+      document.getElementById('nodeCount').textContent = scenario.nodes.length;
+      document.getElementById('edgeCount').textContent = scenario.edges.length;
+      document.getElementById('curveCount').textContent = '—';
+    }
+
+    function runLayout(animate = true) {
+      if (!cy || cy.destroyed()) return;
+      const scenario = scenarios[activeIndex];
+      const loader = document.getElementById('loading');
+      loader.classList.add('visible');
+
+      const layout = cy.layout({
+        name: 'cose-bilkent',
+        quality: 'proof',
+        randomize: true,
+        animate: animate ? 'end' : false,
+        animationDuration: animate ? 700 : 0,
+        fit: true,
+        padding: 100,
+        idealEdgeLength: scenario.layout.idealEdgeLength,
+        nodeRepulsion: scenario.layout.nodeRepulsion,
+        edgeElasticity: 0.35,
+        nestingFactor: 0.12,
+        gravity: 0.12,
+        numIter: 2600,
+        tile: true
+      });
+
+      layout.one('layoutstop', () => {
+        computeSmartCurves(cy);
+        cy.animate({ fit: { eles: cy.elements(), padding: 85 }, duration: 420 });
+        window.setTimeout(() => loader.classList.remove('visible'), 240);
+      });
+      layout.run();
+    }
+
+    function mountGraph(index) {
+      activeIndex = index;
+      const scenario = scenarios[index];
+
+      if (cy) {
+        cy.destroy();
+        cy = null;
+      }
+      document.getElementById('edge-annotations').replaceChildren();
+
+      updatePanel(scenario);
+      document.querySelectorAll('.tab').forEach(tab => {
+        const isActive = Number(tab.dataset.index) === index;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', String(isActive));
+      });
+
+      cy = cytoscape({
+        container: document.getElementById('cy'),
+        elements: buildElements(scenario),
+        minZoom: 0.18,
+        maxZoom: 2.4,
+        selectionType: 'single',
+        boxSelectionEnabled: false,
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'width': 90,
+              'height': 90,
+              'shape': 'ellipse',
+              'background-color': 'data(fill)',
+              'background-opacity': 1,
+              'border-width': 1.5,
+              'border-color': 'data(color)',
+              'label': 'data(label)',
+              'color': '#2B3A2E',
+              'font-size': 11,
+              'font-family': 'Noto Sans, system-ui, sans-serif',
+              'font-weight': 'bold',
+              'text-wrap': 'wrap',
+              'text-max-width': 74,
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'text-outline-width': 0,
+              'text-outline-color': 'data(fill)',
+              'text-outline-opacity': 0,
+              'overlay-opacity': 0,
+              'underlay-color': 'data(color)',
+              'underlay-padding': 7,
+              'underlay-opacity': 0.06,
+              'underlay-shape': 'ellipse',
+              'transition-property': 'border-width, underlay-opacity, underlay-padding, opacity',
+              'transition-duration': '180ms'
+            }
+          },
+          {
+            selector: 'node.hovered',
+            style: {
+              'border-width': 2.5,
+              'border-color': '#6F9A5B',
+              'underlay-color': '#6F9A5B',
+              'underlay-opacity': 0.12,
+              'underlay-padding': 10
+            }
+          },
+          {
+            selector: 'node:selected',
+            style: {
+              'border-width': 3,
+              'border-color': '#6F9A5B',
+              'underlay-color': '#6F9A5B',
+              'underlay-opacity': 0.18,
+              'underlay-padding': 13
+            }
+          },
+          {
+            selector: 'edge',
+            style: {
+              'width': 1.8,
+              'curve-style': 'unbundled-bezier',
+              'control-point-distances': 80,
+              'control-point-weights': 0.5,
+              'line-color': '#7A8A72',
+              'target-arrow-color': '#7A8A72',
+              'target-arrow-shape': 'triangle',
+              'arrow-scale': 1.35,
+              'label': '',
+              'source-distance-from-node': 5,
+              'target-distance-from-node': 9,
+              'overlay-opacity': 0,
+              'opacity': 0.76,
+              'transition-property': 'opacity, width',
+              'transition-duration': '160ms'
+            }
+          },
+          {
+            selector: 'edge.positive-edge',
+            style: {
+              'line-color': '#2B3A2E',
+              'target-arrow-color': '#2B3A2E',
+              'color': '#2B3A2E'
+            }
+          },
+          {
+            selector: 'edge.negative-edge',
+            style: {
+              'line-color': '#7A8A72',
+              'target-arrow-color': '#7A8A72',
+              'color': '#596452',
+              'line-style': 'dashed',
+              'line-dash-pattern': [8, 5]
+            }
+          },
+          {
+            selector: 'edge:selected',
+            style: {
+              'width': 4,
+              'opacity': 1
+            }
+          },
+          {
+            selector: '.faded',
+            style: { 'opacity': 0.12 }
+          },
+          {
+            selector: '.focused',
+            style: { 'opacity': 1 }
+          }
+        ]
+      });
+
+      cy.on('render', requestAnnotationRender);
+
+      cy.on('drag', 'node', () => {
+        requestAnnotationRender();
+        const now = Date.now();
+        if (now - lastCurveCompute > 120) {
+          lastCurveCompute = now;
+          if (dragFrame) cancelAnimationFrame(dragFrame);
+          dragFrame = requestAnimationFrame(() => computeSmartCurves(cy));
+        }
+      });
+      cy.on('free', 'node', () => computeSmartCurves(cy));
+
+      cy.on('mouseover', 'node', event => event.target.addClass('hovered'));
+      cy.on('mouseout', 'node', event => event.target.removeClass('hovered'));
+      cy.on('mouseover', 'edge', event => {
+        event.target.addClass('annotation-focus');
+        requestAnnotationRender();
+      });
+      cy.on('mouseout', 'edge', event => {
+        event.target.removeClass('annotation-focus');
+        requestAnnotationRender();
+      });
+
+      cy.on('tap', 'node', event => {
+        const node = event.target;
+        const connected = node.closedNeighborhood();
+        cy.elements().addClass('faded').removeClass('focused');
+        connected.removeClass('faded').addClass('focused');
+        requestAnnotationRender();
+      });
+
+      cy.on('tap', event => {
+        if (event.target === cy) {
+          cy.elements().removeClass('faded focused');
+          requestAnnotationRender();
+        }
+      });
+
+      runLayout(false);
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => mountGraph(Number(tab.dataset.index)));
+    });
+
+    document.getElementById('relayout').addEventListener('click', () => runLayout(true));
+    document.getElementById('fit').addEventListener('click', () => {
+      if (cy && !cy.destroyed()) cy.animate({ fit: { eles: cy.elements(), padding: 85 }, duration: 450 });
+    });
+
+    window.addEventListener('resize', () => {
+      if (cy && !cy.destroyed()) {
+        cy.resize();
+        cy.fit(cy.elements(), 85);
+      }
+    });
+
+    mountGraph(0);
+  </script>
+</body>
+</html>

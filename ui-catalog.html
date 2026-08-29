@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="matcha" data-density="comfortable">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LoopViewer UI Catalog</title>
+  <link rel="stylesheet" href="dist/loopviewer-ui-tokens.css">
+  <link rel="stylesheet" href="src/react/ui/ui.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: var(--lv-foundation-spacing-8); color: var(--lv-semantic-color-text-primary); background: var(--lv-semantic-color-bg-app); font-family: var(--lv-foundation-typography-bodyFamily); }
+    main { width: min(1100px, 100%); margin: 0 auto; }
+    header { display: flex; align-items: end; justify-content: space-between; gap: var(--lv-foundation-spacing-6); margin-bottom: var(--lv-foundation-spacing-8); }
+    h1, h2 { margin: 0; font-family: var(--lv-foundation-typography-displayFamily); }
+    header p { max-width: 58ch; margin: var(--lv-foundation-spacing-2) 0 0; color: var(--lv-semantic-color-text-muted); }
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--lv-foundation-spacing-5); }
+    .catalog-section { display: grid; gap: var(--lv-foundation-spacing-5); }
+    .catalog-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--lv-foundation-spacing-3); }
+    .catalog-label { color: var(--lv-semantic-color-text-muted); font-size: var(--lv-foundation-typography-metaSize); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .catalog-panel { margin: 0; color: var(--lv-semantic-color-text-muted); line-height: 1.5; }
+    .catalog-menu-wrap { position: relative; }
+    .catalog-menu { right: 0; top: calc(100% + var(--lv-foundation-spacing-2)); display: grid; gap: var(--lv-foundation-spacing-1); }
+    .catalog-menu[hidden] { display: none; }
+    .catalog-menu [role="menuitem"] { justify-content: flex-start; width: 100%; }
+    .catalog-immersive { padding: var(--lv-foundation-spacing-4); border-radius: var(--lv-foundation-radius-sm); background: var(--lv-foundation-color-forest900); }
+    @media (max-width: 720px) { body { padding: var(--lv-foundation-spacing-4); } header { align-items: start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <span class="catalog-label">LoopViewer · design system</span>
+        <h1>UI Catalog</h1>
+        <p>Catálogo isolado para validar estados, densidade, teclado, foco e acessibilidade sem tocar em projeto, engine ou persistência.</p>
+      </div>
+      <div class="catalog-row">
+        <button class="ui-button ui-button-secondary ui-button-sm" type="button" data-density-toggle>Alternar densidade</button>
+        <span class="ui-status ui-status-success"><span class="ui-status-dot" aria-hidden="true"></span>sem escrita</span>
+      </div>
+    </header>
+
+    <div class="catalog-grid">
+      <section class="ui-surface ui-surface-padding-comfortable catalog-section" aria-labelledby="controls-title">
+        <h2 id="controls-title">Controls</h2>
+        <span class="catalog-label">variants e estados</span>
+        <div class="catalog-row">
+          <button class="ui-button ui-button-primary" type="button">Primário</button>
+          <button class="ui-button ui-button-secondary" type="button">Secundário</button>
+          <button class="ui-button ui-button-ghost" type="button">Ghost</button>
+          <button class="ui-button ui-button-danger" type="button">Perigo</button>
+          <button class="ui-button ui-button-quiet" type="button">Quiet</button>
+          <span class="catalog-immersive"><button class="ui-button ui-button-immersive" type="button">Imersivo</button></span>
+        </div>
+        <div class="catalog-row">
+          <button class="ui-button ui-button-secondary ui-button-sm" type="button">Pequeno</button>
+          <button class="ui-button ui-button-secondary" type="button">Médio</button>
+          <button class="ui-button ui-button-secondary ui-button-touch" type="button">Touch</button>
+          <button class="ui-button ui-button-primary" aria-busy="true" disabled type="button"><span class="ui-spinner" aria-hidden="true"></span><span class="ui-button-label">Carregando</span></button>
+          <button class="ui-button ui-button-secondary" disabled type="button">Desabilitado</button>
+          <span class="ui-tooltip-wrap"><button aria-label="Mais opções" class="ui-button ui-icon-button ui-button-ghost" type="button"><svg class="ui-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h.01M12 12h.01M19 12h.01" stroke-width="3" stroke-linecap="round"/></svg></button><span class="ui-tooltip" role="tooltip">Mais opções</span></span>
+        </div>
+        <div class="catalog-row"><span class="ui-badge ui-badge-neutral">Rascunho</span><span class="ui-badge ui-badge-accent">Publicado</span><span class="ui-badge ui-badge-danger">Atenção</span></div>
+      </section>
+
+      <section class="ui-surface ui-surface-padding-comfortable catalog-section" aria-labelledby="fields-title">
+        <h2 id="fields-title">Fields</h2>
+        <label class="ui-field"><span class="ui-field-label">Nome do mapa</span><input class="ui-input" type="text" value="Ciclo de exemplo"></label>
+        <label class="ui-field"><span class="ui-field-label">Modo</span><select class="ui-input ui-select"><option>Visual</option><option>Markdown</option></select><small class="ui-field-hint">A fonte continua separada do modelo persistido.</small></label>
+        <label class="ui-field ui-field-error"><span class="ui-field-label">Descrição</span><textarea aria-describedby="catalog-error" aria-invalid="true" class="ui-input ui-textarea"></textarea><small class="ui-field-error-copy" id="catalog-error" role="alert">Informe uma descrição editorial.</small></label>
+        <label class="ui-checkbox"><input type="checkbox" checked> <span>Preservar layout editorial</span></label>
+      </section>
+
+      <section class="ui-surface ui-surface-padding-comfortable catalog-section" aria-labelledby="navigation-title">
+        <h2 id="navigation-title">Navigation</h2>
+        <div class="ui-tabs" data-catalog-tabs>
+          <div aria-label="Exemplo de tabs" class="ui-tab-list" role="tablist">
+            <button aria-controls="catalog-panel-visual" aria-selected="true" class="ui-tab" id="catalog-tab-visual" role="tab" tabindex="0" type="button">Visual</button>
+            <button aria-controls="catalog-panel-data" aria-selected="false" class="ui-tab" id="catalog-tab-data" role="tab" tabindex="-1" type="button">Dados</button>
+            <button aria-controls="catalog-panel-history" aria-selected="false" class="ui-tab" id="catalog-tab-history" role="tab" tabindex="-1" type="button">Histórico</button>
+          </div>
+          <p aria-labelledby="catalog-tab-visual" class="catalog-panel" id="catalog-panel-visual" role="tabpanel">A aba visual conserva foco, seleção e painel associado.</p>
+          <p aria-labelledby="catalog-tab-data" class="catalog-panel" hidden id="catalog-panel-data" role="tabpanel">Aba de dados demonstrando seleção por teclado.</p>
+          <p aria-labelledby="catalog-tab-history" class="catalog-panel" hidden id="catalog-panel-history" role="tabpanel">Aba de histórico sem elementos tabbable ocultos.</p>
+        </div>
+        <div aria-label="Ações do mapa" class="ui-toolbar" role="toolbar"><button class="ui-button ui-button-quiet ui-button-sm" type="button">Ajustar</button><button class="ui-button ui-button-quiet ui-button-sm" type="button">Centralizar</button><button class="ui-button ui-button-primary ui-button-sm" type="button">Salvar</button></div>
+      </section>
+
+      <section class="ui-surface ui-surface-subtle ui-surface-padding-comfortable catalog-section" aria-labelledby="overlays-title">
+        <h2 id="overlays-title">Overlays</h2>
+        <div class="catalog-row">
+          <button aria-controls="catalog-dialog" class="ui-button ui-button-secondary" data-dialog-open type="button">Abrir diálogo</button>
+          <div class="catalog-menu-wrap">
+            <button aria-controls="catalog-menu" aria-expanded="false" class="ui-button ui-button-ghost" data-menu-trigger type="button">Mais ações</button>
+            <div aria-label="Ações do catálogo" class="ui-popover catalog-menu" hidden id="catalog-menu" role="menu">
+              <button class="ui-button ui-button-quiet ui-button-sm" role="menuitem" type="button">Duplicar</button>
+              <button class="ui-button ui-button-quiet ui-button-sm" role="menuitem" type="button">Arquivar</button>
+            </div>
+          </div>
+        </div>
+        <div class="ui-empty-state"><div class="ui-empty-state-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 16v-4m0-4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg></div><strong>Nenhuma história selecionada</strong><p>Escolha uma apresentação para editar cenas, beats e foco causal.</p><button class="ui-button ui-button-secondary ui-button-sm" type="button">Abrir biblioteca</button></div>
+      </section>
+    </div>
+  </main>
+
+  <dialog aria-labelledby="catalog-dialog-title" class="ui-dialog" id="catalog-dialog">
+    <div class="ui-dialog-card">
+      <header class="ui-dialog-header"><div><h2 id="catalog-dialog-title">Exemplo de diálogo</h2><p>Escape fecha e devolve o foco ao gatilho.</p></div><button aria-label="Fechar diálogo" class="ui-button ui-icon-button ui-button-ghost" data-dialog-close type="button"><svg class="ui-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+      <div class="ui-dialog-content"><label class="ui-field"><span class="ui-field-label">Nome da cena</span><input autofocus class="ui-input" type="text" value="Abertura"></label></div>
+      <footer class="ui-dialog-footer"><button class="ui-button ui-button-secondary" data-dialog-close type="button">Cancelar</button><button class="ui-button ui-button-primary" type="button">Confirmar</button></footer>
+    </div>
+  </dialog>
+
+  <script>
+    const densityButton = document.querySelector('[data-density-toggle]');
+    densityButton.addEventListener('click', () => {
+      document.documentElement.dataset.density = document.documentElement.dataset.density === 'comfortable' ? 'compact' : 'comfortable';
+    });
+
+    document.querySelectorAll('[data-catalog-tabs]').forEach(tabSet => {
+      const tabs = [...tabSet.querySelectorAll('[role="tab"]')];
+      const select = tab => {
+        tabs.forEach(candidate => {
+          const selected = candidate === tab;
+          candidate.setAttribute('aria-selected', String(selected));
+          candidate.tabIndex = selected ? 0 : -1;
+          const panel = document.getElementById(candidate.getAttribute('aria-controls'));
+          if (panel) panel.hidden = !selected;
+        });
+      };
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => select(tab));
+        tab.addEventListener('keydown', event => {
+          if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          const nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+          const next = tabs[nextIndex];
+          select(next);
+          next.focus();
+        });
+      });
+    });
+
+    const dialog = document.getElementById('catalog-dialog');
+    let dialogTrigger = null;
+    document.querySelector('[data-dialog-open]').addEventListener('click', event => {
+      dialogTrigger = event.currentTarget;
+      dialog.showModal();
+      dialog.querySelector('[data-dialog-close]').focus();
+    });
+    dialog.addEventListener('cancel', event => { event.preventDefault(); dialog.close(); });
+    dialog.addEventListener('close', () => dialogTrigger?.focus());
+    dialog.querySelectorAll('[data-dialog-close]').forEach(button => button.addEventListener('click', () => dialog.close()));
+
+    const menuTrigger = document.querySelector('[data-menu-trigger]');
+    const menu = document.getElementById('catalog-menu');
+    const closeMenu = () => {
+      menu.hidden = true;
+      menuTrigger.setAttribute('aria-expanded', 'false');
+      menuTrigger.focus();
+    };
+    menuTrigger.addEventListener('click', () => {
+      const open = menu.hidden;
+      menu.hidden = !open;
+      menuTrigger.setAttribute('aria-expanded', String(open));
+      if (open) menu.querySelector('[role="menuitem"]').focus();
+    });
+    menu.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+  </script>
+</body>
+</html>

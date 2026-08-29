@@ -1,0 +1,818 @@
+{
+  "id": "sobrecarga-filas",
+  "nodes": [
+    {
+      "id": "DCP",
+      "label": "Demandas em\nCanal Paralelo",
+      "position": {
+        "x": 647.003,
+        "y": 761.223
+      }
+    },
+    {
+      "id": "AFC",
+      "label": "Adesão ao\nFunil Corporativo",
+      "position": {
+        "x": 60.75,
+        "y": 508.885
+      }
+    },
+    {
+      "id": "CCD",
+      "label": "Custo de Coordenação\npor Demanda",
+      "position": {
+        "x": 566.812,
+        "y": 615.351
+      }
+    },
+    {
+      "id": "VF",
+      "label": "Visibilidade\nda Fila",
+      "position": {
+        "x": 293.081,
+        "y": 834.456
+      }
+    },
+    {
+      "id": "BLD",
+      "label": "Backlog\ndas Áreas",
+      "position": {
+        "x": 915.097,
+        "y": 505.65
+      }
+    },
+    {
+      "id": "TCD",
+      "label": "Tempo de Ciclo\nda Demanda",
+      "position": {
+        "x": 134.413,
+        "y": 671.448
+      }
+    },
+    {
+      "id": "CAR",
+      "label": "Atalho Hierárquico\n/ Carteirada",
+      "position": {
+        "x": 378.536,
+        "y": 583.838
+      }
+    },
+    {
+      "id": "CRF",
+      "label": "Demandas via\nFluxo Formal",
+      "position": {
+        "x": 627.849,
+        "y": 332.955
+      }
+    },
+    {
+      "id": "DRC",
+      "label": "Handoffs\nentre Áreas",
+      "position": {
+        "x": 848.658,
+        "y": 828.45
+      }
+    },
+    {
+      "id": "ACE",
+      "label": "Eficiência dos\nAceleradores",
+      "position": {
+        "x": 353.632,
+        "y": 221.219
+      }
+    },
+    {
+      "id": "SCL",
+      "label": "Satisfação\ndo Cliente",
+      "position": {
+        "x": 154.152,
+        "y": 303.577
+      }
+    },
+    {
+      "id": "TKT",
+      "label": "Tickets de\nAtendimento",
+      "position": {
+        "x": 455.822,
+        "y": 60.75
+      }
+    },
+    {
+      "id": "RC",
+      "label": "Demandas para\nRelacionamento",
+      "position": {
+        "x": 795.899,
+        "y": 167.262
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e01",
+      "source": "CRF",
+      "target": "BLD",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Demandas que entram pelo fluxo formal viram itens no backlog."
+    },
+    {
+      "id": "e02",
+      "source": "RC",
+      "target": "BLD",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Demandas do Relacionamento alimentam o backlog."
+    },
+    {
+      "id": "e03",
+      "source": "TKT",
+      "target": "RC",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Cada ticket vira uma demanda pro Relacionamento."
+    },
+    {
+      "id": "e04",
+      "source": "SCL",
+      "target": "TKT",
+      "sourceSign": "−",
+      "targetSign": "+",
+      "description": "Satisfação baixa gera mais tickets de clientes insatisfeitos."
+    },
+    {
+      "id": "e05",
+      "source": "SCL",
+      "target": "CAR",
+      "sourceSign": "−",
+      "targetSign": "+",
+      "description": "Satisfação baixa ativa a carteirada."
+    },
+    {
+      "id": "e06",
+      "source": "TCD",
+      "target": "SCL",
+      "sourceSign": "+",
+      "targetSign": "−",
+      "description": "Tempo de ciclo alto reduz a satisfacao do cliente."
+    },
+    {
+      "id": "e07",
+      "source": "DCP",
+      "target": "BLD",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Canal paralelo tambem alimenta o backlog."
+    },
+    {
+      "id": "e08",
+      "source": "BLD",
+      "target": "DRC",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Backlog alto gera mais handoffs entre areas."
+    },
+    {
+      "id": "e09",
+      "source": "DRC",
+      "target": "CCD",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Cada handoff adiciona custo de coordenacao."
+    },
+    {
+      "id": "e10",
+      "source": "ACE",
+      "target": "CCD",
+      "sourceSign": "+",
+      "targetSign": "−",
+      "description": "Aceleradores reduzem o custo de coordenacao."
+    },
+    {
+      "id": "e11",
+      "source": "ACE",
+      "target": "AFC",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Aceleradores aumentam a adesao ao funil."
+    },
+    {
+      "id": "e12",
+      "source": "DCP",
+      "target": "VF",
+      "sourceSign": "+",
+      "targetSign": "−",
+      "description": "Canal paralelo reduz a visibilidade da fila."
+    },
+    {
+      "id": "e13",
+      "source": "AFC",
+      "target": "VF",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Adesão ao funil aumenta a visibilidade da fila."
+    },
+    {
+      "id": "e14",
+      "source": "VF",
+      "target": "CCD",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Visibilidade da fila aumenta o custo de coordenacao."
+    },
+    {
+      "id": "e15",
+      "source": "CCD",
+      "target": "BLD",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Custo de coordenacao infla o backlog."
+    },
+    {
+      "id": "e16",
+      "source": "CCD",
+      "target": "TCD",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Custo de coordenacao aumenta o tempo de ciclo."
+    },
+    {
+      "id": "e17",
+      "source": "TCD",
+      "target": "CAR",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Tempo alto ativa a carteirada."
+    },
+    {
+      "id": "e18",
+      "source": "CAR",
+      "target": "DCP",
+      "sourceSign": "+",
+      "targetSign": "+",
+      "description": "Carteirada alimenta o canal paralelo."
+    },
+    {
+      "id": "e19",
+      "source": "CAR",
+      "target": "CRF",
+      "sourceSign": "+",
+      "targetSign": "−",
+      "description": "Carteirada reduz o fluxo formal."
+    },
+    {
+      "id": "e20",
+      "source": "CRF",
+      "target": "DCP",
+      "sourceSign": "+",
+      "targetSign": "−",
+      "description": "Menos fluxo formal gera mais canal paralelo."
+    },
+    {
+      "id": "e21",
+      "source": "CAR",
+      "target": "ACE",
+      "sourceSign": "+",
+      "targetSign": "−",
+      "description": "Carteirada reduz a eficiencia dos aceleradores."
+    },
+    {
+      "id": "e22",
+      "source": "CAR",
+      "target": "AFC",
+      "sourceSign": "+",
+      "targetSign": "−",
+      "description": "Carteirada reduz a adesao ao funil."
+    }
+  ],
+  "loops": [
+    {
+      "id": "r1",
+      "label": "R1 — Gargalo que se alimenta",
+      "edgeIds": [
+        "e08",
+        "e09",
+        "e15"
+      ],
+      "type": "reinforcing"
+    },
+    {
+      "id": "r2",
+      "label": "B2 — Cliente insatisfeito amplia a pressão",
+      "edgeIds": [
+        "e16",
+        "e06",
+        "e04",
+        "e03",
+        "e02",
+        "e08",
+        "e09"
+      ],
+      "type": "balancing"
+    },
+    {
+      "id": "r3",
+      "label": "R3 — Carteirada acelera o desvio",
+      "edgeIds": [
+        "e18",
+        "e07",
+        "e08",
+        "e09",
+        "e16",
+        "e17"
+      ],
+      "type": "reinforcing"
+    },
+    {
+      "id": "r4",
+      "label": "R4 — Carteirada corroe os aceleradores",
+      "edgeIds": [
+        "e21",
+        "e10",
+        "e16",
+        "e17"
+      ],
+      "type": "reinforcing"
+    }
+  ],
+  "title": "Sobrecarga de Filas",
+  "description": "## O que este loop mostra\n\nO backlog das áreas é o coração do sistema. Três fluxos concorrentes o alimentam: demandas pelo fluxo formal, demandas pelo canal paralelo e tickets de atendimento transformados em novas demandas.\n\nQuanto maior o backlog, mais handoffs entre áreas. Cada handoff adiciona custo de coordenação, que infla o backlog e aumenta o tempo de ciclo.\n\nTempo de ciclo alto reduz a satisfação do cliente e gera mais trabalho. Paralelamente, a demora ativa atalhos hierárquicos. O alívio de uma demanda alimenta o canal paralelo, reduz a visibilidade da fila e aumenta o custo sistêmico. O mapa combina três ciclos de reforço e um ciclo de balanceamento.",
+  "presentation": {
+    "schemaVersion": 2,
+    "title": "Sobrecarga de Filas",
+    "summary": "Esta apresentação mostra como múltiplas portas de entrada e a fragmentação do trabalho produzem filas concorrentes. A latência leva à carteirada, que resolve casos individuais mas amplia os canais paralelos e enfraquece o fluxo formal. Em seguida, a história mostra como o mesmo atalho corrói a eficiência dos aceleradores.",
+    "intent": "explain",
+    "chapters": [
+      {
+        "id": "chapter-1",
+        "title": "Apresentação",
+        "role": "custom",
+        "scenes": [
+          {
+            "id": "scene-a-fila-deixa-de-ser-um-problema-isolado",
+            "type": "stage",
+            "title": "A fila deixa de ser um problema isolado",
+            "content": {
+              "bodyMd": "",
+              "speakerNotesMd": "",
+              "title": "A fila deixa de ser um problema isolado",
+              "caption": "",
+              "altText": ""
+            },
+            "beats": [
+              {
+                "id": "beat-o-backlog-cresce",
+                "type": "focus",
+                "title": "O backlog cresce",
+                "narrationMd": "O backlog das áreas concentra demandas que chegaram por diferentes portas e precisam disputar a mesma capacidade interna.",
+                "focus": {
+                  "kind": "node",
+                  "nodeId": "BLD"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              },
+              {
+                "id": "beat-o-backlog-produz-handoffs",
+                "type": "focus",
+                "title": "O backlog produz handoffs",
+                "narrationMd": "Quando o backlog cresce, cada demanda atravessa mais áreas antes de encontrar uma solução.",
+                "focus": {
+                  "kind": "edge",
+                  "edgeId": "e08"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              },
+              {
+                "id": "beat-handoffs-viram-coordenacao",
+                "type": "focus",
+                "title": "Handoffs viram coordenação",
+                "narrationMd": "Cada passagem acrescenta reuniões, negociações e idas e vindas para alinhar escopo.",
+                "focus": {
+                  "kind": "edge",
+                  "edgeId": "e09"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              }
+            ],
+            "stage": {
+              "camera": {
+                "mode": "fit-map"
+              },
+              "visibility": {
+                "hidden": [],
+                "ghost": [],
+                "context": [],
+                "focused": [],
+                "emphasized": []
+              },
+              "emphasis": [],
+              "annotations": []
+            },
+            "transition": {
+              "type": "dissolve",
+              "durationMs": 320
+            },
+            "timing": {
+              "durationMs": 5000,
+              "advance": "manual"
+            }
+          },
+          {
+            "id": "scene-a-fragmentacao-alonga-o-tempo-de-ciclo",
+            "type": "stage",
+            "title": "A fragmentação alonga o tempo de ciclo",
+            "content": {
+              "bodyMd": "",
+              "speakerNotesMd": "",
+              "title": "A fragmentação alonga o tempo de ciclo",
+              "caption": "",
+              "altText": ""
+            },
+            "beats": [
+              {
+                "id": "beat-coordenacao-consome-capacidade",
+                "type": "focus",
+                "title": "Coordenação consome capacidade",
+                "narrationMd": "O custo de coordenação ocupa capacidade que poderia estar executando as demandas e aumenta o tempo total de ciclo.",
+                "focus": {
+                  "kind": "edge",
+                  "edgeId": "e16"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              },
+              {
+                "id": "beat-a-latencia-chega-ao-cliente",
+                "type": "focus",
+                "title": "A latência chega ao cliente",
+                "narrationMd": "Quanto mais longa a espera, menor a satisfação do cliente.",
+                "focus": {
+                  "kind": "edge",
+                  "edgeId": "e06"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              }
+            ],
+            "stage": {
+              "camera": {
+                "mode": "fit-map"
+              },
+              "visibility": {
+                "hidden": [],
+                "ghost": [],
+                "context": [],
+                "focused": [],
+                "emphasized": []
+              },
+              "emphasis": [],
+              "annotations": []
+            },
+            "transition": {
+              "type": "dissolve",
+              "durationMs": 320
+            },
+            "timing": {
+              "durationMs": 5000,
+              "advance": "manual"
+            }
+          },
+          {
+            "id": "scene-a-carteirada-aparece-como-alivio",
+            "type": "stage",
+            "title": "A carteirada aparece como alívio",
+            "content": {
+              "bodyMd": "",
+              "speakerNotesMd": "",
+              "title": "A carteirada aparece como alívio",
+              "caption": "",
+              "altText": ""
+            },
+            "beats": [
+              {
+                "id": "beat-insatisfacao-ativa-o-atalho",
+                "type": "focus",
+                "title": "Insatisfação ativa o atalho",
+                "narrationMd": "A insatisfação cria pressão por uma solução imediata e ativa a carteirada como atalho hierárquico.",
+                "focus": {
+                  "kind": "edge",
+                  "edgeId": "e05"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              },
+              {
+                "id": "beat-o-atalho-reduz-uma-espera",
+                "type": "focus",
+                "title": "O atalho reduz uma espera",
+                "narrationMd": "Para a demanda específica, a carteirada pode reduzir o tempo de ciclo e produzir a sensação de que o sistema voltou a responder.",
+                "focus": {
+                  "kind": "set",
+                  "nodeIds": [
+                    "CAR",
+                    "TCD"
+                  ],
+                  "edgeIds": [],
+                  "loopIds": []
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              }
+            ],
+            "stage": {
+              "camera": {
+                "mode": "fit-map"
+              },
+              "visibility": {
+                "hidden": [],
+                "ghost": [],
+                "context": [],
+                "focused": [],
+                "emphasized": []
+              },
+              "emphasis": [],
+              "annotations": []
+            },
+            "transition": {
+              "type": "dissolve",
+              "durationMs": 320
+            },
+            "timing": {
+              "durationMs": 5000,
+              "advance": "manual"
+            }
+          },
+          {
+            "id": "scene-o-alivio-alimenta-o-problema",
+            "type": "stage",
+            "title": "O alívio alimenta o problema",
+            "content": {
+              "bodyMd": "",
+              "speakerNotesMd": "",
+              "title": "O alívio alimenta o problema",
+              "caption": "",
+              "altText": ""
+            },
+            "beats": [
+              {
+                "id": "beat-o-atalho-cria-canal-paralelo",
+                "type": "focus",
+                "title": "O atalho cria canal paralelo",
+                "narrationMd": "Cada exceção bem-sucedida incentiva novas demandas a contornarem o fluxo formal.",
+                "focus": {
+                  "kind": "edge",
+                  "edgeId": "e18"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              },
+              {
+                "id": "beat-o-canal-paralelo-reduz-visibilidade",
+                "type": "focus",
+                "title": "O canal paralelo reduz visibilidade",
+                "narrationMd": "Quando as demandas deixam de aparecer no funil, a visibilidade da fila diminui e a coordenação fica ainda mais difícil.",
+                "focus": {
+                  "kind": "edge",
+                  "edgeId": "e12"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              },
+              {
+                "id": "beat-o-ciclo-de-sobrecarga-se-fecha",
+                "type": "focus",
+                "title": "O ciclo de sobrecarga se fecha",
+                "narrationMd": "O atalho alivia uma demanda, mas amplia os canais paralelos, aumenta os handoffs e reforça a própria necessidade de novos atalhos.",
+                "focus": {
+                  "kind": "loop",
+                  "loopId": "r3"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              }
+            ],
+            "stage": {
+              "camera": {
+                "mode": "fit-map"
+              },
+              "visibility": {
+                "hidden": [],
+                "ghost": [],
+                "context": [],
+                "focused": [],
+                "emphasized": []
+              },
+              "emphasis": [],
+              "annotations": []
+            },
+            "transition": {
+              "type": "dissolve",
+              "durationMs": 320
+            },
+            "timing": {
+              "durationMs": 5000,
+              "advance": "manual"
+            }
+          },
+          {
+            "id": "scene-o-acelerador-tambem-se-deteriora",
+            "type": "stage",
+            "title": "O acelerador também se deteriora",
+            "content": {
+              "bodyMd": "",
+              "speakerNotesMd": "",
+              "title": "O acelerador também se deteriora",
+              "caption": "",
+              "altText": ""
+            },
+            "beats": [
+              {
+                "id": "beat-a-carteirada-corroi-os-aceleradores",
+                "type": "focus",
+                "title": "A carteirada corrói os aceleradores",
+                "narrationMd": "Ao substituir o fluxo desenhado, a carteirada reduz a eficiência dos aceleradores que deveriam diminuir o custo de coordenação.",
+                "focus": {
+                  "kind": "edge",
+                  "edgeId": "e21"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              },
+              {
+                "id": "beat-a-deterioracao-alonga-novamente-o-ciclo",
+                "type": "focus",
+                "title": "A deterioração alonga novamente o ciclo",
+                "narrationMd": "Com aceleradores menos eficientes, a coordenação fica mais cara, a latência aumenta e a pressão pelo atalho retorna.",
+                "focus": {
+                  "kind": "path",
+                  "edgeIds": [
+                    "e10",
+                    "e16",
+                    "e17"
+                  ]
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              }
+            ],
+            "stage": {
+              "camera": {
+                "mode": "fit-map"
+              },
+              "visibility": {
+                "hidden": [],
+                "ghost": [],
+                "context": [],
+                "focused": [],
+                "emphasized": []
+              },
+              "emphasis": [],
+              "annotations": []
+            },
+            "transition": {
+              "type": "dissolve",
+              "durationMs": 320
+            },
+            "timing": {
+              "durationMs": 5000,
+              "advance": "manual"
+            }
+          },
+          {
+            "id": "scene-a-armadilha-sistemica",
+            "type": "stage",
+            "title": "A armadilha sistêmica",
+            "content": {
+              "bodyMd": "",
+              "speakerNotesMd": "",
+              "title": "A armadilha sistêmica",
+              "caption": "",
+              "altText": ""
+            },
+            "beats": [
+              {
+                "id": "beat-resolver-casos-nao-e-recuperar-o-sistema",
+                "type": "focus",
+                "title": "Resolver casos não é recuperar o sistema",
+                "narrationMd": "A carteirada pode ser racional para uma urgência individual, mas seu efeito agregado enfraquece a arquitetura que deveria tornar o fluxo visível, coordenável e previsível.",
+                "focus": {
+                  "kind": "loop",
+                  "loopId": "r3"
+                },
+                "speakerNotesMd": "",
+                "delta": {},
+                "timing": {
+                  "durationMs": 5000,
+                  "advance": "manual"
+                },
+                "transition": {}
+              }
+            ],
+            "stage": {
+              "camera": {
+                "mode": "fit-map"
+              },
+              "visibility": {
+                "hidden": [],
+                "ghost": [],
+                "context": [],
+                "focused": [],
+                "emphasized": []
+              },
+              "emphasis": [],
+              "annotations": []
+            },
+            "transition": {
+              "type": "dissolve",
+              "durationMs": 320
+            },
+            "timing": {
+              "durationMs": 5000,
+              "advance": "manual"
+            }
+          }
+        ],
+        "summary": ""
+      }
+    ],
+    "id": "sobrecarga-filas-presentation",
+    "audience": {
+      "type": "general",
+      "knowledge": "introductory",
+      "expectedOutcome": ""
+    },
+    "themeId": "matcha-editorial",
+    "settings": {
+      "autoplay": false,
+      "defaultBeatDurationMs": 5000,
+      "allowExplore": true,
+      "resumeAfterExplore": true,
+      "showChapterProgress": true,
+      "reducedMotion": "respect-system"
+    },
+    "source_md": "# Sobrecarga de Filas\n\nEsta apresentação mostra como múltiplas portas de entrada e a fragmentação do trabalho produzem filas concorrentes. A latência leva à carteirada, que resolve casos individuais mas amplia os canais paralelos e enfraquece o fluxo formal. Em seguida, a história mostra como o mesmo atalho corrói a eficiência dos aceleradores.\n\n## Cena: A fila deixa de ser um problema isolado\nfocus: path e01, e08, e09\n\n### O backlog cresce\nfocus: node BLD\n\nO backlog das áreas concentra demandas que chegaram por diferentes portas e precisam disputar a mesma capacidade interna.\n\n### O backlog produz handoffs\nfocus: edge e08\n\nQuando o backlog cresce, cada demanda atravessa mais áreas antes de encontrar uma solução.\n\n### Handoffs viram coordenação\nfocus: edge e09\n\nCada passagem acrescenta reuniões, negociações e idas e vindas para alinhar escopo.\n\n## Cena: A fragmentação alonga o tempo de ciclo\nfocus: path e09, e16, e06\n\n### Coordenação consome capacidade\nfocus: edge e16\n\nO custo de coordenação ocupa capacidade que poderia estar executando as demandas e aumenta o tempo total de ciclo.\n\n### A latência chega ao cliente\nfocus: edge e06\n\nQuanto mais longa a espera, menor a satisfação do cliente.\n\n## Cena: A carteirada aparece como alívio\nfocus: set edge:e05, edge:e17, node:CAR\n\n### Insatisfação ativa o atalho\nfocus: edge e05\n\nA insatisfação cria pressão por uma solução imediata e ativa a carteirada como atalho hierárquico.\n\n### O atalho reduz uma espera\nfocus: set node:CAR, node:TCD\n\nPara a demanda específica, a carteirada pode reduzir o tempo de ciclo e produzir a sensação de que o sistema voltou a responder.\n\n## Cena: O alívio alimenta o problema\nfocus: path e18, e07, e08, e09, e16, e17\n\n### O atalho cria canal paralelo\nfocus: edge e18\n\nCada exceção bem-sucedida incentiva novas demandas a contornarem o fluxo formal.\n\n### O canal paralelo reduz visibilidade\nfocus: edge e12\n\nQuando as demandas deixam de aparecer no funil, a visibilidade da fila diminui e a coordenação fica ainda mais difícil.\n\n### O ciclo de sobrecarga se fecha\nfocus: loop r3\n\nO atalho alivia uma demanda, mas amplia os canais paralelos, aumenta os handoffs e reforça a própria necessidade de novos atalhos.\n\n## Cena: O acelerador também se deteriora\nfocus: loop r4\n\n### A carteirada corrói os aceleradores\nfocus: edge e21\n\nAo substituir o fluxo desenhado, a carteirada reduz a eficiência dos aceleradores que deveriam diminuir o custo de coordenação.\n\n### A deterioração alonga novamente o ciclo\nfocus: path e10, e16, e17\n\nCom aceleradores menos eficientes, a coordenação fica mais cara, a latência aumenta e a pressão pelo atalho retorna.\n\n## Cena: A armadilha sistêmica\nfocus: set node:BLD, node:CAR, node:TCD, node:ACE\n\n### Resolver casos não é recuperar o sistema\nfocus: loop r3\n\nA carteirada pode ser racional para uma urgência individual, mas seu efeito agregado enfraquece a arquitetura que deveria tornar o fluxo visível, coordenável e previsível.\n"
+  }
+}
+

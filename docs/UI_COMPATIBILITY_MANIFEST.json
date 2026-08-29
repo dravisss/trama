@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "owner": "LoopViewer UI migration",
+  "retirementRule": "Remove an entry only after static usage search, browser smoke and the owning bridge are green.",
+  "mountPoints": [
+    "react-root",
+    "workspace-home",
+    "react-workspace-sidebar-root",
+    "react-canvas-surface-root",
+    "react-presentation-root",
+    "react-editor-rail-root",
+    "react-editor-dock-panels-root",
+    "react-editor-inspector-root",
+    "react-story-frame-root",
+    "react-story-timeline-shell-root",
+    "react-movement-composer-root"
+  ],
+  "bridgeIds": [
+    "command-dialog",
+    "loop-description-modal",
+    "edit-popover",
+    "editor-dock",
+    "dock-panel",
+    "map-area",
+    "workspace-sidebar",
+    "presentation-card",
+    "story-inspector-basic",
+    "presentation-markdown-panel"
+  ],
+  "deprecatedAliases": [],
+  "retiredBridges": [
+    {
+      "id": "transientDomBridge",
+      "replacement": "src/adapters/browser/transientDetailsController.js",
+      "adr": "docs/adr/0014-retire-transient-dom-bridge.md"
+    }
+  ]
+}

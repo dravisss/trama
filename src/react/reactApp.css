@@ -1,0 +1,153 @@
+/* React migration shell. The legacy DOM remains hidden as a compatibility adapter until
+   each route is migrated, while React owns the visible navigation and workspace library. */
+@layer routes {
+#react-root { display: contents; }
+#react-loop-markdown-root { display: block; min-height: 0; }
+#react-story-inspector-root { display: block; min-height: 0; }
+#react-story-inspector-root ~ * { display: none; }
+#story-inspector-basic > *:not(#react-story-inspector-root) { display: none; }
+#react-story-markdown-root { display: block; min-height: 0; }
+#react-story-markdown-root ~ * { display: none; }
+#presentation-markdown-panel > *:not(#react-story-markdown-root) { display: none; }
+#react-editor-rail-root { display: block; }
+#react-editor-rail-root ~ .utility-rail { display: none; }
+#react-workspace-sidebar-root { display: block; min-height: 0; }
+#react-workspace-sidebar-root ~ .sidebar-content { display: none; }
+#react-editor-dock-panels-root { display: contents; }
+#react-editor-inspector-root { display: contents; }
+#react-canvas-surface-root { display: contents; }
+#react-canvas-surface-root ~ #cld-root,
+#react-canvas-surface-root ~ #story-canvas-header,
+#react-canvas-surface-root ~ #route-handle,
+#react-canvas-surface-root ~ #connection-handle,
+#react-canvas-surface-root ~ #connection-preview,
+#react-canvas-surface-root ~ #focus-exit,
+#react-canvas-surface-root ~ .map-controls,
+#react-canvas-surface-root ~ #edit-toolbar,
+#react-canvas-surface-root ~ #view-legend,
+#react-canvas-surface-root ~ .hint,
+#react-canvas-surface-root ~ #toast { display: none; }
+#react-presentation-root { display: contents; }
+#react-presentation-root ~ #presentation-card,
+#react-presentation-root ~ #presentation-close { display: none; }
+#react-story-frame-root { display: contents; }
+#react-story-frame-root > section[data-dock-content="story"] { display: grid; }
+#react-story-timeline-shell-root { display: contents; }
+body.react-shell-ready > .app > .app-navigation:not(.react-app-navigation),
+body.react-shell-ready > .app > .topbar:not(.react-topbar) { display: none; }
+.react-app-navigation { grid-area: 1 / 1 / -1 / 2; }
+.react-topbar { grid-area: 1 / 2 / 2 / -1; }
+.react-topbar .brand { min-width: 0; }
+.react-topbar .brand h1 { margin: 0; color: var(--lv-foundation-color-ink); font-size: 23px; line-height: 1.05; }
+.react-topbar .brand p { margin: 3px 0 0; overflow: hidden; color: var(--lv-foundation-color-muted); font-size: 9px; letter-spacing: .035em; text-overflow: ellipsis; white-space: nowrap; }
+.react-topbar .breadcrumb-shell { min-width: 0; justify-self: stretch; }
+.react-breadcrumb { overflow: hidden; color: var(--lv-foundation-color-ink); font-size: 11px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.react-topbar .breadcrumb-shell small { overflow: hidden; color: var(--lv-foundation-color-muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.react-topbar .actions { display: flex; flex-wrap: nowrap; min-width: max-content; gap: 6px; }
+.react-topbar .actions button { min-height: 36px; border-radius: 9px; }
+.react-topbar .story-exit-workspace { display: none; }
+body.workspace-mode .react-topbar { grid-template-columns: minmax(0, 1fr) minmax(240px, 1fr) auto; }
+body.workspace-mode .react-topbar .actions { display: flex; }
+body.workspace-mode .react-app-navigation { color: var(--lv-foundation-color-editorialTones-tonef8f6eb); border-right: 0; background: radial-gradient(circle at 12% 86%, rgba(134,169,104,.22), transparent 35%), linear-gradient(155deg, var(--lv-foundation-color-editorialTones-tone24452f) 0%, var(--lv-foundation-color-editorialTones-tone193527) 58%, var(--lv-foundation-color-editorialTones-tone122a20) 100%); }
+body.workspace-mode .react-app-navigation::before,
+body.workspace-mode .react-app-navigation::after { display: block; }
+body.workspace-mode .react-app-navigation .app-navigation-brand { color: var(--lv-foundation-color-editorialTones-tonef8f6eb); }
+body.workspace-mode .react-app-navigation .app-navigation-links { margin-top: 50px; }
+body.workspace-mode .react-app-navigation .app-navigation-links button { color: rgba(248,246,235,.77); }
+body.workspace-mode .react-app-navigation .app-navigation-links button:hover,
+body.workspace-mode .react-app-navigation .app-navigation-links button.active { color: var(--lv-foundation-color-paper); border-color: rgba(223,232,211,.14); background: rgba(223,232,211,.16); }
+body.workspace-mode .react-app-navigation .app-navigation-foot { display: grid; }
+body.editor-mode .react-app-navigation,
+body[data-ui-mode="story"] .react-app-navigation { overflow: visible; padding: 22px 9px; }
+body.editor-mode .react-app-navigation .app-navigation-brand,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-brand { justify-content: center; padding: 0; }
+body.editor-mode .react-app-navigation .app-navigation-brand > span:last-child,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-brand > span:last-child { display: none; }
+body.editor-mode .react-app-navigation .app-navigation-links,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links { margin-top: 34px; }
+body.editor-mode .react-app-navigation .app-navigation-links button,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button { grid-template-columns: 1fr; justify-items: center; min-height: 48px; padding: 0; }
+body.editor-mode .react-app-navigation .app-navigation-links button > span:last-child:not(.ui-button-label),
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button > span:last-child:not(.ui-button-label),
+body.editor-mode .react-app-navigation .app-navigation-links button > .ui-button-label > span:last-child,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button > .ui-button-label > span:last-child { display: none; }
+body.editor-mode .react-app-navigation .app-navigation-links button,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button { position: relative; }
+body.editor-mode .react-app-navigation .app-navigation-links button:hover::after,
+body.editor-mode .react-app-navigation .app-navigation-links button:focus-visible::after,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button:hover::after,
+body[data-ui-mode="story"] .react-app-navigation .app-navigation-links button:focus-visible::after { content: attr(aria-label); position: absolute; z-index: 80; top: 50%; left: calc(100% + 12px); min-width: max-content; padding: 7px 9px; border: 1px solid var(--lv-foundation-color-line); border-radius: 7px; color: var(--lv-foundation-color-paper); background: var(--lv-foundation-color-forest950); box-shadow: var(--lv-foundation-shadow-sm); font-size: 10px; font-weight: 700; transform: translateY(-50%); }
+body.react-shell-ready #workspace-home { display: block; grid-area: 2 / 2 / -1 / -1; }
+body.react-shell-ready #workspace-home[hidden] { display: none; }
+
+/* Workspace uses the same compact rail as the editor and Story Studio. The
+   former workspace-specific treatment was a separate, wide dark sidebar;
+   keeping the variant here makes the shared React shell the single visual
+   contract for every mode without changing navigation semantics. */
+body.workspace-mode .app {
+  grid-template-columns: 72px minmax(0, 1fr);
+}
+body.workspace-mode .react-app-navigation {
+  overflow: visible;
+  padding: 22px 9px;
+  color: var(--lv-foundation-color-ink);
+  border-right: 1px solid var(--lv-foundation-color-line);
+  background: linear-gradient(180deg, rgba(255, 253, 245, .98), rgba(248, 245, 235, .98));
+}
+body.workspace-mode .react-app-navigation::before,
+body.workspace-mode .react-app-navigation::after { display: none; }
+body.workspace-mode .react-app-navigation .app-navigation-brand {
+  justify-content: center;
+  padding: 0;
+  color: var(--lv-foundation-color-forest950);
+}
+body.workspace-mode .react-app-navigation .app-navigation-brand > span:last-child,
+body.workspace-mode .react-app-navigation .app-navigation-foot { display: none; }
+body.workspace-mode .react-app-navigation .app-navigation-links { margin-top: 34px; }
+body.workspace-mode .react-app-navigation .app-navigation-links button {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  min-height: 48px;
+  padding: 0;
+  color: var(--lv-foundation-color-editorialTones-tone526257);
+  position: relative;
+}
+body.workspace-mode .react-app-navigation .app-navigation-links button > span:last-child:not(.ui-button-label),
+body.workspace-mode .react-app-navigation .app-navigation-links button > .ui-button-label > span:last-child { display: none; }
+body.workspace-mode .react-app-navigation .app-navigation-links button:hover,
+body.workspace-mode .react-app-navigation .app-navigation-links button.active {
+  color: var(--lv-foundation-color-forest950);
+  border-color: rgba(111, 154, 91, .18);
+  background: rgba(223, 232, 211, .58);
+}
+body.workspace-mode .react-app-navigation .app-navigation-links button:hover::after,
+body.workspace-mode .react-app-navigation .app-navigation-links button:focus-visible::after {
+  content: attr(aria-label);
+  position: absolute;
+  z-index: 80;
+  top: 50%;
+  left: calc(100% + 12px);
+  min-width: max-content;
+  padding: 7px 9px;
+  border: 1px solid var(--lv-foundation-color-line);
+  border-radius: 7px;
+  color: var(--lv-foundation-color-paper);
+  background: var(--lv-foundation-color-forest950);
+  box-shadow: var(--lv-foundation-shadow-sm);
+  font-size: 10px;
+  font-weight: 700;
+  transform: translateY(-50%);
+}
+@media (max-width: 1180px) {
+  .react-topbar { grid-template-columns: minmax(0, 1fr) auto; }
+  .react-topbar .breadcrumb-shell { display: none; }
+}
+@media (max-width: 720px) {
+  .react-app-navigation { display: flex; }
+  .react-topbar { grid-area: 1 / 1 / 2 / -1; grid-template-columns: 1fr auto; min-height: 64px; }
+  .react-topbar .brand { gap: 8px; }
+  .react-topbar .brand h1 { font-size: 18px; }
+  .react-topbar .actions button:not(.primary-action) { display: none; }
+body.react-shell-ready #workspace-home { grid-area: 3 / 1 / -1 / -1; }
+}
+}

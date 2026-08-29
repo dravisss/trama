@@ -1,0 +1,45 @@
+{
+  "name": "loop-viewer",
+  "version": "0.1.0",
+  "description": "Reusable causal loop diagram engine with smart routing, anchored polarities and semantic zoom.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.mjs tests/design-system/*.test.mjs",
+    "qa:story": "node --test qa/story-studio.test.mjs",
+    "qa:browser": "node scripts/qa-browser-performance.mjs",
+    "build:tokens": "node scripts/build-design-tokens.mjs",
+    "build:fonts": "node scripts/build-publication-fonts.mjs",
+    "check:ui-contract": "node scripts/check-ui-contract.mjs",
+    "check:ui-legacy": "node scripts/check-ui-legacy-usage.mjs",
+    "test:ui-contract": "node scripts/check-ui-contract.mjs",
+    "test:ui": "playwright test e2e/ui",
+    "test:a11y": "playwright test e2e/a11y",
+    "test:visual": "playwright test e2e/ui",
+    "check:ui": "npm run check:ui-contract && npm run check:ui-legacy && npm run test:ui && npm run test:a11y",
+    "migrate:presentations-camera": "node scripts/migrate-presentations-camera-v2.mjs data/loopviewer.db",
+    "check": "npm run test && npm run qa:story && npm run build",
+    "serve": "node --no-warnings server.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.61.1",
+    "esbuild": "^0.25.0"
+  },
+  "dependencies": {
+    "@fontsource/noto-sans": "^5.3.0",
+    "@fontsource/noto-serif": "^5.3.0",
+    "cose-base": "^2.2.0",
+    "cytoscape": "^3.30.4",
+    "cytoscape-cose-bilkent": "^4.1.0",
+    "cytoscape-fcose": "^2.2.0",
+    "layout-base": "^2.0.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  }
+}

@@ -1,0 +1,16 @@
+node_modules/
+.DS_Store
+npm-debug.log*
+data/*.db
+data/*.db-*
+test-results/
+playwright-report/
+coverage/
+*.log
+*.artifact.json
+--viewport
+.superdesign/
+prototypes/
+research/
+printscreens/
+.od-skills/
