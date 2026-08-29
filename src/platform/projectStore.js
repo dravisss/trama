@@ -8,7 +8,7 @@ import { migrateStoryToPresentation } from "../presentation/migration.js";
 const DEFAULT_PROJECT_ID = "default-project";
 
 export class ProjectStore {
-  constructor(dbPath, { project, seedModels = [] } = {}) {
+  constructor(dbPath, { project, seedModels = [], seedAssets = [] } = {}) {
     mkdirSync(dirname(dbPath), { recursive: true });
     this.dbPath = dbPath;
     this.db = new DatabaseSync(dbPath);
@@ -17,6 +17,9 @@ export class ProjectStore {
     this.ensureProject(project);
     if (!this.listLoops().length && seedModels.length) this.seed(seedModels);
     else if (seedModels.length) this.backfillSeedModels(seedModels);
+    for (const asset of seedAssets) {
+      if (!this.getAsset(asset.id)) this.createAsset(asset);
+    }
     this.ensureMapsForLoops();
   }
 

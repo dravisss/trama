@@ -4,6 +4,7 @@
     {
       "id": "DCP",
       "label": "Demandas em\nCanal Paralelo",
+      "media": { "assetId": "sobrecarga-filas-dcp", "altText": "Demandas entrando por canais laterais e contornando a entrada principal", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 647.003,
         "y": 761.223
@@ -12,6 +13,7 @@
     {
       "id": "AFC",
       "label": "Adesão ao\nFunil Corporativo",
+      "media": { "assetId": "sobrecarga-filas-afc", "altText": "Pessoas escolhendo entrar por um funil organizado", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 60.75,
         "y": 508.885
@@ -20,6 +22,7 @@
     {
       "id": "CCD",
       "label": "Custo de Coordenação\npor Demanda",
+      "media": { "assetId": "sobrecarga-filas-ccd", "altText": "Várias mãos tentando coordenar a mesma pasta de trabalho", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 566.812,
         "y": 615.351
@@ -28,6 +31,7 @@
     {
       "id": "VF",
       "label": "Visibilidade\nda Fila",
+      "media": { "assetId": "sobrecarga-filas-vf", "altText": "Uma fila de cartões visível dentro de uma bandeja transparente", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 293.081,
         "y": 834.456
@@ -36,6 +40,7 @@
     {
       "id": "BLD",
       "label": "Backlog\ndas Áreas",
+      "media": { "assetId": "sobrecarga-filas-bld", "altText": "Uma caixa de entrada transbordando com cartões de demandas acumuladas", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 915.097,
         "y": 505.65
@@ -44,6 +49,7 @@
     {
       "id": "TCD",
       "label": "Tempo de Ciclo\nda Demanda",
+      "media": { "assetId": "sobrecarga-filas-tcd", "altText": "Um cartão parado em uma esteira circular ao lado de uma ampulheta", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 134.413,
         "y": 671.448
@@ -52,6 +58,7 @@
     {
       "id": "CAR",
       "label": "Atalho Hierárquico\n/ Carteirada",
+      "media": { "assetId": "sobrecarga-filas-car", "altText": "Uma mão retirando um cartão da fila para colocá-lo à frente", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 378.536,
         "y": 583.838
@@ -60,6 +67,7 @@
     {
       "id": "CRF",
       "label": "Demandas via\nFluxo Formal",
+      "media": { "assetId": "sobrecarga-filas-crf", "altText": "Cartões avançando por uma única faixa formal e organizada", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 627.849,
         "y": 332.955
@@ -68,6 +76,7 @@
     {
       "id": "DRC",
       "label": "Handoffs\nentre Áreas",
+      "media": { "assetId": "sobrecarga-filas-drc", "altText": "Uma pasta sendo passada entre diferentes estações de trabalho", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 848.658,
         "y": 828.45
@@ -76,6 +85,7 @@
     {
       "id": "ACE",
       "label": "Eficiência dos\nAceleradores",
+      "media": { "assetId": "sobrecarga-filas-ace", "altText": "Engrenagens e uma rampa movendo cartões com pouco atrito", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 353.632,
         "y": 221.219
@@ -84,6 +94,7 @@
     {
       "id": "SCL",
       "label": "Satisfação\ndo Cliente",
+      "media": { "assetId": "sobrecarga-filas-scl", "altText": "Uma cliente recebendo uma demanda concluída em um atendimento", "size": 96, "labelGap": 8, "labelPlacement": "below", "fit": "cover", "focalPoint": { "x": 0.5, "y": 0.5 } },
       "position": {
         "x": 154.152,
         "y": 303.577
@@ -815,4 +826,3 @@
     "source_md": "# Sobrecarga de Filas\n\nEsta apresentação mostra como múltiplas portas de entrada e a fragmentação do trabalho produzem filas concorrentes. A latência leva à carteirada, que resolve casos individuais mas amplia os canais paralelos e enfraquece o fluxo formal. Em seguida, a história mostra como o mesmo atalho corrói a eficiência dos aceleradores.\n\n## Cena: A fila deixa de ser um problema isolado\nfocus: path e01, e08, e09\n\n### O backlog cresce\nfocus: node BLD\n\nO backlog das áreas concentra demandas que chegaram por diferentes portas e precisam disputar a mesma capacidade interna.\n\n### O backlog produz handoffs\nfocus: edge e08\n\nQuando o backlog cresce, cada demanda atravessa mais áreas antes de encontrar uma solução.\n\n### Handoffs viram coordenação\nfocus: edge e09\n\nCada passagem acrescenta reuniões, negociações e idas e vindas para alinhar escopo.\n\n## Cena: A fragmentação alonga o tempo de ciclo\nfocus: path e09, e16, e06\n\n### Coordenação consome capacidade\nfocus: edge e16\n\nO custo de coordenação ocupa capacidade que poderia estar executando as demandas e aumenta o tempo total de ciclo.\n\n### A latência chega ao cliente\nfocus: edge e06\n\nQuanto mais longa a espera, menor a satisfação do cliente.\n\n## Cena: A carteirada aparece como alívio\nfocus: set edge:e05, edge:e17, node:CAR\n\n### Insatisfação ativa o atalho\nfocus: edge e05\n\nA insatisfação cria pressão por uma solução imediata e ativa a carteirada como atalho hierárquico.\n\n### O atalho reduz uma espera\nfocus: set node:CAR, node:TCD\n\nPara a demanda específica, a carteirada pode reduzir o tempo de ciclo e produzir a sensação de que o sistema voltou a responder.\n\n## Cena: O alívio alimenta o problema\nfocus: path e18, e07, e08, e09, e16, e17\n\n### O atalho cria canal paralelo\nfocus: edge e18\n\nCada exceção bem-sucedida incentiva novas demandas a contornarem o fluxo formal.\n\n### O canal paralelo reduz visibilidade\nfocus: edge e12\n\nQuando as demandas deixam de aparecer no funil, a visibilidade da fila diminui e a coordenação fica ainda mais difícil.\n\n### O ciclo de sobrecarga se fecha\nfocus: loop r3\n\nO atalho alivia uma demanda, mas amplia os canais paralelos, aumenta os handoffs e reforça a própria necessidade de novos atalhos.\n\n## Cena: O acelerador também se deteriora\nfocus: loop r4\n\n### A carteirada corrói os aceleradores\nfocus: edge e21\n\nAo substituir o fluxo desenhado, a carteirada reduz a eficiência dos aceleradores que deveriam diminuir o custo de coordenação.\n\n### A deterioração alonga novamente o ciclo\nfocus: path e10, e16, e17\n\nCom aceleradores menos eficientes, a coordenação fica mais cara, a latência aumenta e a pressão pelo atalho retorna.\n\n## Cena: A armadilha sistêmica\nfocus: set node:BLD, node:CAR, node:TCD, node:ACE\n\n### Resolver casos não é recuperar o sistema\nfocus: loop r3\n\nA carteirada pode ser racional para uma urgência individual, mas seu efeito agregado enfraquece a arquitetura que deveria tornar o fluxo visível, coordenável e previsível.\n"
   }
 }
-

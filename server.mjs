@@ -1,10 +1,11 @@
-import { createReadStream } from "node:fs";
+import { createReadStream, readFileSync } from "node:fs";
 import { access, readdir, readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { basename, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ProjectStore } from "./src/platform/projectStore.js";
 import { examples } from "./src/models/examples.js";
+import { exampleAssets } from "./src/models/exampleAssets.js";
 import { slugId } from "./src/core/model.js";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
@@ -24,7 +25,10 @@ const allowExternalDb = process.env.LOOPVIEWER_ALLOW_EXTERNAL_DB === "1";
 // with the demo catalog: that makes deterministic fixtures non-deterministic
 // and can mix sample records into a user's selected project.
 const seedModels = process.env.LOOPVIEWER_DB_PATH || process.env.LOOPVIEWER_DATA_ROOT ? [] : examples;
-let store = new ProjectStore(configuredDbPath, { seedModels });
+const seedAssets = seedModels.length
+  ? exampleAssets.map(asset => ({ ...asset, content: readFileSync(asset.path) }))
+  : [];
+let store = new ProjectStore(configuredDbPath, { seedModels, seedAssets });
 let qaFixtureGeneration = 0;
 
 const mimeTypes = {

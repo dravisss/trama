@@ -69,6 +69,35 @@ test("seed migration persists only the Presentation V2 result", () => {
   }
 });
 
+test("bundled demo assets are seeded once with stable ids", () => {
+  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dbPath = join(dir, "project.db");
+  const seedAsset = {
+    id: "demo-backlog",
+    filename: "backlog.webp",
+    mime_type: "image/webp",
+    content: Buffer.from("demo-image"),
+    width: 512,
+    height: 512,
+    alt_text: "Backlog ilustrado"
+  };
+  const first = new ProjectStore(dbPath, { seedModels: [model], seedAssets: [seedAsset] });
+  try {
+    assert.equal(first.listAssets().length, 1);
+    assert.equal(first.getAsset("demo-backlog").alt_text, "Backlog ilustrado");
+  } finally {
+    first.close();
+  }
+
+  const second = new ProjectStore(dbPath, { seedModels: [model], seedAssets: [seedAsset] });
+  try {
+    assert.equal(second.listAssets().length, 1);
+  } finally {
+    second.close();
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test("project store persists loops across reopen", () => {
   const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
   const dbPath = join(dir, "project.db");
