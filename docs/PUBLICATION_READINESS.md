@@ -18,14 +18,16 @@ explicit action.
 - [x] Database paths are restricted to `data/` unless explicitly overridden.
 - [x] README, contribution, support and security guidance.
 - [x] GitHub Actions CI for clean install, tests and build.
+- [x] Clean worktree verified with `npm ci` and `npm run check`.
+- [x] Final tracked-file inventory and secret-pattern scan reviewed.
+- [x] Initial changelog entry prepared.
 
 ## Required before the first public tag
 
 - [ ] Create the GitHub repository and replace the README clone placeholder.
 - [ ] Run CI on GitHub and enable branch protection.
-- [ ] Confirm a clean clone can run `npm ci`, `npm run check` and `npm run serve`.
-- [ ] Review the final staged file inventory and secret scan.
-- [ ] Create the first changelog entry and tag only after explicit approval.
+- [ ] Confirm GitHub CI passes from the public branch.
+- [ ] Create the first tag only after explicit approval.
 
 ## Distribution decision
 
