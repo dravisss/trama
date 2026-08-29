@@ -1,32 +1,32 @@
 # LoopViewer
 
+**Mapeie sistemas, conte a história dos feedbacks e entregue uma apresentação navegável.**
+
 LoopViewer é uma aplicação local-first para criar, explorar e apresentar Diagramas de Loops
-Causais (CLDs). O repositório também contém o motor front-end reutilizável exposto por
-`CLD.createCLD()`.
+Causais (CLDs). Pessoas podem trabalhar pela interface visual; agentes podem operar os mesmos
+artefatos em Markdown, validar o modelo e usar o motor público sem depender de um harness
+específico.
 
-O projeto é distribuído sob a licença [MIT](LICENSE) e está na série `0.x`: a aplicação funciona,
-mas contratos públicos ainda podem evoluir antes da versão `1.0`.
+![Editor do LoopViewer mostrando a demonstração Sobrecarga de Filas](docs/images/loopviewer-editor.png)
 
-## O que está incluído
+O projeto está na série `0.x`, é distribuído sob a [licença MIT](LICENSE) e inclui apenas uma
+demonstração anônima: **Sobrecarga de Filas**.
 
-- editor visual de variáveis, relações, posições e rotas;
-- descoberta e curadoria de ciclos de feedback;
-- autoria por Markdown para mapas, estilos e apresentações;
-- Presentation V2 com cenas, beats, foco semântico e câmera explícita;
-- persistência local em SQLite;
-- export HTML standalone sem dependência de CDN;
-- um único exemplo anônimo: **Sobrecarga de Filas**, com mapa e apresentação.
+## O que você consegue fazer
 
-Dados criados pelo usuário ficam em `data/*.db`, que não são versionados. O repositório público
-não contém bancos de clientes, corpus de pesquisa privado ou projetos reais.
+- criar variáveis e relações causais com polaridades explícitas;
+- organizar posições, rotas, estilos e diferentes vistas do mesmo mapa;
+- descobrir ciclos e curar loops reforçadores ou balanceadores;
+- descrever o sistema em Markdown sem misturar narrativa com o modelo;
+- criar apresentações com cenas, beats, foco semântico e câmera explícita;
+- reproduzir a história passo a passo no modo **Apresentar**;
+- persistir projetos localmente em SQLite;
+- exportar HTML autocontido, executável offline e sem CDN;
+- integrar o motor reutilizável por `CLD.createCLD()`.
 
-## Requisitos
+## Comece em cinco minutos
 
-- Node.js 22.5 ou superior (`node:sqlite` é utilizado);
-- npm compatível com o lockfile;
-- macOS, Linux ou Windows com um navegador moderno.
-
-## Instalação
+Requisitos: Node.js 22.5 ou superior, npm e um navegador moderno.
 
 ```bash
 git clone <URL-DO-REPOSITORIO>
@@ -36,27 +36,106 @@ npm run check
 npm run serve
 ```
 
-Abra [http://127.0.0.1:4173](http://127.0.0.1:4173). Na primeira execução, o SQLite local é criado
-com a demonstração Sobrecarga de Filas e sua Presentation V2.
+Abra [http://127.0.0.1:4173](http://127.0.0.1:4173). Na primeira execução, o projeto local e o
+banco `data/loopviewer.db` são criados com o mapa **Sobrecarga de Filas** e sua Presentation V2.
 
-O servidor escuta somente `127.0.0.1` por padrão. Ele não possui autenticação e não deve ser
-publicado diretamente na internet. Definir `HOST` amplia deliberadamente a interface de rede.
+O servidor fica restrito a `127.0.0.1` por padrão. Ele é uma aplicação local e não deve ser
+exposto diretamente à internet.
 
-## Uso da aplicação
+## Um passeio pela aplicação
 
-- **Projetos** cria ou abre projetos SQLite dentro de `data/`;
-- **Editor** altera o mapa, Markdown, estilo, dados e histórico;
-- **Story Studio** cria e valida a Presentation V2 associada ao mapa;
-- **Apresentar** executa a narrativa persistida;
-- **Exportar HTML** gera uma publicação autocontida.
+### 1. Projetos: cada trabalho permanece local
 
-Por segurança, caminhos de bancos ficam restritos a `data/`. Um operador local pode permitir
-explicitamente caminhos externos com `LOOPVIEWER_ALLOW_EXTERNAL_DB=1`. O limite padrão para JSON
-da API é 5 MiB e pode ser ajustado por `LOOPVIEWER_MAX_JSON_BYTES`.
+Abra ou crie bancos SQLite, importe Markdown e organize vários mapas sem enviar conteúdo para um
+serviço externo. Arquivos em `data/*.db` são ignorados pelo Git.
 
-## Motor em browser
+![Workspace local do LoopViewer](docs/images/loopviewer-workspace.png)
 
-O build gera `dist/cld-engine.iife.js`. Carregue Cytoscape e o layout antes do motor:
+### 2. Editor: estrutura e visual no mesmo lugar
+
+O Editor reúne canvas, descrição, Inspector, Markdown, estilos, dados e histórico. O mapa continua
+sendo o artefato causal; nenhuma Presentation é escondida dentro de `model.story`.
+
+![Editor com o mapa Sobrecarga de Filas](docs/images/loopviewer-editor.png)
+
+### 3. Story Studio: transforme estrutura em narrativa
+
+Cenas organizam viradas narrativas. Beats explicam movimentos causais individuais. Cada foco
+referencia nós, relações, caminhos ou loops que realmente existem no mapa.
+
+![Story Studio com cenas, timeline e Inspector](docs/images/loopviewer-story-studio.png)
+
+### 4. Apresentar: conduza a leitura do sistema
+
+A Presentation V2 controla enquadramento, destaque e progressão sem duplicar o mapa. O mesmo
+contrato alimenta a prévia, o player e a exportação offline.
+
+![Modo Apresentar destacando o backlog](docs/images/loopviewer-present.png)
+
+As imagens acima foram capturadas da branch pública, em uma instalação limpa, usando somente a
+demonstração incluída no repositório.
+
+## Feito para agentes — sem dependência de harness
+
+LoopViewer não exige Codex, Claude, Cursor, MCP ou um framework de agentes específico. Um agente
+precisa apenas conseguir:
+
+1. ler e editar arquivos do repositório;
+2. executar comandos Node/npm;
+3. respeitar IDs estáveis e os contratos documentados;
+4. devolver mudanças verificáveis em Git.
+
+O protocolo é baseado em artefatos, não na ferramenta que os produz:
+
+```text
+descrição do sistema
+        ↓
+seeds/<slug>.loop.md       mapa, relações, sinais e ciclos
+        +
+seeds/<slug>.story.md      cenas, beats, focos e trajetória
+        ↓
+compilação + validação + lint
+        ↓
+ProjectStore / SQLite
+        ↓
+Editor → Story Studio → Apresentar → HTML offline
+```
+
+### Contrato mínimo para um agente
+
+- Leia [AGENTS.md](AGENTS.md) antes de alterar mapas ou apresentações.
+- Use `.agents/skills/mermaid-to-loopviewer/SKILL.md` quando a origem for um diagrama Mermaid.
+- Dê IDs estáveis a nós e relações; não derive polaridades mecanicamente do rótulo.
+- Mantenha mapa e Presentation em arquivos separados.
+- Toda cena deve apontar para o mapa real com `mapRef`.
+- Use apenas focos existentes: `node`, `edge`, `loop`, `path` ou `set`.
+- Não crie `model.story` nem um formato narrativo paralelo.
+- Execute `npm test` e `npm run check` antes do handoff.
+
+Exemplo de pedido que funciona com qualquer agente de código:
+
+> Leia `AGENTS.md` e converta meu diagrama causal para
+> `seeds/meu-sistema.loop.md`. Crie também `seeds/meu-sistema.story.md`, valide sinais,
+> ciclos, focos e câmera contra o mapa real, execute os gates do projeto e relate os arquivos
+> alterados e os testes.
+
+Esse processo permite usar um agente no terminal, numa IDE, em CI ou dentro de uma orquestração
+maior sem acoplar o conteúdo a mensagens privadas, memória de conversa ou APIs proprietárias.
+
+## A demonstração pública
+
+`seeds/` contém somente:
+
+- `sobrecarga-filas.loop.md`: fonte legível do mapa;
+- `sobrecarga-filas.story.md`: fonte legível da narrativa;
+- `sobrecarga-filas.public.json`: modelo e Presentation V2 usados na primeira execução.
+
+A demonstração mostra como backlog, handoffs, custo de coordenação, latência e atalhos formam
+feedbacks concorrentes. Ela é inteiramente anônima e não representa dados de uma organização real.
+
+## Usando o motor no browser
+
+O build gera `dist/cld-engine.iife.js`. Carregue Cytoscape e um layout antes do motor:
 
 ```html
 <link rel="stylesheet" href="styles.css">
@@ -69,6 +148,7 @@ O build gera `dist/cld-engine.iife.js`. Carregue Cytoscape e o layout antes do m
 <script src="dist/cld-engine.iife.js"></script>
 <script>
   cytoscape.use(cytoscapeCoseBilkent);
+
   const viewer = CLD.createCLD({
     container: "#graph",
     model: {
@@ -91,25 +171,39 @@ O build gera `dist/cld-engine.iife.js`. Carregue Cytoscape e o layout antes do m
 </script>
 ```
 
-O contrato exportado está centralizado em [`src/index.js`](src/index.js). Narrativas não pertencem
-ao modelo do mapa: a entidade oficial é a `Presentation` V2 persistida separadamente, e cada cena
-referencia um mapa real com `mapRef`.
+O contrato completo é exportado por [`src/index.js`](src/index.js). Além de `createCLD()`, ele
+inclui validação de modelos, descoberta e classificação de loops, compilação e lint de
+Presentations, controller de reprodução, exportação e medição de performance.
 
-## Desenvolvimento
+## Persistência e segurança local
+
+- bancos ficam em `data/` e não são versionados;
+- o servidor escuta apenas loopback por padrão;
+- requisições mutáveis feitas pelo browser exigem mesma origem;
+- payloads JSON possuem limite padrão de 5 MiB;
+- caminhos de banco ficam restritos a `data/`;
+- `LOOPVIEWER_ALLOW_EXTERNAL_DB=1` permite deliberadamente bancos externos;
+- `LOOPVIEWER_MAX_JSON_BYTES` altera o limite de JSON;
+- definir `HOST` amplia deliberadamente a interface de rede.
+
+O servidor não possui autenticação. Se você optar por expô-lo além da máquina local, adicione uma
+camada externa de autenticação, TLS e controle de acesso.
+
+## Desenvolvimento e QA
 
 ```bash
 npm test                 # testes Node
 npm run qa:story         # contrato do Story Studio
 npm run build            # bundles em dist/
-npm run check            # gate local principal
-npm run check:ui         # Playwright + acessibilidade
+npm run check            # gate local: testes + Story Studio + build
+npm run check:ui         # Playwright + regressão visual + acessibilidade
 npm run serve            # aplicação local
 ```
 
-`dist/` é gerado por `npm run build`; não edite bundles manualmente. A CI executa instalação limpa
-e `npm run check` em pushes e pull requests.
+A CI executa instalação limpa, testes, build e QA de navegador em pushes e pull requests.
+`dist/` é gerado por `npm run build`; não edite bundles manualmente.
 
-## Estrutura
+## Estrutura do repositório
 
 ```text
 src/core/          modelo de domínio e loops
@@ -120,21 +214,27 @@ src/rendering/     adaptação para Cytoscape
 src/presentation/  Presentation V2, câmera, lint e export
 src/platform/      persistência SQLite local
 src/app/           composição da aplicação
-seeds/             única demonstração pública
+seeds/             demonstração pública e suas fontes
+docs/images/       capturas da aplicação pública
 tests/             testes Node
-e2e/               testes Playwright
+e2e/               testes Playwright e baselines visuais
 ```
 
-Detalhes adicionais estão em [Arquitetura](docs/ARCHITECTURE.md),
-[Extensão](docs/EXTENDING.md), [Contribuição](CONTRIBUTING.md) e [Segurança](SECURITY.md).
+Leitura recomendada:
+
+- [Arquitetura](docs/ARCHITECTURE.md)
+- [Como estender](docs/EXTENDING.md)
+- [Como contribuir](CONTRIBUTING.md)
+- [Política de segurança](SECURITY.md)
+- [Guia para agentes](AGENTS.md)
 
 ## Limitações atuais
 
-- a versão `0.x` ainda não promete estabilidade semântica até `1.0`;
-- self-loops e múltiplas arestas paralelas têm suporte limitado;
-- o roteamento é heurístico e não uma solução ótima global;
-- a API ESM não é publicada como pacote npm;
-- exposição do servidor além de loopback exige uma camada externa de autenticação e segurança.
+- a série `0.x` ainda pode evoluir contratos antes da versão `1.0`;
+- self-loops e múltiplas arestas paralelas possuem suporte limitado;
+- o roteamento é heurístico, não uma solução ótima global;
+- a API ESM ainda não é distribuída como pacote npm;
+- a aplicação é local-first e não inclui autenticação multiusuário.
 
 ## Licença
 
