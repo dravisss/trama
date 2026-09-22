@@ -28,12 +28,12 @@ export function buildUnifiedUiFixture() {
   const maps = [...routingMaps, flagshipMap];
 
   return {
-    format: "loopviewer-project",
+    format: "trama-project",
     version: 1,
     exported_at: EXPORTED_AT,
     project: {
       id: "unified-ui-qa",
-      title: "LoopViewer UI QA",
+      title: "Trama UI QA",
       description_md: "Fixture isolada e determinística para regressão visual, interação e publicação."
     },
     // The runtime keeps a legacy loop write queue while maps own views and

@@ -1,8 +1,8 @@
 import { test, expect } from "../support/qa-test.mjs";
 
 function catalogUrl() {
-  const baseURL = process.env.LOOPVIEWER_UI_QA_URL;
-  if (!baseURL) throw new Error("LOOPVIEWER_UI_QA_URL was not initialized by Playwright global setup.");
+  const baseURL = process.env.TRAMA_UI_QA_URL;
+  if (!baseURL) throw new Error("TRAMA_UI_QA_URL was not initialized by Playwright global setup.");
   return `${baseURL}/ui-catalog.html`;
 }
 

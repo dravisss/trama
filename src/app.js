@@ -66,14 +66,14 @@ import {
 } from "./presentation/styleProfiles.js";
 import fcose from "cytoscape-fcose";
 
-const reactRuntime = typeof window !== "undefined" ? window.LoopViewerReact || {} : {};
+const reactRuntime = typeof window !== "undefined" ? window.TramaReact || window.LoopViewerReact || {} : {};
 const appStore = createAppStore();
 const appCommands = createAppCommands(appStore);
 
 if (typeof cytoscapeCoseBilkent !== "undefined") cytoscape.use(cytoscapeCoseBilkent);
 if (typeof cytoscape !== "undefined") {
   cytoscape.use(fcose);
-  globalThis.__LOOPVIEWER_FCOSE__ = true;
+  globalThis.__TRAMA_FCOSE__ = true;
 }
 
 const reactApp = reactRuntime.mountReactApp?.({
@@ -358,7 +358,7 @@ const openCommandDialog = createCommandDialogController({
 // the canonical writer for persisted Markdown and style source. Notify the
 // chrome after imperative assignments so line counts never drift from source.
 function syncCodeEditor(id) {
-  document.dispatchEvent(new CustomEvent("loopviewer:code-editor-sync", { detail: { id } }));
+  document.dispatchEvent(new CustomEvent("trama:code-editor-sync", { detail: { id } }));
 }
 
 let movementComposerSession = 0;
@@ -406,7 +406,7 @@ const fallbackWorkspace = examples.map((source, index) => {
 // fallback map just before the real SQLite project replaced it.
 let workspace = [];
 let workspaceHydrating = true;
-let project = { title: "LoopViewer Workspace", description_md: "" };
+let project = { title: "Trama Workspace", description_md: "" };
 let localProjectRecords = [];
 let apiAvailable = false;
 const saveTimers = new Map();
@@ -4340,7 +4340,7 @@ async function openProjectDb() {
     title: "Abrir projeto SQLite",
     description: "Informe o caminho local do arquivo .db.",
     submitLabel: "Abrir projeto",
-    fields: [{ name: "path", label: "Caminho", value: "data/loopviewer.db", required: true }]
+    fields: [{ name: "path", label: "Caminho", value: "data/trama.db", required: true }]
   });
   if (!values) return;
   const path = values.path;
@@ -4393,7 +4393,7 @@ async function exportProjectBackup() {
   try {
     await persistActiveLoop();
     const bundle = await apiFetch("/api/project/backup");
-    downloadText(`${slugId(project?.title || "projeto", "projeto")}.loopviewer.json`,
+    downloadText(`${slugId(project?.title || "projeto", "projeto")}.trama.json`,
       JSON.stringify(bundle, null, 2), "application/json");
     showToast("Backup completo do projeto gerado.");
   } catch (error) {
@@ -4414,7 +4414,7 @@ async function importProjectBackup(event) {
     showToast("Backup importado em um novo projeto SQLite.");
   } catch (error) {
     handleApiError(error);
-    showToast("O arquivo não é um backup LoopViewer válido.");
+    showToast("O arquivo não é um backup Trama válido.");
   }
 }
 
@@ -4575,7 +4575,7 @@ async function deleteActiveLoop() {
 
 function exportJson() {
   const model = engine.getModel({ includePositions: true, includeRoutes: true });
-  downloadText(`${model.id || "loopviewer"}-model.json`, JSON.stringify(model, null, 2), "application/json");
+  downloadText(`${model.id || "trama"}-model.json`, JSON.stringify(model, null, 2), "application/json");
   showToast("JSON exportado.");
 }
 
@@ -6141,7 +6141,7 @@ async function exportStandalone() {
     syncWorkspaceFromEngine();
     const entry = standaloneEntryForIndex(activeIndex);
     await exportStandaloneApplication.execute({
-      filename: `${entry.model.id || entry.id}-loopviewer.html`,
+      filename: `${entry.model.id || entry.id}-trama.html`,
       project,
       model: entry.model,
       loops: [entry],
@@ -6168,7 +6168,7 @@ async function exportProjectStandalone() {
     const entries = workspace.map((_entry, index) => standaloneEntryForIndex(index));
     const active = entries[activeIndex] || entries[0];
     await exportStandaloneApplication.execute({
-      filename: `${slugId(project?.title || "loopviewer-projeto", "projeto")}-loopviewer.html`,
+      filename: `${slugId(project?.title || "trama-projeto", "projeto")}-trama.html`,
       project,
       model: active.model,
       loops: entries.map(item => ({
@@ -6791,12 +6791,12 @@ function projectHeading(model) {
 }
 
 function recentProjectsKey() {
-  return "loopviewer:recent-projects";
+  return "trama:recent-projects";
 }
 
 function readRecentProjects() {
   try {
-    const value = localStorage.getItem(recentProjectsKey());
+    const value = localStorage.getItem(recentProjectsKey()) || localStorage.getItem("loopviewer:recent-projects");
     return value ? JSON.parse(value) : [];
   } catch {
     return [];
@@ -6882,7 +6882,7 @@ function fileNameFromPath(path) {
 
 function readLayout(modelId) {
   try {
-    const value = localStorage.getItem(storageKey(modelId));
+    const value = localStorage.getItem(storageKey(modelId)) || localStorage.getItem(`loopviewer:layout:v2:${modelId}`);
     return value ? JSON.parse(value) : null;
   } catch {
     return null;
@@ -6907,7 +6907,7 @@ function preferredSavedLayout(entry) {
 function storageKey(modelId) {
   // v2 discards pre-metadata snapshots that cannot distinguish generated
   // geometry from an authored layout.
-  return `loopviewer:layout:v2:${modelId}`;
+  return `trama:layout:v2:${modelId}`;
 }
 
 function showToast(message) {
@@ -7009,7 +7009,7 @@ window.addEventListener("resize", () => {
   }, 180);
 });
 
-window.loopViewerDemo = {
+const tramaDemo = {
   engine,
   qa: qaRuntime,
   examples,
@@ -7020,4 +7020,7 @@ window.loopViewerDemo = {
   get workspace() { return workspace; },
   get activeIndex() { return activeIndex; }
 };
+window.tramaDemo = tramaDemo;
+window.loopViewerDemo = tramaDemo;
+window.__TRAMA_QA__ = qaRuntime;
 window.__LOOPVIEWER_QA__ = qaRuntime;

@@ -31,5 +31,5 @@ explicit action.
 
 ## Distribution decision
 
-LoopViewer is published as a clonable application, not as an npm package. `private: true` is
+Trama is published as a clonable application, not as an npm package. `private: true` is
 intentional. The reusable browser bundle is generated locally in `dist/`.

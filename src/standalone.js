@@ -25,10 +25,10 @@ import { measureCanvasSafeRect } from "./app/canvasViewport.js";
 globalThis.cytoscape = cytoscape;
 cytoscape.use(coseBilkent);
 
-const payload = globalThis.__LOOPVIEWER_DATA__;
-if (!payload?.model && !payload?.loops?.length) throw new Error("LoopViewer standalone model was not found.");
+const payload = globalThis.__TRAMA_DATA__ || globalThis.__LOOPVIEWER_DATA__;
+if (!payload?.model && !payload?.loops?.length) throw new Error("Trama standalone model was not found.");
 if (payload.version >= 3 && payload.integrity?.digest && payload.integrity.digest !== hashPayload(payload)) {
-  throw new Error("LoopViewer export integrity check failed.");
+  throw new Error("Trama export integrity check failed.");
 }
 const route = new URLSearchParams(globalThis.location?.search || "");
 const reducedMotion = payload.presentation?.settings?.reducedMotion === "always" ||
@@ -52,14 +52,14 @@ let standaloneConnectorFrameKey = null;
 let standaloneTooltipPlacementState = null;
 let standaloneAtlasCardSideState = null;
 
-const root = document.querySelector("#loopviewer-standalone");
+const root = document.querySelector("#trama-standalone, #loopviewer-standalone");
 if (payload.embed?.sidebar === false) document.body.classList.add("standalone-no-sidebar");
 if (payload.embed?.presentationOnly) document.body.classList.add("standalone-presentation-only");
 root.innerHTML = `
   <main class="standalone-shell">
     <header class="standalone-header">
       <div class="standalone-brand">
-        <small>LoopViewer export</small>
+        <small>Trama export</small>
         <h1></h1>
         <p></p>
       </div>
@@ -150,7 +150,7 @@ function fitStandalone(options = {}) {
   engine.fit({ ...options, safeRect: standaloneSafeRect() });
 }
 
-elements.projectTitle.textContent = payload.project?.title || "LoopViewer";
+elements.projectTitle.textContent = payload.project?.title || "Trama";
 elements.projectSubtitle.textContent = payload.project?.description_md || "Visualização exportada";
 
 entries.forEach((entry, index) => {
@@ -331,7 +331,7 @@ function renderOverview(entry) {
   const model = entry.model;
   const storyCount = compilePresentation(currentPresentation, { model }).timeline.length;
   const loopCount = model.loops?.length || 0;
-  elements.eyebrow.textContent = payload.project?.title || "LoopViewer";
+  elements.eyebrow.textContent = payload.project?.title || "Trama";
   elements.title.textContent = entry.title || model.title || model.id;
   elements.markdown.innerHTML = renderMarkdown(entry.description_md || model.description || "Este loop não possui descrição editorial.");
   elements.metrics.textContent = `${model.nodes.length} variáveis · ${model.edges.length} relações · ${loopCount} ciclos · ${storyCount} passos`;
@@ -916,7 +916,7 @@ function updateRoute(frame) {
 
 function persistResume(index, frame) {
   try {
-    globalThis.localStorage?.setItem(`loopviewer:resume:${payload.project?.id || payload.project?.title || "project"}`, JSON.stringify({
+    globalThis.localStorage?.setItem(`trama:resume:${payload.project?.id || payload.project?.title || "project"}`, JSON.stringify({
       index, sceneId: frame.sceneId, beatId: frame.beatId,
       presentationId: currentPresentation?.id, entryId: entries[activeIndex]?.id
     }));
@@ -925,7 +925,10 @@ function persistResume(index, frame) {
 
 function readResume() {
   try {
-    return JSON.parse(globalThis.localStorage?.getItem(`loopviewer:resume:${payload.project?.id || payload.project?.title || "project"}`) || "null");
+    const projectKey = payload.project?.id || payload.project?.title || "project";
+    const value = globalThis.localStorage?.getItem(`trama:resume:${projectKey}`)
+      || globalThis.localStorage?.getItem(`loopviewer:resume:${projectKey}`);
+    return JSON.parse(value || "null");
   } catch { return null; }
 }
 
@@ -940,7 +943,7 @@ function emitEmbed(type, detail) {
   if (!globalThis.parent || globalThis.parent === globalThis) return;
   const allowed = payload.embed?.allowedOrigins || [];
   const targetOrigin = allowed.length === 1 && allowed[0] !== "*" ? allowed[0] : "*";
-  try { globalThis.parent.postMessage({ source: "loopviewer", type, detail }, targetOrigin); } catch {}
+  try { globalThis.parent.postMessage({ source: "trama", type, detail }, targetOrigin); } catch {}
 }
 
 function motionDuration(value) {

@@ -121,7 +121,7 @@ test("flagship desktop cobre a jornada local-first completa até o standalone of
     await offlinePage.context().setOffline(true);
     await offlinePage.goto(pathToFileURL(downloadedHtmlPath).href, { waitUntil: "load" });
     await expect(offlinePage.locator(".standalone-shell")).toBeVisible();
-    await expect(offlinePage.locator("meta[name='loopviewer-design-system-hash']")).toHaveAttribute("content", /^[a-f0-9]{64}$/);
+    await expect(offlinePage.locator("meta[name='trama-design-system-hash']")).toHaveAttribute("content", /^[a-f0-9]{64}$/);
     await expect.poll(() => offlinePage.locator("#standalone-graph canvas").count()).toBeGreaterThan(0);
   } finally {
     await offlinePage.context().setOffline(false);

@@ -3,7 +3,7 @@ import { Button } from "./ui/Button.jsx";
 import { Input } from "./ui/Field.jsx";
 import { Icon } from "./ui/Icon.jsx";
 
-const DRAG_MIME = "application/x-loopviewer-story";
+const DRAG_MIME = "application/x-trama-story";
 
 function formatDuration(durationMs = 0) {
   const totalSeconds = Math.max(0, Math.round(Number(durationMs) / 1000));

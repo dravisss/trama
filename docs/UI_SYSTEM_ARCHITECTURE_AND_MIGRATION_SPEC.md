@@ -1,4 +1,4 @@
-# LoopViewer — Arquitetura do Sistema de UI e Plano de Migração
+# Trama — Arquitetura do Sistema de UI e Plano de Migração
 
 Status: especificação arquitetural normativa; a execução incremental compartilhada está registrada
 em `docs/UI_SYSTEM_IMPLEMENTATION_LOG.md` e não equivale à conclusão das fases arquiteturais.
@@ -106,7 +106,7 @@ o rótulo arquitetural correto é **monólito modular com DDD seletivo em evolu�
 
 ## 1. Resultado esperado
 
-O LoopViewer deve ter uma única identidade visual — **Matcha editorial** — expressa por tokens,
+A Trama deve ter uma única identidade visual — **Matcha editorial** — expressa por tokens,
 primitives e patterns reutilizáveis. Workspace, Editor, Explore, Story Studio e Present podem ter
 densidades e composições diferentes, mas não podem redefinir independentemente cor, tipografia,
 espaçamento, forma, estados de controle ou comportamento acessível.
@@ -792,7 +792,7 @@ Nomes finais podem mudar; a separação entre feedback rápido e release gate é
 - apresentação flagship multi-loop;
 - estados de falha: API indisponível, conflito de revisão, asset ausente e save falho.
 
-E2E nunca deve depender do banco pessoal `data/loopviewer.db`. Cada teste cria banco temporário e o
+E2E nunca deve depender do banco pessoal `data/trama.db`. Cada teste cria banco temporário e o
 descarta após execução.
 
 ---
@@ -1182,7 +1182,7 @@ Uma fatia termina quando:
 | refatoração longa congela features | média/alta | fatias verticais e flags curtas | branches grandes ou mais de um eixo/PR |
 | `!important` reaparece | alta/média | lint e layers | aumento do orçamento |
 | mobile perde funcionalidade | alta/alta | contrato por viewport + J16 | ação crítica inacessível/overflow global |
-| dados pessoais usados em E2E | baixa/alta | banco temporário obrigatório | teste aponta para `data/loopviewer.db` |
+| dados pessoais usados em E2E | baixa/alta | banco temporário obrigatório | teste aponta para `data/trama.db` |
 | docs ficam otimistas | alta/média | status derivado de gates | “concluído” sem evidência atual |
 
 ---

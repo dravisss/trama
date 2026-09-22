@@ -10,7 +10,7 @@ function lineTotal(value) {
  * to own source values and compilation; this component only supplies the
  * editorial code treatment (line gutter, count and synchronized scrolling).
  *
- * `loopviewer:code-editor-sync` supports the current imperative bridge while
+ * `trama:code-editor-sync` supports the current imperative bridge while
  * source panels are being promoted to React. Its `detail.id` is optional so a
  * caller may refresh every mounted code surface after a model switch.
  */
@@ -34,14 +34,14 @@ export function LineNumberedTextarea({ id, className = "", label, metaId, ...pro
     textarea.addEventListener("input", refresh);
     textarea.addEventListener("change", refresh);
     textarea.addEventListener("scroll", syncScroll, { passive: true });
-    document.addEventListener("loopviewer:code-editor-sync", syncFromBridge);
+    document.addEventListener("trama:code-editor-sync", syncFromBridge);
     const frame = window.requestAnimationFrame(refresh);
     return () => {
       window.cancelAnimationFrame(frame);
       textarea.removeEventListener("input", refresh);
       textarea.removeEventListener("change", refresh);
       textarea.removeEventListener("scroll", syncScroll);
-      document.removeEventListener("loopviewer:code-editor-sync", syncFromBridge);
+      document.removeEventListener("trama:code-editor-sync", syncFromBridge);
     };
   }, [id]);
 

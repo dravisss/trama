@@ -2,8 +2,8 @@ import { test, expect } from "../support/qa-test.mjs";
 import { activateCanvasNode } from "../support/canvas-interaction.mjs";
 
 function qaBaseURL() {
-  const baseURL = process.env.LOOPVIEWER_UI_QA_URL;
-  if (!baseURL) throw new Error("LOOPVIEWER_UI_QA_URL was not initialized by Playwright global setup.");
+  const baseURL = process.env.TRAMA_UI_QA_URL;
+  if (!baseURL) throw new Error("TRAMA_UI_QA_URL was not initialized by Playwright global setup.");
   return baseURL;
 }
 
@@ -14,7 +14,7 @@ async function openEditor(page) {
   await page.keyboard.press("Escape");
   await expect(page.locator("#edit-toolbar")).toBeVisible();
   await page.waitForFunction(() => {
-    const cy = window.loopViewerDemo?.engine?.cy;
+    const cy = window.tramaDemo?.engine?.cy;
     // The project-card click swaps the active map asynchronously. The toolbar
     // survives that transition, so it is not by itself proof that the flagship
     // graph has become the live Cytoscape model.
@@ -34,7 +34,7 @@ async function renderedPoint(page, id, kind = "node", sampleIndex = 0) {
       return hit === canvas || canvas.contains(hit);
     };
     for (let attempt = 0; attempt < 24; attempt += 1) {
-      const cy = window.loopViewerDemo?.engine?.cy;
+      const cy = window.tramaDemo?.engine?.cy;
       const element = cy?.getElementById(id);
       const direct = kind === "edge"
         ? (element?.renderedMidpoint?.() || element?.renderedControlPoints?.()[0])
@@ -137,7 +137,7 @@ async function renderedPoint(page, id, kind = "node", sampleIndex = 0) {
       }
       await nextFrame();
     }
-    const finalCy = window.loopViewerDemo?.engine?.cy;
+    const finalCy = window.tramaDemo?.engine?.cy;
     const finalElement = finalCy?.getElementById(id);
     const diagnostics = kind === "edge" && finalElement
       ? {
@@ -148,7 +148,7 @@ async function renderedPoint(page, id, kind = "node", sampleIndex = 0) {
         }
       : {
           activeNodeIds: finalCy?.nodes?.().map(node => node.id()) || [],
-          activeMap: window.loopViewerDemo?.appStore?.getState?.().activeMapId || null
+          activeMap: window.tramaDemo?.appStore?.getState?.().activeMapId || null
         };
     throw new Error(`Could not resolve an interactive rendered point for ${kind} ${id}: ${JSON.stringify(diagnostics)}`);
   }, { id, kind, sampleIndex });
@@ -161,10 +161,10 @@ async function activateEdge(page, id) {
     const point = await renderedPoint(page, id, "edge", attempt);
     for (const [dx, dy] of offsets) {
       await page.mouse.move(point.x + dx, point.y + dy);
-      const hovered = await page.evaluate(edgeId => window.loopViewerDemo.engine.cy.getElementById(edgeId).hasClass("annotation-focus"), id);
+      const hovered = await page.evaluate(edgeId => window.tramaDemo.engine.cy.getElementById(edgeId).hasClass("annotation-focus"), id);
       if (!hovered) continue;
       await page.mouse.click(point.x + dx, point.y + dy);
-      const selected = await page.evaluate(edgeId => window.loopViewerDemo.engine.cy.getElementById(edgeId).selected(), id);
+      const selected = await page.evaluate(edgeId => window.tramaDemo.engine.cy.getElementById(edgeId).selected(), id);
       if (selected) return;
       // A near miss can legitimately select a node and open its edit popover;
       // dismiss that real UI surface before trying the next curve sample.
@@ -245,7 +245,7 @@ async function dragRouteHandle(page, id) {
     await page.mouse.down();
     await page.mouse.move(start.x + 42, start.y + 26, { steps: 4 });
     await page.mouse.up();
-    const locked = await page.evaluate(edgeId => Boolean(window.loopViewerDemo.engine.cy.getElementById(edgeId).data("routeLocked")), id);
+    const locked = await page.evaluate(edgeId => Boolean(window.tramaDemo.engine.cy.getElementById(edgeId).data("routeLocked")), id);
     if (locked) return;
     // Keep the current edge selection while the handle settles. Re-selecting
     // through the canvas here can race the route redraw and turn a recoverable

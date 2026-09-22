@@ -1,9 +1,9 @@
-# Roadmap do LoopViewer
+# Roadmap da Trama
 
 ## Direção do produto
 
-O LoopViewer deve gerar diagramas interativos autocontidos para relatórios. O relatório final não
-dependerá de um servidor LoopViewer ou deste repositório estar em execução.
+A Trama deve gerar diagramas interativos autocontidos para relatórios. O relatório final não
+dependerá de um servidor Trama ou deste repositório estar em execução.
 
 ## 1. Fundação de domínio
 
@@ -36,15 +36,15 @@ Gerar uma pasta ou ZIP contendo:
 loop-report/
 ├── index.html
 ├── assets/
-│   ├── loop-viewer.js
-│   └── loop-viewer.css
+│   ├── trama.js
+│   └── trama.css
 └── model.json
 ```
 
 Requisitos:
 
 - [x] funcionar em hospedagem estática;
-- [x] não depender do projeto LoopViewer rodando;
+- [x] não depender do projeta Trama rodando;
 - [x] não depender de APIs remotas;
 - [x] preservar zoom, pan, foco e navegação de loops;
 - [x] aceitar embed por `iframe`;

@@ -30,7 +30,7 @@ handoff index, not a replacement for the product and language specifications.
 ## Deliberate Product Boundaries
 
 - The editor is local-first and optimized for one active author, not real-time collaboration.
-- Kumu is a UX benchmark, while LoopViewer keeps its own loop-oriented Markdown and standalone HTML export.
+- Kumu is a UX benchmark, while Trama keeps its own loop-oriented Markdown and standalone HTML export.
 - Legacy loop records remain supported while maps and views are the canonical workspace direction.
 - Generated files in `dist/` are committed but must only be changed through `npm run build`.
 

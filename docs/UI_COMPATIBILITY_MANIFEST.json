@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "owner": "LoopViewer UI migration",
+  "owner": "Trama UI migration",
   "retirementRule": "Remove an entry only after static usage search, browser smoke and the owning bridge are green.",
   "mountPoints": [
     "react-root",

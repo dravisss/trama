@@ -14,7 +14,7 @@ import { matchaTheme } from "./themes/matcha.js";
 globalThis.cytoscape = cytoscape;
 
 const payload = readPayload();
-const root = document.querySelector("#loopviewer-atlas-embed");
+const root = document.querySelector("#trama-atlas-embed, #loopviewer-atlas-embed");
 const atlasQuery = new URLSearchParams(globalThis.location?.search || "");
 const atlasQaEnabled = atlasQuery.has("atlas-qa");
 const atlasReferenceEnabled = atlasQuery.has("atlas-reference-qa");
@@ -22,7 +22,10 @@ const atlasQaSession = atlasQaEnabled ? { version: 1, samples: [], events: [] } 
 let atlasQaLastRenderAt = null;
 
 if (!root) throw new Error("Atlas embed root was not found.");
-if (atlasQaSession) globalThis.__LOOPVIEWER_ATLAS_QA__ = atlasQaSession;
+if (atlasQaSession) {
+  globalThis.__TRAMA_ATLAS_QA__ = atlasQaSession;
+  globalThis.__LOOPVIEWER_ATLAS_QA__ = atlasQaSession;
+}
 
 let engine = null;
 let controller = null;
@@ -88,7 +91,7 @@ root.innerHTML = `
     <section class="atlas-embed-poster" aria-live="polite">
       <img alt="" hidden>
       <div class="atlas-embed-poster-copy">
-        <small>LoopViewer · Atlas Editorial</small>
+        <small>Trama · Atlas Editorial</small>
         <h1></h1>
         <p>Preparando a apresentação em alta definição.</p>
         <button type="button" data-action="play" disabled aria-describedby="atlas-embed-status">Preparando…</button>
@@ -169,7 +172,7 @@ async function prepare() {
 }
 
 function validatePayload(value) {
-  if (value?.format !== "loopviewer-atlas-embed") throw new Error("Arquivo Atlas Embed inválido.");
+  if (value?.format !== "trama-atlas-embed") throw new Error("Arquivo Atlas Embed inválido.");
   if (!value.model || !value.presentation || !Array.isArray(value.compiled?.timeline) || !value.compiled.timeline.length) {
     throw new Error("A apresentação Atlas não possui um primeiro quadro compilado.");
   }
@@ -201,8 +204,14 @@ function createFirstFrameEngine() {
     // mobile camera stalls.
     rendererOptions: { pixelRatio: Math.min(Number(globalThis.devicePixelRatio) || 1, 2) }
   });
-  if (atlasQaSession) globalThis.__LOOPVIEWER_ATLAS_QA_ENGINE__ = engine;
-  if (atlasReferenceEnabled) globalThis.__LOOPVIEWER_ATLAS_REFERENCE_ENGINE__ = engine;
+  if (atlasQaSession) {
+    globalThis.__TRAMA_ATLAS_QA_ENGINE__ = engine;
+    globalThis.__LOOPVIEWER_ATLAS_QA_ENGINE__ = engine;
+  }
+  if (atlasReferenceEnabled) {
+    globalThis.__TRAMA_ATLAS_REFERENCE_ENGINE__ = engine;
+    globalThis.__LOOPVIEWER_ATLAS_REFERENCE_ENGINE__ = engine;
+  }
   engine.setEditing(false);
   engine.cy.nodes().addClass("atlas-embed-compositor-motion");
   engine.cy.on("render", () => {
@@ -1409,13 +1418,13 @@ function showFailure(error) {
 }
 
 function readPayload() {
-  const node = document.querySelector("#loopviewer-atlas-embed-payload");
+  const node = document.querySelector("#trama-atlas-embed-payload, #loopviewer-atlas-embed-payload");
   if (node?.textContent) {
     const value = JSON.parse(node.textContent);
     node.remove();
     return value;
   }
-  return globalThis.__LOOPVIEWER_ATLAS_EMBED__;
+  return globalThis.__TRAMA_ATLAS_EMBED__ || globalThis.__LOOPVIEWER_ATLAS_EMBED__;
 }
 
 function hashPayload(value) {

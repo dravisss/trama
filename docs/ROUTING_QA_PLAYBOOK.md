@@ -2,7 +2,7 @@
 
 Status: active engineering contract
 
-This playbook defines how LoopViewer proves that a layout is readable, stable, fast enough to edit,
+This playbook defines how Trama proves that a layout is readable, stable, fast enough to edit,
 and safe to persist. A screenshot alone is evidence, not a pass condition.
 
 ## What Must Be Proven

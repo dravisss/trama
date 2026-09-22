@@ -6,7 +6,7 @@ Version: `1.0`
 
 Last updated: `2026-07-14`
 
-Primary objective: turn LoopViewer into a local-first environment for authoring, playing and
+Primary objective: turn Trama into a local-first environment for authoring, playing and
 exporting rigorous, beautiful narratives about complex causal-loop systems.
 
 This document is the source of truth for Story Mode V2. It connects product intent, user stories,
@@ -94,7 +94,7 @@ player.
 
 ## 3. Product Vision
 
-LoopViewer should be the best environment for explaining complex causal systems as guided stories.
+Trama should be the best environment for explaining complex causal systems as guided stories.
 
 The north-star workflow is:
 
@@ -114,7 +114,7 @@ The north-star workflow is:
 
 ### 3.2 Differentiation
 
-LoopViewer must not become a generic PowerPoint clone. Its advantage is that it understands:
+Trama must not become a generic PowerPoint clone. Its advantage is that it understands:
 
 - ordered causal relations;
 - endpoint polarities;

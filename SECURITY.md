@@ -7,7 +7,7 @@ segurança no repositório, contate o mantenedor pelo canal privado associado ao
 o projeto. Inclua versão ou commit, impacto, passos mínimos de reprodução e uma sugestão de
 mitigação, se houver.
 
-O LoopViewer é uma aplicação local-first. Arquivos SQLite e exports podem conter conteúdo criado
+A Trama é uma aplicação local-first. Arquivos SQLite e exports podem conter conteúdo criado
 pelo usuário; trate-os como dados privados e revise-os antes de compartilhar.
 
 ## Versões suportadas

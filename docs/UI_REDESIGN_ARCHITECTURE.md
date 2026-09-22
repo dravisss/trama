@@ -2,12 +2,12 @@
 
 Status: implemented foundation
 
-This document records how the selected visual references map onto the real LoopViewer product. It
+This document records how the selected visual references map onto the real Trama product. It
 is deliberately about the application shell; it does not change the reusable engine contract.
 
 ## Reference-to-product mapping
 
-| Reference surface | LoopViewer mode | Real source of truth |
+| Reference surface | Trama mode | Real source of truth |
 | --- | --- | --- |
 | Projects dashboard | `workspace` | SQLite project metadata, local project list and `workspace` map records |
 | Split map editor | `map` | Active engine model, `.loop.md` source, view, inspector and data table |

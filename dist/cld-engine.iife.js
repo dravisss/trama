@@ -1719,7 +1719,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
   function buildLoopAwareSeed(model, topology, {
     idealEdgeLength = 220,
     center = { x: 0, y: 0 },
-    seed = "loopviewer"
+    seed = "trama"
   } = {}) {
     const positions = /* @__PURE__ */ new Map();
     if (!topology?.hasLoops) return positions;
@@ -1783,7 +1783,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
     const nodes = [...model?.nodes || []].sort((a, b) => String(a.id).localeCompare(String(b.id)));
     const idealEdgeLength = Number(options.idealEdgeLength) || 220;
     const center = options.center || { x: 0, y: 0 };
-    const seed = options.seed || "loopviewer";
+    const seed = options.seed || "trama";
     const remaining = nodes.filter((node) => !positions.has(node.id));
     if (!remaining.length) return positions;
     const radius = Math.max(
@@ -3552,7 +3552,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       if (!this.container) throw new Error("CLDEngine container was not found.");
       this.theme = options.theme || matchaTheme;
       this.options = options;
-      this.layoutSeed = options.layoutSeed || "loopviewer";
+      this.layoutSeed = options.layoutSeed || "trama";
       this.cy = null;
       this.annotations = null;
       this.model = null;
@@ -3583,7 +3583,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       if (history && this.model) this.pushHistory(this.currentEditableModel());
       this.model = normalizeModel(input);
       this.loopDiscoveryCache.clear();
-      this.layoutSeed = this.options.layoutSeed || this.model.layoutMeta?.seed || this.model.id || "loopviewer";
+      this.layoutSeed = this.options.layoutSeed || this.model.layoutMeta?.seed || this.model.id || "trama";
       this.profile = resolveDensityProfile(this.model, this.options.densityProfile);
       this.layoutTopology = deriveLoopTopology(this.model, {
         maxVisualLoops: this.profile.maxVisualLoops
@@ -3812,7 +3812,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       function runAttempt(index) {
         if (index === 0 && attempts === 0) return finish();
         const layout = engine.cy.layout({
-          name: thorough && globalThis.__LOOPVIEWER_FCOSE__ ? "fcose" : "cose-bilkent",
+          name: thorough && (globalThis.__TRAMA_FCOSE__ || globalThis.__LOOPVIEWER_FCOSE__) ? "fcose" : "cose-bilkent",
           quality: thorough ? "proof" : "default",
           // The graph is seeded before entering CoSE. Letting the layout plugin
           // randomize again is the main source of first-load/reload drift.
@@ -3820,7 +3820,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
           animate: false,
           fit: false,
           nodeDimensionsIncludeLabels: true,
-          ...thorough && globalThis.__LOOPVIEWER_FCOSE__ ? {
+          ...thorough && (globalThis.__TRAMA_FCOSE__ || globalThis.__LOOPVIEWER_FCOSE__) ? {
             fixedNodeConstraint: engine.cy.nodes().filter((node) => node.locked()).map((node) => ({
               nodeId: node.id(),
               position: { ...node.position() }
@@ -6130,7 +6130,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
     }
   };
   function compilePresentationExport({
-    project = { title: "LoopViewer" },
+    project = { title: "Trama" },
     model,
     loops = [],
     presentation,
@@ -6167,7 +6167,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
     const exportAssets = assets.filter((asset) => !referencedAssets.size || referencedAssets.has(asset.id));
     const payload = {
       version: 3,
-      format: "loopviewer-presentation",
+      format: "trama-presentation",
       project,
       model,
       loops: loops.length ? loops : model?.loops || [],
@@ -6252,7 +6252,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
   var DESIGN_SYSTEM_MANIFEST = Object.freeze({
     "schemaVersion": "1.0.0",
     "theme": "matcha",
-    "hash": "ba96f9e1921a1e533065dacb1f86b8273b3124042c44ac40efd43926aeb7dd90",
+    "hash": "52ec92400717f6fbf71b5ebc379cd32cfc0d0f71decf2bf38231ca862abf79a9",
     "tokenCount": 237
   });
 

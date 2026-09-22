@@ -1,8 +1,8 @@
 import { test, expect } from "../support/qa-test.mjs";
 
 function qaBaseURL() {
-  const baseURL = process.env.LOOPVIEWER_UI_QA_URL;
-  if (!baseURL) throw new Error("LOOPVIEWER_UI_QA_URL was not initialized by Playwright global setup.");
+  const baseURL = process.env.TRAMA_UI_QA_URL;
+  if (!baseURL) throw new Error("TRAMA_UI_QA_URL was not initialized by Playwright global setup.");
   return baseURL;
 }
 
@@ -13,7 +13,7 @@ test("dez trocas de modo preservam um CanvasHost e uma composição React", asyn
 
   const canvas = page.locator("#cld-root");
   const canvasHandle = await canvas.elementHandle();
-  const cyContainerId = await page.evaluate(() => window.loopViewerDemo.engine.cy.container()?.id);
+  const cyContainerId = await page.evaluate(() => window.tramaDemo.engine.cy.container()?.id);
   for (const action of ["story", "map", "present", "close", "story", "map", "present", "close", "story", "map"]) {
     if (action === "close") {
       await page.locator("#presentation-close").click();
@@ -26,8 +26,8 @@ test("dez trocas de modo preservam um CanvasHost e uma composição React", asyn
 
   expect(await canvasHandle?.evaluate(element => element.isConnected)).toBe(true);
   await expect(canvas).toHaveAttribute("data-qa-canvas-mounts", "1");
-  expect(await page.evaluate(() => window.loopViewerDemo.engine.cy.container()?.isConnected)).toBe(true);
-  expect(await page.evaluate(() => window.loopViewerDemo.engine.cy.container()?.id)).toBe(cyContainerId);
+  expect(await page.evaluate(() => window.tramaDemo.engine.cy.container()?.isConnected)).toBe(true);
+  expect(await page.evaluate(() => window.tramaDemo.engine.cy.container()?.id)).toBe(cyContainerId);
   expect(await page.locator("#cld-root")).toHaveCount(1);
   expect(await page.locator("#react-root")).toHaveCount(1);
   expect(await page.locator("[data-react-ui-mode]")).toHaveCount(4);

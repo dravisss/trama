@@ -4,7 +4,7 @@ Status: aceito para R0–R3
 
 ## Contexto
 
-O LoopViewer precisa convergir sua identidade Matcha sem introduzir uma segunda
+A Trama precisa convergir sua identidade Matcha sem introduzir uma segunda
 linguagem visual, uma dependência prematura ou um comportamento de overlay
 inacessível. `docs/UNIFIED_PRODUCT_DESIGN_SYSTEM_SPEC.md` recomenda Radix
 apenas quando um primitive nativo ou local não puder cumprir o contrato de
@@ -12,7 +12,7 @@ foco, teclado, portal e acessibilidade.
 
 ## Decisão
 
-- Primitives visuais continuam próprios do LoopViewer e consomem somente
+- Primitives visuais continuam próprios da Trama e consomem somente
   tokens `--lv-*`.
 - O UI Catalog é uma página estática isolada; não carrega projeto, engine ou
   persistência. Ele é a bancada inicial de comportamento.

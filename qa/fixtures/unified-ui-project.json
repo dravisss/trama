@@ -1,10 +1,10 @@
 {
-  "format": "loopviewer-project",
+  "format": "trama-project",
   "version": 1,
   "exported_at": "2026-07-21T00:00:00.000Z",
   "project": {
     "id": "unified-ui-qa",
-    "title": "LoopViewer UI QA",
+    "title": "Trama UI QA",
     "description_md": "Fixture isolada e determinística para regressão visual, interação e publicação."
   },
   "loops": [

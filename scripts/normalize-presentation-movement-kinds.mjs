@@ -11,7 +11,7 @@ import { resolve } from "node:path";
 import { ProjectStore } from "../src/platform/projectStore.js";
 import { describeMovement } from "../src/presentation/movementDescriptor.js";
 
-const dbPath = resolve(process.argv[2] || "data/loopviewer.db");
+const dbPath = resolve(process.argv[2] || "data/trama.db");
 const shouldWrite = process.argv.includes("--write");
 const store = new ProjectStore(dbPath);
 const maps = new Map(store.listMaps().map(map => [map.id, map]));

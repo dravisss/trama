@@ -1,13 +1,13 @@
 ---
-name: mermaid-to-loopviewer
-description: Use when converting Markdown causal-loop documents with Mermaid diagrams into LoopViewer models, especially when you need to audit polarities, preserve story continuity, and persist the result into the local SQLite project.
+name: mermaid-to-trama
+description: Use when converting Markdown causal-loop documents with Mermaid diagrams inta Trama models, especially when you need to audit polarities, preserve story continuity, and persist the result into the local SQLite project.
 ---
 
-# Mermaid To LoopViewer
+# Mermaid Ta Trama
 
 ## Overview
 
-Convert a Markdown causal-loop document into a LoopViewer loop model. Treat the job as editorial translation: Mermaid gives structure, but the source narrative decides the polarities, story, and final coherence.
+Convert a Markdown causal-loop document into a Trama loop model. Treat the job as editorial translation: Mermaid gives structure, but the source narrative decides the polarities, story, and final coherence.
 
 ## Read First
 
@@ -33,7 +33,7 @@ Typical shape:
 import { ProjectStore } from "./src/platform/projectStore.js";
 import { normalizeModel, validateModel } from "./src/core/model.js";
 
-const store = new ProjectStore("data/loopviewer.db");
+const store = new ProjectStore("data/trama.db");
 const existing = store.getLoop(id);
 const payload = {
   title: model.title,
@@ -126,7 +126,7 @@ Add an item to `model.loops` only when:
 - `classifyLoop()` derives the intended type;
 - the sign sequence passes continuity audit.
 
-If a named source loop does not form a valid LoopViewer cycle, represent it in `model.story.steps` instead.
+If a named source loop does not form a valid Trama cycle, represent it in `model.story.steps` instead.
 
 If coherent polarities imply a different R/B type from the source text, use the coherent derived type.
 
@@ -144,7 +144,7 @@ Avoid:
 Evidencia: ...
 Fulano disse...
 Nota editorial...
-No contrato do LoopViewer...
+No contrato da Trama...
 ```
 
 Write `description_md` from the original loop's essential story:

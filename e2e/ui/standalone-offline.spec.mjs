@@ -23,7 +23,7 @@ async function writeStandaloneFiles({ presentationStyle = null } = {}) {
     readFile(resolve(root, "dist/standalone-fonts.css"), "utf8"),
     readFile(resolve(root, "standalone.css"), "utf8")
   ]).then(parts => parts.join("\n"));
-  const directory = await mkdtemp(resolve(tmpdir(), "loopviewer-standalone-"));
+  const directory = await mkdtemp(resolve(tmpdir(), "trama-standalone-"));
   const files = [];
   const presentation = presentationStyle
     ? {
@@ -70,8 +70,8 @@ test("standalone export abre por file:// sem rede nos três perfis", async ({ pa
       await page.context().setOffline(true);
       await page.goto(pathToFileURL(path).href, { waitUntil: "load" });
       await expect(page.locator(".standalone-shell")).toBeVisible();
-      await expect(page.locator("meta[name='loopviewer-design-system']")).toHaveAttribute("content", "matcha@1.0.0");
-      await expect(page.locator("meta[name='loopviewer-design-system-hash']")).toHaveAttribute("content", /^[a-f0-9]{64}$/);
+      await expect(page.locator("meta[name='trama-design-system']")).toHaveAttribute("content", "matcha@1.0.0");
+      await expect(page.locator("meta[name='trama-design-system-hash']")).toHaveAttribute("content", /^[a-f0-9]{64}$/);
       await expect(page.locator("#standalone-graph")).toBeVisible();
       await expect.poll(() => page.locator("#standalone-graph canvas").count()).toBeGreaterThan(0);
       expect(externalRequests).toEqual([]);

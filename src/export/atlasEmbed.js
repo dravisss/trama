@@ -6,7 +6,7 @@ import { DESIGN_SYSTEM_SCHEMA_VERSION, DESIGN_SYSTEM_THEME, resolveFoundationCol
 import { generateTokenCss } from "../design-system/css.js";
 import { DESIGN_SYSTEM_MANIFEST } from "../design-system/generatedManifest.js";
 
-const GENERATED_POSTER_ID = "loopviewer-atlas-poster-svg";
+const GENERATED_POSTER_ID = "trama-atlas-poster-svg";
 
 export class AtlasEmbedExportError extends Error {
   constructor(message) {
@@ -33,7 +33,7 @@ export function createAtlasEmbedHtml({ model, project, presentation, views = [],
   ]);
   const assetTag = asset => {
     const source = assetSources.get(asset.id) || "";
-    return `<script type="application/octet-stream" id="atlas-embed-asset-${asset.slot}" data-loopviewer-atlas-asset="${asset.slot}">${scriptSafe(source)}</script>`;
+    return `<script type="application/octet-stream" id="atlas-embed-asset-${asset.slot}" data-trama-atlas-asset="${asset.slot}">${scriptSafe(source)}</script>`;
   };
   // An HTML file cannot defer its own bytes over the network. It can, however,
   // execute the small shell as soon as the poster and first-frame sources have
@@ -45,23 +45,23 @@ export function createAtlasEmbedHtml({ model, project, presentation, views = [],
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="loopviewer-design-system" content="${DESIGN_SYSTEM_THEME}@${DESIGN_SYSTEM_SCHEMA_VERSION}">
-  <meta name="loopviewer-design-system-hash" content="${DESIGN_SYSTEM_MANIFEST.hash}">
+  <meta name="trama-design-system" content="${DESIGN_SYSTEM_THEME}@${DESIGN_SYSTEM_SCHEMA_VERSION}">
+  <meta name="trama-design-system-hash" content="${DESIGN_SYSTEM_MANIFEST.hash}">
   <meta name="theme-color" content="${resolveFoundationColor("neutral")}">
-  <title>${escapeHtml(title)} — LoopViewer</title>
-  <style data-loopviewer-design-system="${DESIGN_SYSTEM_THEME}@${DESIGN_SYSTEM_SCHEMA_VERSION}" data-loopviewer-design-system-hash="${DESIGN_SYSTEM_MANIFEST.hash}">${publicationTokens}\n${styles}</style>
+  <title>${escapeHtml(title)} — Trama</title>
+  <style data-trama-design-system="${DESIGN_SYSTEM_THEME}@${DESIGN_SYSTEM_SCHEMA_VERSION}" data-trama-design-system-hash="${DESIGN_SYSTEM_MANIFEST.hash}">${publicationTokens}\n${styles}</style>
 </head>
 <body>
-  <div id="loopviewer-atlas-embed"></div>
-  <script id="loopviewer-atlas-embed-payload" type="application/json">${data}</script>
+  <div id="trama-atlas-embed"></div>
+  <script id="trama-atlas-embed-payload" type="application/json">${data}</script>
   ${criticalAssetTags}
-  <script data-loopviewer-atlas-runtime>${scriptSafe(String(runtime))}</script>
+  <script data-trama-atlas-runtime>${scriptSafe(String(runtime))}</script>
   ${deferredAssetTags}
 </body>
 </html>`;
 }
 
-export function compileAtlasEmbedPayload({ model, project = { title: "LoopViewer" }, presentation, views = [], assets = [] } = {}) {
+export function compileAtlasEmbedPayload({ model, project = { title: "Trama" }, presentation, views = [], assets = [] } = {}) {
   if (!model?.id) throw new AtlasEmbedExportError("Atlas embed requires one map.");
   if (!presentation) throw new AtlasEmbedExportError("Atlas embed requires one Presentation V2.");
   const compiledExport = compilePresentationExport({
@@ -102,7 +102,7 @@ export function compileAtlasEmbedPayload({ model, project = { title: "LoopViewer
   ];
   const payload = {
     version: 2,
-    format: "loopviewer-atlas-embed",
+    format: "trama-atlas-embed",
     project: compiledExport.payload.project,
     model: publicationModel,
     views: compiledExport.payload.views,
@@ -216,7 +216,7 @@ export function createAtlasPosterSvg({ model = {}, frame = {}, title = "Apresent
 export function atlasEmbedBreakdown({ html = "", payload = null } = {}) {
   const assets = payload?.assets || [];
   const assetBytes = assets.reduce((total, asset) => total + Number(asset.byteLength || 0), 0);
-  const runtimeBytes = byteLengthFromHtml(html, /<script data-loopviewer-atlas-runtime>([\s\S]*?)<\/script>/g);
+  const runtimeBytes = byteLengthFromHtml(html, /<script data-trama-atlas-runtime>([\s\S]*?)<\/script>/g);
   return {
     htmlBytes: byteLength(html),
     payloadBytes: byteLength(payload ? JSON.stringify(payload) : ""),

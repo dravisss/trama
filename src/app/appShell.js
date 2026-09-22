@@ -26,7 +26,7 @@ export function workspaceViewModel({ project = {}, workspace = [], presentations
     hydrating: Boolean(hydrating),
     project: {
       title: project?.title || "Projeto local",
-      description: project?.description_md || "Projeto SQLite local do LoopViewer.",
+      description: project?.description_md || "Projeto SQLite local da Trama.",
       path: activePath,
       updatedAt: project?.updatedAt || project?.updated_at || null,
       active: true,

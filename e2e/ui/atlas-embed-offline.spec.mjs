@@ -31,7 +31,7 @@ test("Atlas embed is self-contained, preserves the selected style and enables Pl
     runtime,
     styles
   });
-  const directory = await mkdtemp(resolve(tmpdir(), "loopviewer-atlas-embed-"));
+  const directory = await mkdtemp(resolve(tmpdir(), "trama-atlas-embed-"));
   const path = resolve(directory, "atlas.html");
   await writeFile(path, html, "utf8");
   try {
@@ -44,7 +44,7 @@ test("Atlas embed is self-contained, preserves the selected style and enables Pl
     await page.goto(pathToFileURL(path).href, { waitUntil: "domcontentloaded" });
     await expect(page.locator(".atlas-embed-poster")).toBeVisible();
     await expect(page.locator(".atlas-embed-poster img")).toHaveAttribute("src", /^data:image\/svg\+xml/);
-    await expect(page.locator("#loopviewer-atlas-embed")).toHaveAttribute("data-presentation-style", "atlas-editorial");
+    await expect(page.locator("#trama-atlas-embed")).toHaveAttribute("data-presentation-style", "atlas-editorial");
     await expect(page.locator(".atlas-embed-shell")).toHaveAttribute("data-state", "ready");
     await expect(page.locator(".atlas-embed-shell")).toHaveAttribute("data-atlas-poster-source", "live-map");
     await expect(page.locator(".atlas-embed-poster img")).toBeHidden();
@@ -102,7 +102,7 @@ test("Atlas poster keeps the first focused route legible across editorial viewpo
     }] }]
   };
   const html = createAtlasEmbedHtml({ model, presentation, runtime, styles });
-  const directory = await mkdtemp(resolve(tmpdir(), "loopviewer-atlas-poster-parity-"));
+  const directory = await mkdtemp(resolve(tmpdir(), "trama-atlas-poster-parity-"));
   const path = resolve(directory, "atlas-poster-parity.html");
   await writeFile(path, html, "utf8");
   try {
@@ -172,7 +172,7 @@ test("Atlas enables Play from WebP overviews, upgrades focus by beat, and keeps 
   });
   expect(html).toContain("data:image/webp");
   expect(html).not.toContain("data:image/png;base64,iVBORw0K");
-  const directory = await mkdtemp(resolve(tmpdir(), "loopviewer-atlas-embed-lazy-"));
+  const directory = await mkdtemp(resolve(tmpdir(), "trama-atlas-embed-lazy-"));
   const path = resolve(directory, "atlas-lazy.html");
   await writeFile(path, html, "utf8");
   try {
@@ -181,7 +181,7 @@ test("Atlas enables Play from WebP overviews, upgrades focus by beat, and keeps 
     await expect(page.locator(".atlas-embed-shell")).toHaveAttribute("data-state", "ready");
     await expect(page.locator('[data-action="play"]')).toBeEnabled();
     const overviewUrls = await page.evaluate(() =>
-      globalThis.__LOOPVIEWER_ATLAS_QA_ENGINE__.cy.nodes().map(node => node.style("background-image"))
+      globalThis.__TRAMA_ATLAS_QA_ENGINE__.cy.nodes().map(node => node.style("background-image"))
     );
     expect(overviewUrls.every(url => String(url).startsWith("blob:"))).toBe(true);
     await page.getByRole("button", { name: "Começar leitura" }).click();
@@ -240,7 +240,7 @@ test("Atlas cancels superseded camera motion, anchors an edge card and honours k
       }
     }))
   });
-  const directory = await mkdtemp(resolve(tmpdir(), "loopviewer-atlas-embed-motion-"));
+  const directory = await mkdtemp(resolve(tmpdir(), "trama-atlas-embed-motion-"));
   const path = resolve(directory, "atlas-motion.html");
   await writeFile(path, html, "utf8");
   try {
@@ -265,7 +265,7 @@ test("Atlas cancels superseded camera motion, anchors an edge card and honours k
     await expect(page.locator(".atlas-embed-connector path.atlas-embed-connector-line")).toHaveCount(1);
     await expect(page.locator(".atlas-embed-story")).toHaveAttribute("data-anchor", /left|right/);
     await page.evaluate(() => {
-      const cy = globalThis.__LOOPVIEWER_ATLAS_QA_ENGINE__.cy;
+      const cy = globalThis.__TRAMA_ATLAS_QA_ENGINE__.cy;
       globalThis.__ATLAS_NODE_SIZE_TRACE__ = [];
       const started = performance.now();
       const sample = now => {
@@ -318,15 +318,15 @@ test("Atlas cancels superseded camera motion, anchors an edge card and honours k
     await expect(page.locator(".atlas-embed-shell")).toHaveAttribute("data-atlas-flow-renderer", "cytoscape-dash-offset");
     await expect(page.locator(".atlas-embed-flow-path")).toHaveCount(0);
     await expect.poll(() => page.locator(".atlas-embed-focus-pulse").count()).toBeGreaterThan(0);
-    const dashOffsetBefore = await page.evaluate(() => globalThis.__LOOPVIEWER_ATLAS_QA_ENGINE__.cy.edges(".story-current").map(edge => edge.style("line-dash-offset")));
+    const dashOffsetBefore = await page.evaluate(() => globalThis.__TRAMA_ATLAS_QA_ENGINE__.cy.edges(".story-current").map(edge => edge.style("line-dash-offset")));
     await page.waitForTimeout(80);
-    const dashOffsetAfter = await page.evaluate(() => globalThis.__LOOPVIEWER_ATLAS_QA_ENGINE__.cy.edges(".story-current").map(edge => edge.style("line-dash-offset")));
+    const dashOffsetAfter = await page.evaluate(() => globalThis.__TRAMA_ATLAS_QA_ENGINE__.cy.edges(".story-current").map(edge => edge.style("line-dash-offset")));
     expect(dashOffsetBefore.length).toBeGreaterThan(0);
     expect(dashOffsetAfter).not.toEqual(dashOffsetBefore);
     await expect(page.locator(".atlas-embed-shell")).toHaveAttribute("data-atlas-last-input-ms", /\d+/);
     await page.getByRole("button", { name: "Anterior" }).click();
     await expect(page.locator(".atlas-embed-story h1")).toHaveText("O foco amplia");
-    const qa = await page.evaluate(() => globalThis.__LOOPVIEWER_ATLAS_QA__);
+    const qa = await page.evaluate(() => globalThis.__TRAMA_ATLAS_QA__);
     expect(qa.samples.length).toBeGreaterThan(20);
     expect(new Set(qa.samples.map(sample => sample.zoom)).size).toBeGreaterThan(4);
     expect(new Set(qa.samples.map(sample => sample.connector).filter(Boolean)).size).toBeGreaterThan(2);
@@ -357,7 +357,7 @@ test("Atlas embed keeps Play blocked and exposes recovery when a critical HD ass
     model, presentation, runtime, styles,
     assets: [{ id: "broken", mime_type: "image/png", data_url: "data:image/png;base64,not-an-image" }]
   });
-  const directory = await mkdtemp(resolve(tmpdir(), "loopviewer-atlas-embed-broken-"));
+  const directory = await mkdtemp(resolve(tmpdir(), "trama-atlas-embed-broken-"));
   const path = resolve(directory, "atlas-broken.html");
   await writeFile(path, html, "utf8");
   try {
@@ -396,7 +396,7 @@ test("Story Studio exports its selected Atlas style through the product command"
   try {
     await offlinePage.context().setOffline(true);
     await offlinePage.goto(pathToFileURL(htmlPath).href, { waitUntil: "domcontentloaded" });
-    await expect(offlinePage.locator("#loopviewer-atlas-embed")).toHaveAttribute("data-presentation-style", "atlas-editorial");
+    await expect(offlinePage.locator("#trama-atlas-embed")).toHaveAttribute("data-presentation-style", "atlas-editorial");
     await expect(offlinePage.locator('[data-action="play"]')).toBeEnabled();
   } finally {
     await offlinePage.context().setOffline(false);

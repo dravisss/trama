@@ -1,4 +1,4 @@
-# Estendendo o LoopViewer
+# Estendendo a Trama
 
 ## Adicionar um novo diagrama
 
@@ -168,4 +168,4 @@ engine.updateNode("BLD", {
 });
 ```
 
-Ao criar o engine, injete `assetResolver(assetId)` para retornar uma URL local ou data URL. Nunca coloque bytes no modelo. Para o workflow completo e a validação do lote, use `.agents/skills/node-images-for-loopviewer/`.
+Ao criar o engine, injete `assetResolver(assetId)` para retornar uma URL local ou data URL. Nunca coloque bytes no modelo. Para o workflow completo e a validação do lote, use `.agents/skills/node-images-for-trama/`.

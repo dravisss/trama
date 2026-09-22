@@ -465,13 +465,13 @@ test("creates a self-contained standalone HTML document", () => {
     runtime: "window.runtimeLoaded=true;",
     styles: "body{background:white}"
   });
-  assert.match(html, /window\.__LOOPVIEWER_DATA__/);
+  assert.match(html, /window\.__TRAMA_DATA__/);
   assert.match(html, /window\.runtimeLoaded=true/);
   assert.doesNotMatch(html, /<script[^>]+src=/);
   assert.doesNotMatch(html, /<link[^>]+stylesheet/);
-  assert.match(html, /data-loopviewer-design-system="matcha@1\.0\.0"/);
-  assert.match(html, /meta name="loopviewer-design-system-hash" content="[a-f0-9]{64}"/);
-  assert.match(html, /data-loopviewer-design-system-hash="[a-f0-9]{64}"/);
+  assert.match(html, /data-trama-design-system="matcha@1\.0\.0"/);
+  assert.match(html, /meta name="trama-design-system-hash" content="[a-f0-9]{64}"/);
+  assert.match(html, /data-trama-design-system-hash="[a-f0-9]{64}"/);
   assert.match(html, /--lv-foundation-color-moss600: #6F9A5B;/);
   assert.doesNotMatch(html, /react-dom|createRoot/);
 });
@@ -506,7 +506,7 @@ test("creates standalone HTML with project and loop entries", () => {
     styles: "body{background:white}"
   });
   assert.match(html, /"version":3/);
-  assert.match(html, /"format":"loopviewer-presentation"/);
+  assert.match(html, /"format":"trama-presentation"/);
   assert.match(html, /"integrity"/);
   assert.match(html, /Projeto Exportado/);
   assert.match(html, /description_md/);

@@ -1,5 +1,5 @@
 /**
- * Framework-agnostic source of truth for the LoopViewer product visual system.
+ * Framework-agnostic source of truth for the Trama product visual system.
  *
  * Map Style Packs are deliberately not represented here: these tokens belong to
  * the application chrome and publication profiles, not to authored canvas data.

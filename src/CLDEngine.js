@@ -41,7 +41,7 @@ export class CLDEngine extends EventTarget {
     if (!this.container) throw new Error("CLDEngine container was not found.");
     this.theme = options.theme || matchaTheme;
     this.options = options;
-    this.layoutSeed = options.layoutSeed || "loopviewer";
+    this.layoutSeed = options.layoutSeed || "trama";
     this.cy = null;
     this.annotations = null;
     this.model = null;
@@ -76,7 +76,7 @@ export class CLDEngine extends EventTarget {
     if (history && this.model) this.pushHistory(this.currentEditableModel());
     this.model = normalizeModel(input);
     this.loopDiscoveryCache.clear();
-    this.layoutSeed = this.options.layoutSeed || this.model.layoutMeta?.seed || this.model.id || "loopviewer";
+    this.layoutSeed = this.options.layoutSeed || this.model.layoutMeta?.seed || this.model.id || "trama";
     this.profile = resolveDensityProfile(this.model, this.options.densityProfile);
     this.layoutTopology = deriveLoopTopology(this.model, {
       maxVisualLoops: this.profile.maxVisualLoops
@@ -318,7 +318,7 @@ export class CLDEngine extends EventTarget {
     function runAttempt(index) {
       if (index === 0 && attempts === 0) return finish();
       const layout = engine.cy.layout({
-        name: thorough && globalThis.__LOOPVIEWER_FCOSE__ ? "fcose" : "cose-bilkent",
+        name: thorough && (globalThis.__TRAMA_FCOSE__ || globalThis.__LOOPVIEWER_FCOSE__) ? "fcose" : "cose-bilkent",
         quality: thorough ? "proof" : "default",
         // The graph is seeded before entering CoSE. Letting the layout plugin
         // randomize again is the main source of first-load/reload drift.
@@ -326,7 +326,7 @@ export class CLDEngine extends EventTarget {
         animate: false,
         fit: false,
         nodeDimensionsIncludeLabels: true,
-        ...(thorough && globalThis.__LOOPVIEWER_FCOSE__ ? {
+        ...(thorough && (globalThis.__TRAMA_FCOSE__ || globalThis.__LOOPVIEWER_FCOSE__) ? {
           fixedNodeConstraint: engine.cy.nodes().filter(node => node.locked()).map(node => ({
             nodeId: node.id(),
             position: { ...node.position() }

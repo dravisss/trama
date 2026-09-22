@@ -1,8 +1,8 @@
-# Arquitetura do LoopViewer
+# Arquitetura da Trama
 
 ## Princípios
 
-O LoopViewer segue quatro separações:
+A Trama segue quatro separações:
 
 1. dados de domínio não conhecem Cytoscape;
 2. geometria não conhece DOM;

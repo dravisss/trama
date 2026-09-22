@@ -64,7 +64,7 @@ function EditorControlBar({ viewSwitcher, onAction, hydrating }) {
 }
 
 function ReactShell({ mode, view, callbacks, viewSwitcher, onModeChange, onAction }) {
-  const projectTitle = view?.project?.title || "LoopViewer Workspace";
+  const projectTitle = view?.project?.title || "Trama Workspace";
   const activeMap = view?.maps?.find(item => item.active) || view?.maps?.[0];
   const workspaceHydrating = Boolean(view?.hydrating);
   return (
@@ -72,7 +72,7 @@ function ReactShell({ mode, view, callbacks, viewSwitcher, onModeChange, onActio
       <aside className="app-navigation react-app-navigation" aria-label="Navegação principal">
         <div className="app-navigation-brand">
           <span className="app-navigation-mark" aria-hidden="true" />
-          <span>LoopViewer</span>
+          <span>Trama</span>
         </div>
         <nav className="app-navigation-links" aria-label="Modos do aplicativo">
           {MODES.map(([value, label]) => (
@@ -114,9 +114,9 @@ function ReactShell({ mode, view, callbacks, viewSwitcher, onModeChange, onActio
               <div className="local-projects" id="local-projects" />
               <Button id="open-project-db" onClick={() => onAction?.("openProject")} size="sm" variant="quiet">Abrir .db por caminho</Button>
               <Button id="edit-project-metadata" onClick={() => onAction?.("editProjectMetadata")} size="sm" variant="quiet">Editar projeto</Button>
-              <Button id="export-project-backup" onClick={() => onAction?.("exportProjectBackup")} size="sm" variant="quiet">Backup completo .loopviewer.json</Button>
+              <Button id="export-project-backup" onClick={() => onAction?.("exportProjectBackup")} size="sm" variant="quiet">Backup completo .trama.json</Button>
               <Button id="import-project-backup" onClick={() => onAction?.("importProjectBackup")} size="sm" variant="quiet">Importar backup como novo projeto</Button>
-              <Input unstyled id="project-backup-file" type="file" accept="application/json,.json,.loopviewer.json" hidden />
+              <Input unstyled id="project-backup-file" type="file" accept="application/json,.json,.trama.json,.loopviewer.json" hidden />
               <Button id="export-project-standalone" onClick={() => onAction?.("exportProjectStandalone")} size="sm" variant="quiet">Exportar projeto HTML</Button>
               <label className="export-option"><Input unstyled id="export-project-with-sidebar" type="checkbox" defaultChecked /> Incluir sidebar</label>
               <div className="recent-projects" id="recent-projects" />
@@ -141,7 +141,7 @@ function ReactShell({ mode, view, callbacks, viewSwitcher, onModeChange, onActio
   );
 }
 
-function modeLabel(mode) { return MODES.find(([value]) => value === mode)?.[1] || "LoopViewer"; }
+function modeLabel(mode) { return MODES.find(([value]) => value === mode)?.[1] || "Trama"; }
 function modeSubtitle(mode) {
   return ({ workspace: "Organize os mapas sistêmicos do seu workspace local", map: "Edite o canvas, os dados e a fonte Markdown em um só lugar", story: "Transforme o mapa em uma narrativa causal editável", present: "Conduza a história sem perder o contexto do sistema" })[mode] || "";
 }
@@ -290,5 +290,7 @@ export function mountReactApp({ shellRoot, workspaceRoot, onModeChange, onAction
 export { mountReactStoryTimeline };
 
 if (typeof window !== "undefined") {
-  window.LoopViewerReact = { mountReactApp, mountReactStoryTimeline };
+  const runtime = { mountReactApp, mountReactStoryTimeline };
+  window.TramaReact = runtime;
+  window.LoopViewerReact = runtime;
 }

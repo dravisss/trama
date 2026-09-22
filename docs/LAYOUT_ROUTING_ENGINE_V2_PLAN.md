@@ -1,8 +1,8 @@
-# LoopViewer Layout and Routing Engine V2
+# Trama Layout and Routing Engine V2
 
 Status: implementation plan
 
-Purpose: define the algorithmic foundation required for LoopViewer to produce attractive,
+Purpose: define the algorithmic foundation required for Trama to produce attractive,
 readable causal-loop maps with minimal manual cleanup across small, medium, large, and very large
 models.
 
@@ -845,5 +845,5 @@ The V2 engine is not done because one screenshot looks good. It is done when:
 - WebCola constraint-based layout implementation:
   <https://github.com/tgdwyer/WebCola>
 
-These are references and benchmark sources. They do not override the LoopViewer-specific causal-loop
+These are references and benchmark sources. They do not override the Trama-specific causal-loop
 semantics or the protected local-first architecture.

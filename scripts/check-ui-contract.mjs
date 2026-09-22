@@ -112,7 +112,7 @@ if (knownExceptions.exceptions.length) fail(`known visual baseline exceptions re
 
 const stylesheetHrefs = [...html.matchAll(/<link[^>]+rel=["']stylesheet["'][^>]+href=["']([^"']+)["']/g)]
   .map(match => match[1]);
-if (stylesheetHrefs[0] !== "dist/loopviewer-ui-tokens.css") {
+if (stylesheetHrefs[0] !== "dist/trama-ui-tokens.css") {
   fail("generated token stylesheet must be the first product stylesheet in index.html");
 }
 if (!html.includes('data-theme="matcha"')) fail('index.html must declare data-theme="matcha"');
@@ -138,8 +138,8 @@ if (/\b(?:ReactDOM|createRoot)\b/.test(standaloneRuntime)) {
 
 const tokenValidation = validateDesignTokens();
 const generated = generateTokenCss();
-const tokenCssPath = resolve(root, "dist/loopviewer-ui-tokens.css");
-const tokenManifestPath = resolve(root, "dist/loopviewer-ui-tokens.manifest.json");
+const tokenCssPath = resolve(root, "dist/trama-ui-tokens.css");
+const tokenManifestPath = resolve(root, "dist/trama-ui-tokens.manifest.json");
 if (!existsSync(tokenCssPath) || !existsSync(tokenManifestPath)) {
   fail("generated design-token artifacts are missing; run npm run build:tokens");
 } else {
@@ -147,12 +147,12 @@ if (!existsSync(tokenCssPath) || !existsSync(tokenManifestPath)) {
     readFile(tokenCssPath, "utf8"),
     readFile(tokenManifestPath, "utf8").then(JSON.parse)
   ]);
-  if (tokenCss !== generated.css) fail("dist/loopviewer-ui-tokens.css is stale");
+  if (tokenCss !== generated.css) fail("dist/trama-ui-tokens.css is stale");
   if (!tokenCss.includes("@layer reset, legacy, tokens, primitives, patterns, routes, states, utilities;")) {
     fail("generated token stylesheet must declare the canonical cascade layer order");
   }
   if (JSON.stringify(tokenManifest) !== JSON.stringify(generated.manifest)) {
-    fail("dist/loopviewer-ui-tokens.manifest.json is stale");
+    fail("dist/trama-ui-tokens.manifest.json is stale");
   }
   for (const key of ["schemaVersion", "theme", "hash", "tokenCount"]) {
     if (DESIGN_SYSTEM_MANIFEST[key] !== generated.manifest[key]) {

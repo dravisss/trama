@@ -6,6 +6,8 @@ import { createEmptyModel, normalizeModel, slugId, uniqueId } from "../core/mode
 import { migrateStoryToPresentation } from "../presentation/migration.js";
 
 const DEFAULT_PROJECT_ID = "default-project";
+const PROJECT_BUNDLE_FORMAT = "trama-project";
+const LEGACY_PROJECT_BUNDLE_FORMAT = "loopviewer-project";
 
 export class ProjectStore {
   constructor(dbPath, { project, seedModels = [], seedAssets = [] } = {}) {
@@ -146,7 +148,7 @@ export class ProjectStore {
       VALUES (?, ?, ?, ?, ?)
     `).run(
       project.id || DEFAULT_PROJECT_ID,
-      project.title || "LoopViewer Workspace",
+      project.title || "Trama Workspace",
       project.description_md || "Projeto local de loops causais.",
       now,
       now
@@ -556,7 +558,7 @@ export class ProjectStore {
   exportBundle() {
     const maps = this.listMaps();
     return {
-      format: "loopviewer-project",
+      format: PROJECT_BUNDLE_FORMAT,
       version: 1,
       exported_at: timestamp(),
       project: this.getProject(),
@@ -575,8 +577,8 @@ export class ProjectStore {
   }
 
   importBundle(bundle) {
-    if (bundle?.format !== "loopviewer-project" || bundle.version !== 1 || !bundle.project) {
-      throw new Error("Invalid LoopViewer project bundle.");
+    if (![PROJECT_BUNDLE_FORMAT, LEGACY_PROJECT_BUNDLE_FORMAT].includes(bundle?.format) || bundle.version !== 1 || !bundle.project) {
+      throw new Error("Invalid Trama project bundle.");
     }
     this.db.exec("BEGIN IMMEDIATE");
     try {

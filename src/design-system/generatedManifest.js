@@ -2,6 +2,6 @@
 export const DESIGN_SYSTEM_MANIFEST = Object.freeze({
   "schemaVersion": "1.0.0",
   "theme": "matcha",
-  "hash": "ba96f9e1921a1e533065dacb1f86b8273b3124042c44ac40efd43926aeb7dd90",
+  "hash": "52ec92400717f6fbf71b5ebc379cd32cfc0d0f71decf2bf38231ca862abf79a9",
   "tokenCount": 237
 });

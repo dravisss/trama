@@ -60,14 +60,14 @@ async function openEditor(page) {
   await expect(page.locator("#edit-toolbar")).toBeVisible();
   await expect(page.locator("#cld-root")).toHaveAttribute("data-qa-camera-stable", /^map:stable:/);
   await page.waitForFunction(() => {
-    const cy = window.loopViewerDemo?.engine?.cy;
+    const cy = window.tramaDemo?.engine?.cy;
     return Boolean(cy) && !cy.animated() && !cy.elements().animated();
   });
 }
 
 async function modelSnapshot(page, id, kind = "node") {
   return page.evaluate(({ id, kind }) => {
-    const element = window.loopViewerDemo.engine.cy.getElementById(id);
+    const element = window.tramaDemo.engine.cy.getElementById(id);
     if (kind === "edge") return element.data("route") || {};
     return element.position();
   }, { id, kind });
@@ -83,7 +83,7 @@ async function renderedPoint(page, id, kind = "node") {
       return hit === canvas || canvas.contains(hit);
     };
     for (let attempt = 0; attempt < 24; attempt += 1) {
-      const cy = window.loopViewerDemo?.engine?.cy;
+      const cy = window.tramaDemo?.engine?.cy;
       const element = cy?.getElementById(id);
       const direct = kind === "edge"
         ? (element?.renderedMidpoint?.() || element?.renderedControlPoints?.()[0])
@@ -180,7 +180,7 @@ async function dragRouteHandle(page, id) {
     await page.mouse.down();
     await page.mouse.move(start.x + 42, start.y + 26, { steps: 4 });
     await page.mouse.up();
-    const locked = await page.evaluate(edgeId => Boolean(window.loopViewerDemo.engine.cy.getElementById(edgeId).data("routeLocked")), id);
+    const locked = await page.evaluate(edgeId => Boolean(window.tramaDemo.engine.cy.getElementById(edgeId).data("routeLocked")), id);
     if (locked) return;
     await activateCanvasEdge(page, id);
   }
@@ -188,7 +188,7 @@ async function dragRouteHandle(page, id) {
 }
 
 function qaBaseURL() {
-  const baseURL = process.env.LOOPVIEWER_UI_QA_URL;
-  if (!baseURL) throw new Error("LOOPVIEWER_UI_QA_URL was not initialized by Playwright global setup.");
+  const baseURL = process.env.TRAMA_UI_QA_URL;
+  if (!baseURL) throw new Error("TRAMA_UI_QA_URL was not initialized by Playwright global setup.");
   return baseURL;
 }

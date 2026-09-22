@@ -1,4 +1,4 @@
-# LoopViewer Unified Product Design System
+# Trama Unified Product Design System
 
 ## Especificação de convergência visual, arquitetura React e migração segura
 
@@ -6,7 +6,7 @@ Status: especificação normativa; a execução e a auditoria final estão regis
 `docs/UI_SYSTEM_IMPLEMENTATION_LOG.md`.
 Versão da spec: 1.1
 Data da análise: 2026-07-21
-Escopo do repositório: raiz do projeto LoopViewer.
+Escopo do repositório: raiz do projeta Trama.
 
 ## 0. Relação com a especificação arquitetural
 
@@ -41,7 +41,7 @@ produção deve começar antes de seu aceite.
 
 ## 1. Resumo executivo
 
-O LoopViewer não precisa de uma nova identidade visual nem de uma biblioteca visual completa. Ele
+A Trama não precisa de uma nova identidade visual nem de uma biblioteca visual completa. Ele
 precisa transformar a identidade Matcha já existente em um sistema explícito, compartilhado e
 verificável.
 
@@ -104,7 +104,7 @@ quantidades e limites da auditoria. Os aliases de tokens não são mais publicad
 
 Ao concluir esta spec:
 
-- o LoopViewer terá uma identidade Matcha reconhecível em todas as superfícies;
+- a Trama terá uma identidade Matcha reconhecível em todas as superfícies;
 - diferenças entre modos serão expressas como densidade, composição e contexto, não como sistemas
   visuais independentes;
 - componentes comuns terão os mesmos estados, dimensões e semântica em toda a aplicação;
@@ -354,7 +354,7 @@ sem importar React.
 ### PR-05 — Comportamento e aparência são contratos separados
 
 Radix ou outro primitive headless pode implementar foco, teclado e portal. Aparência continua
-sendo propriedade do LoopViewer.
+sendo propriedade da Trama.
 
 ### PR-06 — Um eixo de risco por mudança
 
@@ -415,7 +415,7 @@ nenhum consumidor permanece.
 - Story Studio salva e recarrega a mesma hierarquia Presentation V2;
 - trocar de modo não cria snapshot nem versão;
 - autosave continua serializado por registro;
-- E2E nunca usa `data/loopviewer.db` diretamente.
+- E2E nunca usa `data/trama.db` diretamente.
 
 ### 7.2 Engine e canvas
 
@@ -615,7 +615,7 @@ scripts sem depender do DOM.
 
 O gerador deve produzir deterministicamente:
 
-- `dist/loopviewer-ui-tokens.css` para o app;
+- `dist/trama-ui-tokens.css` para o app;
 - um bloco de variables para `standalone.css`/publication bundle;
 - um adapter JS para `src/themes/matcha.js` ou permitir que `matcha.js` importe diretamente os
   foundation tokens;
@@ -701,7 +701,7 @@ Sizes iniciais:
 
 Decisão recomendada:
 
-- manter aparência e primitives básicos no próprio LoopViewer;
+- manter aparência e primitives básicos no própria Trama;
 - adotar Radix Primitives seletivamente para Dialog, Popover, Dropdown Menu, Tooltip e Tabs quando
   o comportamento nativo atual não cobrir foco, teclado e portal com robustez;
 - não adotar MUI, Ant, Chakra ou outro sistema visual completo;
@@ -826,7 +826,7 @@ dos mesmos tokens e validados por paridade.
 
 | ID | Prioridade | User story | Resumo de aceite |
 |---|---|---|---|
-| DS-001 | P0 | Como usuário, reconheço o LoopViewer em qualquer modo. | identidade Matcha e estados compartilhados |
+| DS-001 | P0 | Como usuário, reconheço a Trama em qualquer modo. | identidade Matcha e estados compartilhados |
 | DS-002 | P0 | Como autor, controles equivalentes se comportam e parecem equivalentes. | primitives e variants canônicos |
 | DS-003 | P0 | Como autor, a migração não altera meus mapas, rotas ou histórias. | nenhuma migração de dados; reload parity |
 | DS-004 | P0 | Como leitor, o standalone mantém a experiência autorada offline. | file://, view e timeline paritários |
@@ -870,7 +870,7 @@ dos mesmos tokens e validados por paridade.
 |---|---|---|---|---|
 | T-001 | F-001 | Criar inventário versionado de stylesheets, roots, IDs e bridges. | — | relatório gerado e revisado |
 | T-002 | F-001 | Criar fixture JSON de UI com mapas 8/16/32, view, assets e Presentation V2. | — | fixture valida e reproduzível |
-| T-003 | F-001 | Permitir `LOOPVIEWER_DB_PATH` ou data root no server de QA. | T-002 | E2E usa temp dir |
+| T-003 | F-001 | Permitir `TRAMA_DB_PATH` ou data root no server de QA. | T-002 | E2E usa temp dir |
 | T-004 | F-001 | Criar lifecycle de server E2E que inicia, aguarda, encerra e limpa temp DB. | T-003 | nenhum processo/DB residual |
 | T-005 | F-016 | Adicionar runner Playwright versionado para UI E2E/visual. | T-004 | execução local determinística |
 | T-006 | F-016 | Capturar baselines dos cinco modos em 1440x900, 1024x768 e 390x844. | T-005 | 15 estados aprovados |
@@ -959,7 +959,7 @@ dos mesmos tokens e validados por paridade.
 
 | Task | Feature | Descrição | Dependências | Evidência |
 |---|---|---|---|---|
-| T-062 | F-018 | Escrever guia “como criar uma superfície LoopViewer”. | T-022 | doc com exemplos |
+| T-062 | F-018 | Escrever guia “como criar uma superfície Trama”. | T-022 | doc com exemplos |
 | T-063 | F-018 | Escrever ADRs de tokens, Radix, roots, CSS e standalone. | decisões aprovadas | ADRs versionados |
 | T-064 | F-016 | Integrar `check:ui-contract`, `test:ui`, `test:a11y`, `test:visual`. | T-005, T-016, T-026 | scripts estáveis |
 | T-065 | F-016 | Criar relatório de budgets por PR. | T-017, T-064 | diff de métricas |
@@ -1821,11 +1821,11 @@ Melhoria incorporada:
 
 ### 29.4 Risco identificado: QA tocar o banco pessoal
 
-Problema da primeira abordagem: E2E de save/reload poderia escrever no `data/loopviewer.db`.
+Problema da primeira abordagem: E2E de save/reload poderia escrever no `data/trama.db`.
 
 Melhoria incorporada:
 
-- `LOOPVIEWER_DB_PATH`/data root como task P0;
+- `TRAMA_DB_PATH`/data root como task P0;
 - fixture JSON e temp dir;
 - stop condition para qualquer uso do banco real.
 

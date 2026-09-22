@@ -1,8 +1,8 @@
-# LoopViewer Style Library — Spec-Driven Development
+# Trama Style Library — Spec-Driven Development
 
 ## Objetivo
 
-Transformar o sistema de views do LoopViewer em uma biblioteca visual editorial para mapas causais usados em apresentações corporativas, relatórios e exports standalone.
+Transformar o sistema de views da Trama em uma biblioteca visual editorial para mapas causais usados em apresentações corporativas, relatórios e exports standalone.
 
 O sistema deve separar:
 

@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 
-const browser = process.env.LOOPVIEWER_BROWSER_BIN || "agent-browser";
-const url = process.env.LOOPVIEWER_QA_URL || "http://127.0.0.1:4173/?qa=1&fixture=8";
+const browser = process.env.TRAMA_BROWSER_BIN || process.env.LOOPVIEWER_BROWSER_BIN || "agent-browser";
+const url = process.env.TRAMA_QA_URL || process.env.LOOPVIEWER_QA_URL || "http://127.0.0.1:4173/?qa=1&fixture=8";
 
 run(["open", url]);
 run(["wait", "1800"]);
@@ -10,9 +10,9 @@ run(["wait", "1400"]);
 
 const result = evaluate(`
 (() => {
-  const source = window.loopViewerDemo?.engine;
-  const qa = window.loopViewerDemo?.qa;
-  if (!source || !qa || !window.CLD) throw new Error("LoopViewer QA runtime is unavailable");
+  const source = window.tramaDemo?.engine;
+  const qa = window.tramaDemo?.qa;
+  if (!source || !qa || !window.CLD) throw new Error("Trama QA runtime is unavailable");
   const baselineFingerprint = qa.fingerprint();
   const canvas = document.querySelector("#cld-root");
   if (!canvas || canvas.clientWidth < 100 || canvas.clientHeight < 100) {

@@ -1,6 +1,6 @@
 # Loop Language Spec
 
-This document defines the first implementation target for LoopViewer’s authored text layer.
+This document defines the first implementation target for Trama’s authored text layer.
 
 It is intentionally different from Kumu’s table-first workflow.
 
@@ -10,7 +10,7 @@ Kumu is optimized around:
 - fields and profiles;
 - views authored on top of that data.
 
-LoopViewer should also support structured data and table editing, but its main authored source should be:
+Trama should also support structured data and table editing, but its main authored source should be:
 
 - a loop-native markdown/mermaid-like language for semantics and storytelling;
 - a simplified CSS-like language for visual and interaction behavior.
@@ -22,7 +22,7 @@ The language should feel like:
 - easier than raw JSON;
 - more loop-native than Mermaid;
 - more author-friendly than a relational table;
-- still compilable to the current LoopViewer model and standalone HTML exports.
+- still compilable to the current Trama model and standalone HTML exports.
 
 ## Deliverables
 
@@ -72,7 +72,7 @@ We want Mermaid-like brevity for declaring relations, but we also need:
 So the language should be:
 
 - Mermaid-like in readability;
-- LoopViewer-native in semantics.
+- Trama-native in semantics.
 
 ## Difference From Kumu
 
@@ -83,7 +83,7 @@ Kumu typically grows from:
 - relational entries;
 - view rules layered on top.
 
-LoopViewer should also support table mode and structured editing, but the authored text path is primary.
+Trama should also support table mode and structured editing, but the authored text path is primary.
 
 That means:
 
@@ -294,7 +294,7 @@ That means:
 
 ## Mermaid Compatibility Path
 
-We already have a Mermaid-to-LoopViewer pathway in the repo skill ecosystem.
+We already have a Mermaid-to-Trama pathway in the repo skill ecosystem.
 
 The v1 plan should keep three paths:
 

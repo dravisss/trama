@@ -64,9 +64,9 @@ test("atlas embed contracts a generated SVG poster and only first-frame HD asset
     presentation,
     assets: assets.map(asset => ({ ...asset, content: Buffer.from("storage-only") }))
   });
-  assert.equal(payload.format, "loopviewer-atlas-embed");
+  assert.equal(payload.format, "trama-atlas-embed");
   assert.equal(payload.publication.style, "atlas-editorial");
-  assert.equal(payload.publication.posterAssetId, "loopviewer-atlas-poster-svg");
+  assert.equal(payload.publication.posterAssetId, "trama-atlas-poster-svg");
   assert.deepEqual(payload.publication.criticalAssetIds, ["scene-image", "node-image"]);
   assert.deepEqual(payload.publication.lazyAssetIds, []);
   assert.equal(payload.assets.at(-1).mime_type, "image/svg+xml");
@@ -223,7 +223,7 @@ test("atlas manifest embeds only WebP renditions selected for overview, focus an
   assert.doesNotMatch(html, /data:image\/png;base64,master/);
   const criticalSlot = payload.assets.find(asset => asset.id === "one::atlas-overview").slot;
   const lazySlot = payload.assets.find(asset => asset.id === "one::atlas-focus").slot;
-  const runtimeIndex = html.indexOf("data-loopviewer-atlas-runtime");
+  const runtimeIndex = html.indexOf("data-trama-atlas-runtime");
   assert.ok(html.indexOf(`atlas-embed-asset-${criticalSlot}`) < runtimeIndex);
   assert.ok(html.indexOf(`atlas-embed-asset-${lazySlot}`) > runtimeIndex);
 });
@@ -256,10 +256,10 @@ test("atlas embed refuses an incomplete publication and keeps generic HTML absen
   assert.throws(() => compileAtlasEmbedPayload({ model, presentation, assets: [assets[0]] }), /Presentation export blocked/);
   assert.throws(() => compileAtlasEmbedPayload({ model, presentation: null, assets }), AtlasEmbedExportError);
   const html = createAtlasEmbedHtml({ model, presentation, assets, runtime: "window.atlas=true;", styles: ".atlas{}" });
-  assert.match(html, /loopviewer-atlas-embed/);
-  assert.match(html, /loopviewer-atlas-embed-payload/);
-  assert.match(html, /data-loopviewer-atlas-asset/);
-  assert.doesNotMatch(html, /window\.__LOOPVIEWER_ATLAS_EMBED__=/);
+  assert.match(html, /trama-atlas-embed/);
+  assert.match(html, /trama-atlas-embed-payload/);
+  assert.match(html, /data-trama-atlas-asset/);
+  assert.doesNotMatch(html, /window\.__TRAMA_ATLAS_EMBED__=/);
   assert.doesNotMatch(html, /standalone-sidebar|data-action="explore"/);
   assert.doesNotMatch(html, /<script[^>]+src=/);
   const payload = compileAtlasEmbedPayload({ model, presentation, assets });

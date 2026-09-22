@@ -46,7 +46,7 @@ test("fixture API exposes only the deterministic QA project", async ({ request }
   const response = await request.get(`${qaBaseURL()}/api/project`);
   expect(response.ok()).toBe(true);
   const project = await response.json();
-  expect(project.project.title).toBe("LoopViewer UI QA");
+  expect(project.project.title).toBe("Trama UI QA");
   expect(project.maps).toHaveLength(4);
   expect(project.maps.map(map => map.id).sort()).toEqual(["ui-qa-8", "ui-qa-16", "ui-qa-32", "flagship-growth"].sort());
 });
@@ -69,7 +69,7 @@ async function openMode(page, mode, viewportName) {
   // React mode changes are asynchronous. Capture only after the shell still
   // reflects the real project and map, preventing a transient empty breadcrumb
   // from becoming a visual baseline failure.
-  await expect(page.locator("#active-project-label")).toContainText("LoopViewer UI QA");
+  await expect(page.locator("#active-project-label")).toContainText("Trama UI QA");
   await expect(page.locator("#active-loop-label")).toContainText("Flagship — Crescimento sob pressão");
 
   if (mode !== "map") {
@@ -96,8 +96,8 @@ async function openMode(page, mode, viewportName) {
 }
 
 function qaBaseURL() {
-  const baseURL = process.env.LOOPVIEWER_UI_QA_URL;
-  if (!baseURL) throw new Error("LOOPVIEWER_UI_QA_URL was not initialized by Playwright global setup.");
+  const baseURL = process.env.TRAMA_UI_QA_URL;
+  if (!baseURL) throw new Error("TRAMA_UI_QA_URL was not initialized by Playwright global setup.");
   return baseURL;
 }
 

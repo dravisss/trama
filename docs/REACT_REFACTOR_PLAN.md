@@ -1,4 +1,4 @@
-# Refatoração React do LoopViewer
+# Refatoração React da Trama
 
 Status: migração principal concluída; adapter legado em redução controlada
 
@@ -48,7 +48,7 @@ em `src/app/`; nenhum componente novo deve importar `src/app.js`.
 
 | Fatia | Estado | Evidência |
 | --- | --- | --- |
-| Dependências, build e ponte de runtime | concluída | `react`, `react-dom`, `dist/react-app.iife.js`, `window.LoopViewerReact` |
+| Dependências, build e ponte de runtime | concluída | `react`, `react-dom`, `dist/react-app.iife.js`, `window.TramaReact` |
 | Shell, navegação e workspace | concluída | `src/react/main.jsx`, `src/react/reactApp.css`, mount points preservados |
 | Timeline do Story Studio | concluída nesta fatia | `src/react/storyTimeline.jsx`, drag nativo + fallback por ponteiro |
 | Rail contextual, seletor de mapas e canvas Cytoscape | concluída nesta fatia | `src/react/workspaceSidebar.jsx`, `src/react/canvasSurface.jsx`, ciclo de vida Cytoscape preservado |

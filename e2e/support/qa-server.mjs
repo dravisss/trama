@@ -12,8 +12,8 @@ const root = resolve(fileURLToPath(new URL("../..", import.meta.url)));
 
 export async function startQaServer() {
   const port = await availablePort();
-  const fixtureDirectory = mkdtempSync(join(tmpdir(), "loopviewer-ui-e2e-"));
-  const databasePath = join(fixtureDirectory, "loopviewer.db");
+  const fixtureDirectory = mkdtempSync(join(tmpdir(), "trama-ui-e2e-"));
+  const databasePath = join(fixtureDirectory, "trama.db");
   const fixturePath = join(fixtureDirectory, "unified-ui-fixture.json");
   const fixture = buildUnifiedUiFixture();
   writeFileSync(fixturePath, `${JSON.stringify(fixture)}\n`);
@@ -29,10 +29,10 @@ export async function startQaServer() {
     env: {
       ...process.env,
       PORT: String(port),
-      LOOPVIEWER_DB_PATH: databasePath,
-      LOOPVIEWER_DATA_ROOT: fixtureDirectory,
-      LOOPVIEWER_QA_FIXTURE_PATH: fixturePath,
-      LOOPVIEWER_QA_OWNER_PID: String(process.pid)
+      TRAMA_DB_PATH: databasePath,
+      TRAMA_DATA_ROOT: fixtureDirectory,
+      TRAMA_QA_FIXTURE_PATH: fixturePath,
+      TRAMA_QA_OWNER_PID: String(process.pid)
     },
     stdio: "inherit"
   });
@@ -67,23 +67,23 @@ async function availablePort() {
   const address = probe.address();
   const port = typeof address === "object" && address ? address.port : 0;
   await new Promise(resolve => probe.close(resolve));
-  if (!port) throw new Error("Could not reserve an ephemeral port for LoopViewer UI QA.");
+  if (!port) throw new Error("Could not reserve an ephemeral port for Trama UI QA.");
   return port;
 }
 
 async function waitForFixture(baseURL, child) {
   for (let attempt = 0; attempt < 100; attempt += 1) {
-    if (child.exitCode !== null) throw new Error(`LoopViewer QA server exited with ${child.exitCode}.`);
+    if (child.exitCode !== null) throw new Error(`Trama QA server exited with ${child.exitCode}.`);
     try {
       const response = await fetch(`${baseURL}/api/project`);
       const payload = await response.json();
-      if (response.ok && payload?.project?.title === "LoopViewer UI QA" && payload.maps?.length === 4) return;
+      if (response.ok && payload?.project?.title === "Trama UI QA" && payload.maps?.length === 4) return;
     } catch {
       // The child is still binding the server or initializing SQLite.
     }
     await new Promise(resolve => setTimeout(resolve, 100));
   }
-  throw new Error("LoopViewer QA server did not expose the deterministic fixture within 10 seconds.");
+  throw new Error("Trama QA server did not expose the deterministic fixture within 10 seconds.");
 }
 
 async function stopChild(child) {
@@ -100,7 +100,7 @@ async function stopChild(child) {
 const invokedDirectly = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (invokedDirectly) {
   const runtime = await startQaServer();
-  console.log(`LoopViewer UI QA server uses isolated fixture DB: ${runtime.databasePath}`);
+  console.log(`Trama UI QA server uses isolated fixture DB: ${runtime.databasePath}`);
   const shutdown = async () => {
     await runtime.stop();
     process.exit(0);

@@ -1,4 +1,4 @@
-import { createReadStream, readFileSync } from "node:fs";
+import { createReadStream, existsSync, readFileSync } from "node:fs";
 import { access, readdir, readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { basename, extname, join, relative, resolve } from "node:path";
@@ -9,22 +9,27 @@ import { exampleAssets } from "./src/models/exampleAssets.js";
 import { slugId } from "./src/core/model.js";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
-const dataRoot = resolve(process.env.LOOPVIEWER_DATA_ROOT || resolve(root, "data"));
-const defaultDbPath = resolve(dataRoot, "loopviewer.db");
-const configuredDbPath = process.env.LOOPVIEWER_DB_PATH ? resolve(process.env.LOOPVIEWER_DB_PATH) : defaultDbPath;
-const qaFixturePath = process.env.LOOPVIEWER_QA_FIXTURE_PATH
-  ? resolve(process.env.LOOPVIEWER_QA_FIXTURE_PATH)
+const configuredDataRoot = process.env.TRAMA_DATA_ROOT || process.env.LOOPVIEWER_DATA_ROOT;
+const dataRoot = resolve(configuredDataRoot || resolve(root, "data"));
+const tramaDbPath = resolve(dataRoot, "trama.db");
+const legacyDbPath = resolve(dataRoot, "loopviewer.db");
+const defaultDbPath = existsSync(tramaDbPath) || !existsSync(legacyDbPath) ? tramaDbPath : legacyDbPath;
+const configuredDbValue = process.env.TRAMA_DB_PATH || process.env.LOOPVIEWER_DB_PATH;
+const configuredDbPath = configuredDbValue ? resolve(configuredDbValue) : defaultDbPath;
+const qaFixtureValue = process.env.TRAMA_QA_FIXTURE_PATH || process.env.LOOPVIEWER_QA_FIXTURE_PATH;
+const qaFixturePath = qaFixtureValue
+  ? resolve(qaFixtureValue)
   : null;
-const qaDebug = process.env.LOOPVIEWER_QA_DEBUG === "1";
+const qaDebug = (process.env.TRAMA_QA_DEBUG || process.env.LOOPVIEWER_QA_DEBUG) === "1";
 const port = Number(process.env.PORT || 4173);
 const host = process.env.HOST || "127.0.0.1";
-const maxJsonBytes = positiveInteger(process.env.LOOPVIEWER_MAX_JSON_BYTES, 5 * 1024 * 1024);
-const allowExternalDb = process.env.LOOPVIEWER_ALLOW_EXTERNAL_DB === "1";
+const maxJsonBytes = positiveInteger(process.env.TRAMA_MAX_JSON_BYTES || process.env.LOOPVIEWER_MAX_JSON_BYTES, 5 * 1024 * 1024);
+const allowExternalDb = (process.env.TRAMA_ALLOW_EXTERNAL_DB || process.env.LOOPVIEWER_ALLOW_EXTERNAL_DB) === "1";
 // An explicitly configured database/data root belongs to the caller (QA,
 // import/export tooling, or an isolated workspace). Do not silently seed it
 // with the demo catalog: that makes deterministic fixtures non-deterministic
 // and can mix sample records into a user's selected project.
-const seedModels = process.env.LOOPVIEWER_DB_PATH || process.env.LOOPVIEWER_DATA_ROOT ? [] : examples;
+const seedModels = configuredDbValue || configuredDataRoot ? [] : examples;
 const seedAssets = seedModels.length
   ? exampleAssets.map(asset => ({ ...asset, content: readFileSync(asset.path) }))
   : [];
@@ -62,7 +67,7 @@ const server = createServer(async (request, response) => {
 // Browser UI QA starts this process with an ephemeral database. If the test
 // runner is interrupted, avoid leaving that server (and its temporary DB) as
 // an orphan. Production/local servers never set this variable.
-const qaOwnerPid = Number(process.env.LOOPVIEWER_QA_OWNER_PID || 0);
+const qaOwnerPid = Number(process.env.TRAMA_QA_OWNER_PID || process.env.LOOPVIEWER_QA_OWNER_PID || 0);
 if (Number.isInteger(qaOwnerPid) && qaOwnerPid > 0) {
   const ownerMonitor = setInterval(() => {
     if (process.ppid === qaOwnerPid) return;
@@ -77,7 +82,7 @@ if (Number.isInteger(qaOwnerPid) && qaOwnerPid > 0) {
 }
 
 server.listen(port, host, () => {
-  console.log(`LoopViewer running at http://${host}:${port}/`);
+  console.log(`Trama running at http://${host}:${port}/`);
 });
 
 async function handleApi(request, response) {
@@ -106,7 +111,7 @@ async function handleApi(request, response) {
   // freshly restored fixture. Production servers have no fixture path and are
   // entirely unaffected.
   if (qaFixturePath && !["GET", "HEAD", "OPTIONS"].includes(request.method)) {
-    const requestGeneration = Number(request.headers["x-loopviewer-qa-generation"] || 0);
+    const requestGeneration = Number(request.headers["x-trama-qa-generation"] || request.headers["x-loopviewer-qa-generation"] || 0);
     if (qaDebug) console.log(`[qa-generation] ${request.method} ${url.pathname} received=${requestGeneration} current=${qaFixtureGeneration}`);
     if (!Number.isInteger(requestGeneration) || requestGeneration !== qaFixtureGeneration) {
       request.resume();
@@ -137,8 +142,8 @@ async function handleApi(request, response) {
   if (request.method === "POST" && url.pathname === "/api/project/import") {
     const body = await readJson(request);
     const bundle = body.bundle;
-    if (bundle?.format !== "loopviewer-project") {
-      sendJson(response, 400, { error: "Invalid LoopViewer project bundle." });
+    if (!["trama-project", "loopviewer-project"].includes(bundle?.format)) {
+      sendJson(response, 400, { error: "Invalid Trama project bundle." });
       return;
     }
     const title = `${bundle.project?.title || "Projeto"} importado`;
@@ -436,7 +441,7 @@ async function listLocalProjects() {
         }
       });
     } catch {
-      // Ignore non-LoopViewer SQLite files in data/.
+      // Ignore non-Trama SQLite files in data/.
     } finally {
       projectStore?.close();
     }
@@ -527,7 +532,7 @@ function resolveDatabasePath(candidate) {
   }
   const dataRelative = relative(dataRoot, dbPath);
   if (!allowExternalDb && (dataRelative.startsWith("..") || dataRelative === "")) {
-    const error = new Error("Project path must stay inside the LoopViewer data directory.");
+    const error = new Error("Project path must stay inside the Trama data directory.");
     error.statusCode = 403;
     throw error;
   }

@@ -1,5 +1,5 @@
 * { box-sizing: border-box; }
-html, body, #loopviewer-atlas-embed { width: 100%; height: 100%; margin: 0; }
+html, body, #trama-atlas-embed, #loopviewer-atlas-embed { width: 100%; height: 100%; margin: 0; }
 body { overflow: hidden; background: var(--lv-semantic-color-bg-app); color: var(--lv-semantic-color-text-primary); font-family: var(--lv-foundation-typography-bodyFamily); }
 button { font: inherit; }
 .atlas-embed-shell { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--lv-foundation-color-editorialTones-tonefbf8ef); }

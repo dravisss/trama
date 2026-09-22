@@ -6,7 +6,7 @@
 export function buildLoopAwareSeed(model, topology, {
   idealEdgeLength = 220,
   center = { x: 0, y: 0 },
-  seed = "loopviewer"
+  seed = "trama"
 } = {}) {
   const positions = new Map();
   if (!topology?.hasLoops) return positions;
@@ -89,7 +89,7 @@ export function buildDeterministicSeed(model, topology, options = {}) {
   const nodes = [...(model?.nodes || [])].sort((a, b) => String(a.id).localeCompare(String(b.id)));
   const idealEdgeLength = Number(options.idealEdgeLength) || 220;
   const center = options.center || { x: 0, y: 0 };
-  const seed = options.seed || "loopviewer";
+  const seed = options.seed || "trama";
   const remaining = nodes.filter(node => !positions.has(node.id));
   if (!remaining.length) return positions;
 

@@ -1,4 +1,4 @@
-# Contribuindo com o LoopViewer
+# Contribuindo com a Trama
 
 Obrigado por considerar uma contribuição. Antes de começar, abra uma issue descrevendo o
 problema ou proposta, principalmente para mudanças no modelo de domínio, geometria, roteamento,

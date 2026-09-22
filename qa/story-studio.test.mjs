@@ -154,7 +154,7 @@ test("Story Studio preserves the critical authoring surfaces", () => {
   assert.doesNotMatch(html, /id="story-timeline-track"/);
   assert.match(html, /dist\/react-app\.iife\.js[\s\S]*dist\/app\.iife\.js/);
   assert.doesNotMatch(app, /from ["']\.\/react\/main\.jsx/);
-  assert.match(app, /window\.LoopViewerReact/);
+  assert.match(app, /window\.TramaReact/);
   assert.match(app, /renderLoopBrowser/);
   assert.match(app, /renderMapSelector/);
   assert.match(app, /renderEditorInspector/);
@@ -171,7 +171,7 @@ test("Story Studio preserves the critical authoring surfaces", () => {
   assert.match(appStore, /export function createAppStore/);
   assert.match(appStore, /subscribe\(listener\)/);
   assert.match(appCommands, /export function createAppCommands/);
-  assert.match(reactMain, /window\.LoopViewerReact\s*=\s*\{\s*mountReactApp,\s*mountReactStoryTimeline/);
+  assert.match(reactMain, /window\.TramaReact\s*=\s*runtime/);
   assert.match(reactTimeline, /data-beat-id=\{beat\.id\}/);
   assert.match(reactTimeline, /moveBeatToScene\(payload\.sceneId/);
   assert.match(reactTimeline, /export function StoryTimelineShell/);

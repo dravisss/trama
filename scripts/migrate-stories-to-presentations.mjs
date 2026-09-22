@@ -7,7 +7,7 @@ import { normalizePresentation } from "../src/presentation/schema.js";
 import { compilePresentation } from "../src/presentation/compiler.js";
 import { lintPresentation } from "../src/presentation/lint.js";
 
-const dbPath = resolve("data/loopviewer.db");
+const dbPath = resolve("data/trama.db");
 const store = new ProjectStore(dbPath);
 let presentations = store.listPresentations();
 const report = [];

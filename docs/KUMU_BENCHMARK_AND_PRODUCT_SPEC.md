@@ -1,14 +1,14 @@
-# LoopViewer: Kumu Benchmark, Documentation Inventory, and Product Spec
+# Trama: Kumu Benchmark, Documentation Inventory, and Product Spec
 
 ## Purpose
 
-This document turns the Kumu benchmark into a product blueprint for LoopViewer.
+This document turns the Kumu benchmark into a product blueprint for Trama.
 
 It has three goals:
 
 1. Inventory the Kumu documentation that matters for the product direction we want.
 2. Translate Kumu's UX and interaction patterns into reusable product principles.
-3. Define a spec-driven target for LoopViewer as a local-first causal loop authoring tool.
+3. Define a spec-driven target for Trama as a local-first causal loop authoring tool.
 
 ## Research boundary
 
@@ -16,13 +16,13 @@ The private benchmarking corpus used during early product research is intentiona
 distributed with the open-source application. This document preserves only product decisions and
 does not serve as a mirror of Kumu documentation or assets.
 
-This document does **not** propose replacing the current LoopViewer routing and curve system.
+This document does **not** propose replacing the current Trama routing and curve system.
 The existing layout, curve, and annotation logic is a core strategic asset. The goal is to
 preserve it, expose it better, and refine it incrementally.
 
 ## Foundational Constraint
 
-The current LoopViewer automatic positioning and curved-edge routing stack is one of the hardest
+The current Trama automatic positioning and curved-edge routing stack is one of the hardest
 won parts of the project. It must be treated as a protected subsystem.
 
 Protected assets:
@@ -39,7 +39,7 @@ Implication:
 - We are cloning the **authoring experience**, **information architecture**, and **interaction
   patterns** around a stronger loop-specific engine.
 
-## Current LoopViewer Strengths To Preserve
+## Current Trama Strengths To Preserve
 
 - Clear separation between domain, geometry, routing, annotations, rendering, and demo.
 - Local-first SQLite-backed persistence.
@@ -146,7 +146,7 @@ pages include screenshots, UI examples, or step-by-step illustrated workflows.
 15. Shapes
     Link: <https://docs.kumu.io/guides/shapes>
     Why it matters:
-    Useful for designing a simplified but flexible LoopViewer shape system.
+    Useful for designing a simplified but flexible Trama shape system.
 
 16. Default view settings
     Link: <https://docs.kumu.io/guides/default-view-settings>
@@ -208,7 +208,7 @@ pages include screenshots, UI examples, or step-by-step illustrated workflows.
 27. Partial views
     Link: <https://docs.kumu.io/guides/partial-views>
     Why it matters:
-    Useful for designing stateful storytelling and view toggles in LoopViewer.
+    Useful for designing stateful storytelling and view toggles in Trama.
 
 ### E. Presentation and Distribution
 
@@ -264,7 +264,7 @@ Kumu's top-level IA is extremely clean:
 - editing context is clear from the current map + current view;
 - settings are grouped by administrative scope.
 
-Implication for LoopViewer:
+Implication for Trama:
 
 - the current `project -> active loop` model is too shallow;
 - we need at least `project -> map -> view`.
@@ -276,7 +276,7 @@ Kumu supports two complementary editing modes:
 - direct decoration and contextual editing on the object;
 - rule-based editing via Basic/Advanced Editor.
 
-Implication for LoopViewer:
+Implication for Trama:
 
 - editing cannot stay toolbar-only;
 - each node, relation, and loop needs contextual quick-edit affordances;
@@ -291,7 +291,7 @@ Kumu layers information:
 - profiles give the full narrative/data record;
 - table view gives bulk editing.
 
-Implication for LoopViewer:
+Implication for Trama:
 
 - a node/relation/loop needs both a short hover form and a full profile;
 - the current sidebar should evolve into a real inspector/profile panel;
@@ -307,7 +307,7 @@ system:
 - data-driven rules scale;
 - advanced users can express styling declaratively.
 
-Implication for LoopViewer:
+Implication for Trama:
 
 - style cannot remain hardcoded in the Cytoscape style function;
 - we need a first-class visual language and a simplified CSS-like DSL.
@@ -324,7 +324,7 @@ Kumu turns reader interaction into authored interface:
 - metrics overlays;
 - partial view switching.
 
-Implication for LoopViewer:
+Implication for Trama:
 
 - view-level controls should be part of authored output;
 - standalone exports should preserve these controls;
@@ -334,7 +334,7 @@ Implication for LoopViewer:
 
 Kumu presentations are not just guided zoom steps. They are structured outputs with slide types.
 
-Implication for LoopViewer:
+Implication for Trama:
 
 - the current story model is a strong start, but too narrow;
 - we need richer presentation primitives: title, map step, text step, image step, camera state,
@@ -353,12 +353,12 @@ Implication for LoopViewer:
 ### 5. What We Should Adapt Rather Than Copy
 
 - generic network semantics should become causal-loop semantics;
-- Kumu's flexible everything-data-model should be narrowed where LoopViewer benefits from stronger
+- Kumu's flexible everything-data-model should be narrowed where Trama benefits from stronger
   causal constraints;
 - loop polarity, edge signs, route geometry, and story logic should remain domain-native to
-  LoopViewer.
+  Trama.
 
-### 6. What LoopViewer Can Potentially Do Better Than Kumu
+### 6. What Trama Can Potentially Do Better Than Kumu
 
 - better causal loop semantics and validation;
 - stronger automatic routing for curved causal edges;
@@ -371,7 +371,7 @@ Implication for LoopViewer:
 
 ## Product Vision
 
-LoopViewer should become a local-first causal loop authoring environment that combines:
+Trama should become a local-first causal loop authoring environment that combines:
 
 - the authoring fluency and view architecture of Kumu;
 - a simpler, loop-native markdown syntax with mermaid-like brevity;
@@ -399,7 +399,7 @@ They want to:
 4. Preserve and evolve the current routing/layout engine.
 5. Separate data, map composition, and visual views.
 6. Progressive disclosure from novice to advanced author.
-7. Export should not require the LoopViewer app to remain running.
+7. Export should not require the Trama app to remain running.
 8. Standalone embeddable HTML export remains a first-class deliverable.
 
 ## Non-Goals
@@ -414,24 +414,24 @@ They want to:
 We are using Kumu as a benchmark for editing architecture and UX quality, not as a product identity
 to copy wholesale.
 
-LoopViewer should intentionally diverge in the following ways:
+Trama should intentionally diverge in the following ways:
 
 ### 1. Standalone HTML export is a primary output
 
 Kumu leans heavily on hosted URLs, publish flows, and remote embeds.
 
-LoopViewer should keep the current direction:
+Trama should keep the current direction:
 
 - export a loop or project as standalone HTML;
 - support embeddable local packages;
 - support offline preview;
 - avoid requiring a hosted publish step for normal use.
 
-### 2. LoopViewer is loop-native, not generic-network-first
+### 2. Trama is loop-native, not generic-network-first
 
 Kumu must serve many kinds of relational maps.
 
-LoopViewer should stay narrower and better:
+Trama should stay narrower and better:
 
 - variable, relation, and loop are the semantic center;
 - polarity, delay, balancing, reinforcing, and story explanation should be first-class;
@@ -441,7 +441,7 @@ LoopViewer should stay narrower and better:
 
 Kumu includes many collaboration and hosted-platform patterns.
 
-LoopViewer should bias toward:
+Trama should bias toward:
 
 - one-person editing;
 - reliable local saves;
@@ -566,7 +566,7 @@ Needs:
 ### Text Authoring
 
 - As an author, I can describe a loop in a markdown-like, mermaid-like language and compile it into a diagram.
-- As an author, I can import Mermaid as a compatibility path but prefer a richer native LoopViewer language for loops, polarities, and story scenes.
+- As an author, I can import Mermaid as a compatibility path but prefer a richer native Trama language for loops, polarities, and story scenes.
 - As an author, I can export an edited loop back into a stable text representation.
 
 ### Story and Presentation
@@ -682,7 +682,7 @@ We should design three coordinated sidebar patterns:
 2. Right utility rail plus right editor panel
 3. Separate settings/admin navigation outside the main canvas
 
-Recommended adaptation for LoopViewer:
+Recommended adaptation for Trama:
 
 - the left editor sidebar should be stronger than Kumu’s for local loop authoring, because it must also
   support story, loop browser, and semantic editing;
@@ -758,7 +758,7 @@ To preserve the current algorithm while improving UX:
 
 ## DSL Strategy
 
-LoopViewer should expose two authored text artifacts:
+Trama should expose two authored text artifacts:
 
 ### 1. Loop Markdown
 
@@ -780,7 +780,7 @@ Suggested role:
 Important product difference from Kumu:
 
 - Kumu is comfortable starting from relational tables and fields;
-- LoopViewer must explicitly support a text-first authoring path as a first-class workflow.
+- Trama must explicitly support a text-first authoring path as a first-class workflow.
 
 ### 2. Loop CSS-Like Language
 
@@ -1001,7 +1001,7 @@ But the remaining gap is architectural:
 
 ### What this means strategically
 
-LoopViewer does **not** need a new core algorithm to become excellent.
+Trama does **not** need a new core algorithm to become excellent.
 
 It needs:
 
@@ -1059,10 +1059,10 @@ It needs:
 We should clone Kumu's **authoring architecture** and **editing experience** much more than its
 rendering internals.
 
-LoopViewer's end state should be:
+Trama's end state should be:
 
 - Kumu-like in UX and product structure;
 - more opinionated and stronger for causal loops;
 - local-first;
 - markdown-friendly;
-- powered by the existing LoopViewer routing and annotation engine rather than replacing it.
+- powered by the existing Trama routing and annotation engine rather than replacing it.

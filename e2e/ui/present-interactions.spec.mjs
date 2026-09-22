@@ -11,7 +11,7 @@ test("Present supports guided keyboard playback, presenter notes and close", asy
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(`${qaBaseURL()}/?qa=1`, { waitUntil: "domcontentloaded" });
   await page.getByRole("button", { name: /Flagship — Crescimento sob pressão/ }).click();
-  await expect(page).toHaveTitle(/LoopViewer/);
+  await expect(page).toHaveTitle(/Trama/);
   await page.locator("[data-react-ui-mode='present']").click();
   await expect(page.locator("body")).toHaveAttribute("data-ui-mode", "present");
   await expect(page.locator("#presentation-card")).toBeVisible();
@@ -41,7 +41,7 @@ test("Present supports guided keyboard playback, presenter notes and close", asy
 });
 
 function qaBaseURL() {
-  const baseURL = process.env.LOOPVIEWER_UI_QA_URL;
-  if (!baseURL) throw new Error("LOOPVIEWER_UI_QA_URL was not initialized by Playwright global setup.");
+  const baseURL = process.env.TRAMA_UI_QA_URL;
+  if (!baseURL) throw new Error("TRAMA_UI_QA_URL was not initialized by Playwright global setup.");
   return baseURL;
 }

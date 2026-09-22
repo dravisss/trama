@@ -6,7 +6,7 @@
  *   node scripts/presentation-from-dsl.mjs <caminho-do-arquivo.dsl> [loop-id] [db-path]
  *
  * O loop-id padrão é "sobrecarga-filas".
- * O db-path padrão é "data/loopviewer.db" relativo à raiz do projeto.
+ * O db-path padrão é "data/trama.db" relativo à raiz do projeto.
  *
  * DSL format:
  *   # Título da Apresentação
@@ -42,7 +42,7 @@ const HELP = `Uso: node scripts/presentation-from-dsl.mjs <arquivo.dsl> [loop-id
 Argumentos:
   arquivo.dsl   Caminho para o arquivo DSL (obrigatório)
   loop-id         ID do loop no banco (padrão: "sobrecarga-filas")
-  db-path         Caminho do SQLite (padrão: "data/loopviewer.db")
+  db-path         Caminho do SQLite (padrão: "data/trama.db")
 
 Exemplos:
   node scripts/presentation-from-dsl.mjs seeds/sobrecarga.dsl
@@ -66,7 +66,7 @@ function parseArgs() {
 
   const dslPath = args[0];
   const loopId = args[1] || "sobrecarga-filas";
-  const dbPathRaw = args[2] || "data/loopviewer.db";
+  const dbPathRaw = args[2] || "data/trama.db";
   const dbPath = isAbsolute(dbPathRaw) ? dbPathRaw : resolve(ROOT, dbPathRaw);
 
   return { dslPath, loopId, dbPath };
@@ -301,7 +301,7 @@ function main() {
   // 2. Conectar ao banco
   console.log(`\n▶ Conectando ao banco: ${dbPath}`);
   const store = new ProjectStore(dbPath, {
-    project: { id: "loopviewer-example", title: "LoopViewer Example" },
+    project: { id: "trama-example", title: "Trama Example" },
   });
 
   const existingLoop = store.getLoop(loopId);
@@ -409,4 +409,3 @@ function main() {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main();
 }
-

@@ -17,7 +17,7 @@ export class PresentationExportError extends Error {
  * cannot silently degrade after leaving the editor.
  */
 export function compilePresentationExport({
-  project = { title: "LoopViewer" },
+  project = { title: "Trama" },
   model,
   loops = [],
   presentation,
@@ -56,7 +56,7 @@ export function compilePresentationExport({
   const exportAssets = assets.filter(asset => !referencedAssets.size || referencedAssets.has(asset.id));
   const payload = {
     version: 3,
-    format: "loopviewer-presentation",
+    format: "trama-presentation",
     project,
     model,
     loops: loops.length ? loops : (model?.loops || []),

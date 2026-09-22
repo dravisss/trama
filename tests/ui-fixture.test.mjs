@@ -12,7 +12,7 @@ test("unified UI fixture is deterministic and covers maps 8, 16, 32 and flagship
   const first = buildUnifiedUiFixture();
   const second = buildUnifiedUiFixture();
   assert.deepEqual(first, second);
-  assert.equal(first.format, "loopviewer-project");
+  assert.equal(first.format, "trama-project");
   assert.equal(first.version, 1);
   assert.deepEqual(first.maps.slice(0, 3).map(map => map.model.nodes.length), [8, 16, 32]);
   assert.equal(first.assets.length, 1);
@@ -32,16 +32,30 @@ test("unified UI fixture is deterministic and covers maps 8, 16, 32 and flagship
 });
 
 test("unified UI fixture round-trips through an isolated ProjectStore", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-ui-fixture-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-ui-fixture-"));
   const store = new ProjectStore(join(dir, "ui-qa.db"));
   try {
     const imported = store.importBundle(buildUnifiedUiFixture());
-    assert.equal(imported.project.title, "LoopViewer UI QA");
+    assert.equal(imported.project.title, "Trama UI QA");
     assert.equal(store.listMaps().length, 4);
     assert.equal(store.listLoops().length, 4);
     assert.equal(store.listViews("flagship-growth").length, 2);
     assert.equal(store.listPresentations().length, 1);
     assert.equal(store.listAssets().length, 1);
+  } finally {
+    store.close();
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("ProjectStore imports legacy LoopViewer bundles during the Trama transition", () => {
+  const dir = mkdtempSync(join(tmpdir(), "trama-legacy-fixture-"));
+  const store = new ProjectStore(join(dir, "legacy.db"));
+  try {
+    const legacyBundle = { ...buildUnifiedUiFixture(), format: "loopviewer-project" };
+    const imported = store.importBundle(legacyBundle);
+    assert.equal(imported.project.title, "Trama UI QA");
+    assert.equal(store.exportBundle().format, "trama-project");
   } finally {
     store.close();
     rmSync(dir, { recursive: true, force: true });

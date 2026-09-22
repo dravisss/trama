@@ -1,4 +1,4 @@
-/* LoopViewer application shell
+/* Trama application shell
    ----------------------------
    This file owns the product UI framing only. Graph rendering, standalone
    exports and the public engine continue to use their existing styles. */
@@ -509,7 +509,7 @@ body.story-mode .topbar {
   border: 0;
   background: linear-gradient(110deg, var(--lv-foundation-color-forest950), var(--lv-foundation-color-forest900));
 }
-body.story-mode .topbar::before { content: "LoopViewer"; padding-right: 26px; border-right: 1px solid rgba(255,255,255,.22); font: 600 22px/1 "Noto Serif", Georgia, serif; }
+body.story-mode .topbar::before { content: "Trama"; padding-right: 26px; border-right: 1px solid rgba(255,255,255,.22); font: 600 22px/1 "Noto Serif", Georgia, serif; }
 body.story-mode .topbar .brand { display: block; }
 body.story-mode .topbar .brand h1 { color: var(--lv-foundation-color-moss500); font-size: 17px; }
 body.story-mode .topbar .brand p,

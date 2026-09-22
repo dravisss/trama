@@ -11,7 +11,7 @@ export default defineConfig({
   reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
   globalSetup: "./e2e/support/global-setup.mjs",
   use: {
-    channel: process.env.LOOPVIEWER_PLAYWRIGHT_CHANNEL || undefined,
+    channel: process.env.TRAMA_PLAYWRIGHT_CHANNEL || process.env.LOOPVIEWER_PLAYWRIGHT_CHANNEL || undefined,
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
     video: "retain-on-failure"

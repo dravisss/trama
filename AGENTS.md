@@ -1,10 +1,10 @@
-# LoopViewer Agent Guide
+# Trama Agent Guide
 
-This file explains the project at a glance and shows how an agent should create causal-loop maps and their presentations from Markdown. The detailed Mermaid conversion skill lives in `.agents/skills/mermaid-to-loopviewer/SKILL.md`.
+This file explains the project at a glance and shows how an agent should create causal-loop maps and their presentations from Markdown. The detailed Mermaid conversion skill lives in `.agents/skills/mermaid-to-trama/SKILL.md`.
 
-## What LoopViewer Is
+## What Trama Is
 
-LoopViewer is a reusable front-end engine for interactive causal loop diagrams.
+Trama is a reusable front-end engine for interactive causal loop diagrams.
 
 The main public contract is `CLD.createCLD()`. The engine is built so that each concern stays separate:
 
@@ -154,24 +154,24 @@ semantic focus:
 
 Do not write `mode: focus`, implicit fit-map defaults, `model.story`, or a
 parallel presentation step format. Existing records were migrated with
-`node scripts/migrate-presentations-camera-v2.mjs data/loopviewer.db`; new
+`node scripts/migrate-presentations-camera-v2.mjs data/trama.db`; new
 presentations must be authored directly in V2 and validated before persistence.
 The editor and standalone player both resolve camera targets through
 `src/presentation/camera.js`.
 
 For a reusable authored loop, leave `seeds/<slug>.loop.md`, `seeds/<slug>.story.md`, and a small seed/update script when persistence is repeatable. Do not add `model.story`, maintain a parallel legacy narrative, or edit `dist/` and `reference.html` by hand.
 
-## Mermaid To LoopViewer Skill
+## Mermaid Ta Trama Skill
 
 Path:
 
-- `.agents/skills/mermaid-to-loopviewer/SKILL.md`
+- `.agents/skills/mermaid-to-trama/SKILL.md`
 
-Use this skill when the input is a Markdown file with a Mermaid causal-loop diagram and you want to turn it into a LoopViewer model.
+Use this skill when the input is a Markdown file with a Mermaid causal-loop diagram and you want to turn it into a Trama model.
 
 ### When To Use It
 
-- A Mermaid diagram needs to become a persisted LoopViewer loop.
+- A Mermaid diagram needs to become a persisted Trama loop.
 - You need to audit causal polarities instead of copying labels literally.
 - You want a clean `description_md`, `edge.description`, and Presentation mapping.
 - You want the result saved into the local SQLite-backed project.
@@ -179,7 +179,7 @@ Use this skill when the input is a Markdown file with a Mermaid causal-loop diag
 ### Practical Workflow
 
 1. Read the source story and the Mermaid `graph TD` block.
-2. Map nodes, edges, and stable IDs into the LoopViewer model.
+2. Map nodes, edges, and stable IDs into the Trama model.
 3. Audit signs for causality and continuity.
 4. Curate only the loops that read as valid directed cycles.
 5. Write a separate presentation Markdown with a coherent causal trajectory.
@@ -231,7 +231,7 @@ This keeps the engine, application shell, and local project storage aligned.
 
 ## Extended Planning Docs
 
-If the task is to evolve LoopViewer beyond the current demo into the intended product, read:
+If the task is to evolve Trama beyond the current demo into the intended product, read:
 
 - `docs/KUMU_BENCHMARK_AND_PRODUCT_SPEC.md`
 - `docs/STORY_MODE_V2_PRODUCT_AND_IMPLEMENTATION_SPEC.md`

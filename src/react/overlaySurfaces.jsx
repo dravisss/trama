@@ -30,7 +30,7 @@ function OverlaySurfacesMarkup() {
     <dialog className="command-dialog" id="command-dialog">
       <form method="dialog" id="command-dialog-form">
         <div className="modal-header">
-          <div><div className="sidebar-section-title">LoopViewer</div><h2 id="command-dialog-title" /></div>
+          <div><div className="sidebar-section-title">Trama</div><h2 id="command-dialog-title" /></div>
           <Button unstyled type="button" id="command-dialog-close">Fechar</Button>
         </div>
         <p id="command-dialog-description" />

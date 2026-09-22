@@ -7,15 +7,15 @@ import { createServer } from "node:net";
 import test from "node:test";
 
 test("local server rejects foreign origins, oversized JSON and external database paths", async t => {
-  const dataRoot = await mkdtemp(join(tmpdir(), "loopviewer-server-security-"));
+  const dataRoot = await mkdtemp(join(tmpdir(), "trama-server-security-"));
   const port = await availablePort();
   const child = spawn(process.execPath, ["server.mjs"], {
     cwd: process.cwd(),
     env: {
       ...process.env,
       PORT: String(port),
-      LOOPVIEWER_DATA_ROOT: dataRoot,
-      LOOPVIEWER_MAX_JSON_BYTES: "128"
+      TRAMA_DATA_ROOT: dataRoot,
+      TRAMA_MAX_JSON_BYTES: "128"
     },
     stdio: ["ignore", "pipe", "pipe"]
   });
@@ -45,7 +45,7 @@ test("local server rejects foreign origins, oversized JSON and external database
   const external = await fetch(`http://127.0.0.1:${port}/api/project/new`, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ title: "Blocked", path: join(tmpdir(), "outside-loopviewer.db") })
+    body: JSON.stringify({ title: "Blocked", path: join(tmpdir(), "outside-trama.db") })
   });
   assert.equal(external.status, 403);
 });

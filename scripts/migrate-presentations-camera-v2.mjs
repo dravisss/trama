@@ -16,7 +16,7 @@ import { lintPresentation } from "../src/presentation/lint.js";
 import { serializePresentationMarkdown } from "../src/language/presentationMarkdown.js";
 import { resolveFocus } from "../src/presentation/references.js";
 
-const dbPath = resolve(process.argv[2] || "data/loopviewer.db");
+const dbPath = resolve(process.argv[2] || "data/trama.db");
 const store = new ProjectStore(dbPath);
 const mapRecords = store.listMaps();
 const maps = new Map(mapRecords.map(map => [map.id, map.model]));

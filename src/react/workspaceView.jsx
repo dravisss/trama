@@ -61,7 +61,7 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
             <div className="projects-breadcrumb"><Icon name="folder" size="sm" /><span>Projetos</span><b>›</b><strong>{activeTitle}</strong></div>
             <span className="workspace-kicker">Projeto selecionado</span>
             <h3 id="workspace-maps-title">{activeTitle}</h3>
-            <p>{project.description || "Projeto SQLite local do LoopViewer."}</p>
+            <p>{project.description || "Projeto SQLite local da Trama."}</p>
           </div>
           <div className="projects-selected-actions">
             <Button id="workspace-import-markdown" onClick={() => callbacks.onImportMarkdown?.()} variant="secondary" leadingIcon="download">Importar Markdown</Button>

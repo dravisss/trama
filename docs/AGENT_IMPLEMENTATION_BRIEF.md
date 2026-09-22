@@ -6,10 +6,10 @@ Its job is to translate product direction into safe execution inside this repo.
 
 ## Mission
 
-Turn LoopViewer from a strong demo/editor prototype into a real local-first loop authoring environment with:
+Turn Trama from a strong demo/editor prototype into a real local-first loop authoring environment with:
 
 - Kumu-grade editing ergonomics;
-- LoopViewer-native causal semantics;
+- Trama-native causal semantics;
 - local SQLite project persistence;
 - embeddable standalone HTML exports;
 - a mermaid-like markdown authoring path;
@@ -171,7 +171,7 @@ Acceptance:
 
 Goal:
 
-- reproduce Kumu-grade editing ergonomics in LoopViewer’s own language.
+- reproduce Kumu-grade editing ergonomics in Trama’s own language.
 
 Tasks:
 
@@ -372,4 +372,4 @@ A good first major implementation pass should deliver:
 It does not need to deliver the final perfect DSL, every panel, and every presentation feature at once.
 ## Workflow de imagens nos nós
 
-Agentes que produzirem imagens para diagramas devem usar `.agents/skills/node-images-for-loopviewer/SKILL.md`. O fluxo lê o mapa canônico, gera/revisa um lote, importa assets com SHA-256, anexa apenas `node.media`, executa `npm run check` e verifica editor/standalone no navegador. Não gerar imagens no app, não inventar IDs, não inserir proveniência em texto causal e não mover polaridades para acomodar o label.
+Agentes que produzirem imagens para diagramas devem usar `.agents/skills/node-images-for-trama/SKILL.md`. O fluxo lê o mapa canônico, gera/revisa um lote, importa assets com SHA-256, anexa apenas `node.media`, executa `npm run check` e verifica editor/standalone no navegador. Não gerar imagens no app, não inventar IDs, não inserir proveniência em texto causal e não mover polaridades para acomodar o label.

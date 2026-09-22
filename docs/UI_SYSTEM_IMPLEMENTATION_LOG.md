@@ -1,4 +1,4 @@
-# LoopViewer UI System — Implementation Log
+# Trama UI System — Implementation Log
 
 Fonte normativa: `docs/UNIFIED_PRODUCT_DESIGN_SYSTEM_SPEC.md`.
 
@@ -27,7 +27,7 @@ fase só avança quando seus critérios e rollback permanecem verificáveis.
   (Matcha e Boardroom).
 - `e2e/support/qa-server.mjs` importa a fixture em banco temporário, expõe o
   reset somente nesse processo efêmero e encerra junto com o runner; nenhum
-  teste aponta para `data/loopviewer.db`.
+  teste aponta para `data/trama.db`.
 - `e2e/support/qa-test.mjs` restaura a fixture antes de cada teste Playwright;
   um fluxo com persistência não contamina o baseline ou a jornada seguinte.
 - `docs/UI_COMPATIBILITY_MANIFEST.json` inventaria mount points e bridges.
@@ -40,7 +40,7 @@ Rollback: remover a infraestrutura de QA não toca em dados de usuário.
 ## R1 — Tokens e cascade
 
 - `src/design-system/tokens.js` é a fonte canônica; o gerador produz
-  `dist/loopviewer-ui-tokens.css` e manifest versionado e hasheado. O manifest
+  `dist/trama-ui-tokens.css` e manifest versionado e hasheado. O manifest
   final declara `aliases: {}`: nenhum alias deprecated é publicado.
 - `src/design-system/generatedManifest.js` é gerado junto com o CSS. App,
   engine e standalone publicam o mesmo schema/tema/hash; o contrato falha se

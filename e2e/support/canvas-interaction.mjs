@@ -13,7 +13,7 @@ export async function activateCanvasNode(page, id) {
       await page.mouse.move(point.x + dx, point.y + dy);
       await page.mouse.click(point.x + dx, point.y + dy);
       const selected = await page.evaluate(nodeId =>
-        window.loopViewerDemo.engine.cy.getElementById(nodeId).selected(), id);
+        window.tramaDemo.engine.cy.getElementById(nodeId).selected(), id);
       if (selected) return;
       await page.keyboard.press("Escape");
       await page.waitForTimeout(260);
@@ -32,11 +32,11 @@ export async function activateCanvasEdge(page, id) {
     for (const [dx, dy] of offsets) {
       await page.mouse.move(point.x + dx, point.y + dy);
       const hovered = await page.evaluate(edgeId =>
-        window.loopViewerDemo.engine.cy.getElementById(edgeId).hasClass("annotation-focus"), id);
+        window.tramaDemo.engine.cy.getElementById(edgeId).hasClass("annotation-focus"), id);
       if (!hovered) continue;
       await page.mouse.click(point.x + dx, point.y + dy);
       const selected = await page.evaluate(edgeId =>
-        window.loopViewerDemo.engine.cy.getElementById(edgeId).selected(), id);
+        window.tramaDemo.engine.cy.getElementById(edgeId).selected(), id);
       if (selected) return;
       await page.keyboard.press("Escape");
       await page.waitForTimeout(260);
@@ -56,7 +56,7 @@ export async function renderedCanvasPoint(page, id, kind = "node", sampleIndex =
       return hit === canvas || canvas.contains(hit);
     };
     for (let attempt = 0; attempt < 24; attempt += 1) {
-      const cy = window.loopViewerDemo?.engine?.cy;
+      const cy = window.tramaDemo?.engine?.cy;
       const element = cy?.getElementById(id);
       const direct = kind === "edge"
         ? (element?.renderedMidpoint?.() || element?.renderedControlPoints?.()[0])

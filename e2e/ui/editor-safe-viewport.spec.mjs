@@ -1,8 +1,8 @@
 import { test, expect } from "../support/qa-test.mjs";
 
 function qaBaseURL() {
-  const baseURL = process.env.LOOPVIEWER_UI_QA_URL;
-  if (!baseURL) throw new Error("LOOPVIEWER_UI_QA_URL was not initialized by Playwright global setup.");
+  const baseURL = process.env.TRAMA_UI_QA_URL;
+  if (!baseURL) throw new Error("TRAMA_UI_QA_URL was not initialized by Playwright global setup.");
   return baseURL;
 }
 
@@ -18,7 +18,7 @@ test("enquadramento do Editor respeita a área segura dos controles do canvas", 
   const geometry = await page.evaluate(() => {
     const root = document.querySelector("#cld-root");
     const safe = JSON.parse(root.dataset.qaSafeRect);
-    const cy = window.loopViewerDemo.engine.cy;
+    const cy = window.tramaDemo.engine.cy;
     const box = cy.elements().boundingBox({ includeLabels: true });
     const zoom = cy.zoom();
     const pan = cy.pan();
@@ -50,7 +50,7 @@ test("o renderer mantém geometria autoral e polaridades legíveis entre modos",
     await expect(page.locator("body")).toHaveAttribute("data-ui-mode", mode);
     if (mode === "present") await expect(page.locator("#presentation-card")).toBeVisible();
     geometryByMode[mode] = await page.evaluate(() => {
-      const node = window.loopViewerDemo.engine.cy.nodes().first();
+      const node = window.tramaDemo.engine.cy.nodes().first();
       return {
         shape: node.pstyle("shape").value,
         width: node.width(),

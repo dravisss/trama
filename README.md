@@ -1,13 +1,13 @@
-# LoopViewer
+# Trama
 
 **Mapeie sistemas, conte a história dos feedbacks e entregue uma apresentação navegável.**
 
-LoopViewer é uma aplicação local-first para criar, explorar e apresentar Diagramas de Loops
+Trama é uma aplicação local-first para criar, explorar e apresentar Diagramas de Loops
 Causais (CLDs). Pessoas podem trabalhar pela interface visual; agentes podem operar os mesmos
 artefatos em Markdown, validar o modelo e usar o motor público sem depender de um harness
 específico.
 
-![Apresentação ilustrada do LoopViewer destacando o backlog](docs/images/loopviewer-present.png)
+![Apresentação ilustrada da Trama destacando o backlog](docs/images/trama-present.png)
 
 O projeto está na série `0.x`, é distribuído sob a [licença MIT](LICENSE) e inclui apenas uma
 demonstração anônima e ilustrada: **Sobrecarga de Filas**.
@@ -30,14 +30,14 @@ Requisitos: Node.js 22.5 ou superior, npm e um navegador moderno.
 
 ```bash
 git clone <URL-DO-REPOSITORIO>
-cd LoopViewer
+cd <PASTA-CLONADA>
 npm ci
 npm run check
 npm run serve
 ```
 
 Abra [http://127.0.0.1:4173](http://127.0.0.1:4173). Na primeira execução, o projeto local e o
-banco `data/loopviewer.db` são criados com o mapa **Sobrecarga de Filas** e sua Presentation V2.
+banco `data/trama.db` são criados com o mapa **Sobrecarga de Filas** e sua Presentation V2.
 
 O servidor fica restrito a `127.0.0.1` por padrão. Ele é uma aplicação local e não deve ser
 exposto diretamente à internet.
@@ -49,35 +49,35 @@ exposto diretamente à internet.
 Abra ou crie bancos SQLite, importe Markdown e organize vários mapas sem enviar conteúdo para um
 serviço externo. Arquivos em `data/*.db` são ignorados pelo Git.
 
-![Workspace local do LoopViewer](docs/images/loopviewer-workspace.png)
+![Workspace local da Trama](docs/images/trama-workspace.png)
 
 ### 2. Editor: estrutura e visual no mesmo lugar
 
 O Editor reúne canvas, descrição, Inspector, Markdown, estilos, dados e histórico. O mapa continua
 sendo o artefato causal; nenhuma Presentation é escondida dentro de `model.story`.
 
-![Editor com o mapa Sobrecarga de Filas](docs/images/loopviewer-editor.png)
+![Editor com o mapa Sobrecarga de Filas](docs/images/trama-editor.png)
 
 ### 3. Story Studio: transforme estrutura em narrativa
 
 Cenas organizam viradas narrativas. Beats explicam movimentos causais individuais. Cada foco
 referencia nós, relações, caminhos ou loops que realmente existem no mapa.
 
-![Story Studio com cenas, timeline e Inspector](docs/images/loopviewer-story-studio.png)
+![Story Studio com cenas, timeline e Inspector](docs/images/trama-story-studio.png)
 
 ### 4. Apresentar: conduza a leitura do sistema
 
 A Presentation V2 controla enquadramento, destaque e progressão sem duplicar o mapa. O mesmo
 contrato alimenta a prévia, o player e a exportação offline.
 
-![Modo Apresentar destacando o backlog](docs/images/loopviewer-present.png)
+![Modo Apresentar destacando o backlog](docs/images/trama-present.png)
 
 As imagens acima foram capturadas da branch pública, em uma instalação limpa, usando somente a
 demonstração incluída no repositório.
 
 ## Feito para agentes — sem dependência de harness
 
-LoopViewer não exige Codex, Claude, Cursor, MCP ou um framework de agentes específico. Um agente
+Trama não exige Codex, Claude, Cursor, MCP ou um framework de agentes específico. Um agente
 precisa apenas conseguir:
 
 1. ler e editar arquivos do repositório;
@@ -104,7 +104,7 @@ Editor → Story Studio → Apresentar → HTML offline
 ### Contrato mínimo para um agente
 
 - Leia [AGENTS.md](AGENTS.md) antes de alterar mapas ou apresentações.
-- Use `.agents/skills/mermaid-to-loopviewer/SKILL.md` quando a origem for um diagrama Mermaid.
+- Use `.agents/skills/mermaid-to-trama/SKILL.md` quando a origem for um diagrama Mermaid.
 - Dê IDs estáveis a nós e relações; não derive polaridades mecanicamente do rótulo.
 - Mantenha mapa e Presentation em arquivos separados.
 - Toda cena deve apontar para o mapa real com `mapRef`.
@@ -186,14 +186,43 @@ Presentations, controller de reprodução, exportação e medição de performan
 - requisições mutáveis feitas pelo browser exigem mesma origem;
 - payloads JSON possuem limite padrão de 5 MiB;
 - caminhos de banco ficam restritos a `data/`;
-- `LOOPVIEWER_ALLOW_EXTERNAL_DB=1` permite deliberadamente bancos externos;
-- `LOOPVIEWER_MAX_JSON_BYTES` altera o limite de JSON;
+- `TRAMA_ALLOW_EXTERNAL_DB=1` permite deliberadamente bancos externos;
+- `TRAMA_MAX_JSON_BYTES` altera o limite de JSON;
 - definir `HOST` amplia deliberadamente a interface de rede.
 
 O servidor não possui autenticação. Se você optar por expô-lo além da máquina local, adicione uma
 camada externa de autenticação, TLS e controle de acesso.
 
+## Migração de LoopViewer para Trama
+
+Trama é o novo nome do aplicativo, do pacote, dos exports e dos contratos criados a partir desta
+versão. Instalações existentes continuam abrindo `data/loopviewer.db` quando ainda não existe um
+`data/trama.db`, backups com o formato legado continuam importáveis e as antigas variáveis de
+ambiente e pontes JavaScript seguem aceitas como aliases de transição. Novas integrações devem usar
+os nomes `TRAMA_*`, `trama-project`, `.trama.json`, `window.TramaReact` e `window.tramaDemo`.
+
+O inventário completo de compatibilidade está em
+[`docs/BRAND_MIGRATION_TO_TRAMA.md`](docs/BRAND_MIGRATION_TO_TRAMA.md).
+
 ## Desenvolvimento e QA
+
+### Landing do Trama
+
+A landing editorial possui uma demonstração real do motor: apresentação guiada,
+exploração e edição de uma cópia temporária, com desfazer e download em JSON.
+
+```bash
+npm run build:landing
+npm run serve:landing     # http://127.0.0.1:4180/
+npm run check:landing     # validação do exemplo, build e QA de navegador
+```
+
+O artefato estático fica em `dist/landing/`. Não depende do banco local nem de
+serviços externos. As fontes autorais e os limites da demonstração estão em
+[`landing/README.md`](landing/README.md). A hospedagem pública e o MCP são etapas
+posteriores; esta implementação não os publica.
+
+### Aplicação e motor
 
 ```bash
 npm test                 # testes Node

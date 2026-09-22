@@ -15,7 +15,7 @@ const model = {
 };
 
 test("project store creates, updates, duplicates and deletes loop JSON records", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const store = new ProjectStore(join(dir, "project.db"));
   try {
     const created = store.createLoop({
@@ -48,7 +48,7 @@ test("project store creates, updates, duplicates and deletes loop JSON records",
 });
 
 test("seed migration persists only the Presentation V2 result", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const store = new ProjectStore(join(dir, "project.db"), {
     seedModels: [{
       ...model,
@@ -70,7 +70,7 @@ test("seed migration persists only the Presentation V2 result", () => {
 });
 
 test("bundled demo assets are seeded once with stable ids", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const dbPath = join(dir, "project.db");
   const seedAsset = {
     id: "demo-backlog",
@@ -99,7 +99,7 @@ test("bundled demo assets are seeded once with stable ids", () => {
 });
 
 test("project store persists loops across reopen", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const dbPath = join(dir, "project.db");
   const first = new ProjectStore(dbPath);
   try {
@@ -119,7 +119,7 @@ test("project store persists loops across reopen", () => {
 });
 
 test("project store lists and restores automatic loop versions", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const store = new ProjectStore(join(dir, "project.db"));
   try {
     const created = store.createLoop({ title: "Versioned", model });
@@ -137,7 +137,7 @@ test("project store lists and restores automatic loop versions", () => {
 });
 
 test("project store persists positions, locks and routes", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const dbPath = join(dir, "project.db");
   const first = new ProjectStore(dbPath);
   try {
@@ -173,7 +173,7 @@ test("project store persists positions, locks and routes", () => {
 });
 
 test("project store creates project metadata and first empty loop", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const store = new ProjectStore(join(dir, "project.db"), {
     project: {
       title: "Projeto de Exemplo",
@@ -196,7 +196,7 @@ test("project store creates project metadata and first empty loop", () => {
 });
 
 test("project store updates project metadata", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const store = new ProjectStore(join(dir, "project.db"));
   try {
     const updated = store.updateProject({
@@ -212,7 +212,7 @@ test("project store updates project metadata", () => {
 });
 
 test("project store persists maps with independent views", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const store = new ProjectStore(join(dir, "project.db"));
   try {
     const map = store.createMap({ title: "Mapa sistêmico", model });
@@ -249,7 +249,7 @@ test("project store persists maps with independent views", () => {
 });
 
 test("project store promotes existing loops without duplicating their map", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const store = new ProjectStore(join(dir, "project.db"));
   try {
     const loop = store.createLoop({ title: "Legado", model });
@@ -265,7 +265,7 @@ test("project store promotes existing loops without duplicating their map", () =
 });
 
 test("legacy loop updates keep their promoted map and views synchronized", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const store = new ProjectStore(join(dir, "project.db"));
   try {
     const loop = store.createLoop({ title: "Legacy", model });
@@ -284,7 +284,7 @@ test("legacy loop updates keep their promoted map and views synchronized", () =>
 });
 
 test("project store persists presentations and binary assets", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const store = new ProjectStore(join(dir, "project.db"));
   try {
     const presentation = store.createPresentation({
@@ -312,7 +312,7 @@ test("project store persists presentations and binary assets", () => {
 });
 
 test("project store versions presentations and rejects stale revisions", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-presentation-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-presentation-store-"));
   const store = new ProjectStore(join(dir, "project.db"));
   try {
     const created = store.createPresentation({
@@ -344,7 +344,7 @@ test("project store versions presentations and rejects stale revisions", () => {
 });
 
 test("project store duplicates presentations without sharing JSON state", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-presentation-copy-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-presentation-copy-"));
   const store = new ProjectStore(join(dir, "project.db"));
   try {
     const created = store.createPresentation({
@@ -364,7 +364,7 @@ test("project store duplicates presentations without sharing JSON state", () => 
 });
 
 test("project bundles round-trip every local-first entity", () => {
-  const dir = mkdtempSync(join(tmpdir(), "loopviewer-store-"));
+  const dir = mkdtempSync(join(tmpdir(), "trama-store-"));
   const source = new ProjectStore(join(dir, "source.db"), { project: { title: "Portfolio" } });
   let bundle;
   try {

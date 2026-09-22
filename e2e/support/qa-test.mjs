@@ -1,8 +1,8 @@
 import { test as base, expect } from "@playwright/test";
 
 function qaBaseURL() {
-  const baseURL = process.env.LOOPVIEWER_UI_QA_URL;
-  if (!baseURL) throw new Error("LOOPVIEWER_UI_QA_URL was not initialized by Playwright global setup.");
+  const baseURL = process.env.TRAMA_UI_QA_URL;
+  if (!baseURL) throw new Error("TRAMA_UI_QA_URL was not initialized by Playwright global setup.");
   return baseURL;
 }
 
@@ -19,7 +19,7 @@ const test = base.extend({
   qaFixture: [async ({ page }, use) => {
     const response = await fetch(`${qaBaseURL()}/api/qa/reset-fixture`, { method: "POST" });
     if (!response.ok) {
-      throw new Error(`Could not reset the LoopViewer UI QA fixture (${response.status}).`);
+      throw new Error(`Could not reset the Trama UI QA fixture (${response.status}).`);
     }
     // Consume the reset response and confirm the canonical presentation order
     // before a browser can hydrate it. A previous persistence scenario may have
@@ -32,7 +32,7 @@ const test = base.extend({
       throw new Error("QA fixture reset did not return a valid generation.");
     }
     const projectResponse = await fetch(`${qaBaseURL()}/api/project`);
-    if (!projectResponse.ok) throw new Error(`Could not verify the LoopViewer UI QA fixture (${projectResponse.status}).`);
+    if (!projectResponse.ok) throw new Error(`Could not verify the Trama UI QA fixture (${projectResponse.status}).`);
     const projectData = await projectResponse.json();
     const flagship = (projectData.presentations || []).find(item => item.id === "flagship-growth-story")?.presentation;
     const openingBeatId = flagship?.chapters?.[0]?.scenes?.[0]?.beats?.[0]?.id;
@@ -43,7 +43,7 @@ const test = base.extend({
     // survive a test's own `page.goto()` calls and let the QA server distinguish
     // a delayed request from a previous page without changing application code.
     const qaGenerationHeaders = {
-      "X-LoopViewer-QA-Generation": String(fixtureGeneration)
+      "X-Trama-QA-Generation": String(fixtureGeneration)
     };
     await page.context().setExtraHTTPHeaders(qaGenerationHeaders);
     await page.setExtraHTTPHeaders(qaGenerationHeaders);
@@ -51,12 +51,12 @@ const test = base.extend({
     page.on("request", request => {
       if (["GET", "HEAD", "OPTIONS"].includes(request.method())) return;
       if (!new URL(request.url()).pathname.startsWith("/api/")) return;
-      if (request.headers()["x-loopviewer-qa-generation"] !== String(fixtureGeneration)) {
+      if (request.headers()["x-trama-qa-generation"] !== String(fixtureGeneration)) {
         headerViolations.push(`${request.method()} ${new URL(request.url()).pathname}`);
       }
     });
     qaRequestViolations.set(page, headerViolations);
-    // The app deliberately persists local layout/route state under loopviewer:*
+    // The app deliberately persists local layout/route state under trama:*
     // keys when the API is offline. Resetting the QA SQLite fixture alone does
     // not reset that browser-local state, so one test can leak positions, routes
     // or stale selection into the next test. Install this before navigation so
@@ -64,7 +64,7 @@ const test = base.extend({
     // within a single test (including reload checks) remains untouched.
     await page.addInitScript(() => {
       Object.keys(localStorage)
-        .filter(key => key.startsWith("loopviewer:"))
+        .filter(key => key.startsWith("trama:"))
         .forEach(key => localStorage.removeItem(key));
       sessionStorage.clear();
     });
@@ -74,12 +74,12 @@ const test = base.extend({
     });
     await page.goto(`${qaBaseURL()}/?qa=1&qa-reset=1`, { waitUntil: "domcontentloaded" });
     const initialProjectHeaders = (await initialProjectRequest).headers();
-    if (initialProjectHeaders["x-loopviewer-qa-generation"] !== String(fixtureGeneration)) {
+    if (initialProjectHeaders["x-trama-qa-generation"] !== String(fixtureGeneration)) {
       throw new Error("QA page did not stamp its initial project request with the fixture generation.");
     }
     await page.evaluate(() => {
       Object.keys(localStorage)
-        .filter(key => key.startsWith("loopviewer:"))
+        .filter(key => key.startsWith("trama:"))
         .forEach(key => localStorage.removeItem(key));
       sessionStorage.clear();
     });

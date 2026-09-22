@@ -2,7 +2,7 @@
 
 This document answers one question:
 
-`Would a fresh coding agent, without the context of our conversation, have enough material to start implementing the full LoopViewer target product?`
+`Would a fresh coding agent, without the context of our conversation, have enough material to start implementing the full Trama target product?`
 
 Before this document set, the answer was:
 
