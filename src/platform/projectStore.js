@@ -10,11 +10,15 @@ const PROJECT_BUNDLE_FORMAT = "trama-project";
 const LEGACY_PROJECT_BUNDLE_FORMAT = "loopviewer-project";
 
 export class ProjectStore {
-  constructor(dbPath, { project, seedModels = [], seedAssets = [] } = {}) {
+  constructor(dbPath, { project, seedModels = [], seedAssets = [], wal = false, busyTimeoutMs = 0, versionRetention = 0 } = {}) {
     mkdirSync(dirname(dbPath), { recursive: true });
     this.dbPath = dbPath;
+    // Hosted mode keeps a bounded history per record; 0 keeps every version.
+    this.versionRetention = Number.isInteger(versionRetention) && versionRetention > 0 ? versionRetention : 0;
     this.db = new DatabaseSync(dbPath);
     this.db.exec("PRAGMA foreign_keys = ON");
+    if (busyTimeoutMs > 0) this.db.exec(`PRAGMA busy_timeout = ${Math.floor(busyTimeoutMs)}`);
+    if (wal) this.db.exec("PRAGMA journal_mode = WAL");
     this.migrate();
     this.ensureProject(project);
     if (!this.listLoops().length && seedModels.length) this.seed(seedModels);
@@ -27,6 +31,23 @@ export class ProjectStore {
 
   close() {
     this.db.close();
+  }
+
+  /** Allocated database size in bytes (used by hosted quotas). */
+  sizeBytes() {
+    const pages = this.db.prepare("PRAGMA page_count").get();
+    const pageSize = this.db.prepare("PRAGMA page_size").get();
+    return Number(pages?.page_count || 0) * Number(pageSize?.page_size || 0);
+  }
+
+  pruneVersions(table, column, recordId) {
+    if (!this.versionRetention) return;
+    this.db.prepare(`
+      DELETE FROM ${table}
+      WHERE ${column} = ? AND id NOT IN (
+        SELECT id FROM ${table} WHERE ${column} = ? ORDER BY id DESC LIMIT ?
+      )
+    `).run(recordId, recordId, this.versionRetention);
   }
 
   migrate() {
@@ -241,6 +262,7 @@ export class ProjectStore {
       INSERT INTO loop_versions (loop_id, model_json, created_at)
       VALUES (?, ?, ?)
     `).run(id, JSON.stringify(current.model), now);
+    this.pruneVersions("loop_versions", "loop_id", id);
     this.db.prepare(`
       UPDATE loops
       SET title = ?, summary = ?, description_md = ?, model_json = ?, updated_at = ?
@@ -508,6 +530,7 @@ export class ProjectStore {
       INSERT INTO presentation_versions (presentation_id, presentation_json, reason, created_at)
       VALUES (?, ?, ?, ?)
     `).run(presentation.id, JSON.stringify(presentation.presentation || {}), reason, timestamp());
+    this.pruneVersions("presentation_versions", "presentation_id", presentation.id);
     return this.listPresentationVersions(presentation.id)[0] || null;
   }
 

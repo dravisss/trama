@@ -1,4 +1,6 @@
 import { applyDesignSystemContext } from "../design-system/runtime.js";
+import { hostedContext } from "./api.js";
+import { deploymentCopy } from "./deploymentCopy.js";
 
 const MODE_COPY = Object.freeze({
   workspace: {
@@ -26,7 +28,7 @@ export function workspaceViewModel({ project = {}, workspace = [], presentations
     hydrating: Boolean(hydrating),
     project: {
       title: project?.title || "Projeto local",
-      description: project?.description_md || "Projeto SQLite local da Trama.",
+      description: project?.description_md || deploymentCopy().defaultDescription,
       path: activePath,
       updatedAt: project?.updatedAt || project?.updated_at || null,
       active: true,
@@ -175,7 +177,7 @@ export function createAppShellController({
     });
     if (status && !reactApp) {
       const mapLabel = view.maps.length === 1 ? "1 mapa" : `${view.maps.length} mapas`;
-      const storageLabel = view.project.path ? "SQLite local" : "modo local";
+      const storageLabel = hostedContext() ? "online" : view.project.path ? "SQLite local" : "modo local";
       status.textContent = `${view.project.title} · ${mapLabel} · ${storageLabel}`;
     }
     return view;

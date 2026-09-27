@@ -1,0 +1,36 @@
+# Hosted Trama. Put this file next to ./app (the repository), ./data and
+# ./trama.env, then `docker compose up -d --build`. A reverse proxy with TLS
+# forwards the public hostname to 127.0.0.1:4180 (deploy/nginx/trama.conf.example).
+#
+# Keep the explicit project name so this stack never shares a compose project
+# (and its orphan cleanup) with other services on the same host.
+name: trama
+services:
+  trama:
+    build:
+      context: ./app
+    image: trama:latest
+    container_name: trama
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4180:4180"
+    env_file:
+      - ./trama.env
+    volumes:
+      - ./data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"

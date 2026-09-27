@@ -31,7 +31,8 @@ import { searchPresentationStoryboard } from "./presentation/search.js";
 import { compileLoopStyle, serializeLoopStyle } from "./language/styleLanguage.js";
 import { createViewFromStylePreset, stylePresetOptions } from "./styles/library.js";
 import { importMermaid } from "./language/mermaid.js";
-import { apiFetch } from "./app/api.js";
+import { apiFetch, apiUrl, hostedContext } from "./app/api.js";
+import { deploymentCopy } from "./app/deploymentCopy.js";
 import { createAppShellController } from "./app/appShell.js";
 import { createAppStore } from "./app/appStore.js";
 import { createAppCommands } from "./app/appCommands.js";
@@ -474,7 +475,7 @@ const engine = createCLD({
   theme: matchaTheme,
   editable: false,
   assetResolver: assetId => apiAvailable && assetId
-    ? `/api/assets/${encodeURIComponent(assetId)}`
+    ? apiUrl(`/api/assets/${encodeURIComponent(assetId)}`)
     : ""
 });
 const {
@@ -496,7 +497,7 @@ const {
   snapshotEntry,
   toEntry: loop => loopRecordToEntry(loop),
   isAvailable: () => apiAvailable,
-  resourceFetcher: path => fetch(path),
+  resourceFetcher: path => fetch(apiUrl(path)),
   downloadText
 });
 
@@ -1131,7 +1132,7 @@ async function loadProjectFromApi() {
     projectPresentations = data.presentations || [];
     projectAssets = data.assets || [];
     engine.setAssetResolver(assetId => apiAvailable && assetId
-      ? `/api/assets/${encodeURIComponent(assetId)}`
+      ? apiUrl(`/api/assets/${encodeURIComponent(assetId)}`)
       : "");
     rememberRecentProject(project);
     if (Array.isArray(data.loops) && data.loops.length) {
@@ -4309,7 +4310,9 @@ async function importJsonFile(event) {
 async function createNewProjectDb() {
   const values = await openCommandDialog({
     title: "Novo projeto",
-    description: "Um novo arquivo SQLite será criado localmente.",
+    description: hostedContext()
+      ? "Um novo espaço será criado com um link secreto próprio. Guarde o link: ele é a chave de edição."
+      : "Um novo arquivo SQLite será criado localmente.",
     submitLabel: "Criar projeto",
     fields: [
       { name: "title", label: "Nome", value: "Novo projeto", required: true },
@@ -4326,22 +4329,31 @@ async function createNewProjectDb() {
         description_md: values.description || `# ${title}\n\nDescreva o objetivo deste projeto.`
       }
     });
+    if (followHostedRedirect(data)) return;
     await activateProjectData(data);
     await loadLocalProjects();
     showToast("Projeto criado com um mapa vazio.");
   } catch (error) {
     handleApiError(error);
-    showToast(apiAvailable ? "Não foi possível criar o projeto." : "Servidor local offline. Rode npm run serve.");
+    showToast(apiAvailable ? "Não foi possível criar o projeto." : deploymentCopy().serverOffline);
   }
 }
 
 async function openProjectDb() {
-  const values = await openCommandDialog({
-    title: "Abrir projeto SQLite",
-    description: "Informe o caminho local do arquivo .db.",
-    submitLabel: "Abrir projeto",
-    fields: [{ name: "path", label: "Caminho", value: "data/trama.db", required: true }]
-  });
+  const hosted = hostedContext();
+  const values = await openCommandDialog(hosted
+    ? {
+      title: "Abrir espaço",
+      description: "Cole o link secreto de edição de um espaço (https://…/w/…).",
+      submitLabel: "Abrir espaço",
+      fields: [{ name: "path", label: "Link do espaço", value: "", required: true }]
+    }
+    : {
+      title: "Abrir projeto SQLite",
+      description: "Informe o caminho local do arquivo .db.",
+      submitLabel: "Abrir projeto",
+      fields: [{ name: "path", label: "Caminho", value: "data/trama.db", required: true }]
+    });
   if (!values) return;
   const path = values.path;
   try {
@@ -4349,6 +4361,7 @@ async function openProjectDb() {
       method: "POST",
       body: { path }
     });
+    if (followHostedRedirect(data)) return;
     await activateProjectData(data);
     await loadLocalProjects();
     showToast("Projeto SQLite aberto.");
@@ -4356,7 +4369,7 @@ async function openProjectDb() {
     handleApiError(error);
     showToast(error.message.includes("does not exist")
       ? "Esse arquivo .db ainda não existe."
-      : apiAvailable ? "Não foi possível abrir o projeto SQLite." : "Servidor local offline. Rode npm run serve.");
+      : apiAvailable ? "Não foi possível abrir o projeto SQLite." : deploymentCopy().serverOffline);
   }
 }
 
@@ -4365,7 +4378,7 @@ async function activateProjectData(data) {
   projectPresentations = data.presentations || [];
   projectAssets = (await apiFetch("/api/assets").catch(() => ({ assets: [] }))).assets || [];
   engine.setAssetResolver(assetId => apiAvailable && assetId
-    ? `/api/assets/${encodeURIComponent(assetId)}`
+    ? apiUrl(`/api/assets/${encodeURIComponent(assetId)}`)
     : "");
   const mapsByLoop = new Map((data.maps || []).filter(map => map.source_loop_id)
     .map(map => [map.source_loop_id, map]));
@@ -4409,6 +4422,7 @@ async function importProjectBackup(event) {
   try {
     const bundle = JSON.parse(await file.text());
     const data = await apiFetch("/api/project/import", { method: "POST", body: { bundle } });
+    if (followHostedRedirect(data)) return;
     await activateProjectData(data);
     await loadLocalProjects();
     showToast("Backup importado em um novo projeto SQLite.");
@@ -4448,7 +4462,7 @@ async function editProjectMetadata({ restoreFocusTo } = {}) {
     showToast("Projeto atualizado.");
   } catch (error) {
     handleApiError(error);
-    showToast(apiAvailable ? "Não foi possível atualizar o projeto." : "Servidor local offline. Rode npm run serve.");
+    showToast(apiAvailable ? "Não foi possível atualizar o projeto." : deploymentCopy().serverOffline);
   }
 }
 
@@ -5219,7 +5233,7 @@ function renderPresentationStep({ frame, state }) {
     });
   }
   const imageSource = frame.scene.content.src ||
-    (frame.scene.content.assetId && apiAvailable ? `/api/assets/${encodeURIComponent(frame.scene.content.assetId)}` : "");
+    (frame.scene.content.assetId && apiAvailable ? apiUrl(`/api/assets/${encodeURIComponent(frame.scene.content.assetId)}`) : "");
   elements.presentationImage.hidden = !imageSource;
   if (imageSource) {
     elements.presentationImage.src = imageSource;
@@ -6867,13 +6881,25 @@ async function openProjectByPath(path, message = "Projeto aberto.") {
       method: "POST",
       body: { path }
     });
+    if (followHostedRedirect(data)) return;
     await activateProjectData(data);
     await loadLocalProjects();
     showToast(message);
   } catch (error) {
     handleApiError(error);
-    showToast(apiAvailable ? "Não foi possível abrir o projeto." : "Servidor local offline. Rode npm run serve.");
+    showToast(apiAvailable ? "Não foi possível abrir o projeto." : deploymentCopy().serverOffline);
   }
+}
+
+/**
+ * Hosted workspaces are addressed by secret links, so creating, opening or
+ * importing a project navigates to that workspace instead of swapping the
+ * server's active SQLite file.
+ */
+function followHostedRedirect(data) {
+  if (!hostedContext() || typeof data?.redirect !== "string" || !data.redirect.startsWith("/w/")) return false;
+  window.location.assign(data.redirect);
+  return true;
 }
 
 function fileNameFromPath(path) {

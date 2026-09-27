@@ -48,6 +48,15 @@ test("local server rejects foreign origins, oversized JSON and external database
     body: JSON.stringify({ title: "Blocked", path: join(tmpdir(), "outside-trama.db") })
   });
   assert.equal(external.status, 403);
+
+  // Map/presentation/project routes live in server/projectRoutes.js and must
+  // read bodies through the same size-limited reader.
+  const oversizedUpdate = await fetch(`http://127.0.0.1:${port}/api/project`, {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ description_md: "x".repeat(256) })
+  });
+  assert.equal(oversizedUpdate.status, 413);
 });
 
 async function availablePort() {

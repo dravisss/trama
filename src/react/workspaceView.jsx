@@ -3,6 +3,7 @@ import { mapPreviewGeometry } from "../app/appShell.js";
 import { Button } from "./ui/Button.jsx";
 import { Icon } from "./ui/Icon.jsx";
 import { Input } from "./ui/Field.jsx";
+import { deploymentCopy } from "../app/deploymentCopy.js";
 
 /**
  * React-owned Projects surface. This deliberately consumes the existing shell
@@ -15,6 +16,7 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
   const projects = [project, ...(view.otherProjects || [])];
   const projectCount = projects.length;
   const activeTitle = project.title || "Projeto local";
+  const copy = deploymentCopy();
 
   return (
     <div className="projects-workspace">
@@ -22,12 +24,12 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
         <div className="projects-hero-copy">
           <span className="workspace-kicker">Continue de onde parou</span>
           <h2 id="workspace-home-title">Seu trabalho sistêmico, em um só lugar</h2>
-          <p>Abra um projeto local para editar seus mapas e construir as narrativas que os tornam compreensíveis.</p>
+          <p>{copy.heroText}</p>
         </div>
         <div className="projects-hero-actions">
-          <span className="projects-local-status"><Icon name="folder" size="sm" /><strong>{projectCount} {projectCount === 1 ? "projeto local" : "projetos locais"}</strong><small>SQLite · nenhum envio externo</small></span>
-          <Button id="workspace-open-project" onClick={() => callbacks.onOpenProject?.()} variant="secondary" leadingIcon="folder">Abrir projeto</Button>
-          <Button className="workspace-primary" id="workspace-new-project" onClick={() => callbacks.onNewProject?.()} variant="primary" leadingIcon="plus">Novo projeto</Button>
+          <span className="projects-local-status"><Icon name="folder" size="sm" /><strong>{copy.projectCount(projectCount)}</strong><small>{copy.storageBadge}</small></span>
+          <Button id="workspace-open-project" onClick={() => callbacks.onOpenProject?.()} variant="secondary" leadingIcon="folder">{copy.openProject}</Button>
+          <Button className="workspace-primary" id="workspace-new-project" onClick={() => callbacks.onNewProject?.()} variant="primary" leadingIcon="plus">{copy.newProject}</Button>
         </div>
       </section>
 
@@ -37,7 +39,7 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
             <span className="workspace-kicker">Projetos recentes</span>
             <h3 id="workspace-projects-title">Biblioteca de projetos</h3>
           </div>
-          <span className="projects-library-count">{projectCount} {projectCount === 1 ? "local" : "locais"}</span>
+          <span className="projects-library-count">{copy.libraryCount(projectCount)}</span>
         </div>
         <div className="projects-library-grid" id="workspace-project-grid">
           {projects.map((item, index) => <ProjectCard
@@ -49,8 +51,8 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
           />)}
           <Button className="projects-new-card" aria-label="Criar novo projeto" onClick={() => callbacks.onNewProject?.()} variant="quiet" size="touch">
             <span className="projects-new-card-icon" aria-hidden="true"><Icon name="plus" /></span>
-            <strong>Novo projeto</strong>
-            <small>Crie um banco local para organizar mapas relacionados.</small>
+            <strong>{copy.newProject}</strong>
+            <small>{copy.newProjectHint}</small>
           </Button>
         </div>
       </section>
@@ -61,7 +63,7 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
             <div className="projects-breadcrumb"><Icon name="folder" size="sm" /><span>Projetos</span><b>›</b><strong>{activeTitle}</strong></div>
             <span className="workspace-kicker">Projeto selecionado</span>
             <h3 id="workspace-maps-title">{activeTitle}</h3>
-            <p>{project.description || "Projeto SQLite local da Trama."}</p>
+            <p>{project.description || copy.defaultDescription}</p>
           </div>
           <div className="projects-selected-actions">
             <Button id="workspace-import-markdown" onClick={() => callbacks.onImportMarkdown?.()} variant="secondary" leadingIcon="download">Importar Markdown</Button>
@@ -84,12 +86,13 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
 }
 
 function WorkspaceLoadingState() {
+  const copy = deploymentCopy();
   return <div className="projects-workspace projects-workspace-loading" aria-busy="true" aria-live="polite">
     <section className="projects-loading-panel">
       <span className="projects-loading-mark" aria-hidden="true"><Icon name="map" /></span>
-      <span className="workspace-kicker">Workspace local</span>
+      <span className="workspace-kicker">{copy.loadingKicker}</span>
       <h2>Preparando seus mapas</h2>
-      <p>Carregando o projeto local e suas narrativas salvas.</p>
+      <p>{copy.loadingText}</p>
       <span className="projects-loading-line" aria-hidden="true" />
     </section>
   </div>;

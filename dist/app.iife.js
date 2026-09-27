@@ -16073,8 +16073,16 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
   }
 
   // src/app/api.js
+  function hostedContext() {
+    const context = globalThis.__TRAMA__;
+    return context && typeof context === "object" && context.hosted ? context : null;
+  }
+  function apiUrl(path) {
+    const base = hostedContext()?.apiBase || "";
+    return base && typeof path === "string" && path.startsWith("/api/") ? `${base}${path}` : path;
+  }
   async function apiFetch(path, { method = "GET", body } = {}) {
-    const response = await fetch(path, {
+    const response = await fetch(apiUrl(path), {
       method,
       headers: body ? { "Content-Type": "application/json" } : void 0,
       body: body ? JSON.stringify(body) : void 0
@@ -16087,6 +16095,45 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
       throw error;
     }
     return data;
+  }
+
+  // src/app/deploymentCopy.js
+  var LOCAL_COPY = {
+    heroText: "Abra um projeto local para editar seus mapas e construir as narrativas que os tornam compreens\xEDveis.",
+    projectCount: (count) => `${count} ${count === 1 ? "projeto local" : "projetos locais"}`,
+    storageBadge: "SQLite \xB7 nenhum envio externo",
+    libraryCount: (count) => `${count} ${count === 1 ? "local" : "locais"}`,
+    openProject: "Abrir projeto",
+    newProject: "Novo projeto",
+    newProjectHint: "Crie um banco local para organizar mapas relacionados.",
+    defaultDescription: "Projeto SQLite local da Trama.",
+    loadingKicker: "Workspace local",
+    loadingText: "Carregando o projeto local e suas narrativas salvas.",
+    navFootTitle: "Local-first",
+    navFootText: "Seus mapas permanecem no projeto SQLite local.",
+    editorEyebrow: "Editor local",
+    serverOffline: "Servidor local offline. Rode npm run serve."
+  };
+  function deploymentCopy() {
+    const hosted = hostedContext();
+    if (!hosted) return LOCAL_COPY;
+    const product = hosted.productName || "Trama";
+    return {
+      heroText: "Abra um espa\xE7o para editar seus mapas e construir as narrativas que os tornam compreens\xEDveis.",
+      projectCount: (count) => `${count} ${count === 1 ? "espa\xE7o" : "espa\xE7os"}`,
+      storageBadge: `Salvo em ${product} \xB7 acesso por link secreto`,
+      libraryCount: (count) => `${count} ${count === 1 ? "espa\xE7o" : "espa\xE7os"}`,
+      openProject: "Abrir espa\xE7o",
+      newProject: "Novo espa\xE7o",
+      newProjectHint: "Crie um espa\xE7o novo, com link secreto pr\xF3prio.",
+      defaultDescription: `Espa\xE7o de mapas causais em ${product}.`,
+      loadingKicker: "Espa\xE7o online",
+      loadingText: "Carregando o espa\xE7o e suas narrativas salvas.",
+      navFootTitle: "Sem conta",
+      navFootText: "Quem tiver o link de edi\xE7\xE3o pode editar. Guarde-o e compartilhe s\xF3 o link de leitura.",
+      editorEyebrow: "Editor",
+      serverOffline: `N\xE3o foi poss\xEDvel falar com ${product}. Verifique a conex\xE3o e tente de novo.`
+    };
   }
 
   // src/design-system/generatedManifest.js
@@ -16148,7 +16195,7 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
       hydrating: Boolean(hydrating),
       project: {
         title: project2?.title || "Projeto local",
-        description: project2?.description_md || "Projeto SQLite local da Trama.",
+        description: project2?.description_md || deploymentCopy().defaultDescription,
         path: activePath,
         updatedAt: project2?.updatedAt || project2?.updated_at || null,
         active: true,
@@ -16288,7 +16335,7 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
       });
       if (status && !reactApp2) {
         const mapLabel = view.maps.length === 1 ? "1 mapa" : `${view.maps.length} mapas`;
-        const storageLabel = view.project.path ? "SQLite local" : "modo local";
+        const storageLabel = hostedContext() ? "online" : view.project.path ? "SQLite local" : "modo local";
         status.textContent = `${view.project.title} \xB7 ${mapLabel} \xB7 ${storageLabel}`;
       }
       return view;
@@ -19710,7 +19757,7 @@ ${styles}</style>
     container: "#cld-root",
     theme: matchaTheme,
     editable: false,
-    assetResolver: (assetId) => apiAvailable && assetId ? `/api/assets/${encodeURIComponent(assetId)}` : ""
+    assetResolver: (assetId) => apiAvailable && assetId ? apiUrl(`/api/assets/${encodeURIComponent(assetId)}`) : ""
   });
   var {
     editMapCommand,
@@ -19731,7 +19778,7 @@ ${styles}</style>
     snapshotEntry,
     toEntry: (loop) => loopRecordToEntry(loop),
     isAvailable: () => apiAvailable,
-    resourceFetcher: (path) => fetch(path),
+    resourceFetcher: (path) => fetch(apiUrl(path)),
     downloadText
   });
   explorePanelController = createExplorePanelController({
@@ -20319,7 +20366,7 @@ ${styles}</style>
       project = data.project || project;
       projectPresentations = data.presentations || [];
       projectAssets = data.assets || [];
-      engine.setAssetResolver((assetId) => apiAvailable && assetId ? `/api/assets/${encodeURIComponent(assetId)}` : "");
+      engine.setAssetResolver((assetId) => apiAvailable && assetId ? apiUrl(`/api/assets/${encodeURIComponent(assetId)}`) : "");
       rememberRecentProject(project);
       if (Array.isArray(data.loops) && data.loops.length) {
         const mapsByLoop = new Map((data.maps || []).filter((map) => map.source_loop_id).map((map) => [map.source_loop_id, map]));
@@ -23111,7 +23158,7 @@ Descreva aqui a hist\xF3ria e o recorte deste loop.`,
   async function createNewProjectDb() {
     const values = await openCommandDialog({
       title: "Novo projeto",
-      description: "Um novo arquivo SQLite ser\xE1 criado localmente.",
+      description: hostedContext() ? "Um novo espa\xE7o ser\xE1 criado com um link secreto pr\xF3prio. Guarde o link: ele \xE9 a chave de edi\xE7\xE3o." : "Um novo arquivo SQLite ser\xE1 criado localmente.",
       submitLabel: "Criar projeto",
       fields: [
         { name: "title", label: "Nome", value: "Novo projeto", required: true },
@@ -23130,16 +23177,23 @@ Descreva aqui a hist\xF3ria e o recorte deste loop.`,
 Descreva o objetivo deste projeto.`
         }
       });
+      if (followHostedRedirect(data)) return;
       await activateProjectData(data);
       await loadLocalProjects();
       showToast("Projeto criado com um mapa vazio.");
     } catch (error) {
       handleApiError(error);
-      showToast(apiAvailable ? "N\xE3o foi poss\xEDvel criar o projeto." : "Servidor local offline. Rode npm run serve.");
+      showToast(apiAvailable ? "N\xE3o foi poss\xEDvel criar o projeto." : deploymentCopy().serverOffline);
     }
   }
   async function openProjectDb() {
-    const values = await openCommandDialog({
+    const hosted = hostedContext();
+    const values = await openCommandDialog(hosted ? {
+      title: "Abrir espa\xE7o",
+      description: "Cole o link secreto de edi\xE7\xE3o de um espa\xE7o (https://\u2026/w/\u2026).",
+      submitLabel: "Abrir espa\xE7o",
+      fields: [{ name: "path", label: "Link do espa\xE7o", value: "", required: true }]
+    } : {
       title: "Abrir projeto SQLite",
       description: "Informe o caminho local do arquivo .db.",
       submitLabel: "Abrir projeto",
@@ -23152,19 +23206,20 @@ Descreva o objetivo deste projeto.`
         method: "POST",
         body: { path }
       });
+      if (followHostedRedirect(data)) return;
       await activateProjectData(data);
       await loadLocalProjects();
       showToast("Projeto SQLite aberto.");
     } catch (error) {
       handleApiError(error);
-      showToast(error.message.includes("does not exist") ? "Esse arquivo .db ainda n\xE3o existe." : apiAvailable ? "N\xE3o foi poss\xEDvel abrir o projeto SQLite." : "Servidor local offline. Rode npm run serve.");
+      showToast(error.message.includes("does not exist") ? "Esse arquivo .db ainda n\xE3o existe." : apiAvailable ? "N\xE3o foi poss\xEDvel abrir o projeto SQLite." : deploymentCopy().serverOffline);
     }
   }
   async function activateProjectData(data) {
     project = data.project || project;
     projectPresentations = data.presentations || [];
     projectAssets = (await apiFetch("/api/assets").catch(() => ({ assets: [] }))).assets || [];
-    engine.setAssetResolver((assetId) => apiAvailable && assetId ? `/api/assets/${encodeURIComponent(assetId)}` : "");
+    engine.setAssetResolver((assetId) => apiAvailable && assetId ? apiUrl(`/api/assets/${encodeURIComponent(assetId)}`) : "");
     const mapsByLoop = new Map((data.maps || []).filter((map) => map.source_loop_id).map((map) => [map.source_loop_id, map]));
     workspace = (data.loops || []).map((loop) => loopRecordToEntry(loop, mapsByLoop.get(loop.id)));
     apiAvailable = true;
@@ -23207,6 +23262,7 @@ Descreva o objetivo deste projeto.`
     try {
       const bundle = JSON.parse(await file.text());
       const data = await apiFetch("/api/project/import", { method: "POST", body: { bundle } });
+      if (followHostedRedirect(data)) return;
       await activateProjectData(data);
       await loadLocalProjects();
       showToast("Backup importado em um novo projeto SQLite.");
@@ -23245,7 +23301,7 @@ Descreva o objetivo deste projeto.`
       showToast("Projeto atualizado.");
     } catch (error) {
       handleApiError(error);
-      showToast(apiAvailable ? "N\xE3o foi poss\xEDvel atualizar o projeto." : "Servidor local offline. Rode npm run serve.");
+      showToast(apiAvailable ? "N\xE3o foi poss\xEDvel atualizar o projeto." : deploymentCopy().serverOffline);
     }
   }
   async function renameActiveLoop() {
@@ -23928,7 +23984,7 @@ Descreva o objetivo deste projeto.`
         elements.presentationBody.style.animation = "";
       });
     }
-    const imageSource = frame.scene.content.src || (frame.scene.content.assetId && apiAvailable ? `/api/assets/${encodeURIComponent(frame.scene.content.assetId)}` : "");
+    const imageSource = frame.scene.content.src || (frame.scene.content.assetId && apiAvailable ? apiUrl(`/api/assets/${encodeURIComponent(frame.scene.content.assetId)}`) : "");
     elements.presentationImage.hidden = !imageSource;
     if (imageSource) {
       elements.presentationImage.src = imageSource;
@@ -25205,13 +25261,19 @@ Descreva o objetivo deste projeto.`
         method: "POST",
         body: { path }
       });
+      if (followHostedRedirect(data)) return;
       await activateProjectData(data);
       await loadLocalProjects();
       showToast(message);
     } catch (error) {
       handleApiError(error);
-      showToast(apiAvailable ? "N\xE3o foi poss\xEDvel abrir o projeto." : "Servidor local offline. Rode npm run serve.");
+      showToast(apiAvailable ? "N\xE3o foi poss\xEDvel abrir o projeto." : deploymentCopy().serverOffline);
     }
+  }
+  function followHostedRedirect(data) {
+    if (!hostedContext() || typeof data?.redirect !== "string" || !data.redirect.startsWith("/w/")) return false;
+    window.location.assign(data.redirect);
+    return true;
   }
   function fileNameFromPath(path) {
     return String(path || "Projeto").split(/[\\/]/).pop() || "Projeto";

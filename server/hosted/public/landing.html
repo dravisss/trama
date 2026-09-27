@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ECE8DB">
+  <meta name="description" content="{{PRODUCT}}: mapas de loops causais interativos e apresentações narradas. Sem conta, com links secretos, e aberto a agentes via MCP e API.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232B3A2E'/%3E%3Cpath d='M10 18c2-7 10-8 13-2' fill='none' stroke='%23F7F3E7' stroke-width='2'/%3E%3Cpath d='m21 12 3 4-5 1' fill='none' stroke='%23F7F3E7' stroke-width='2'/%3E%3C/svg%3E">
+  <title>{{PRODUCT}} — Mapas sistêmicos</title>
+  <link rel="stylesheet" href="/src/design-system/fonts.css">
+  <link rel="stylesheet" href="/hosted/landing.css">
+</head>
+<body>
+  <main class="landing">
+    <header class="hero">
+      <p class="eyebrow"><a href="/">{{PRODUCT}}</a> · começar</p>
+      <h1>Mapas de loops causais que contam a própria história.</h1>
+      <p class="lede">Desenhe variáveis e relações, encontre os ciclos de reforço e equilíbrio, e transforme o mapa em uma apresentação narrada. Tudo no navegador, sem criar conta.</p>
+      <form class="actions" method="post" action="/new">
+        <button class="button primary" type="submit" name="seed" value="starter">Criar espaço em branco</button>
+        <button class="button" type="submit" name="seed" value="examples">Criar com exemplos</button>
+      </form>
+      <p class="note">Cada espaço tem um <strong>link secreto de edição</strong>: quem tiver o link pode editar. Guarde-o, porque ele não pode ser recuperado. Para mostrar o trabalho, use o <strong>link de leitura</strong>, que não permite editar.</p>
+    </header>
+
+    <section class="recent" id="recent" hidden aria-labelledby="recent-title">
+      <h2 id="recent-title">Seus espaços neste navegador</h2>
+      <ul id="recent-list"></ul>
+      <form class="open" id="open-form">
+        <label for="open-link">Abrir outro espaço</label>
+        <div class="open-row">
+          <input id="open-link" type="url" placeholder="Cole o link de edição (…/w/…)" autocomplete="off" required>
+          <button class="button" type="submit">Abrir</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="agents" aria-labelledby="agents-title">
+      <h2 id="agents-title">Para agentes</h2>
+      <p>Qualquer agente pode criar, auditar e publicar mapas. O guia completo de autoria está em <a href="/llms.txt">/llms.txt</a>.</p>
+      <dl>
+        <dt>MCP (Streamable HTTP)</dt>
+        <dd><code>{{PUBLIC_URL}}/mcp</code><span>Ou use o endereço MCP do próprio espaço, disponível em “Compartilhar” dentro do editor.</span></dd>
+        <dt>API REST</dt>
+        <dd><code>{{PUBLIC_URL}}/api/v1</code><span><a href="/api/v1/openapi.json">OpenAPI</a>. Autenticação: <code>Authorization: Bearer &lt;token do espaço&gt;</code>.</span></dd>
+        <dt>CLI</dt>
+        <dd><code>curl -fsSLo trama.mjs {{PUBLIC_URL}}/cli/trama.mjs &amp;&amp; node trama.mjs help</code></dd>
+      </dl>
+    </section>
+
+    <footer class="footer">
+      <p>Espaços nunca editados são removidos após {{UNTOUCHED_DAYS}} dias, e qualquer espaço sem acesso por {{INACTIVE_DAYS}} dias também. Exporte um backup do que for importante (Compartilhar → Backup).</p>
+      {{CONTACT_BLOCK}}
+    </footer>
+  </main>
+  <script type="module" src="/hosted/landing.js"></script>
+</body>
+</html>

@@ -190,8 +190,29 @@ Presentations, controller de reprodução, exportação e medição de performan
 - `TRAMA_MAX_JSON_BYTES` altera o limite de JSON;
 - definir `HOST` amplia deliberadamente a interface de rede.
 
-O servidor não possui autenticação. Se você optar por expô-lo além da máquina local, adicione uma
-camada externa de autenticação, TLS e controle de acesso.
+O servidor local não possui autenticação. Para uso público, use o modo hospedado abaixo em vez de
+expor `server.mjs`.
+
+## Modo hospedado: Trama online, sem conta
+
+`npm run serve:hosted` (`server-hosted.mjs`) publica o mesmo app para qualquer pessoa, como em
+`https://trama.org-agents.work`:
+
+- cada pessoa cria um **espaço** isolado (um `.db` por espaço), acessado por um link secreto de
+  edição `/w/<token>`;
+- o link de leitura `/p/<token>` mostra mapas e apresentações sem permitir edição;
+- agentes usam MCP (`/mcp` ou `/w/<token>/mcp`), a API REST (`/api/v1`, com OpenAPI) ou a CLI
+  `cli/trama.mjs`, sem dependências;
+- o guia de autoria para agentes é servido em `/llms.txt`;
+- o servidor serve só uma lista fixa de arquivos e aplica limites de corpo, cotas por espaço, rate
+  limit e retenção.
+
+```bash
+npm run build
+TRAMA_PUBLIC_URL=http://localhost:4180 npm run serve:hosted
+```
+
+Arquitetura, segurança, limites e deploy na VPS: [docs/HOSTING.md](docs/HOSTING.md).
 
 ## Migração de LoopViewer para Trama
 
@@ -247,6 +268,9 @@ src/rendering/     adaptação para Cytoscape
 src/presentation/  Presentation V2, câmera, lint e export
 src/platform/      persistência SQLite local
 src/app/           composição da aplicação
+server/            rotas de projeto compartilhadas e modo hospedado (Trama online)
+cli/trama.mjs      CLI para agentes (modo hospedado)
+deploy/            Docker Compose, drop-in nginx, deploy e backup
 seeds/             demonstração pública e suas fontes
 docs/images/       capturas da aplicação pública
 tests/             testes Node
@@ -260,6 +284,7 @@ Leitura recomendada:
 - [Como contribuir](CONTRIBUTING.md)
 - [Política de segurança](SECURITY.md)
 - [Guia para agentes](AGENTS.md)
+- [Hospedagem pública](docs/HOSTING.md)
 
 ## Limitações atuais
 

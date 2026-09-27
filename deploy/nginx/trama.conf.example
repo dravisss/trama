@@ -1,0 +1,39 @@
+# Example nginx server block for a hosted Trama instance behind TLS.
+# Replace the server name and certificate paths with your own.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name trama.example.org;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name trama.example.org;
+    ssl_certificate     /etc/ssl/trama/fullchain.pem;
+    ssl_certificate_key /etc/ssl/trama/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    # The app enforces smaller per-route limits (JSON 4 MB, images 8 MB,
+    # bundle import up to the workspace quota); this is only the outer bound.
+    client_max_body_size 100M;
+
+    # Secret edit links travel in the path (/w/<token>): keep them out of logs.
+    access_log off;
+
+    add_header Strict-Transport-Security "max-age=31536000" always;
+
+    location / {
+        proxy_pass http://127.0.0.1:4180;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+        # Behind Cloudflare, also forward CF-Connecting-IP and set
+        # TRAMA_CLIENT_IP_HEADER=cf-connecting-ip in trama.env.
+        proxy_read_timeout 120s;
+        proxy_send_timeout 120s;
+    }
+}

@@ -1,0 +1,5 @@
+# /etc/cron.d/trama-backup — nightly consistent snapshot of every Trama database
+# (registry + workspaces), keeping 14 days. Retention sweeps run inside the server.
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+15 3 * * * root docker exec trama node scripts/trama-backup.mjs --data /data --out /data/backups --keep 14 >> /var/log/trama-backup.log 2>&1

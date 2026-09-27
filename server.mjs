@@ -7,6 +7,8 @@ import { ProjectStore } from "./src/platform/projectStore.js";
 import { examples } from "./src/models/examples.js";
 import { exampleAssets } from "./src/models/exampleAssets.js";
 import { slugId } from "./src/core/model.js";
+import { HttpError } from "./server/http.js";
+import { handleProjectRoutes } from "./server/projectRoutes.js";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
 const configuredDataRoot = process.env.TRAMA_DATA_ROOT || process.env.LOOPVIEWER_DATA_ROOT;
@@ -57,6 +59,10 @@ const server = createServer(async (request, response) => {
     }
     await serveStatic(request, response);
   } catch (error) {
+    if (error instanceof HttpError) {
+      sendJson(response, error.status, { error: error.message });
+      return;
+    }
     console.error(error);
     sendJson(response, error.statusCode || 500, {
       error: error.statusCode ? error.message : "Internal server error."
@@ -124,18 +130,8 @@ async function handleApi(request, response) {
     }
   }
 
-  if (request.method === "GET" && url.pathname === "/api/project") {
-    sendProject(response);
-    return;
-  }
-
   if (request.method === "GET" && url.pathname === "/api/projects") {
     sendJson(response, 200, { projects: await listLocalProjects() });
-    return;
-  }
-
-  if (request.method === "GET" && url.pathname === "/api/project/backup") {
-    sendJson(response, 200, store.exportBundle());
     return;
   }
 
@@ -212,201 +208,16 @@ async function handleApi(request, response) {
     return;
   }
 
-  if (request.method === "PUT" && url.pathname === "/api/project") {
-    const body = await readJson(request);
-    store.updateProject({
-      title: body.title,
-      description_md: body.description_md
-    });
-    sendProject(response);
-    return;
-  }
-
-  if (request.method === "GET" && url.pathname === "/api/loops") {
-    sendJson(response, 200, { loops: store.listLoops() });
-    return;
-  }
-
-  if (request.method === "GET" && url.pathname === "/api/maps") {
-    sendJson(response, 200, { maps: store.listMaps() });
-    return;
-  }
-
-  if (request.method === "POST" && url.pathname === "/api/maps") {
-    const map = store.createMap(await readJson(request));
-    sendJson(response, 201, { map });
-    return;
-  }
-
-  if (parts[0] === "api" && parts[1] === "maps" && parts[2]) {
-    const id = decodeURIComponent(parts[2]);
-    if (request.method === "POST" && parts[3] === "promote-loop") {
-      const map = store.promoteLoopToMap(id);
-      sendJson(response, map ? 201 : 404, map ? { map } : { error: "Loop not found." });
-      return;
-    }
-    if (request.method === "GET" && parts[3] === "views") {
-      sendJson(response, 200, { views: store.listViews(id) });
-      return;
-    }
-    if (request.method === "PUT" && parts.length === 3) {
-      const map = store.updateMap(id, await readJson(request));
-      sendJson(response, map ? 200 : 404, map ? { map } : { error: "Map not found." });
-      return;
-    }
-    if (request.method === "DELETE" && parts.length === 3) {
-      sendJson(response, store.deleteMap(id) ? 200 : 404, { ok: true });
-      return;
-    }
-  }
-
-  if (request.method === "POST" && url.pathname === "/api/views") {
-    const view = store.createView(await readJson(request));
-    sendJson(response, view ? 201 : 404, view ? { view } : { error: "Map not found." });
-    return;
-  }
-
-  if (parts[0] === "api" && parts[1] === "views" && parts[2]) {
-    const id = decodeURIComponent(parts[2]);
-    if (request.method === "PUT") {
-      const view = store.updateView(id, await readJson(request));
-      sendJson(response, view ? 200 : 404, view ? { view } : { error: "View not found." });
-      return;
-    }
-    if (request.method === "DELETE") {
-      sendJson(response, store.deleteView(id) ? 200 : 404, { ok: true });
-      return;
-    }
-  }
-
-  if (request.method === "GET" && url.pathname === "/api/presentations") {
-    sendJson(response, 200, { presentations: store.listPresentations() });
-    return;
-  }
-
-  if (request.method === "POST" && url.pathname === "/api/presentations") {
-    sendJson(response, 201, { presentation: store.createPresentation(await readJson(request)) });
-    return;
-  }
-
-  if (parts[0] === "api" && parts[1] === "presentations" && parts[2]) {
-    const id = decodeURIComponent(parts[2]);
-    if (request.method === "GET" && parts.length === 3) {
-      const presentation = store.getPresentation(id);
-      sendJson(response, presentation ? 200 : 404,
-        presentation ? { presentation } : { error: "Presentation not found." });
-      return;
-    }
-    if (request.method === "POST" && parts[3] === "duplicate") {
-      const duplicate = store.duplicatePresentation(id, await readJson(request));
-      sendJson(response, duplicate ? 201 : 404,
-        duplicate ? { presentation: duplicate } : { error: "Presentation not found." });
-      return;
-    }
-    if (request.method === "GET" && parts[3] === "versions") {
-      sendJson(response, 200, { versions: store.listPresentationVersions(id) });
-      return;
-    }
-    if (request.method === "POST" && parts[3] === "restore") {
-      const body = await readJson(request);
-      const restored = store.restorePresentationVersion(id, body.version_id || body.versionId);
-      sendJson(response, restored ? 200 : 404,
-        restored ? { presentation: restored } : { error: "Presentation or version not found." });
-      return;
-    }
-    if (request.method === "PUT") {
-      try {
-        const presentation = store.updatePresentation(id, await readJson(request));
-        sendJson(response, presentation ? 200 : 404,
-          presentation ? { presentation } : { error: "Presentation not found." });
-      } catch (error) {
-        if (error?.status === 409) {
-          sendJson(response, 409, { error: "Presentation revision conflict.", current: error.current });
-          return;
-        }
-        throw error;
-      }
-      return;
-    }
-    if (request.method === "DELETE") {
-      sendJson(response, store.deletePresentation(id) ? 200 : 404, { ok: true });
-      return;
-    }
-  }
-
-  if (request.method === "GET" && url.pathname === "/api/assets") {
-    sendJson(response, 200, { assets: store.listAssets() });
-    return;
-  }
-
-  if (request.method === "POST" && url.pathname === "/api/assets") {
-    const body = await readJson(request);
-    const asset = store.createAsset({
-      ...body,
-      content: Buffer.from(body.content_base64 || "", "base64")
-    });
-    sendJson(response, 201, { asset });
-    return;
-  }
-
-  if (parts[0] === "api" && parts[1] === "assets" && parts[2]) {
-    const id = decodeURIComponent(parts[2]);
-    if (request.method === "GET") {
-      const asset = store.getAsset(id);
-      if (!asset) sendJson(response, 404, { error: "Asset not found." });
-      else {
-        response.writeHead(200, {
-          "Content-Type": asset.mime_type,
-          "Cache-Control": "public, max-age=31536000, immutable",
-          "Content-Disposition": `inline; filename="${asset.filename.replace(/["\\]/g, "")}"`
-        });
-        response.end(asset.content);
-      }
-      return;
-    }
-    if (request.method === "DELETE") {
-      sendJson(response, store.deleteAsset(id) ? 200 : 404, { ok: true });
-      return;
-    }
-  }
-
-  if (request.method === "POST" && url.pathname === "/api/loops") {
-    const body = await readJson(request);
-    const loop = store.createLoop(body);
-    store.promoteLoopToMap(loop.id);
-    sendJson(response, 201, { loop });
-    return;
-  }
-
-  if (parts[0] === "api" && parts[1] === "loops" && parts[2]) {
-    const id = decodeURIComponent(parts[2]);
-    if (request.method === "GET" && parts[3] === "versions") {
-      sendJson(response, 200, { versions: store.listLoopVersions(id) });
-      return;
-    }
-    if (request.method === "POST" && parts[3] === "versions" && parts[4] && parts[5] === "restore") {
-      const loop = store.restoreLoopVersion(id, Number(parts[4]));
-      sendJson(response, loop ? 200 : 404, loop ? { loop } : { error: "Version not found." });
-      return;
-    }
-    if (request.method === "PUT" && parts.length === 3) {
-      const loop = store.updateLoop(id, await readJson(request));
-      if (!loop) sendJson(response, 404, { error: "Loop not found." });
-      else sendJson(response, 200, { loop });
-      return;
-    }
-    if (request.method === "DELETE" && parts.length === 3) {
-      sendJson(response, store.deleteLoop(id) ? 200 : 404, { ok: true });
-      return;
-    }
-    if (request.method === "POST" && parts[3] === "duplicate") {
-      const loop = store.duplicateLoop(id);
-      if (loop) store.promoteLoopToMap(loop.id);
-      if (!loop) sendJson(response, 404, { error: "Loop not found." });
-      else sendJson(response, 201, { loop });
-      return;
-    }
-  }
+  // Shared project routes read bodies through this server's size-limited
+  // readJson (TRAMA_MAX_JSON_BYTES), exactly like the routes kept above.
+  if (await handleProjectRoutes({
+    request,
+    response,
+    url,
+    store,
+    sendProject,
+    hooks: { readBody: req => readJson(req) }
+  })) return;
 
   sendJson(response, 404, { error: "Not found." });
 }

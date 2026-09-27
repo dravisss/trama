@@ -14,3 +14,6 @@ prototypes/
 research/
 printscreens/
 .od-skills/
+data/hosted/
+.trama.json
+playwright.tmp.config.mjs

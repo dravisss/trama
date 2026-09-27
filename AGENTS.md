@@ -26,6 +26,10 @@ The product is not just the application shell. The reusable engine is the core d
 - `src/rendering/` adapts the model to Cytoscape.
 - `src/app/` and `src/app.js` contain the local-first application shell.
 - `src/platform/` contains local project storage and SQLite integration.
+- `server/projectRoutes.js` holds the project REST routes shared by both servers.
+- `server/hosted/` is the public, account-less mode (Trama): secret-link workspaces, share pages,
+  agent REST API, MCP server and authoring service. `server-hosted.mjs` starts it. The CLI lives in
+  `cli/trama.mjs`. See `docs/HOSTING.md`.
 - `dist/` is generated output and should not be edited by hand.
 - `reference.html` is the frozen visual reference and should normally stay untouched.
 
@@ -160,6 +164,22 @@ The editor and standalone player both resolve camera targets through
 `src/presentation/camera.js`.
 
 For a reusable authored loop, leave `seeds/<slug>.loop.md`, `seeds/<slug>.story.md`, and a small seed/update script when persistence is repeatable. Do not add `model.story`, maintain a parallel legacy narrative, or edit `dist/` and `reference.html` by hand.
+
+## Hosted Mode And Remote Agents
+
+When the target is the hosted Trama server (`https://trama.org-agents.work`) rather than the local
+SQLite project, use its MCP server (`/mcp` or `/w/<edit-token>/mcp`), the REST API (`/api/v1`) or
+`cli/trama.mjs`. They run the same pipeline described above on the server:
+
+- `validate_map` compiles the map, validates it and compares the loop classification with each
+  R/B label;
+- `save_presentation` binds every scene to the map, derives the V2 camera and lints against the
+  real map;
+- saving a presentation again updates it instead of creating a duplicate.
+
+The public authoring guide is `server/hosted/guide.md` (served as `/llms.txt`). Keep it in sync with
+the loop and story Markdown grammars. Never publish an edit token; share only `share_url` /
+`present_url`.
 
 ## Mermaid Ta Trama Skill
 

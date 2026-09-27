@@ -13,7 +13,7 @@
     "serve:landing": "node scripts/serve-landing.mjs",
     "check:landing": "node --test tests/landing.test.mjs && node scripts/build-landing.mjs && node scripts/qa-landing.mjs",
     "build": "node build.mjs",
-    "test": "node --test tests/*.test.mjs tests/design-system/*.test.mjs",
+    "test": "node --test tests/*.test.mjs tests/design-system/*.test.mjs tests/hosted/*.test.mjs",
     "qa:story": "node --test qa/story-studio.test.mjs",
     "qa:browser": "node scripts/qa-browser-performance.mjs",
     "build:tokens": "node scripts/build-design-tokens.mjs",
@@ -27,7 +27,9 @@
     "check:ui": "npm run check:ui-contract && npm run check:ui-legacy && npm run test:ui && npm run test:a11y",
     "migrate:presentations-camera": "node scripts/migrate-presentations-camera-v2.mjs data/trama.db",
     "check": "npm run test && npm run qa:story && npm run build",
-    "serve": "node --no-warnings server.mjs"
+    "serve": "node --no-warnings server.mjs",
+    "serve:hosted": "node --no-warnings server-hosted.mjs",
+    "trama": "node cli/trama.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
@@ -44,5 +46,11 @@
     "layout-base": "^2.0.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
+  },
+  "bin": {
+    "trama": "cli/trama.mjs"
+  },
+  "engines": {
+    "node": ">=22.13"
   }
 }

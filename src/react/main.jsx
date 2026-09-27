@@ -17,6 +17,7 @@ import { Icon } from "./ui/Icon.jsx";
 import { Input, Select } from "./ui/Field.jsx";
 import { OverlaySurfaces } from "./overlaySurfaces.jsx";
 import { WorkspaceView } from "./workspaceView.jsx";
+import { deploymentCopy } from "../app/deploymentCopy.js";
 
 const ICONS = {
   workspace: <Icon name="folder" />,
@@ -93,8 +94,8 @@ function ReactShell({ mode, view, callbacks, viewSwitcher, onModeChange, onActio
           ))}
         </nav>
         <div className="app-navigation-foot">
-          <span>Local-first</span>
-          <small>Seus mapas permanecem no projeto SQLite local.</small>
+          <span>{deploymentCopy().navFootTitle}</span>
+          <small>{deploymentCopy().navFootText}</small>
         </div>
       </aside>
       <header className="topbar react-topbar">
@@ -103,7 +104,7 @@ function ReactShell({ mode, view, callbacks, viewSwitcher, onModeChange, onActio
           <Button className="story-exit-workspace" id="story-exit-workspace" onClick={() => onAction?.("exitStoryWorkspace")} aria-label="Voltar ao workspace" size="icon" variant="quiet"><Icon name="arrowLeft" /></Button>
           <div className="brand-mark" aria-hidden="true" />
           <div>
-            {mode === "map" ? <><span className="mode-eyebrow">Editor local</span><h1>Editor</h1><p>{modeSubtitle(mode)}</p></> : <><h1>{modeLabel(mode)}</h1><p>{modeSubtitle(mode)}</p></>}
+            {mode === "map" ? <><span className="mode-eyebrow">{deploymentCopy().editorEyebrow}</span><h1>Editor</h1><p>{modeSubtitle(mode)}</p></> : <><h1>{modeLabel(mode)}</h1><p>{modeSubtitle(mode)}</p></>}
           </div>
         </div>
         <div className="breadcrumb-shell">
