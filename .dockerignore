@@ -1,19 +1,23 @@
-.git
-.claude
-node_modules
-data
-research
-prototypes
-printscreens
-test-results
-playwright-report
-e2e
-qa
-docs
-tests
+# Patterns are anchored at the repository root (leading "/") so rsync
+# --exclude-from and Docker interpret them the same way: an unanchored "qa"
+# would also drop src/qa/ under rsync.
+/.git
+/.claude
+/.impeccable
+/node_modules
+/data
+/research
+/prototypes
+/printscreens
+/test-results
+/playwright-report
+/e2e
+/qa
+/docs
+/tests
+/storymap*
+/excalidraw.log
+/.trama.json
 *.log
 *.png
-storymap*
-excalidraw.log
-.trama.json
 .DS_Store

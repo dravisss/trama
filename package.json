@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "engines": {
-    "node": ">=22.5"
+    "node": ">=22.13"
   },
   "scripts": {
     "build:landing": "node scripts/build-landing.mjs",
@@ -49,8 +49,5 @@
   },
   "bin": {
     "trama": "cli/trama.mjs"
-  },
-  "engines": {
-    "node": ">=22.13"
   }
 }
