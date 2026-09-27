@@ -17,3 +17,6 @@ printscreens/
 data/hosted/
 .trama.json
 playwright.tmp.config.mjs
+
+# Impeccable local design-tool config (internal)
+.impeccable/
