@@ -145,12 +145,19 @@ Allowed signs:
 - `-+`
 - `--`
 
-Meaning:
+Meaning: each sign is the direction of movement at that end of the relation
+(source ↑/↓, target ↑/↓).
 
-- `++` positive feedback relation
-- `--` negative feedback relation
-- `+-` negative feedback relation
-- `-+` positive feedback relation
+- `++` source ↑, target ↑: same direction, positive relation
+- `--` source ↓, target ↓: same direction, positive relation
+- `+-` source ↑, target ↓: opposite direction, negative relation
+- `-+` source ↓, target ↑: opposite direction, negative relation
+
+Loop type is the product of relation polarities: an even number of negative
+relations is reinforcing, an odd number is balancing.
+
+At most one relation may be declared per ordered `source -> target` pair.
+Loops reference edges by pair, so a duplicate pair is a compile error.
 
 Normalization:
 

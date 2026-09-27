@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   compileLoopMarkdown,
   LoopLanguageError,
@@ -94,6 +95,65 @@ test("loop markdown reports actionable line errors", () => {
     () => compileLoopMarkdown("# Broken\n\n## Relations\nmissing ++ unknown"),
     error => error instanceof LoopLanguageError && error.errors.some(item => item.line === 4)
   );
+});
+
+test("loop markdown classifies -- as positive and -+ as negative relations", () => {
+  const model = compileLoopMarkdown(`# Dual signs
+
+## Variables
+
+- a: A
+- b: B
+- c: C
+
+## Relations
+
+a -+ b
+b -- c
+c ++ a
+
+## Loops
+
+- B1: Dual-sign balance
+  edges:
+    - a -> b
+    - b -> c
+    - c -> a
+`);
+  assert.deepEqual(model.edges.map(edge => `${edge.sourceSign}${edge.targetSign}:${edge.type}`), ["−+:balancing", "−−:reinforcing", "++:reinforcing"]);
+  assert.equal(model.loops[0].type, "balancing");
+});
+
+test("loop markdown rejects duplicate relations for the same ordered pair", () => {
+  assert.throws(
+    () => compileLoopMarkdown(`# Duplicates
+
+## Variables
+
+- a: A
+- b: B
+
+## Relations
+
+a ++ b
+b ++ a
+a -- b
+
+## Loops
+
+- R1: Ambiguous
+  edges:
+    - a -> b
+    - b -> a
+`),
+    error => error instanceof LoopLanguageError
+      && error.errors.some(item => item.line === 12 && /Duplicate relation 'a -> b'.*line 10/.test(item.message))
+  );
+});
+
+test("capitalismo seed loops classify as labelled", () => {
+  const model = compileLoopMarkdown(readFileSync(new URL("./hosted/fixtures/capitalismo.loop.md", import.meta.url), "utf8"));
+  assert.deepEqual(model.loops.map(loop => `${loop.id}:${loop.type}`), ["R1:reinforcing", "B1:balancing"]);
 });
 
 test("loop markdown remains map-only and does not serialize presentation data", () => {

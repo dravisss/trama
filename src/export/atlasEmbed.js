@@ -435,7 +435,12 @@ function quadraticPoint(source, control, target, t) {
 }
 
 function isNegativePolarity(edge = {}) {
-  return ["-", "−", "–"].includes(String(edge.targetSign || "").trim()) || edge.type === "balancing";
+  if (edge.sourceSign && edge.targetSign) return isMinusSign(edge.sourceSign) !== isMinusSign(edge.targetSign);
+  return isMinusSign(edge.targetSign) || edge.type === "balancing";
+}
+
+function isMinusSign(sign) {
+  return ["-", "−", "–"].includes(String(sign || "").trim());
 }
 
 function validPosition(position) {

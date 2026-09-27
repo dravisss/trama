@@ -308,7 +308,7 @@
     },
     {
       "id": "r2",
-      "label": "B2 — Cliente insatisfeito amplia a pressão",
+      "label": "R2 — Cliente insatisfeito amplia a pressão",
       "edgeIds": [
         "e16",
         "e06",
@@ -318,7 +318,7 @@
         "e08",
         "e09"
       ],
-      "type": "balancing"
+      "type": "reinforcing"
     },
     {
       "id": "r3",

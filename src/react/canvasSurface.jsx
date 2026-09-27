@@ -106,7 +106,7 @@ function CanvasSurfaceMarkup({ mapSelector = {}, canvasActions = {}, editorActio
           <span className="route-performance" id="route-performance">Rota aguardando medição</span>
         </div></details>
       </div>
-      <div className="legend" id="view-legend" aria-label="Legenda da view"><span><i className="legend-line" />Feedback positivo ++ / −+</span><span><i className="legend-line dashed" />Feedback negativo −− / +−</span></div>
+      <div className="legend" id="view-legend" aria-label="Legenda da view"><span><i className="legend-line" />Feedback positivo ++ / −−</span><span><i className="legend-line dashed" />Feedback negativo +− / −+</span></div>
       <div className="hint">Clique numa aresta para ler · explore loops R/B · use Editar para reorganizar</div>
       <div className="toast" id="toast" role="status" hidden />
     </>

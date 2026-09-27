@@ -97,9 +97,17 @@ export function compileLoopMarkdown(source) {
   if (inFrontmatter) errors.push({ line: lines.length, message: "Frontmatter is not closed." });
   const nodeIds = new Set(nodes.map(node => node.id));
   const edgeIds = new Set();
+  const relationLineByPair = new Map();
   const edges = relations.map(relation => {
     if (!nodeIds.has(relation.source)) errors.push({ line: relation.line, message: `Unknown source variable '${relation.source}'.` });
     if (!nodeIds.has(relation.target)) errors.push({ line: relation.line, message: `Unknown target variable '${relation.target}'.` });
+    const pair = `${relation.source}->${relation.target}`;
+    if (relationLineByPair.has(pair)) {
+      errors.push({
+        line: relation.line,
+        message: `Duplicate relation '${relation.source} -> ${relation.target}' (first declared on line ${relationLineByPair.get(pair)}). Declare at most one relation per ordered pair.`
+      });
+    } else relationLineByPair.set(pair, relation.line);
     const id = uniqueId(`${relation.source}-${relation.target}`, edgeIds);
     edgeIds.add(id);
     return {

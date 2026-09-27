@@ -2049,9 +2049,9 @@ function addViewRule() {
 function renderViewLegend(view) {
   if (!elements.viewLegend) return;
   elements.viewLegend.replaceChildren();
-  const reinforcing = element("span", "", "Feedback positivo ++ / −+");
+  const reinforcing = element("span", "", "Feedback positivo ++ / −−");
   reinforcing.prepend(element("i", "legend-line"));
-  const balancing = element("span", "", "Feedback negativo −− / +−");
+  const balancing = element("span", "", "Feedback negativo +− / −+");
   balancing.prepend(element("i", "legend-line dashed"));
   elements.viewLegend.append(reinforcing, balancing);
   for (const entry of buildViewLegend(view)) {

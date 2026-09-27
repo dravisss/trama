@@ -283,9 +283,7 @@ export function uniqueId(base, existingIds) {
 function normalizeEdge(edge) {
   const sourceSign = normalizeSign(edge.sourceSign);
   const targetSign = normalizeSign(edge.targetSign);
-  const feedbackType = sourceSign === "+" && targetSign === "+" || sourceSign === "−" && targetSign === "+"
-    ? "reinforcing"
-    : "balancing";
+  const feedbackType = sourceSign === targetSign ? "reinforcing" : "balancing";
   return {
     ...edge,
     sourceSign,

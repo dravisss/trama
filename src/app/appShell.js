@@ -1,6 +1,7 @@
 import { applyDesignSystemContext } from "../design-system/runtime.js";
 import { hostedContext } from "./api.js";
 import { deploymentCopy } from "./deploymentCopy.js";
+import { normalizeSign } from "../core/model.js";
 
 const MODE_COPY = Object.freeze({
   workspace: {
@@ -111,7 +112,7 @@ export function mapPreviewGeometry(model, { width = 220, height = 106, padding =
       id: edge.id,
       source: byId.get(edge.source),
       target: byId.get(edge.target),
-      type: edge.type || (edge.sourceSign === "+" && edge.targetSign === "+" || edge.sourceSign === "−" && edge.targetSign === "+" ? "reinforcing" : "balancing")
+      type: edge.type || (normalizeSign(edge.sourceSign) === normalizeSign(edge.targetSign) ? "reinforcing" : "balancing")
     })).filter(edge => edge.source && edge.target)
   };
 }

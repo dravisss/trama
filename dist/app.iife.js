@@ -7707,8 +7707,7 @@
   var LOOP_TYPES = /* @__PURE__ */ new Set(["reinforcing", "balancing"]);
   var discoveryCache = /* @__PURE__ */ new WeakMap();
   function relationPolarity(edge) {
-    const signs = `${normalizeSign(edge.sourceSign)}${normalizeSign(edge.targetSign)}`;
-    return signs === "++" || signs === "\u2212+" ? 1 : -1;
+    return normalizeSign(edge.sourceSign) === normalizeSign(edge.targetSign) ? 1 : -1;
   }
   function classifyLoop(edges) {
     const polarity = edges.reduce((product, edge) => product * relationPolarity(edge), 1);
@@ -8115,7 +8114,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
   function normalizeEdge(edge) {
     const sourceSign = normalizeSign2(edge.sourceSign);
     const targetSign = normalizeSign2(edge.targetSign);
-    const feedbackType = sourceSign === "+" && targetSign === "+" || sourceSign === "\u2212" && targetSign === "+" ? "reinforcing" : "balancing";
+    const feedbackType = sourceSign === targetSign ? "reinforcing" : "balancing";
     return {
       ...edge,
       sourceSign,
@@ -12545,7 +12544,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       },
       {
         id: "r2",
-        label: "B2 \u2014 Cliente insatisfeito amplia a press\xE3o",
+        label: "R2 \u2014 Cliente insatisfeito amplia a press\xE3o",
         edgeIds: [
           "e16",
           "e06",
@@ -12555,7 +12554,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
           "e08",
           "e09"
         ],
-        type: "balancing"
+        type: "reinforcing"
       },
       {
         id: "r3",
@@ -14936,9 +14935,17 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
     if (inFrontmatter) errors.push({ line: lines.length, message: "Frontmatter is not closed." });
     const nodeIds = new Set(nodes.map((node) => node.id));
     const edgeIds = /* @__PURE__ */ new Set();
+    const relationLineByPair = /* @__PURE__ */ new Map();
     const edges = relations.map((relation) => {
       if (!nodeIds.has(relation.source)) errors.push({ line: relation.line, message: `Unknown source variable '${relation.source}'.` });
       if (!nodeIds.has(relation.target)) errors.push({ line: relation.line, message: `Unknown target variable '${relation.target}'.` });
+      const pair = `${relation.source}->${relation.target}`;
+      if (relationLineByPair.has(pair)) {
+        errors.push({
+          line: relation.line,
+          message: `Duplicate relation '${relation.source} -> ${relation.target}' (first declared on line ${relationLineByPair.get(pair)}). Declare at most one relation per ordered pair.`
+        });
+      } else relationLineByPair.set(pair, relation.line);
       const id = uniqueId(`${relation.source}-${relation.target}`, edgeIds);
       edgeIds.add(id);
       return {
@@ -16273,7 +16280,7 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
         id: edge.id,
         source: byId2.get(edge.source),
         target: byId2.get(edge.target),
-        type: edge.type || (edge.sourceSign === "+" && edge.targetSign === "+" || edge.sourceSign === "\u2212" && edge.targetSign === "+" ? "reinforcing" : "balancing")
+        type: edge.type || (normalizeSign2(edge.sourceSign) === normalizeSign2(edge.targetSign) ? "reinforcing" : "balancing")
       })).filter((edge) => edge.source && edge.target)
     };
   }
@@ -18204,7 +18211,11 @@ ${styles}</style>
     };
   }
   function isNegativePolarity(edge = {}) {
-    return ["-", "\u2212", "\u2013"].includes(String(edge.targetSign || "").trim()) || edge.type === "balancing";
+    if (edge.sourceSign && edge.targetSign) return isMinusSign(edge.sourceSign) !== isMinusSign(edge.targetSign);
+    return isMinusSign(edge.targetSign) || edge.type === "balancing";
+  }
+  function isMinusSign(sign) {
+    return ["-", "\u2212", "\u2013"].includes(String(sign || "").trim());
   }
   function validPosition(position) {
     return Number.isFinite(position?.x) && Number.isFinite(position?.y);
@@ -21210,9 +21221,9 @@ variable { shape: ellipse; }
   function renderViewLegend(view) {
     if (!elements.viewLegend) return;
     elements.viewLegend.replaceChildren();
-    const reinforcing = element2("span", "", "Feedback positivo ++ / \u2212+");
+    const reinforcing = element2("span", "", "Feedback positivo ++ / \u2212\u2212");
     reinforcing.prepend(element2("i", "legend-line"));
-    const balancing = element2("span", "", "Feedback negativo \u2212\u2212 / +\u2212");
+    const balancing = element2("span", "", "Feedback negativo +\u2212 / \u2212+");
     balancing.prepend(element2("i", "legend-line dashed"));
     elements.viewLegend.append(reinforcing, balancing);
     for (const entry of buildViewLegend(view)) {

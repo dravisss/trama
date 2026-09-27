@@ -28,9 +28,7 @@ escassez-renda ++ corrida-rentabilidade: A escassez cria oportunidades de lucro 
 corrida-rentabilidade ++ expectativa-lucratividade: Novas oportunidades de rentabilidade reforçam a expectativa de que a expansão continuará compensando.
 escassez-renda ++ investimento-eficiencia: A escassez e o aumento de custos estimulam investimentos em eficiência, substituição e conservação.
 investimento-eficiencia +- intensidade-material: Mais eficiência reduz a quantidade de recursos necessária por unidade de valor produzido.
-intensidade-material -- pressao-extrativa: Menor intensidade material reduz a pressão extrativa para um mesmo nível de atividade econômica.
-pressao-extrativa -- deplecao-recursos: Quando a pressão extrativa cai, a velocidade de depleção também cai.
-deplecao-recursos -- escassez-renda: Menor depleção reduz a escassez e a renda extraordinária associada ao recurso.
+intensidade-material ++ pressao-extrativa: Menor intensidade material reduz a pressão extrativa para um mesmo nível de atividade econômica.
 
 ## Loops
 

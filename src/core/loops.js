@@ -2,9 +2,10 @@ export const LOOP_TYPES = new Set(["reinforcing", "balancing"]);
 
 const discoveryCache = new WeakMap();
 
+// Each sign is the direction of movement at that end (source ↑/↓, target ↑/↓):
+// equal signs (++, −−) are same-direction links, different signs (+−, −+) are opposite-direction links.
 export function relationPolarity(edge) {
-  const signs = `${normalizeSign(edge.sourceSign)}${normalizeSign(edge.targetSign)}`;
-  return signs === "++" || signs === "−+" ? 1 : -1;
+  return normalizeSign(edge.sourceSign) === normalizeSign(edge.targetSign) ? 1 : -1;
 }
 
 export function classifyLoop(edges) {

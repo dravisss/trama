@@ -13,7 +13,7 @@ import {
   CLDValidationError
 } from "../src/core/model.js";
 import { analyzeDensity, resolveDensityProfile } from "../src/core/density.js";
-import { classifyLoop, discoverLoops } from "../src/core/loops.js";
+import { classifyLoop, discoverLoops, relationPolarity } from "../src/core/loops.js";
 import { applySavedLayout, extractLayout } from "../src/app/layoutStorage.js";
 import { examples } from "../src/models/examples.js";
 import { exampleAssets } from "../src/models/exampleAssets.js";
@@ -208,6 +208,33 @@ test("normalizes curated loops and derives their type", () => {
   assert.equal(classifyLoop(model.edges), "balancing");
 });
 
+test("relation polarity compares source and target movement: −− is positive and −+ is negative", () => {
+  const edge = (sourceSign, targetSign) => ({ id: `${sourceSign}${targetSign}`, source: "a", target: "b", sourceSign, targetSign });
+  assert.equal(relationPolarity(edge("+", "+")), 1);
+  assert.equal(relationPolarity(edge("-", "-")), 1);
+  assert.equal(relationPolarity(edge("−", "−")), 1);
+  assert.equal(relationPolarity(edge("-", "−")), 1);
+  assert.equal(relationPolarity(edge("+", "-")), -1);
+  assert.equal(relationPolarity(edge("-", "+")), -1);
+  assert.equal(relationPolarity(edge("−", "+")), -1);
+  assert.equal(classifyLoop([edge("-", "-"), edge("+", "+")]), "reinforcing");
+  assert.equal(classifyLoop([edge("-", "+"), edge("+", "+")]), "balancing");
+  assert.equal(classifyLoop([edge("-", "+"), edge("+", "-")]), "reinforcing");
+  assert.equal(classifyLoop([edge("-", "-"), edge("+", "-")]), "balancing");
+  const normalized = normalizeModel({
+    id: "dual-sign",
+    nodes: [{ id: "a", label: "A" }, { id: "b", label: "B" }, { id: "c", label: "C" }],
+    edges: [
+      { id: "ab", source: "a", target: "b", sourceSign: "-", targetSign: "+" },
+      { id: "bc", source: "b", target: "c", sourceSign: "-", targetSign: "-" },
+      { id: "ca", source: "c", target: "a", sourceSign: "+", targetSign: "+" }
+    ],
+    loops: [{ id: "b1", edgeIds: ["ab", "bc", "ca"] }]
+  });
+  assert.deepEqual(normalized.edges.map(item => item.type), ["balancing", "reinforcing", "reinforcing"]);
+  assert.equal(normalized.loops[0].type, "balancing");
+});
+
 test("editing edge polarity recalculates dependent loop type", () => {
   const model = normalizeModel({
     id: "polarity-edit",
@@ -281,16 +308,16 @@ test("invalidates discovered loop type when an edge sign changes", () => {
   });
   assert.equal(discoverLoops(model)[0].type, "reinforcing");
   model.edges[0].sourceSign = "-";
-  assert.equal(discoverLoops(model)[0].type, "reinforcing");
+  assert.equal(discoverLoops(model)[0].type, "balancing");
 });
 
 test("classifies relation feedback from the exact sign pair", () => {
   const positive = normalizeModel({ id: "positive", nodes: [{ id: "a", label: "A" }, { id: "b", label: "B" }], edges: [
     { id: "pp", source: "a", target: "b", sourceSign: "+", targetSign: "+" },
-    { id: "np", source: "a", target: "b", sourceSign: "−", targetSign: "+" }
+    { id: "nn", source: "a", target: "b", sourceSign: "−", targetSign: "−" }
   ] });
   const negative = normalizeModel({ id: "negative", nodes: [{ id: "a", label: "A" }, { id: "b", label: "B" }], edges: [
-    { id: "nn", source: "a", target: "b", sourceSign: "−", targetSign: "−" },
+    { id: "np", source: "a", target: "b", sourceSign: "−", targetSign: "+" },
     { id: "pn", source: "a", target: "b", sourceSign: "+", targetSign: "−" }
   ] });
   assert.deepEqual(positive.edges.map(edge => edge.type), ["reinforcing", "reinforcing"]);

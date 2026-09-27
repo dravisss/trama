@@ -86,6 +86,8 @@ source ↓, target ↑ => -+
 source ↓, target ↓ => --
 ```
 
+Equal signs (`++`, `--`) are same-direction links and count as positive; different signs (`+-`, `-+`) are opposite-direction links and count as negative. `relationPolarity()` and `classifyLoop()` implement exactly this rule: a loop is reinforcing when it has an even number of opposite-direction links and balancing when the number is odd.
+
 Mermaid labels are only clues:
 
 - `Aumenta` means same direction, which can be `++` or `--`.

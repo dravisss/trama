@@ -90,7 +90,9 @@ source ↓, target ↑ => -+
 source ↓, target ↓ => --
 ```
 
-For every curated loop, verify that edge ids form an ordered directed cycle, no edge repeats, adjacent signs support the intended movement, `validateModel(model)` accepts it, and `classifyLoop()` derives the intended reinforcing/balancing type. If a source section describes an important connection that is not a valid directed cycle, keep it as a presentation beat instead of forcing it into `model.loops`.
+Equal signs (`++`, `--`) are same-direction links and count as positive; different signs (`+-`, `-+`) are opposite-direction links and count as negative. `relationPolarity()` and `classifyLoop()` implement exactly this rule: a loop is reinforcing when it has an even number of opposite-direction links and balancing when the number is odd.
+
+Declare at most one relation per ordered pair of variables: `compileLoopMarkdown()` rejects a second `source SIGN target` line for the same pair, because loop edges are referenced by pair. For every curated loop, verify that edge ids form an ordered directed cycle, no edge repeats, adjacent signs support the intended movement, `validateModel(model)` accepts it, and `classifyLoop()` derives the intended reinforcing/balancing type. If a source section describes an important connection that is not a valid directed cycle, keep it as a presentation beat instead of forcing it into `model.loops`.
 
 ### Create the presentation Markdown
 

@@ -48,7 +48,7 @@ CAR +- AFC: Carteirada reduz a adesao ao funil.
     - BLD -> DRC
     - DRC -> CCD
     - CCD -> BLD
-- r2: B2 — Cliente insatisfeito amplia a pressão
+- r2: R2 — Cliente insatisfeito amplia a pressão
   edges:
     - CCD -> TCD
     - TCD -> SCL
