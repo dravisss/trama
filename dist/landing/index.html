@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3e9">
+  <meta name="description" content="Crie mapas de relações causais, explore os ciclos de um sistema e conte a história por trás de um problema. Experimente o Trama nesta página.">
+  <title>Trama — entenda as relações, descubra os ciclos</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="./assets/fonts/noto-serif-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/noto-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./assets/landing.css">
+  <script src="./assets/landing.js" defer></script>
+</head>
+<body class="no-js">
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+  <header class="site-header page-width">
+    <a class="brand" href="#inicio" aria-label="Trama, início"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M5 23C5 9 21 6 26 13s-3 18-12 14S7 12 17 7s17 8 10 16"/></svg>trama</a>
+    <nav aria-label="Navegação principal"><a href="#como-funciona">Como funciona</a><a href="#para-quem">Para quem</a><a class="nav-action" href="#demo" data-start="explore">Experimentar <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></a></nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero page-width" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">O que faz um problema <em>se repetir?</em></h1>
+        <p class="hero-description">Dê forma às relações que você percebe. Descubra os ciclos. Conte a história do sistema.</p>
+        <a href="#historia" class="button primary" data-story-enter>Acompanhe uma história <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+        <p class="hero-note">Mapas de relações causais para pensar<br class="desktop-break"> e conversar sobre problemas complexos.</p>
+      </div>
+      <figure class="hero-atlas" aria-label="O ciclo dos atalhos: seis variáveis ilustradas, conectadas em um ciclo de reforço">
+        <svg id="atlas" viewBox="0 0 760 700" role="group" aria-label="Explore as variáveis do exemplo"></svg>
+        <noscript><img src="./assets/images/TCD.webp" alt="Uma ampulheta sobre uma esteira circular: a espera que se repete." width="512" height="512"></noscript>
+        <figcaption><span class="atlas-caption-line"></span>Uma espera. Muitos caminhos. O mesmo ciclo.</figcaption>
+      </figure>
+      <div class="hero-bottom"><span>Um olhar para o sistema inteiro.</span><a href="#historia">Role para puxar o primeiro fio <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-5-5 5 5 5-5"/></svg></a></div>
+    </section>
+
+    <section class="story-intro page-width" aria-labelledby="journey-title"><h2 id="journey-title">Puxe um fio.<br><em>Veja o que se move.</em></h2><div><p>Às vezes, a solução de hoje alimenta o problema de amanhã.</p><p>Acompanhe um exemplo no próprio Trama. A cada passo, uma relação aparece. Até que o ciclo se revela.</p></div></section>
+    <section class="journey" id="historia" aria-label="O ciclo dos atalhos, uma história interativa">
+      <div class="journey-pin">
+      <div class="journey-progress" aria-hidden="true"><span></span></div>
+      <div class="demo page-width" id="demo" aria-label="Demonstração interativa do Trama" tabindex="-1" data-mode="story">
+        <div class="demo-topline"><span class="demo-name">O ciclo dos atalhos</span><span class="demo-label">Exemplo ilustrativo</span></div>
+        <div class="demo-tabs" role="group" aria-label="Escolha como usar o mapa">
+          <button type="button" data-mode="story" aria-pressed="true" disabled>Acompanhar</button>
+          <button type="button" data-mode="explore" aria-pressed="false" disabled>Explorar</button>
+          <button type="button" data-mode="edit" aria-pressed="false" disabled>Experimentar</button>
+        </div>
+        <div class="map-wrap">
+          <div id="graph" role="img" aria-label="Mapa de seis variáveis formando o ciclo dos atalhos. Uma versão em texto está disponível abaixo." aria-describedby="graph-help"></div>
+          <div id="map-keyboard" class="map-keyboard" role="group" aria-label="Variáveis do mapa"></div>
+          <div class="map-center" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M25 12a10 10 0 1 0 1 7M25 5v8h-8"/></svg><span>O ciclo<br>dos atalhos</span><small>um ciclo de reforço</small></div>
+          <div class="map-loading" role="status">Preparando o mapa…</div>
+          <div class="map-tools" role="group" aria-label="Enquadramento do mapa">
+            <button type="button" data-tool="out" aria-label="Diminuir zoom" title="Diminuir zoom" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+            <button type="button" data-tool="in" aria-label="Aumentar zoom" title="Aumentar zoom" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12m-6-6v12"/></svg></button>
+            <button type="button" data-tool="fit" aria-label="Ver o mapa inteiro" title="Ver o mapa inteiro" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H5v4m10-4h4v4M5 15v4h4m6 0h4v-4"/></svg></button>
+          </div>
+        </div>
+        <p class="map-help" id="graph-help">Siga as relações. O último passo revela o ciclo completo.</p>
+
+        <section class="story-reader" aria-label="História do ciclo">
+          <div class="story-copy" aria-live="polite" aria-atomic="true"><p class="story-position"><span id="step-number">1</span><span class="story-total"> / 5</span></p><h2 id="story-title">O problema parece ser a espera.</h2><p id="story-text">Uma demanda demora a avançar. À primeira vista, parece um caso isolado. Mas o que acontece quando todo mundo tenta resolver o seu caso?</p></div>
+          <div class="story-navigation"><div class="step-dots" role="group" aria-label="Passos da história"></div><div class="step-arrows"><button type="button" id="previous" aria-label="Passo anterior" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m5-5-5 5 5 5"/></svg></button><button type="button" id="next" aria-label="Próximo passo" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button></div></div>
+          <button type="button" id="scroll-follow" class="scroll-follow">A história avança com a rolagem <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-5-5 5 5 5-5"/></svg></button>
+        </section>
+
+        <section class="explore-reader" aria-label="Explore as relações" hidden>
+          <p class="reader-eyebrow">Siga o fio</p>
+          <div class="inspect-heading"><img id="inspect-image" alt="" width="112" height="112"><h2>Tempo de espera</h2></div>
+          <p id="explore-text"></p>
+          <div id="relation-path" class="relation-path"></div>
+          <div id="causal-neighbors" class="causal-neighbors" aria-label="Continue pelas relações"></div>
+          <button type="button" class="text-button" id="show-loop">Destacar o ciclo completo <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button>
+        </section>
+
+        <section class="edit-reader" aria-label="Experimente editar seu mapa" hidden>
+          <p class="reader-eyebrow">Sua leitura do sistema</p>
+          <h2>E se a trama<br>fosse outra?</h2>
+          <p>Uma ideia nova pode mudar a conversa. Coloque a sua no mapa.</p>
+          <div class="edit-tools" role="group" aria-label="Ferramentas de criação">
+            <button type="button" data-edit-tool="select" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 3 13 10-7 1-3 7Z"/></svg>Selecionar</button>
+            <button type="button" data-edit-tool="connect" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="17" r="3"/><circle cx="19" cy="7" r="3"/><path d="M8 17c6 0 0-10 8-10m-4-3 4 3-4 3"/></svg>Conectar</button>
+            <button type="button" data-edit-tool="add" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Variável</button>
+          </div>
+          <div id="edit-prompt" class="edit-prompt"><span class="gesture-mark" aria-hidden="true"><svg viewBox="0 0 64 48"><circle cx="18" cy="24" r="12"/><path d="M34 24h22m-7-7 7 7-7 7"/></svg></span><p id="edit-instruction">Toque em uma variável para editar. Arraste para reorganizar.</p></div>
+          <form id="edit-form" hidden><div class="edit-selection"><img id="edit-image" alt="" width="54" height="54"><span>Editando sua cópia</span></div><label class="field">Nome da variável<input id="node-label" maxlength="64" required autocomplete="off"></label><label class="field">Sua leitura<textarea id="node-description" rows="2" maxlength="600"></textarea></label><button class="button primary compact" type="submit">Aplicar alteração</button></form>
+          <form id="add-form" hidden><label class="field">O que está faltando neste mapa?<input id="new-label" maxlength="64" required placeholder="Ex.: visibilidade do trabalho" autocomplete="off"></label><p class="form-note">Depois, conecte sua ideia a uma variável do mapa.</p><button class="button primary compact" type="submit">Criar variável</button></form>
+          <form id="connect-form" hidden><div id="connection-preview" class="connection-preview"></div><fieldset class="polarity-picker"><legend>Quando a primeira aumenta, a outra…</legend><label><input type="radio" name="polarity" value="+" checked><span><b>+</b>Aumenta</span></label><label><input type="radio" name="polarity" value="-"><span><b>−</b>Diminui</span></label></fieldset><label class="field">Por quê?<textarea id="new-description" rows="2" required maxlength="600" placeholder="Explique a relação que você percebe."></textarea></label><button class="button primary compact" type="submit">Criar relação</button><button type="button" id="cancel-connection" class="text-button">Escolher de novo</button></form>
+          <div class="edit-history"><button type="button" id="undo" class="text-button" disabled>Desfazer</button><span>Só sua, durante esta visita.</span></div>
+          <div class="draft-actions"><button type="button" id="download" class="text-button">Baixar meu mapa <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-5-5 5 5 5-5"/></svg></button><button type="button" id="reset" class="text-button">Recomeçar</button></div>
+          <div id="reset-confirm" class="reset-confirm" hidden><p>Descartar suas alterações e voltar ao exemplo original?</p><button type="button" id="confirm-reset" class="small-button">Sim, recomeçar</button><button type="button" id="cancel-reset" class="text-button">Continuar editando</button></div>
+        </section>
+        <p id="demo-status" class="demo-status" role="status" aria-live="polite"></p>
+        <details class="accessible-map"><summary>Ler as relações em texto</summary><p>Este exemplo é ilustrativo: apresenta uma hipótese sobre um sistema, não dados de uma organização real.</p><ol id="relations-list"><li>Mais tempo de espera aumenta a pressão por atalhos.</li><li>Mais atalhos incentivam canais paralelos.</li><li>Mais canais paralelos ampliam o trabalho acumulado.</li><li>O acúmulo aumenta as passagens entre áreas.</li><li>Mais passagens elevam o custo de coordenação.</li><li>Mais coordenação ocupa capacidade e aumenta a espera.</li></ol><p>As relações deste ciclo têm polaridade positiva: as duas variáveis tendem a mudar na mesma direção. Isso não significa que o efeito seja desejável.</p></details>
+        <noscript><p class="no-script">Ative o JavaScript para interagir com o mapa. Você pode acompanhar o ciclo na versão em texto acima.</p></noscript>
+      </div>
+      </div>
+    </section>
+
+    <section class="intro page-width" id="como-funciona" aria-labelledby="intro-title"><h2 id="intro-title">Um mapa para investigar.<br><em>Uma história para compartilhar.</em></h2><p>Alguns problemas persistem porque suas causas se alimentam. O Trama ajuda você a colocar essas relações à vista — e a construir uma leitura que outras pessoas possam acompanhar, questionar e transformar.</p></section>
+
+    <section class="process page-width" aria-label="Como usar o Trama">
+      <article class="product-chapter"><div class="process-art relation-study"><svg id="relation-study" viewBox="0 0 640 390" role="img" aria-label="Mais tempo de espera aumenta a pressão por atalhos individuais"></svg><p>Uma relação é uma hipótese que pode ser discutida.</p></div><div class="chapter-copy"><span class="process-number">01 / Conectar</span><h3>Tudo começa<br>entre duas coisas.</h3><p>Uma espera cresce. Um atalho aparece. Dê nome a essa relação — e torne visível o raciocínio por trás dela.</p><a href="#demo" data-start="edit">Faça uma conexão <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></a></div></article>
+      <article class="product-chapter"><div class="process-art cycle-study"><svg id="cycle-study" viewBox="0 0 640 390" role="img" aria-label="As seis relações do exemplo formam um ciclo de reforço"></svg></div><div class="chapter-copy"><span class="process-number">02 / Investigar</span><h3>Até que o efeito<br>volta ao começo.</h3><p>O que parecia uma sequência revela um ciclo. Siga as relações para entender como o sistema sustenta o próprio comportamento.</p><a href="#demo" data-start="loop">Percorra esse ciclo <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></a></div></article>
+      <article class="product-chapter"><div class="process-art narrative-study"><div class="narrative-paper"><span>O ciclo dos atalhos · 02 / 05</span><h4>Um atalho<br>parece resolver.</h4><svg id="narrative-study" viewBox="0 0 640 270" role="img" aria-label="A história destaca a relação entre espera e atalhos, mantendo o restante do sistema como contexto"></svg><div class="narrative-track" aria-hidden="true"><i></i><i class="current"></i><i></i><i></i><i></i></div></div></div><div class="chapter-copy"><span class="process-number">03 / Compartilhar</span><h3>Não mostre tudo.<br>Conduza o olhar.</h3><p>Revele uma relação por vez. A história aproxima quem está chegando, sem perder de vista a complexidade do todo.</p><a href="#demo" data-start="story">Acompanhe a história <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></a></div></article>
+    </section>
+
+    <section class="contexts" id="para-quem" aria-labelledby="contexts-title"><div class="page-width"><div class="contexts-head"><h2 id="contexts-title">Pensar junto começa<br>por <em>tornar visível.</em></h2><p>Uma superfície comum para investigar situações e conversar sobre o que pode mudar.</p></div><div class="contexts-grid"><figure class="paper-sculpture"><img src="./assets/images/trama-paper-loop.webp" width="1280" height="853" loading="lazy" alt="Faixas de papel verde, creme e terracota entrelaçadas em um ciclo: uma escultura de relações."></figure><div class="context-list"><article><div><h3>Na facilitação</h3><p>Coloque diferentes leituras da situação no mesmo mapa. Faça das conexões um ponto de partida para a conversa.</p></div></article><article><div><h3>Na educação</h3><p>Ajude uma turma a acompanhar um raciocínio. Mostre como efeitos se conectam e como um ciclo se forma.</p></div></article><article><div><h3>Na pesquisa</h3><p>Explicite hipóteses causais, examine relações e apresente uma interpretação com suas perguntas em aberto.</p></div></article></div></div></div></section>
+
+    <section class="questions page-width" aria-labelledby="questions-title"><h2 id="questions-title">Antes de<br>puxar o fio.</h2><div class="question-list"><details><summary>Preciso conhecer pensamento sistêmico?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12m-6-6v12"/></svg></summary><p>Você pode começar com uma pergunta e uma relação: quando uma coisa aumenta, o que tende a acontecer com a outra? O exemplo da página apresenta esse raciocínio passo a passo.</p></details><details><summary>O mapa prevê o que vai acontecer?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12m-6-6v12"/></svg></summary><p>O mapa organiza uma interpretação das relações. Ele ajuda a discutir hipóteses, mas não calcula previsões nem comprova que uma relação seja causal. Essas conclusões dependem de investigação e evidências.</p></details><details><summary>O que acontece com minhas alterações?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12m-6-6v12"/></svg></summary><p>Nesta demonstração, as alterações ficam apenas na memória do seu navegador e desaparecem ao recarregar a página. Use “Baixar meu mapa” no modo Experimentar para guardar uma cópia em JSON, que pode ser importada no Trama.</p></details><details><summary>Posso voltar à história depois de editar?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12m-6-6v12"/></svg></summary><p>Sim. “Acompanhar” abre a apresentação com o exemplo original. Sua cópia continua disponível em “Experimentar” durante esta visita. Você pode explorar sem perder o caminho de volta.</p></details></div></section>
+
+    <section class="closing page-width" aria-labelledby="closing-title"><h2 id="closing-title">Que problema você<br>quer <em>compreender?</em></h2><div><p>Comece por uma relação.<br>Veja aonde ela leva.</p><a class="button primary" href="#demo" data-start="edit">Experimente no mapa <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></div></section>
+  </main>
+  <footer class="site-footer page-width"><a class="brand" href="#inicio">trama</a><p>Mapas para compreender sistemas.</p><a href="#inicio">Voltar ao início <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4m-5 5 5-5 5 5"/></svg></a></footer>
+</body>
+</html>

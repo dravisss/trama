@@ -58,4 +58,10 @@ await Promise.all([
   })
 ]);
 
-console.log("Built CLD engine, app and standalone runtime.");
+await new Promise((resolve, reject) => {
+  const child = spawn(process.execPath, ["scripts/build-landing.mjs"], { stdio: "inherit" });
+  child.once("error", reject);
+  child.once("exit", code => code === 0 ? resolve() : reject(new Error(`Landing build failed with ${code}`)));
+});
+
+console.log("Built CLD engine, app, standalone runtime and Trama landing.");
