@@ -295,7 +295,7 @@ function setEditTool(tool) {
   $("#edit-form").hidden = true; $("#connect-form").hidden = true;
   $("#add-form").hidden = tool !== "add"; $("#edit-prompt").hidden = tool === "add";
   $("#edit-instruction").textContent = tool === "connect" ? "Toque na variável de onde a relação começa." : "Toque em uma variável para editar. Arraste para reorganizar.";
-  document.querySelectorAll("[data-edit-tool]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.editTool === tool)));
+  document.querySelectorAll("button[data-edit-tool]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.editTool === tool)));
   demo.dataset.editTool = tool;
   if (tool === "add") $("#new-label").focus({ preventScroll: true });
 }
@@ -359,7 +359,7 @@ function bindControls() {
     }
   }));
   $("#show-loop").addEventListener("click", showLoop);
-  document.querySelectorAll("[data-edit-tool]").forEach(button => button.addEventListener("click", () => { setEditTool(button.dataset.editTool); announce(); }));
+  document.querySelectorAll("button[data-edit-tool]").forEach(button => button.addEventListener("click", () => { setEditTool(button.dataset.editTool); announce(); }));
   $("#cancel-connection").addEventListener("click", () => setEditTool("connect"));
   document.querySelectorAll("input,textarea").forEach(field => field.addEventListener("input", () => field.setCustomValidity("")));
   $("#edit-form").addEventListener("submit", event => {

@@ -51,3 +51,20 @@ test("source drift fails rather than silently showing a disconnected presentatio
   assert.throws(() => createLandingDemo(map, story.replace("path e02, e03", "path e02, e06")));
   assert.throws(() => createLandingDemo(map.replace("e01 | espera | atalhos", "e01 | espera | canais"), story));
 });
+
+test("every relation of the loop bows toward the centre of the cycle", async () => {
+  const { inwardCurve } = await import("../landing/cinema.js");
+  const { model } = createLandingDemo(map, story);
+  assert.ok(model.edges.every(edge => edge.route.controlPointDistance > 0));
+  const points = [[392, 96], [628, 223], [620, 455], [392, 579], [164, 455], [156, 223]];
+  const centre = [392, 339];
+  for (const edge of model.edges) {
+    const a = points[model.nodes.findIndex(node => node.id === edge.source)];
+    const b = points[model.nodes.findIndex(node => node.id === edge.target)];
+    const { d } = inwardCurve(a, b, centre, { start: 84, end: 92, bow: 34, signOffset: 15 });
+    const [, cx, cy] = d.match(/Q(-?[\d.]+) (-?[\d.]+)/).map(Number);
+    const chordMid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    const distance = point => Math.hypot(point[0] - centre[0], point[1] - centre[1]);
+    assert.ok(distance([cx, cy]) < distance(chordMid), `${edge.id} bows outward`);
+  }
+});

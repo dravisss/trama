@@ -12,6 +12,29 @@ function svgElement(tag, attributes = {}, text) {
   return element;
 }
 
+/** Quadratic curve from a to b whose bulge always points toward `centre`. */
+export function inwardCurve(a, b, centre, { start, end, bow, signOffset, flat = [false, false] }) {
+  const dx = b[0] - a[0], dy = b[1] - a[1], length = Math.hypot(dx, dy);
+  const ux = dx / length, uy = dy / length;
+  const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  let nx = -uy, ny = ux;
+  if ((centre[0] - mid[0]) * nx + (centre[1] - mid[1]) * ny < 0) { nx = -nx; ny = -ny; }
+  const c = [mid[0] + nx * bow * 2, mid[1] + ny * bow * 2];
+  // Ports face the control point, so each edge leaves and enters on the inner side of its illustration.
+  // A `flat` end (the top illustration, whose label sits inside the ring) leaves along the chord instead.
+  const port = (from, gap, flat, sx) => {
+    let vx = c[0] - from[0], vy = c[1] - from[1];
+    const size = Math.hypot(vx, vy); vx /= size; vy /= size;
+    if (flat) { vx = vx * .2 + sx * ux * .8; vy = vy * .2 + sx * uy * .8; }
+    const norm = Math.hypot(vx, vy);
+    return [from[0] + vx / norm * gap, from[1] + vy / norm * gap];
+  };
+  const p0 = port(a, start, flat[0], 1), p2 = port(b, end, flat[1], -1);
+  const at = [.25 * p0[0] + .5 * c[0] + .25 * p2[0], .25 * p0[1] + .5 * c[1] + .25 * p2[1]];
+  const round = value => Math.round(value * 10) / 10;
+  return { d: `M${round(p0[0])} ${round(p0[1])}Q${round(c[0])} ${round(c[1])} ${round(p2[0])} ${round(p2[1])}`, sign: [at[0] + nx * signOffset, at[1] + ny * signOffset] };
+}
+
 /** The opening is an authored SVG view of the same real model, not a second model. */
 export function renderAtlas(model, onSelect) {
   const svg = document.querySelector("#atlas");
@@ -21,20 +44,15 @@ export function renderAtlas(model, onSelect) {
   marker.append(svgElement("path", { d: "M1 1L9 5L1 9", fill: "none", stroke: "#617553", "stroke-width": 1.4 }));
   defs.append(marker); svg.append(defs);
   svg.append(svgElement("ellipse", { cx: 392, cy: 339, rx: 261, ry: 243, class: "atlas-orbit" }));
-  // Ports deliberately avoid the text footprint below each illustration.
-  // In particular e05 approaches coordination from its left, not its label.
-  const routes = {
-    e01: ["M466 116C506 110 539 129 565 173", 523, 119],
-    e02: ["M692 270C741 308 739 373 684 409", 728, 346],
-    e03: ["M550 491C508 482 478 497 450 525", 503, 494],
-    e04: ["M337 524C302 478 278 440 241 454", 288, 477],
-    e05: ["M101 405C43 375 42 319 96 279", 49, 351],
-    e06: ["M219 174C251 132 275 97 314 96", 269, 117]
-  };
+  // Every relation bows toward the centre of the loop, so the cycle reads as one inward-turning ring.
+  // Endpoints stop short of the ring of each illustration, clear of the labels below.
+  const centre = [392, 339];
   model.edges.forEach(edge => {
-    const [d, x, y] = routes[edge.id];
+    const a = points[model.nodes.findIndex(node => node.id === edge.source)];
+    const b = points[model.nodes.findIndex(node => node.id === edge.target)];
+    const { d, sign } = inwardCurve(a, b, centre, { start: 84, end: 92, bow: 34, signOffset: 15, flat: [edge.source === model.nodes[0].id, edge.target === model.nodes[0].id] });
     svg.append(svgElement("path", { d, class: "atlas-edge", "marker-end": "url(#atlas-arrow)" }));
-    svg.append(svgElement("text", { x, y, class: "atlas-sign", "text-anchor": "middle" }, edge.sourceSign === edge.targetSign ? "+" : "−"));
+    svg.append(svgElement("text", { x: sign[0], y: sign[1] + 5, class: "atlas-sign", "text-anchor": "middle" }, edge.sourceSign === edge.targetSign ? "+" : "−"));
   });
   svg.append(svgElement("path", { d: "M407 284a17 17 0 1 0 1 18m-1-30v13h-13", class: "atlas-center-icon" }));
   svg.append(svgElement("text", { x: 392, y: 347, class: "atlas-center-title" }, "O ciclo"));
@@ -46,15 +64,18 @@ export function renderAtlas(model, onSelect) {
     anchor.append(svgElement("title", {}, node.description));
     anchor.append(svgElement("image", { href: assetUrl(node.media.assetId), x: x - 75, y: y - 75, width: 150, height: 150 }));
     anchor.append(svgElement("circle", { cx: x, cy: y, r: 75, class: "node-ring" }));
+    // Side illustrations keep their labels on the outer half, clear of the inward-bowing relations.
+    const side = index % 3 !== 0;
+    const labelX = x + (side ? (x > 392 ? 24 : -24) : 0);
     for (const mobile of [false, true]) {
-      const label = svgElement("text", { x, y: y + (mobile ? 92 : 99), class: `node-label ${mobile ? "node-label-mobile" : "node-label-desktop"}`, "aria-hidden": "true" });
+      const label = svgElement("text", { x: labelX, y: y + (mobile ? 92 : 99), class: `node-label ${mobile ? "node-label-mobile" : "node-label-desktop"}`, "aria-hidden": "true" });
       let line = "", lines = [];
       for (const word of node.label.split(" ")) {
-        if (`${line} ${word}`.trim().length > (mobile ? 14 : 21) && line) { lines.push(line); line = word; }
+        if (`${line} ${word}`.trim().length > (mobile || side ? 14 : 21) && line) { lines.push(line); line = word; }
         else line = `${line} ${word}`.trim();
       }
       lines.push(line);
-      lines.forEach((line, i) => label.append(svgElement("tspan", { x, dy: i ? (mobile ? 23 : 20) : 0 }, line)));
+      lines.forEach((line, i) => label.append(svgElement("tspan", { x: labelX, dy: i ? (mobile ? 23 : 20) : 0 }, line)));
       anchor.append(label);
     }
     anchor.addEventListener("click", event => { event.preventDefault(); onSelect(node.id); });
@@ -96,7 +117,7 @@ export function renderProductStudies(model) {
     const b = points[model.nodes.findIndex(node => node.id === edge.target)];
     const dx = b[0] - a[0], dy = b[1] - a[1], length = Math.hypot(dx, dy);
     const ux = dx / length, uy = dy / length;
-    arrow(cycle, `M${a[0] + ux * 54} ${a[1] + uy * 54}Q${(a[0] + b[0]) / 2 + uy * 26} ${(a[1] + b[1]) / 2 - ux * 26} ${b[0] - ux * 55} ${b[1] - uy * 55}`);
+    arrow(cycle, `M${a[0] + ux * 54} ${a[1] + uy * 54}Q${(a[0] + b[0]) / 2 - uy * 26} ${(a[1] + b[1]) / 2 + ux * 26} ${b[0] - ux * 55} ${b[1] - uy * 55}`);
   });
   model.nodes.forEach((node, index) => picture(cycle, node, ...points[index], 43));
   cycle.append(svgElement("text", { x: 320, y: 186, class: "study-title" }, "O problema"));

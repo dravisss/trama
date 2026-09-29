@@ -24,7 +24,7 @@ try {
       server.once("exit", code => reject(new Error(`QA server exited: ${code}`)));
     });
   }
-  browser = await chromium.launch({ headless: true, channel: "chromium" });
+  browser = await chromium.launch({ headless: true, ...(process.env.TRAMA_CHROMIUM_PATH ? { executablePath: process.env.TRAMA_CHROMIUM_PATH } : { channel: "chromium" }) });
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1, acceptDownloads: true });
   const page = await context.newPage();
   page.on("pageerror", error => report.errors.push(error.message));
@@ -114,34 +114,44 @@ try {
   await page.locator("#demo").screenshot({ path: resolve(output, "feedback.png") });
   await page.locator("#next").click();
   assert.equal(await page.locator("#demo").getAttribute("data-mode"), "explore");
-  await page.locator("#element-select").selectOption("edge:e02");
-  assert.match(await page.locator("#explore-text").textContent(), /canais paralelos/);
-  // A real canvas click, using the renderer's coordinates as the hit target.
-  const nodePoint = await page.evaluate(() => {
+  const canvasPoint = (target, kind = "node") => page.evaluate(({ target, kind }) => {
     const graph = document.querySelector(".cld-canvas"); const rect = graph.getBoundingClientRect();
-    const point = graph._cyreg.cy.getElementById("espera").renderedPosition();
+    const element = graph._cyreg.cy.getElementById(target);
+    const point = kind === "edge" ? element.renderedMidpoint() : element.renderedPosition();
     return { x: rect.x + point.x, y: rect.y + point.y };
-  });
-  await page.mouse.click(nodePoint.x, nodePoint.y);
+  }, { target, kind });
+  const clickCanvas = async (target, kind) => { const point = await canvasPoint(target, kind); await page.mouse.click(point.x, point.y); };
+  // Edit steps dispatch the renderer's own tap, so the check does not depend on page scroll after each layout change.
+  const tapNode = async id => { await page.waitForTimeout(400); await page.evaluate(id => document.querySelector(".cld-canvas")._cyreg.cy.getElementById(id).emit("tap"), id); };
+  const counts = () => page.evaluate(() => { const cy = document.querySelector(".cld-canvas")._cyreg.cy; return { nodes: cy.nodes().length, edges: cy.edges().length }; });
+  // Real canvas clicks, using the renderer's coordinates as the hit target.
+  await clickCanvas("e02", "edge");
+  assert.match(await page.locator("#explore-text").textContent(), /canais paralelos/);
+  await clickCanvas("espera");
   assert.equal(await page.locator(".explore-reader h2").textContent(), "Tempo de espera");
   report.checks.push("Five real Presentation V2 beats, reverse navigation, loop synthesis, select relation and real canvas hit");
 
   await page.locator('.demo-tabs [data-mode="edit"]').click();
+  await tapNode("espera");
   await page.locator("#node-label").fill("Espera pela resposta");
   await page.locator("#node-description").fill("Uma leitura feita na demonstração.");
   await page.getByRole("button", { name: "Aplicar alteração" }).click();
   assert.equal(await page.locator("#node-label").inputValue(), "Espera pela resposta");
   await page.locator('.demo-tabs [data-mode="story"]').click();
   await page.locator('.demo-tabs [data-mode="edit"]').click();
+  await tapNode("espera");
   assert.equal(await page.locator("#node-label").inputValue(), "Espera pela resposta");
   await page.locator("#undo").click();
+  await tapNode("espera");
   assert.equal(await page.locator("#node-label").inputValue(), "Tempo de espera");
-  await page.getByText("Acrescentar uma variável", { exact: true }).click();
+  await page.locator('[data-edit-tool="add"]').click();
   await page.locator("#new-label").fill("Visibilidade do trabalho");
-  await page.locator("#new-sign").selectOption("-");
+  await page.getByRole("button", { name: "Criar variável" }).click();
+  await tapNode("espera");
+  await page.locator('input[name="polarity"][value="-"]').check({ force: true });
   await page.locator("#new-description").fill("Mais visibilidade pode reduzir a espera neste contexto.");
-  await page.getByRole("button", { name: "Adicionar ao mapa" }).click();
-  assert.equal(await page.locator("#node-select option").count(), 7);
+  await page.getByRole("button", { name: "Criar relação" }).click();
+  assert.deepEqual(await counts(), { nodes: 7, edges: 7 });
   await page.waitForTimeout(250);
   await page.locator("#demo").screenshot({ path: resolve(output, "experiment.png") });
   const downloadPending = page.waitForEvent("download");
@@ -149,18 +159,22 @@ try {
   const download = await downloadPending;
   const saved = JSON.parse(await readFile(await download.path(), "utf8"));
   assert.equal(validateModel(saved).valid, true); assert.equal(saved.nodes.length, 7); assert.equal(saved.edges.length, 7);
-  await page.locator("#undo").click(); assert.equal(await page.locator("#node-select option").count(), 6);
+  await page.locator("#undo").click(); assert.deepEqual(await counts(), { nodes: 7, edges: 6 });
+  await page.locator("#undo").click(); assert.deepEqual(await counts(), { nodes: 6, edges: 6 });
+  await tapNode("espera");
   await page.locator("#node-label").fill("Outra hipótese"); await page.getByRole("button", { name: "Aplicar alteração" }).click();
   await page.locator("#reset").click(); await page.locator("#cancel-reset").click(); assert.equal(await page.locator("#node-label").inputValue(), "Outra hipótese");
-  await page.locator("#reset").click(); await page.locator("#confirm-reset").click(); assert.equal(await page.locator("#node-label").inputValue(), "Tempo de espera");
+  await page.locator("#reset").click(); await page.locator("#confirm-reset").click();
+  await tapNode("espera"); assert.equal(await page.locator("#node-label").inputValue(), "Tempo de espera");
   const axeEdit = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
-  report.editAxeViolations = axeEdit.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => n.target) }));
+  report.editAxeViolations = axeEdit.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => ({ target: n.target, html: n.html.slice(0, 240), why: n.any.map(x => x.message) })) }));
   report.checks.push("Edit, retain draft across story mode, undo, add node and signed relation, valid JSON download, atomic undo, reset/cancel");
   const storage = await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length }));
   assert.deepEqual(storage, { local: 0, session: 0 });
+  await tapNode("espera");
   await page.locator("#node-label").fill("Temporário"); await page.getByRole("button", { name: "Aplicar alteração" }).click();
   await page.reload(); await page.locator('#demo[data-ready="true"]').waitFor();
-  await page.locator('.demo-tabs [data-mode="edit"]').click(); assert.equal(await page.locator("#node-label").inputValue(), "Tempo de espera");
+  await page.locator('.demo-tabs [data-mode="edit"]').click(); await tapNode("espera"); assert.equal(await page.locator("#node-label").inputValue(), "Tempo de espera");
   report.checks.push("No shared writes or browser storage; reload starts a clean isolated example");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.locator('.demo-tabs [data-mode="story"]').click();
@@ -173,10 +187,14 @@ try {
   const mobilePage = await mobileContext.newPage(); await mobilePage.goto(url);
   await mobilePage.locator('#demo[data-ready="true"]').waitFor();
   await mobilePage.locator('.demo-tabs [data-mode="edit"]').tap();
+  await mobilePage.locator("#graph").scrollIntoViewIfNeeded();
+  const mobilePoint = await mobilePage.evaluate(() => { const g = document.querySelector(".cld-canvas"); const r = g.getBoundingClientRect(); const p = g._cyreg.cy.getElementById("espera").renderedPosition(); return { x: r.x + p.x, y: r.y + p.y }; });
+  await mobilePage.touchscreen.tap(mobilePoint.x, mobilePoint.y);
   await mobilePage.locator("#node-label").fill("Espera no celular");
   await mobilePage.getByRole("button", { name: "Aplicar alteração" }).tap();
   assert.equal(await mobilePage.locator("#node-label").inputValue(), "Espera no celular");
-  await mobilePage.locator("#undo").tap(); assert.equal(await mobilePage.locator("#node-label").inputValue(), "Tempo de espera");
+  await mobilePage.locator("#undo").tap();
+  await mobilePage.touchscreen.tap(mobilePoint.x, mobilePoint.y); assert.equal(await mobilePage.locator("#node-label").inputValue(), "Tempo de espera");
   await mobilePage.locator('.demo-tabs [data-mode="story"]').tap();
   await mobilePage.locator("#next").tap(); assert.equal(await mobilePage.locator("#step-number").textContent(), "2");
   await mobileContext.close(); report.checks.push("Touch viewport: edit, undo and guided navigation on a 390px mobile device");

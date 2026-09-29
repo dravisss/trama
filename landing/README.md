@@ -16,7 +16,8 @@ runs a bounded Chromium journey with desktop/tablet/mobile captures, axe,
 five scroll-driven chapters, a camera midpoint, reverse and mid-scene reload,
 real canvas interaction, editing, undo, reset, JSON download, reduced motion and
 no-JavaScript reading. The QA server uses port 4181 and is closed in `finally`.
-An existing server may be selected with `TRAMA_LANDING_QA_URL`.
+An existing server may be selected with `TRAMA_LANDING_QA_URL`; a specific Chromium binary
+with `TRAMA_CHROMIUM_PATH`.
 Evidence is written to the ignored `printscreens/trama-landing/` directory.
 
 ## Authored content
