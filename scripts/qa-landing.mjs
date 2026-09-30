@@ -120,7 +120,15 @@ try {
     const point = kind === "edge" ? element.renderedMidpoint() : element.renderedPosition();
     return { x: rect.x + point.x, y: rect.y + point.y };
   }, { target, kind });
-  const clickCanvas = async (target, kind) => { const point = await canvasPoint(target, kind); await page.mouse.click(point.x, point.y); };
+  const clickCanvas = async (target, kind) => {
+    await page.locator(".cld-canvas").scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => {
+      const cy = document.querySelector(".cld-canvas")._cyreg.cy;
+      return !cy.animated() && !cy.elements().some(element => element.animated());
+    });
+    const point = await canvasPoint(target, kind);
+    await page.mouse.click(point.x, point.y);
+  };
   // Edit steps dispatch the renderer's own tap, so the check does not depend on page scroll after each layout change.
   const tapNode = async id => { await page.waitForTimeout(400); await page.evaluate(id => document.querySelector(".cld-canvas")._cyreg.cy.getElementById(id).emit("tap"), id); };
   const counts = () => page.evaluate(() => { const cy = document.querySelector(".cld-canvas")._cyreg.cy; return { nodes: cy.nodes().length, edges: cy.edges().length }; });

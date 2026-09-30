@@ -22,5 +22,11 @@ jobs:
       - run: npm run check
       - run: npx playwright install --with-deps chromium
       - run: npm run check:landing
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: landing-release-qa
+          path: printscreens/trama-landing/
+          retention-days: 7
       - name: Release approved
         run: echo "The VPS watcher will deploy this exact main commit after this workflow succeeds."
