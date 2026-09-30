@@ -180,7 +180,7 @@ try {
     await page.mouse.click(point.x, point.y);
   };
   // Edit steps dispatch the renderer's own tap, so the check does not depend on page scroll after each layout change.
-  const tapNode = async id => { await page.waitForTimeout(400); await page.evaluate(id => document.querySelector(".cld-canvas")._cyreg.cy.getElementById(id).emit("tap"), id); };
+  const tapNode = async id => { await page.waitForTimeout(400); await page.evaluate(id => { document.querySelector(".cld-canvas")._cyreg.cy.getElementById(id).emit("tap"); }, id); };
   const counts = () => page.evaluate(() => { const cy = document.querySelector(".cld-canvas")._cyreg.cy; return { nodes: cy.nodes().length, edges: cy.edges().length }; });
   // Real canvas clicks, using the renderer's coordinates as the hit target.
   console.log("QA canvas relation selection");
