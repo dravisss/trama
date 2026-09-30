@@ -20,7 +20,7 @@ function CustomFields({ fields = {} }) {
   const addRow = () => setRows(current => [...current, { id: `new-${Date.now()}-${current.length}`, key: "", value: "" }]);
 
   return <div className="custom-fields-editor" id="dock-custom-fields">
-    <div className="sidebar-section-title">Campos customizados</div>
+    <div className="sidebar-section-title">Campos personalizados</div>
     <div id="custom-field-rows">
       {rows.map(row => <div className="custom-field-row" data-field-row="true" key={row.id}>
         <Input unstyled placeholder="campo" aria-label="Nome do campo" name="field-key" data-field-key="true" value={row.key} onChange={event => updateRow(row.id, { key: event.target.value })} />
@@ -41,12 +41,12 @@ export function EditorInspectorPanel({ inspector = {}, onSubmit } = {}) {
   const nodeIds = inspector.nodeIds || [];
   const key = inspector.key || "empty";
   const selectedTitle = node?.label || edge?.description || inspector.selectionLabel || "Elemento do mapa";
-  const selectedType = node ? `Variável${node.id ? ` · ${node.id}` : ""}` : edge ? "Relação causal" : "Inspector";
+  const selectedType = node ? `Variável${node.id ? ` · ${node.id}` : ""}` : edge ? "Relação causal" : "Detalhes";
   return <section data-dock-content="inspect" className="editor-inspector-panel" hidden={false} key={key}>
-    <p className="dock-help" id="dock-inspect-help" hidden>{inspector.help || "Selecione uma variável ou relação no canvas."}</p>
+    <p className="dock-help" id="dock-inspect-help" hidden>{inspector.help || "Selecione uma variável ou relação no mapa."}</p>
     <div className="ui-empty-state editor-inspector-empty" hidden={hasSelection}>
-      <span className="ui-empty-state-icon" aria-hidden="true">⌖</span>
-      <strong>Selecione um nó ou uma relação</strong>
+      <span className="ui-empty-state-icon" aria-hidden="true"><Icon name="focus" /></span>
+      <strong>Selecione uma variável ou uma relação</strong>
       <p>O mapa continua sendo o lugar mais rápido para editar. Escolha um elemento para abrir seus campos aqui.</p>
       <div className="editor-inspector-hints"><span><b>Nó</b> nome, forma e estilo</span><span><b>Relação</b> sinais e explicação causal</span></div>
     </div>
@@ -72,7 +72,7 @@ export function EditorInspectorPanel({ inspector = {}, onSubmit } = {}) {
           <label>Posição<Select unstyled id="dock-node-lock" name="locked" defaultValue="keep"><option value="keep">Manter</option><option value="true">Fixar</option><option value="false">Liberar</option></Select></label>
         </div>
         <div className="node-media-editor" id="dock-node-media">
-          <div className="sidebar-section-title">Imagem do nó</div>
+          <div className="sidebar-section-title">Imagem da variável</div>
           <label>Arquivo<Input unstyled id="dock-node-image" name="nodeImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif" disabled={nodeIds.length !== 1} onChange={event => {
             const file = event.target.files?.[0];
             if (file) inspector.onMediaUpload?.(nodeIds[0], file);

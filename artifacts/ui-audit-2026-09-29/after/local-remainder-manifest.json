@@ -1,0 +1,2103 @@
+{
+  "generated_at": "2026-09-30T02:51:34.942Z",
+  "server": "http://127.0.0.1:58810",
+  "git_head": "recorded by finalize-after.mjs",
+  "viewport_matrix": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "mobile390",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "mobile360",
+      "width": 360,
+      "height": 844
+    }
+  ],
+  "entries": [
+    {
+      "name": "map-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "map",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado map"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "map-desktop.png",
+      "screenshot_sha256": "199128182fa6019d2409bcafbbc4712472d5608f96b20b0053f958c34996ddc8",
+      "axe": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": 3
+          }
+        ],
+        "incomplete": 2
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "workspace-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "workspace",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado workspace"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Projetos",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "workspace-desktop.png",
+      "screenshot_sha256": "300e6432b4e40081ded93cc02524d0cb4476a2ced19a4f8c1b6c883bb7646489",
+      "axe": {
+        "violations": [
+          {
+            "id": "landmark-unique",
+            "impact": "moderate",
+            "description": "Ensure landmarks are unique",
+            "nodes": 1
+          },
+          {
+            "id": "page-has-heading-one",
+            "impact": "moderate",
+            "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
+            "nodes": 1
+          }
+        ],
+        "incomplete": 1
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-details-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-details",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-details"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Detalhes",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-details-desktop.png",
+      "screenshot_sha256": "b20dbbf928499bfc8c5a0dc2b1f45c9cc4cad2be77ae1006d9c0dfc8a018435c",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-style-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-style",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-style"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Vista visual",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-style-desktop.png",
+      "screenshot_sha256": "76ac999183bcfc98f6a9c55a22b48eaeca62130bfb75bf2f3e1b3d7b9639cf9d",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-table-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-table",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-table"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Tabela de dados",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-table-desktop.png",
+      "screenshot_sha256": "4d7ca37b66b348c1e2fe1366b4b3ef8a41578b5ec76c335fb850365c70f29cab",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-markdown-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-markdown",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-markdown"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Código do loop",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-markdown-desktop.png",
+      "screenshot_sha256": "328b364260410526a15ddec24acfcac17b898c925edec979856e8b4087c588ef",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-history-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-history",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-history"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Histórico",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-history-desktop.png",
+      "screenshot_sha256": "06ffa50f823430e61fd317d72bb890db0b3750f006167828fdabd86708f848f2",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "menu-project-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "menu-project",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado menu-project"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "menu-project-desktop.png",
+      "screenshot_sha256": "018ee62c01bc00f500f772a135e7ac84d096dad950553b47e20e00c7b789289e",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "dialog-project-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "dialog-project",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado dialog-project"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura",
+        "Editar projeto"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal",
+        "command-dialog"
+      ],
+      "screenshot": "dialog-project-desktop.png",
+      "screenshot_sha256": "af734473cc9873b193c0390a27b9702a5e14068ade8784e7959d549b55ce9491",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "dialog-new-map-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "dialog-new-map",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado dialog-new-map"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura",
+        "Novo mapa"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal",
+        "command-dialog"
+      ],
+      "screenshot": "dialog-new-map-desktop.png",
+      "screenshot_sha256": "7516786ea1f0625ca9ee7feac3b865b64df61decf615ef757f9c1c338f643d3d",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "dialog-map-description-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "dialog-map-description",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado dialog-map-description"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "dialog-map-description-desktop.png",
+      "screenshot_sha256": "474bc69d4fb7e2f65b26ba48903afb2c136b8811153056a536fbc8b3a6ef2822",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "menu-export-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "menu-export",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado menu-export"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "menu-export-desktop.png",
+      "screenshot_sha256": "2ed8f5f3fd4538be99feb4565847896290a1d8c0275715c1d4a983941608b5cf",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "story-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "story",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado story"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "story",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "História",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Storyboard",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "story-desktop.png",
+      "screenshot_sha256": "1d386b1409a5b312e65608b3d90bb15620a9351a318509bb735f97a2ee150aab",
+      "axe": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": 5
+          }
+        ],
+        "incomplete": 2
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "present-desktop",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "present",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado present"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "present",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Apresentar",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Onde começa a história",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "present-desktop.png",
+      "screenshot_sha256": "91496b5e4c2232ea7ab95239c435c32d54268f4e831e80b4c4dd9e29a9de3eeb",
+      "axe": {
+        "violations": [
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "description": "Ensure the order of headings is semantically correct",
+            "nodes": 1
+          }
+        ],
+        "incomplete": 1
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "map-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "map",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado map"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "map-mobile390.png",
+      "screenshot_sha256": "a26b0b324c522463a83aea809a86d273b2f5bbf9f9df7b0cdae55d9772db81f6",
+      "axe": {
+        "violations": [],
+        "incomplete": 2
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "workspace-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "workspace",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado workspace"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Projetos",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "workspace-mobile390.png",
+      "screenshot_sha256": "35043161de374a5fdc8a7a01c15e5d81a562f9c44fb44f41c1032cefe71c190c",
+      "axe": {
+        "violations": [
+          {
+            "id": "landmark-unique",
+            "impact": "moderate",
+            "description": "Ensure landmarks are unique",
+            "nodes": 1
+          }
+        ],
+        "incomplete": 1
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-details-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-details",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-details"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Detalhes",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-details-mobile390.png",
+      "screenshot_sha256": "bac118c77838a1854070a27b9c68eb1678edfd494285fd0ed378d309bf14ddd5",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-style-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-style",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-style"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Vista visual",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-style-mobile390.png",
+      "screenshot_sha256": "6418db07541563283007f6fe0618f5e800fa1e0f790b363193ef51c130f495ca",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-table-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-table",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-table"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Tabela de dados",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-table-mobile390.png",
+      "screenshot_sha256": "dd1d9c27c7d9bba8c6e7f00cf13e6d692ed9334ae3ff98c97a38f6435f257e93",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-markdown-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-markdown",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-markdown"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Código do loop",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-markdown-mobile390.png",
+      "screenshot_sha256": "74d58daf3bd4f9f892e8098b4345ea0171e47ebd54c10f23e149b39d6e9e33d0",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-history-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-history",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-history"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Histórico",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-history-mobile390.png",
+      "screenshot_sha256": "1d00cbd334f15aa1824af76fed228a533b9d1f3b05b42843de6fdc2b8c69ccdd",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "menu-project-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "menu-project",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado menu-project"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "menu-project-mobile390.png",
+      "screenshot_sha256": "4580b0dce5c7103dc70647c7621c53db2c895f8c39980aa8ba26c0b57668853b",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "dialog-project-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "dialog-project",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado dialog-project"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "dialog-project-mobile390.png",
+      "screenshot_sha256": "4580b0dce5c7103dc70647c7621c53db2c895f8c39980aa8ba26c0b57668853b",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "dialog-new-map-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "dialog-new-map",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado dialog-new-map"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura",
+        "Novo mapa"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal",
+        "command-dialog"
+      ],
+      "screenshot": "dialog-new-map-mobile390.png",
+      "screenshot_sha256": "de195076884330e2a0e372d5af7b564801ed8cd71161ba04c7c621f76f4b356a",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "dialog-map-description-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "dialog-map-description",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado dialog-map-description"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "dialog-map-description-mobile390.png",
+      "screenshot_sha256": "318cfccc05e783ebd72c3d98c6b7b729da0ae27588a3d19e4fff6c4564375d9b",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "menu-export-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "menu-export",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado menu-export"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "menu-export-mobile390.png",
+      "screenshot_sha256": "a26b0b324c522463a83aea809a86d273b2f5bbf9f9df7b0cdae55d9772db81f6",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "story-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "story",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado story"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "story",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "História",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Storyboard",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "story-mobile390.png",
+      "screenshot_sha256": "953cacc5e03414a9f60aeeadfa8f9356f8bf3a9d53ebada342f3be9d304f8841",
+      "axe": {
+        "violations": [],
+        "incomplete": 2
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "present-mobile390",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "present",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado present"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "present",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "Apresentar",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Onde começa a história",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "present-mobile390.png",
+      "screenshot_sha256": "be56890e0eb3407f24a67e8c1ae16698d3f09bf8d861b7d49bab6a149764a5c9",
+      "axe": {
+        "violations": [
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "description": "Ensure the order of headings is semantically correct",
+            "nodes": 1
+          }
+        ],
+        "incomplete": 1
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "map-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "map",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado map"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "map-mobile360.png",
+      "screenshot_sha256": "cecd91840a53d9a5b8b406dcd4a772eda9337cdfd429f6264f69cb1d4679ee37",
+      "axe": {
+        "violations": [],
+        "incomplete": 2
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "workspace-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "workspace",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado workspace"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Projetos",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "workspace-mobile360.png",
+      "screenshot_sha256": "cd4be70716d2be1962d27ce02b97765b4aa89607cdcd49ef879d1ca65e2583c2",
+      "axe": {
+        "violations": [
+          {
+            "id": "landmark-unique",
+            "impact": "moderate",
+            "description": "Ensure landmarks are unique",
+            "nodes": 1
+          }
+        ],
+        "incomplete": 1
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-details-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-details",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-details"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Detalhes",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-details-mobile360.png",
+      "screenshot_sha256": "d7c38406caa37c5cc6f242bfa20350c7b3dd11ff28085cc77e5715275fa9a623",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-style-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-style",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-style"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Vista visual",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-style-mobile360.png",
+      "screenshot_sha256": "833f79505e9822735667b613b72abdd0f70e642f007edf43d38050a8b8488e31",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-table-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-table",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-table"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Tabela de dados",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-table-mobile360.png",
+      "screenshot_sha256": "9472258f55477d53bcc83928232429f8b9fda9c15724140075fc1cec16009a51",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-markdown-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-markdown",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-markdown"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Código do loop",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-markdown-mobile360.png",
+      "screenshot_sha256": "9745a36ad2f984ad19255fd1505feca9f45df1a74a6af80ecc6e9d1a16b51d39",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "panel-history-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "panel-history",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado panel-history"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Histórico",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "panel-history-mobile360.png",
+      "screenshot_sha256": "f19249a1856e16468ab5d21c11942591e9c83e27d727f166eb4609c999b8c9f9",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "menu-project-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "menu-project",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado menu-project"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "menu-project-mobile360.png",
+      "screenshot_sha256": "77ab1628a30a2062cf280151984e8077e95d69a5b113a9792fa563c168245fc8",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "dialog-project-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "dialog-project",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado dialog-project"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "dialog-project-mobile360.png",
+      "screenshot_sha256": "77ab1628a30a2062cf280151984e8077e95d69a5b113a9792fa563c168245fc8",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "dialog-new-map-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "dialog-new-map",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado dialog-new-map"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura",
+        "Novo mapa"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal",
+        "command-dialog"
+      ],
+      "screenshot": "dialog-new-map-mobile360.png",
+      "screenshot_sha256": "b66d9e754595f742edb852c1f767b2a6c7bc78cebfb18a1da83631ef30182326",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "dialog-map-description-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "dialog-map-description",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado dialog-map-description"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "dialog-map-description-mobile360.png",
+      "screenshot_sha256": "21c552742ec487fd0cf8cda470193ca3a5782ca91897ccf6cdc352ef4cd0ce30",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "menu-export-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "menu-export",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado menu-export"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "menu-export-mobile360.png",
+      "screenshot_sha256": "cecd91840a53d9a5b8b406dcd4a772eda9337cdfd429f6264f69cb1d4679ee37",
+      "axe": "not-run",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "story-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "story",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado story"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "story",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "História",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Storyboard",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "story-mobile360.png",
+      "screenshot_sha256": "5fa7330b6b17e591616a33e70e105151cf3ed858e4edfa76176ce34cba05d105",
+      "axe": {
+        "violations": [],
+        "incomplete": 2
+      },
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "present-mobile360",
+      "route": "http://127.0.0.1:58810/?qa=1",
+      "state": "present",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir o fixture QA isolado",
+        "Selecionar Flagship — Crescimento sob pressão",
+        "Abrir estado present"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "present",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "Apresentar",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Onde começa a história",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "visibleDialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "present-mobile360.png",
+      "screenshot_sha256": "ec180c729d5e90927702d53c30f7d95458cf95a6bafbde4a57c70156c7b8d31b",
+      "axe": {
+        "violations": [
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "description": "Ensure the order of headings is semantically correct",
+            "nodes": 1
+          }
+        ],
+        "incomplete": 1
+      },
+      "console_errors_and_warnings": []
+    }
+  ],
+  "failures": [
+    {
+      "name": "menu-export-desktop",
+      "action_error": "locator.click: Error: strict mode violation: locator('.edit-toolbar-more summary') resolved to 2 elements:\n    1) <summary title=\"Mais ações de edição\" aria-label=\"Mais ações de edição\">…</summary> aka getByLabel('Mais ações de edição')\n    2) <summary>Opções avançadas de roteamento</summary> aka getByText('Opções avançadas de roteamento')\n\nCall log:\n\u001b[2m  - waiting for locator('.edit-toolbar-more summary')\u001b[22m\n"
+    },
+    {
+      "name": "menu-project-mobile390",
+      "action_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#project-switcher summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary>…</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    4 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+    },
+    {
+      "name": "dialog-project-mobile390",
+      "action_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#project-switcher summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary>…</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    4 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+    },
+    {
+      "name": "menu-export-mobile390",
+      "action_error": "locator.click: Error: strict mode violation: locator('.edit-toolbar-more summary') resolved to 2 elements:\n    1) <summary title=\"Mais ações de edição\" aria-label=\"Mais ações de edição\">…</summary> aka getByLabel('Mais ações de edição')\n    2) <summary>Opções avançadas de roteamento</summary> aka getByText('Opções avançadas de roteamento')\n\nCall log:\n\u001b[2m  - waiting for locator('.edit-toolbar-more summary')\u001b[22m\n"
+    },
+    {
+      "name": "menu-project-mobile360",
+      "action_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#project-switcher summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary>…</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    4 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+    },
+    {
+      "name": "dialog-project-mobile360",
+      "action_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#project-switcher summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary>…</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    4 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+    },
+    {
+      "name": "menu-export-mobile360",
+      "action_error": "locator.click: Error: strict mode violation: locator('.edit-toolbar-more summary') resolved to 2 elements:\n    1) <summary title=\"Mais ações de edição\" aria-label=\"Mais ações de edição\">…</summary> aka getByLabel('Mais ações de edição')\n    2) <summary>Opções avançadas de roteamento</summary> aka getByText('Opções avançadas de roteamento')\n\nCall log:\n\u001b[2m  - waiting for locator('.edit-toolbar-more summary')\u001b[22m\n"
+    },
+    {
+      "name": "export-standalone",
+      "error": "locator.click: Error: strict mode violation: locator('.edit-toolbar-more summary') resolved to 2 elements:\n    1) <summary title=\"Mais ações de edição\" aria-label=\"Mais ações de edição\">…</summary> aka getByLabel('Mais ações de edição')\n    2) <summary>Opções avançadas de roteamento</summary> aka getByText('Opções avançadas de roteamento')\n\nCall log:\n\u001b[2m  - waiting for locator('.edit-toolbar-more summary')\u001b[22m\n"
+    }
+  ],
+  "limitations": [
+    "Screenshots are captured from the isolated QA fixture.",
+    "Accessibility results are axe-core scans; they do not replace manual keyboard/screen-reader checks."
+  ]
+}

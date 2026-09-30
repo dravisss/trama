@@ -29,7 +29,7 @@ import {
   buildCompactPositionVariant,
   buildSkeletonBlendVariant
 } from "./geometry/loopSeed.js";
-import { fitViewportToRect } from "./geometry/fitViewport.js";
+import { clampFitPadding, fitViewportToRect } from "./geometry/fitViewport.js";
 
 export class CLDEngine extends EventTarget {
   constructor(options) {
@@ -473,7 +473,7 @@ export class CLDEngine extends EventTarget {
           height: boundingBox.h
         },
         rect: safeRect,
-        padding
+        padding: clampFitPadding(padding, safeRect)
       });
       if (viewport) {
         this.cy.animate({ zoom: viewport.zoom, pan: viewport.pan }, { duration });

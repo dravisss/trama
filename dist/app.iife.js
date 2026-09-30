@@ -25,9 +25,9 @@
     mod
   ));
 
-  // ../../../Users/Ravi/Apps/LoopViewer/node_modules/layout-base/layout-base.js
+  // node_modules/layout-base/layout-base.js
   var require_layout_base = __commonJS({
-    "../../../Users/Ravi/Apps/LoopViewer/node_modules/layout-base/layout-base.js"(exports, module) {
+    "node_modules/layout-base/layout-base.js"(exports, module) {
       (function webpackUniversalModuleDefinition(root, factory) {
         if (typeof exports === "object" && typeof module === "object")
           module.exports = factory();
@@ -3859,9 +3859,9 @@
     }
   });
 
-  // ../../../Users/Ravi/Apps/LoopViewer/node_modules/cose-base/cose-base.js
+  // node_modules/cose-base/cose-base.js
   var require_cose_base = __commonJS({
-    "../../../Users/Ravi/Apps/LoopViewer/node_modules/cose-base/cose-base.js"(exports, module) {
+    "node_modules/cose-base/cose-base.js"(exports, module) {
       (function webpackUniversalModuleDefinition(root, factory) {
         if (typeof exports === "object" && typeof module === "object")
           module.exports = factory(require_layout_base());
@@ -6416,9 +6416,9 @@
     }
   });
 
-  // ../../../Users/Ravi/Apps/LoopViewer/node_modules/cytoscape-fcose/cytoscape-fcose.js
+  // node_modules/cytoscape-fcose/cytoscape-fcose.js
   var require_cytoscape_fcose = __commonJS({
-    "../../../Users/Ravi/Apps/LoopViewer/node_modules/cytoscape-fcose/cytoscape-fcose.js"(exports, module) {
+    "node_modules/cytoscape-fcose/cytoscape-fcose.js"(exports, module) {
       (function webpackUniversalModuleDefinition(root, factory) {
         if (typeof exports === "object" && typeof module === "object")
           module.exports = factory(require_cose_base());
@@ -11508,7 +11508,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
             height: boundingBox.h
           },
           rect: safeRect,
-          padding
+          padding: clampFitPadding(padding, safeRect)
         });
         if (viewport) {
           this.cy.animate({ zoom: viewport.zoom, pan: viewport.pan }, { duration });
@@ -17240,6 +17240,22 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
     on(elements2.cancelLoopDescription, "click", () => actions.closeLoopDescriptionModal?.());
     on(documentRef, "keydown", (event) => {
       if (isCommandDialogOpen()) return;
+      const descriptionModal = elements2.loopDescriptionModal;
+      if (descriptionModal && !descriptionModal.hidden) {
+        if (event.key === "Escape") {
+          event.preventDefault?.();
+          actions.closeLoopDescriptionModal?.();
+        } else if (event.key === "Tab") {
+          const controls = [...descriptionModal.querySelectorAll("button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), [tabindex='0']")].filter((control) => !control.hidden);
+          const first = controls[0];
+          const last = controls.at(-1);
+          if (event.shiftKey && documentRef.activeElement === first || !event.shiftKey && documentRef.activeElement === last) {
+            event.preventDefault?.();
+            (event.shiftKey ? last : first)?.focus?.();
+          }
+        }
+        return;
+      }
       if (event.key === "Escape" && closeSavePopover({ restoreFocus: true })) {
         event.preventDefault?.();
         return;
@@ -17250,8 +17266,12 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
       }
       actions.handleKeydown?.(event);
     });
+    on(documentRef, "focusin", (event) => {
+      const modal = elements2.loopDescriptionModal;
+      if (modal && !modal.hidden && !modal.contains?.(event.target)) elements2.loopDescriptionInput?.focus?.();
+    });
     on(documentRef, "pointerdown", (event) => {
-      if (isCommandDialogOpen()) return;
+      if (isCommandDialogOpen() || elements2.loopDescriptionModal && !elements2.loopDescriptionModal.hidden) return;
       const target = event.target;
       if (isSavePopoverOpen() && !elements2.saveStatus?.contains?.(target) && !elements2.savePopover?.contains?.(target)) {
         closeSavePopover();
@@ -20491,6 +20511,7 @@ ${styles}</style>
         summary,
         storyCount,
         loopCount,
+        loopCountKind: entry.model.loops?.length ? "curados" : "encontrados",
         nodeCount: entry.model.nodes?.length || 0
       });
     });
@@ -20523,7 +20544,7 @@ ${styles}</style>
     const storyCount = presentation?.chapters?.reduce((total, chapter) => total + (chapter.scenes || []).reduce((sceneTotal, scene) => sceneTotal + (scene.beats?.length || 1), 0), 0) || 0;
     const loopCount = displayLoopCount(entry.model);
     elements.activeLoopSelectLabel.textContent = tabLabel(entry, activeIndex);
-    elements.activeLoopSelectMeta.textContent = `${entry.model.nodes?.length || 0} vari\xE1veis \xB7 ${loopCount} ciclos \xB7 ${storyCount} passos`;
+    elements.activeLoopSelectMeta.textContent = `${entry.model.nodes?.length || 0} vari\xE1veis \xB7 ${loopCount} ciclos ${entry.model.loops?.length ? "curados" : "encontrados"} \xB7 ${storyCount} passos`;
   }
   function displayLoopCount(model) {
     if (Array.isArray(model?.loops) && model.loops.length) return model.loops.length;
@@ -20605,7 +20626,7 @@ ${styles}</style>
       content.hidden = content.dataset.dockContent !== panel;
     });
     elements.dockTitle.textContent = {
-      inspect: "Inspector",
+      inspect: "Detalhes",
       map: "Mapa e descri\xE7\xE3o",
       code: "C\xF3digo do loop",
       style: "Vista visual",
@@ -21703,11 +21724,11 @@ Mapa importado de ${file.name}.`,
       formatDuration: formatTimelineDuration
     });
     const { scene, beat, chapter, hasTarget, isBeat, primaryLoop, loopLabel, beatCount, beatIndex, title, narration, timing, transition, camera, cameraInherited, cameraTarget, focus } = view;
-    if (elements.storyInspectorTarget) elements.storyInspectorTarget.textContent = hasTarget ? `${isBeat ? `Beat ${beatIndex} de ${beatCount}` : primaryLoop ? "Cena do loop" : "Cena"} \xB7 ${title || "Sem t\xEDtulo"}` : "Nenhuma cena selecionada";
+    if (elements.storyInspectorTarget) elements.storyInspectorTarget.textContent = hasTarget ? `${isBeat ? `Movimento ${beatIndex} de ${beatCount}` : primaryLoop ? "Cena do circuito" : "Cena"} \xB7 ${title || "Sem t\xEDtulo"}` : "Nenhuma cena selecionada";
     if (elements.storyCanvasSelectionTitle) elements.storyCanvasSelectionTitle.textContent = hasTarget ? `${isBeat ? "Beat" : "Cena"} \xB7 ${title || "Sem t\xEDtulo"}` : "Nenhum movimento selecionado";
     if (elements.storyCanvasSelectionMeta) elements.storyCanvasSelectionMeta.textContent = hasTarget ? `${chapter?.title || "Apresenta\xE7\xE3o"} \xB7 ${scene.title}` : "Selecione um beat na estrutura ou na timeline";
     updateStoryCanvasSelectionAction();
-    if (elements.storyInspectorContext) elements.storyInspectorContext.textContent = hasTarget ? `${loopLabel ? `Loop \xB7 ${loopLabel} \xB7 ${beatCount} beats` : `${chapter?.title || "Apresenta\xE7\xE3o"} \xB7 ${scene.title}`}${isBeat ? ` \xB7 Beat ${beatIndex}` : ""}` : "Selecione uma cena ou beat no storyboard para dirigir o palco.";
+    if (elements.storyInspectorContext) elements.storyInspectorContext.textContent = hasTarget ? `${loopLabel ? `Circuito \xB7 ${loopLabel} \xB7 ${beatCount} movimentos` : `${chapter?.title || "Apresenta\xE7\xE3o"} \xB7 ${scene.title}`}${isBeat ? ` \xB7 Movimento ${beatIndex}` : ""}` : "Selecione uma cena ou beat no storyboard para dirigir o palco.";
     populateSelect(
       elements.storyInspectorType,
       isBeat ? [["focus", "Foco"], ["reveal", "Revelar"], ["traverse", "Percurso"], ["handoff", "Handoff"], ["compare", "Comparar"], ["intervention", "Interven\xE7\xE3o"], ["consequence", "Consequ\xEAncia"], ["question", "Pergunta"], ["custom", "Custom"]] : [["title", "T\xEDtulo"], ["stage", "Mapa"], ["narrative", "Narrativa"], ["comparison", "Compara\xE7\xE3o"], ["media", "Imagem"], ["choice", "Escolha"]],
@@ -23341,6 +23362,7 @@ Descreva o objetivo deste projeto.`
     updateScenarioPanel(engine.model);
     showToast("Loop renomeado.");
   }
+  var loopDescriptionRestoreFocus = null;
   async function editActiveLoopDescription() {
     const entry = workspace[activeIndex];
     if (!entry) return;
@@ -23349,6 +23371,7 @@ Descreva o objetivo deste projeto.`
 
 `;
     updateLoopDescriptionPreview();
+    loopDescriptionRestoreFocus = document.activeElement;
     elements.loopDescriptionModal.hidden = false;
     elements.loopDescriptionInput.focus();
   }
@@ -23379,6 +23402,8 @@ Descreva o objetivo deste projeto.`
   }
   function closeLoopDescriptionModal() {
     elements.loopDescriptionModal.hidden = true;
+    loopDescriptionRestoreFocus?.focus?.();
+    loopDescriptionRestoreFocus = null;
   }
   async function duplicateActiveLoop() {
     const entry = workspace[activeIndex];
@@ -23671,6 +23696,7 @@ Descreva o objetivo deste projeto.`
       items.push({
         id: loop.id,
         label: loop.label,
+        title: curated?.title || "",
         path: loop.nodeIds.map((id) => nodeLabels.get(id)).join(" \u2192 "),
         edgeCount: loop.edgeIds.length,
         type: loop.type,
@@ -23791,6 +23817,8 @@ Descreva o objetivo deste projeto.`
     if (editing) setEditing(false);
     if (focusMode) setFocusMode(false);
     setPresenterMode(false);
+    clearTimeout(toastTimer);
+    elements.toast.hidden = true;
     presenterStartedAt = Date.now();
     currentPresentationFrame = null;
     activePresentationReducedMotion = presentation.settings?.reducedMotion === "always" || presentation.settings?.reducedMotion !== "never" && window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;

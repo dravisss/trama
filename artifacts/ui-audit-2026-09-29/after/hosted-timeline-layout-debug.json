@@ -1,0 +1,1005 @@
+{
+  "captured_at": "2026-09-30T03:22:48.998Z",
+  "build_mtime": "2026-09-30T03:19:38.907Z",
+  "route": "http://127.0.0.1:4194/w/[REDACTED]",
+  "static_root": "/Users/Ravi/Apps/LoopViewer",
+  "viewport": {
+    "width": 360,
+    "height": 844
+  },
+  "page": {
+    "title": "Trama — Mapas sistêmicos",
+    "mode": "story",
+    "pathname": "/w/[REDACTED]",
+    "scrollWidth": 360,
+    "clientWidth": 360
+  },
+  "targetButtons": [
+    {
+      "textContent": "+ Cena de loop",
+      "innerText": "+ Cena de loop",
+      "ariaLabel": null,
+      "title": "",
+      "className": "story-timeline-add-scene",
+      "rect": {
+        "x": 133.984375,
+        "y": 557,
+        "width": 102.515625,
+        "height": 44,
+        "right": 236.5,
+        "bottom": 601
+      },
+      "style": {
+        "display": "block",
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "gridTemplateRows": "none",
+        "gridTemplateColumns": "none",
+        "gap": "normal",
+        "overflow": "visible",
+        "overflowX": "visible",
+        "justifyContent": "normal",
+        "minWidth": "0px",
+        "width": "102.516px"
+      },
+      "ancestors": [
+        {
+          "tag": "BUTTON",
+          "className": "story-timeline-add-scene",
+          "id": "story-timeline-add-scene",
+          "rect": {
+            "x": 133.984375,
+            "y": 557,
+            "width": 102.515625,
+            "height": 44,
+            "right": 236.5,
+            "bottom": 601
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "102.516px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "story-timeline-create-actions",
+          "id": "",
+          "rect": {
+            "x": 27.484375,
+            "y": 557,
+            "width": 315.515625,
+            "height": 44,
+            "right": 343,
+            "bottom": 601
+          },
+          "style": {
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "4px",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "315.516px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "story-timeline-header",
+          "id": "",
+          "rect": {
+            "x": 9,
+            "y": 517,
+            "width": 342,
+            "height": 94,
+            "right": 351,
+            "bottom": 611
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "32px 44px",
+            "gridTemplateColumns": "285.875px 36.125px",
+            "gap": "4px",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "space-between",
+            "minWidth": "auto",
+            "width": "342px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "story-timeline story-timeline-v2",
+          "id": "story-timeline-shell",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "94px 18px 153px 53px",
+            "gridTemplateColumns": "342px",
+            "gap": "0px",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "react-story-timeline-shell-root",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        }
+      ]
+    },
+    {
+      "textContent": "+ Cena manual",
+      "innerText": "+ Cena manual",
+      "ariaLabel": null,
+      "title": "",
+      "className": "story-timeline-add-manual-scene",
+      "rect": {
+        "x": 240.5,
+        "y": 557,
+        "width": 102.5,
+        "height": 44,
+        "right": 343,
+        "bottom": 601
+      },
+      "style": {
+        "display": "block",
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "gridTemplateRows": "none",
+        "gridTemplateColumns": "none",
+        "gap": "normal",
+        "overflow": "visible",
+        "overflowX": "visible",
+        "justifyContent": "normal",
+        "minWidth": "0px",
+        "width": "102.5px"
+      },
+      "ancestors": [
+        {
+          "tag": "BUTTON",
+          "className": "story-timeline-add-manual-scene",
+          "id": "story-timeline-add-manual-scene",
+          "rect": {
+            "x": 240.5,
+            "y": 557,
+            "width": 102.5,
+            "height": 44,
+            "right": 343,
+            "bottom": 601
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "102.5px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "story-timeline-create-actions",
+          "id": "",
+          "rect": {
+            "x": 27.484375,
+            "y": 557,
+            "width": 315.515625,
+            "height": 44,
+            "right": 343,
+            "bottom": 601
+          },
+          "style": {
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "4px",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "315.516px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "story-timeline-header",
+          "id": "",
+          "rect": {
+            "x": 9,
+            "y": 517,
+            "width": 342,
+            "height": 94,
+            "right": 351,
+            "bottom": 611
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "32px 44px",
+            "gridTemplateColumns": "285.875px 36.125px",
+            "gap": "4px",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "space-between",
+            "minWidth": "auto",
+            "width": "342px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "story-timeline story-timeline-v2",
+          "id": "story-timeline-shell",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "94px 18px 153px 53px",
+            "gridTemplateColumns": "342px",
+            "gap": "0px",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "react-story-timeline-shell-root",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        }
+      ]
+    },
+    {
+      "textContent": "+ Cena manual",
+      "innerText": "+ Cena manual",
+      "ariaLabel": null,
+      "title": "",
+      "className": "story-timeline-add-scene-inline",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "style": {
+        "display": "none",
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "gridTemplateRows": "none",
+        "gridTemplateColumns": "none",
+        "gap": "normal",
+        "overflow": "visible",
+        "overflowX": "visible",
+        "justifyContent": "normal",
+        "minWidth": "0px",
+        "width": "100%"
+      },
+      "ancestors": [
+        {
+          "tag": "BUTTON",
+          "className": "story-timeline-add-scene-inline",
+          "id": "",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "style": {
+            "display": "none",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "100%"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "story-timeline-track react-story-timeline-track",
+          "id": "react-story-timeline-root",
+          "rect": {
+            "x": 9,
+            "y": 629,
+            "width": 342,
+            "height": 153,
+            "right": 351,
+            "bottom": 782
+          },
+          "style": {
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "10px",
+            "overflow": "auto hidden",
+            "overflowX": "auto",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "342px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "story-timeline story-timeline-v2",
+          "id": "story-timeline-shell",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "94px 18px 153px 53px",
+            "gridTemplateColumns": "342px",
+            "gap": "0px",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "react-story-timeline-shell-root",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "stage",
+          "id": "",
+          "rect": {
+            "x": 0,
+            "y": 112,
+            "width": 360,
+            "height": 732,
+            "right": 360,
+            "bottom": 844
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "388px 320px",
+            "gridTemplateColumns": "344px",
+            "gap": "8px",
+            "overflow": "hidden auto",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "360px"
+          }
+        }
+      ]
+    },
+    {
+      "textContent": "",
+      "innerText": "",
+      "ariaLabel": "Primeiro movimento",
+      "title": "",
+      "className": "",
+      "rect": {
+        "x": 39.25,
+        "y": 787,
+        "width": 44,
+        "height": 44,
+        "right": 83.25,
+        "bottom": 831
+      },
+      "style": {
+        "display": "block",
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "gridTemplateRows": "none",
+        "gridTemplateColumns": "none",
+        "gap": "normal",
+        "overflow": "visible",
+        "overflowX": "visible",
+        "justifyContent": "normal",
+        "minWidth": "44px",
+        "width": "44px"
+      },
+      "ancestors": [
+        {
+          "tag": "BUTTON",
+          "className": "",
+          "id": "story-timeline-first",
+          "rect": {
+            "x": 39.25,
+            "y": 787,
+            "width": 44,
+            "height": 44,
+            "right": 83.25,
+            "bottom": 831
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "normal",
+            "minWidth": "44px",
+            "width": "44px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "story-timeline-actions",
+          "id": "",
+          "rect": {
+            "x": 9,
+            "y": 782,
+            "width": 342,
+            "height": 53,
+            "right": 351,
+            "bottom": 835
+          },
+          "style": {
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "1fr 1.4fr 1fr",
+            "gap": "3px",
+            "overflow": "auto",
+            "overflowX": "auto",
+            "justifyContent": "center",
+            "minWidth": "auto",
+            "width": "342px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "story-timeline story-timeline-v2",
+          "id": "story-timeline-shell",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "94px 18px 153px 53px",
+            "gridTemplateColumns": "342px",
+            "gap": "0px",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "react-story-timeline-shell-root",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "stage",
+          "id": "",
+          "rect": {
+            "x": 0,
+            "y": 112,
+            "width": 360,
+            "height": 732,
+            "right": 360,
+            "bottom": 844
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "388px 320px",
+            "gridTemplateColumns": "344px",
+            "gap": "8px",
+            "overflow": "hidden auto",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "360px"
+          }
+        }
+      ]
+    },
+    {
+      "textContent": "Prévia",
+      "innerText": "Prévia",
+      "ariaLabel": "Prévia deste movimento",
+      "title": "",
+      "className": "",
+      "rect": {
+        "x": 154.078125,
+        "y": 787,
+        "width": 52.109375,
+        "height": 44,
+        "right": 206.1875,
+        "bottom": 831
+      },
+      "style": {
+        "display": "block",
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "gridTemplateRows": "none",
+        "gridTemplateColumns": "none",
+        "gap": "normal",
+        "overflow": "visible",
+        "overflowX": "visible",
+        "justifyContent": "normal",
+        "minWidth": "44px",
+        "width": "52.1094px"
+      },
+      "ancestors": [
+        {
+          "tag": "BUTTON",
+          "className": "",
+          "id": "story-timeline-preview",
+          "rect": {
+            "x": 154.078125,
+            "y": 787,
+            "width": 52.109375,
+            "height": 44,
+            "right": 206.1875,
+            "bottom": 831
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "normal",
+            "minWidth": "44px",
+            "width": "52.1094px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "story-timeline-actions",
+          "id": "",
+          "rect": {
+            "x": 9,
+            "y": 782,
+            "width": 342,
+            "height": 53,
+            "right": 351,
+            "bottom": 835
+          },
+          "style": {
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "1fr 1.4fr 1fr",
+            "gap": "3px",
+            "overflow": "auto",
+            "overflowX": "auto",
+            "justifyContent": "center",
+            "minWidth": "auto",
+            "width": "342px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "story-timeline story-timeline-v2",
+          "id": "story-timeline-shell",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "94px 18px 153px 53px",
+            "gridTemplateColumns": "342px",
+            "gap": "0px",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "react-story-timeline-shell-root",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "stage",
+          "id": "",
+          "rect": {
+            "x": 0,
+            "y": 112,
+            "width": 360,
+            "height": 732,
+            "right": 360,
+            "bottom": 844
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "388px 320px",
+            "gridTemplateColumns": "344px",
+            "gap": "8px",
+            "overflow": "hidden auto",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "360px"
+          }
+        }
+      ]
+    },
+    {
+      "textContent": "",
+      "innerText": "",
+      "ariaLabel": "Último movimento",
+      "title": "",
+      "className": "",
+      "rect": {
+        "x": 276.75,
+        "y": 787,
+        "width": 44,
+        "height": 44,
+        "right": 320.75,
+        "bottom": 831
+      },
+      "style": {
+        "display": "block",
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "gridTemplateRows": "none",
+        "gridTemplateColumns": "none",
+        "gap": "normal",
+        "overflow": "visible",
+        "overflowX": "visible",
+        "justifyContent": "normal",
+        "minWidth": "44px",
+        "width": "44px"
+      },
+      "ancestors": [
+        {
+          "tag": "BUTTON",
+          "className": "",
+          "id": "story-timeline-last",
+          "rect": {
+            "x": 276.75,
+            "y": 787,
+            "width": 44,
+            "height": 44,
+            "right": 320.75,
+            "bottom": 831
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "justifyContent": "normal",
+            "minWidth": "44px",
+            "width": "44px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "story-timeline-actions",
+          "id": "",
+          "rect": {
+            "x": 9,
+            "y": 782,
+            "width": 342,
+            "height": 53,
+            "right": 351,
+            "bottom": 835
+          },
+          "style": {
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "1fr 1.4fr 1fr",
+            "gap": "3px",
+            "overflow": "auto",
+            "overflowX": "auto",
+            "justifyContent": "center",
+            "minWidth": "auto",
+            "width": "342px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "story-timeline story-timeline-v2",
+          "id": "story-timeline-shell",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "94px 18px 153px 53px",
+            "gridTemplateColumns": "342px",
+            "gap": "0px",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "DIV",
+          "className": "",
+          "id": "react-story-timeline-shell-root",
+          "rect": {
+            "x": 8,
+            "y": 516,
+            "width": 344,
+            "height": 320,
+            "right": 352,
+            "bottom": 836
+          },
+          "style": {
+            "display": "block",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "none",
+            "gridTemplateColumns": "none",
+            "gap": "normal",
+            "overflow": "hidden",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "344px"
+          }
+        },
+        {
+          "tag": "SECTION",
+          "className": "stage",
+          "id": "",
+          "rect": {
+            "x": 0,
+            "y": 112,
+            "width": 360,
+            "height": 732,
+            "right": 360,
+            "bottom": 844
+          },
+          "style": {
+            "display": "grid",
+            "flexDirection": "row",
+            "flexWrap": "nowrap",
+            "gridTemplateRows": "388px 320px",
+            "gridTemplateColumns": "344px",
+            "gap": "8px",
+            "overflow": "hidden auto",
+            "overflowX": "hidden",
+            "justifyContent": "normal",
+            "minWidth": "0px",
+            "width": "360px"
+          }
+        }
+      ]
+    }
+  ],
+  "resourceUrls": [
+    "http://127.0.0.1:4194/src/design-system/fonts.css",
+    "http://127.0.0.1:4194/dist/trama-ui-tokens.css",
+    "http://127.0.0.1:4194/src/react/ui/ui.css",
+    "http://127.0.0.1:4194/styles.css",
+    "http://127.0.0.1:4194/src/app/appShell.css",
+    "http://127.0.0.1:4194/src/app/storyStudio/storyStudio.css",
+    "http://127.0.0.1:4194/src/react/reactApp.css",
+    "http://127.0.0.1:4194/src/react/storyStudioV2/storyStudioV2.css",
+    "http://127.0.0.1:4194/src/react/applicationRoutes.css",
+    "http://127.0.0.1:4194/src/react/promotion.css",
+    "http://127.0.0.1:4194/src/react/prototypeParity.css",
+    "http://127.0.0.1:4194/hosted/hosted-ui.css",
+    "http://127.0.0.1:4194/vendor/cytoscape-cose-bilkent.js",
+    "http://127.0.0.1:4194/vendor/cose-base.js",
+    "http://127.0.0.1:4194/vendor/layout-base.js",
+    "http://127.0.0.1:4194/dist/cld-engine.iife.js",
+    "http://127.0.0.1:4194/vendor/cytoscape.min.js",
+    "http://127.0.0.1:4194/dist/react-app.iife.js",
+    "http://127.0.0.1:4194/dist/app.iife.js",
+    "http://127.0.0.1:4194/hosted/hosted-ui.js",
+    "http://127.0.0.1:4194/assets/fonts/noto-sans-latin-400-normal.woff2",
+    "http://127.0.0.1:4194/assets/fonts/noto-sans-latin-600-normal.woff2",
+    "http://127.0.0.1:4194/assets/fonts/noto-serif-latin-600-normal.woff2",
+    "http://127.0.0.1:4194/assets/fonts/noto-sans-latin-500-normal.woff2"
+  ]
+}

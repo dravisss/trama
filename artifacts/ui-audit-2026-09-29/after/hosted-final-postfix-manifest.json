@@ -1,0 +1,1656 @@
+{
+  "generated_at": "2026-09-30T03:11:53.088Z",
+  "server": "http://127.0.0.1:4194",
+  "final_build_mtime": "2026-09-30T03:10:53.275Z",
+  "routes": {
+    "edit": "http://127.0.0.1:4194/w/[REDACTED]",
+    "share": "http://127.0.0.1:4194/p/[REDACTED]"
+  },
+  "records": [
+    {
+      "name": "hosted-map-final-mobile360",
+      "state": "Hosted map selected from workspace library",
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Open editor link",
+        "Select Sobrecarga de Filas from map library",
+        "Dismiss first-use notice if present"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Mapa e descrição",
+        "Sobrecarga de Filas",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "Editar leitura"
+      ],
+      "selectControls": [
+        {
+          "id": "active-view-select",
+          "name": "Vista do mapa",
+          "labelledby": null,
+          "labels": [],
+          "value": ""
+        },
+        {
+          "id": "route-quality",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            ""
+          ],
+          "value": "balanced"
+        },
+        {
+          "id": "view-style-preset",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Direção visual"
+          ],
+          "value": ""
+        },
+        {
+          "id": "view-node-shape",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "FormaCírculoRetânguloLosangoHexágono"
+          ],
+          "value": "ellipse"
+        },
+        {
+          "id": "view-edge-style",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TraçoContínuoTracejadoPontilhado"
+          ],
+          "value": "solid"
+        },
+        {
+          "id": "view-edge-arrow",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TerminalTriângulo editorialChevron abertoVee técnicoTriângulo clássicoCírculo"
+          ],
+          "value": "triangle-backcurve"
+        },
+        {
+          "id": "rule-object",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "ObjetoVariávelRelação"
+          ],
+          "value": "variable"
+        },
+        {
+          "id": "rule-attribute",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "CampoTagCampo customizadoTipoID"
+          ],
+          "value": "tag"
+        },
+        {
+          "id": "rule-action",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AçãoDestacarOcultarMostrar"
+          ],
+          "value": "highlight"
+        },
+        {
+          "id": "dock-node-shape",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "FormaCírculoRetânguloLosangoHexágono"
+          ],
+          "value": "ellipse"
+        },
+        {
+          "id": "dock-node-lock",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "PosiçãoManterFixarLiberar"
+          ],
+          "value": "keep"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "EnquadramentoPreencherConter"
+          ],
+          "value": "cover"
+        },
+        {
+          "id": "dock-source-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Origem+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "dock-target-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Destino+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "presentation-style-input",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Estilo da apresentaçãoLegenda cinematográficaExplicação contextualAtlas editorialMuda a direção visual, não a história nem os focos."
+          ],
+          "value": "lower-third"
+        },
+        {
+          "id": "story-inspector-type",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TipoFocoRevelarPercursoHandoffCompararIntervençãoConsequênciaPerguntaCustom"
+          ],
+          "value": "focus"
+        },
+        {
+          "id": "story-inspector-duration-preset",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "DuraçãoRápido · 3sPadrão · 5sContemplativo · 8sPersonalizado"
+          ],
+          "value": "5000"
+        },
+        {
+          "id": "story-inspector-source",
+          "name": "Variável de origem",
+          "labelledby": null,
+          "labels": [],
+          "value": ""
+        },
+        {
+          "id": "story-inspector-camera",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Intenção da câmeraHerdar da cenaMapa inteiroFoco semânticoConjunto de elementosSeguir percursoEnquadramento capturadoComparação"
+          ],
+          "value": "inherit"
+        },
+        {
+          "id": "story-inspector-advance",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AvançoManualAutomático"
+          ],
+          "value": "manual"
+        },
+        {
+          "id": "story-inspector-transition",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TransiçãoInstantâneaDissolverDeslizarTransformar palco"
+          ],
+          "value": "instant"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Variável de origem"
+          ],
+          "value": ""
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Papel na narrativaOrientarExplicar a passagemMostrar consequênciaMarcar intervenção"
+          ],
+          "value": "traverse"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AvançoManualAutomático"
+          ],
+          "value": "manual"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TransiçãoDissolverCorteDeslizar"
+          ],
+          "value": "dissolve"
+        },
+        {
+          "id": "edge-source-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Origem+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "edge-target-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Destino+−"
+          ],
+          "value": "+"
+        }
+      ],
+      "screenshot": "hosted-map-final-mobile360.png",
+      "screenshot_sha256": "d02b905b84d11986422bc8c21977ffa72225184db955bf544519886ddd0cbb55",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-story-actions-final-mobile360",
+      "state": "Hosted Story Studio timeline actions after final fixes",
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Tap História",
+        "Wait for camera/timeline to settle",
+        "Measure visible timeline and primary-action hit areas"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "story",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "História",
+        "Seus projetos e mapas",
+        "Storyboard",
+        "Sobrecarga de Filas",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "Editar leitura"
+      ],
+      "selectControls": [
+        {
+          "id": "route-quality",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Qualidade das rotasRascunhoEquilibradoPublicação"
+          ],
+          "value": "balanced"
+        },
+        {
+          "id": "view-style-preset",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Direção visual"
+          ],
+          "value": ""
+        },
+        {
+          "id": "view-node-shape",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "FormaCírculoRetânguloLosangoHexágono"
+          ],
+          "value": "ellipse"
+        },
+        {
+          "id": "view-edge-style",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TraçoContínuoTracejadoPontilhado"
+          ],
+          "value": "solid"
+        },
+        {
+          "id": "view-edge-arrow",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TerminalTriângulo editorialChevron abertoVee técnicoTriângulo clássicoCírculo"
+          ],
+          "value": "triangle-backcurve"
+        },
+        {
+          "id": "rule-object",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "ObjetoVariávelRelação"
+          ],
+          "value": "variable"
+        },
+        {
+          "id": "rule-attribute",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "CampoTagCampo customizadoTipoID"
+          ],
+          "value": "tag"
+        },
+        {
+          "id": "rule-action",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AçãoDestacarOcultarMostrar"
+          ],
+          "value": "highlight"
+        },
+        {
+          "id": "dock-node-shape",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "FormaCírculoRetânguloLosangoHexágono"
+          ],
+          "value": "ellipse"
+        },
+        {
+          "id": "dock-node-lock",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "PosiçãoManterFixarLiberar"
+          ],
+          "value": "keep"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "EnquadramentoPreencherConter"
+          ],
+          "value": "cover"
+        },
+        {
+          "id": "dock-source-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Origem+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "dock-target-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Destino+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "presentation-style-input",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Estilo da apresentaçãoLegenda cinematográficaExplicação contextualAtlas editorialMuda a direção visual, não a história nem os focos."
+          ],
+          "value": "lower-third"
+        },
+        {
+          "id": "story-inspector-type",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TipoFocoRevelarPercursoHandoffCompararIntervençãoConsequênciaPerguntaCustom"
+          ],
+          "value": "focus"
+        },
+        {
+          "id": "story-inspector-duration-preset",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "DuraçãoRápido · 3sPadrão · 5sContemplativo · 8sPersonalizado"
+          ],
+          "value": "5000"
+        },
+        {
+          "id": "story-inspector-source",
+          "name": "Variável de origem",
+          "labelledby": null,
+          "labels": [],
+          "value": ""
+        },
+        {
+          "id": "story-inspector-camera",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Intenção da câmeraHerdar da cenaMapa inteiroFoco semânticoConjunto de elementosSeguir percursoEnquadramento capturadoComparação"
+          ],
+          "value": "inherit"
+        },
+        {
+          "id": "story-inspector-advance",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AvançoManualAutomático"
+          ],
+          "value": "manual"
+        },
+        {
+          "id": "story-inspector-transition",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TransiçãoInstantâneaDissolverDeslizarTransformar palco"
+          ],
+          "value": "instant"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Variável de origem"
+          ],
+          "value": ""
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Papel na narrativaOrientarExplicar a passagemMostrar consequênciaMarcar intervenção"
+          ],
+          "value": "traverse"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AvançoManualAutomático"
+          ],
+          "value": "manual"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TransiçãoDissolverCorteDeslizar"
+          ],
+          "value": "dissolve"
+        },
+        {
+          "id": "edge-source-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Origem+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "edge-target-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Destino+−"
+          ],
+          "value": "+"
+        }
+      ],
+      "screenshot": "hosted-story-actions-final-mobile360.png",
+      "screenshot_sha256": "24ed6a462907f87f923f82d15994e8be8858ee4e49300734036b44103ef25764",
+      "axe_violations": [],
+      "console_errors_and_warnings": [],
+      "action_metrics": [
+        {
+          "label": "+ Cena de loop",
+          "width": 84,
+          "height": 28,
+          "x": 275,
+          "y": 594
+        },
+        {
+          "label": "+ Cena manual",
+          "width": 85,
+          "height": 28,
+          "x": 365,
+          "y": 594
+        },
+        {
+          "label": "Abrir editor do movimento",
+          "width": 99,
+          "height": 28,
+          "x": 172,
+          "y": 594
+        },
+        {
+          "label": "Editar cena 1: A fila deixa de ser um problema isolado",
+          "width": 58,
+          "height": 31,
+          "x": 27,
+          "y": 662
+        },
+        {
+          "label": "Adicionar movimento à cena 1",
+          "width": 44,
+          "height": 44,
+          "x": 239,
+          "y": 656
+        },
+        {
+          "label": "Remover cena",
+          "width": 27,
+          "height": 27,
+          "x": 288,
+          "y": 664
+        },
+        {
+          "label": "Movimento 1: O backlog cresce",
+          "width": 182,
+          "height": 68,
+          "x": 29,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 176,
+          "y": 714
+        },
+        {
+          "label": "Movimento 2: O backlog produz handoffs",
+          "width": 182,
+          "height": 68,
+          "x": 219,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 366,
+          "y": 714
+        },
+        {
+          "label": "Movimento 3: Handoffs viram coordenação",
+          "width": 182,
+          "height": 68,
+          "x": 409,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 556,
+          "y": 714
+        },
+        {
+          "label": "Editar cena 2: A fragmentação alonga o tempo de ciclo",
+          "width": 58,
+          "height": 31,
+          "x": 337,
+          "y": 662
+        },
+        {
+          "label": "Adicionar movimento à cena 2",
+          "width": 44,
+          "height": 44,
+          "x": 549,
+          "y": 656
+        },
+        {
+          "label": "Remover cena",
+          "width": 27,
+          "height": 27,
+          "x": 598,
+          "y": 664
+        },
+        {
+          "label": "Movimento 4: Coordenação consome capacidade",
+          "width": 182,
+          "height": 68,
+          "x": 339,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 486,
+          "y": 714
+        },
+        {
+          "label": "Movimento 5: A latência chega ao cliente",
+          "width": 182,
+          "height": 68,
+          "x": 529,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 676,
+          "y": 714
+        },
+        {
+          "label": "Editar cena 3: A carteirada aparece como alívio",
+          "width": 58,
+          "height": 31,
+          "x": 647,
+          "y": 662
+        },
+        {
+          "label": "Adicionar movimento à cena 3",
+          "width": 44,
+          "height": 44,
+          "x": 859,
+          "y": 656
+        },
+        {
+          "label": "Remover cena",
+          "width": 27,
+          "height": 27,
+          "x": 908,
+          "y": 664
+        },
+        {
+          "label": "Movimento 6: Insatisfação ativa o atalho",
+          "width": 182,
+          "height": 68,
+          "x": 649,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 796,
+          "y": 714
+        },
+        {
+          "label": "Movimento 7: O atalho reduz uma espera",
+          "width": 182,
+          "height": 68,
+          "x": 839,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 986,
+          "y": 714
+        },
+        {
+          "label": "Editar cena 4: O alívio alimenta o problema",
+          "width": 58,
+          "height": 31,
+          "x": 957,
+          "y": 662
+        },
+        {
+          "label": "Adicionar movimento à cena 4",
+          "width": 44,
+          "height": 44,
+          "x": 1169,
+          "y": 656
+        },
+        {
+          "label": "Remover cena",
+          "width": 27,
+          "height": 27,
+          "x": 1218,
+          "y": 664
+        },
+        {
+          "label": "Movimento 8: O atalho cria canal paralelo",
+          "width": 182,
+          "height": 68,
+          "x": 959,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 1106,
+          "y": 714
+        },
+        {
+          "label": "Movimento 9: O canal paralelo reduz visibilidade",
+          "width": 182,
+          "height": 68,
+          "x": 1149,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 1296,
+          "y": 714
+        },
+        {
+          "label": "Movimento 10: O ciclo de sobrecarga se fecha",
+          "width": 182,
+          "height": 68,
+          "x": 1339,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 1486,
+          "y": 714
+        },
+        {
+          "label": "Editar cena 5: O acelerador também se deteriora",
+          "width": 58,
+          "height": 31,
+          "x": 1267,
+          "y": 662
+        },
+        {
+          "label": "Adicionar movimento à cena 5",
+          "width": 44,
+          "height": 44,
+          "x": 1479,
+          "y": 656
+        },
+        {
+          "label": "Remover cena",
+          "width": 27,
+          "height": 27,
+          "x": 1528,
+          "y": 664
+        },
+        {
+          "label": "Movimento 11: A carteirada corrói os aceleradores",
+          "width": 182,
+          "height": 68,
+          "x": 1269,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 1416,
+          "y": 714
+        },
+        {
+          "label": "Movimento 12: A deterioração alonga novamente o ciclo",
+          "width": 182,
+          "height": 68,
+          "x": 1459,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 1606,
+          "y": 714
+        },
+        {
+          "label": "Editar cena 6: A armadilha sistêmica",
+          "width": 58,
+          "height": 31,
+          "x": 1577,
+          "y": 662
+        },
+        {
+          "label": "Adicionar movimento à cena 6",
+          "width": 44,
+          "height": 44,
+          "x": 1789,
+          "y": 656
+        },
+        {
+          "label": "Remover cena",
+          "width": 27,
+          "height": 27,
+          "x": 1838,
+          "y": 664
+        },
+        {
+          "label": "Movimento 13: Resolver casos não é recuperar o sistema",
+          "width": 182,
+          "height": 68,
+          "x": 1579,
+          "y": 711
+        },
+        {
+          "label": "Remover movimento",
+          "width": 32,
+          "height": 32,
+          "x": 1726,
+          "y": 714
+        },
+        {
+          "label": "Primeiro movimento",
+          "width": 27,
+          "height": 44,
+          "x": 135,
+          "y": 787
+        },
+        {
+          "label": "Anterior",
+          "width": 65,
+          "height": 44,
+          "x": 165,
+          "y": 787
+        },
+        {
+          "label": "Prévia deste movimento",
+          "width": 52,
+          "height": 44,
+          "x": 232,
+          "y": 787
+        },
+        {
+          "label": "Próximo",
+          "width": 65,
+          "height": 44,
+          "x": 288,
+          "y": 787
+        },
+        {
+          "label": "Último movimento",
+          "width": 27,
+          "height": 44,
+          "x": 355,
+          "y": 787
+        }
+      ]
+    },
+    {
+      "name": "hosted-share-final-mobile360",
+      "state": "Read-only map/share",
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Open Read-only map/share on 360px after the final hosted build"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "Exemplos",
+        "Sobrecarga de Filas"
+      ],
+      "selectControls": [
+        {
+          "id": "",
+          "name": "Selecionar mapa",
+          "labelledby": null,
+          "labels": [],
+          "value": "0"
+        }
+      ],
+      "screenshot": "hosted-share-final-mobile360.png",
+      "screenshot_sha256": "b476f7429147ec9397cecf3669a73c77699792100ba2eca6958f49480b3aa730",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-player-final-mobile360",
+      "state": "Read-only presentation/player",
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Open Read-only presentation/player on 360px after the final hosted build"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "Exemplos",
+        "Sobrecarga de Filas",
+        "O backlog cresce"
+      ],
+      "selectControls": [
+        {
+          "id": "",
+          "name": "Selecionar mapa",
+          "labelledby": null,
+          "labels": [],
+          "value": "0"
+        }
+      ],
+      "screenshot": "hosted-player-final-mobile360.png",
+      "screenshot_sha256": "78166fa272281edf4d01519c096ab0062eb0ad28205e9c83873545eb180b5b79",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-no-sidebar-final-mobile360",
+      "state": "Read-only share without sidebar",
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Open Read-only share without sidebar on 360px after the final hosted build"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "Exemplos",
+        "Sobrecarga de Filas"
+      ],
+      "selectControls": [
+        {
+          "id": "",
+          "name": "Selecionar mapa",
+          "labelledby": null,
+          "labels": [],
+          "value": "0"
+        }
+      ],
+      "screenshot": "hosted-no-sidebar-final-mobile360.png",
+      "screenshot_sha256": "838c760bcf040173fbc0fab194f928fab82ac53795cb262999f1441e9c685e9f",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-settings-share-final-mobile360",
+      "state": "Hosted share settings with secret values blurred",
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Open Compartilhar",
+        "Blur fields containing secret URLs before screenshot"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "Projetos",
+        "Seus projetos e mapas",
+        "Inspector",
+        "Sobrecarga de Filas",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "Editar leitura",
+        "Compartilhar e conectar"
+      ],
+      "selectControls": [
+        {
+          "id": "route-quality",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Qualidade das rotasRascunhoEquilibradoPublicação"
+          ],
+          "value": "balanced"
+        },
+        {
+          "id": "view-style-preset",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Direção visual"
+          ],
+          "value": ""
+        },
+        {
+          "id": "view-node-shape",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "FormaCírculoRetânguloLosangoHexágono"
+          ],
+          "value": "ellipse"
+        },
+        {
+          "id": "view-edge-style",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TraçoContínuoTracejadoPontilhado"
+          ],
+          "value": "solid"
+        },
+        {
+          "id": "view-edge-arrow",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TerminalTriângulo editorialChevron abertoVee técnicoTriângulo clássicoCírculo"
+          ],
+          "value": "triangle-backcurve"
+        },
+        {
+          "id": "rule-object",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "ObjetoVariávelRelação"
+          ],
+          "value": "variable"
+        },
+        {
+          "id": "rule-attribute",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "CampoTagCampo customizadoTipoID"
+          ],
+          "value": "tag"
+        },
+        {
+          "id": "rule-action",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AçãoDestacarOcultarMostrar"
+          ],
+          "value": "highlight"
+        },
+        {
+          "id": "dock-node-shape",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "FormaCírculoRetânguloLosangoHexágono"
+          ],
+          "value": "ellipse"
+        },
+        {
+          "id": "dock-node-lock",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "PosiçãoManterFixarLiberar"
+          ],
+          "value": "keep"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "EnquadramentoPreencherConter"
+          ],
+          "value": "cover"
+        },
+        {
+          "id": "dock-source-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Origem+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "dock-target-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Destino+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "presentation-style-input",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Estilo da apresentaçãoLegenda cinematográficaExplicação contextualAtlas editorialMuda a direção visual, não a história nem os focos."
+          ],
+          "value": "lower-third"
+        },
+        {
+          "id": "story-inspector-type",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TipoFocoRevelarPercursoHandoffCompararIntervençãoConsequênciaPerguntaCustom"
+          ],
+          "value": "focus"
+        },
+        {
+          "id": "story-inspector-duration-preset",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "DuraçãoRápido · 3sPadrão · 5sContemplativo · 8sPersonalizado"
+          ],
+          "value": "5000"
+        },
+        {
+          "id": "story-inspector-source",
+          "name": "Variável de origem",
+          "labelledby": null,
+          "labels": [],
+          "value": ""
+        },
+        {
+          "id": "story-inspector-camera",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Intenção da câmeraHerdar da cenaMapa inteiroFoco semânticoConjunto de elementosSeguir percursoEnquadramento capturadoComparação"
+          ],
+          "value": "inherit"
+        },
+        {
+          "id": "story-inspector-advance",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AvançoManualAutomático"
+          ],
+          "value": "manual"
+        },
+        {
+          "id": "story-inspector-transition",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TransiçãoInstantâneaDissolverDeslizarTransformar palco"
+          ],
+          "value": "instant"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Variável de origem"
+          ],
+          "value": ""
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Papel na narrativaOrientarExplicar a passagemMostrar consequênciaMarcar intervenção"
+          ],
+          "value": "traverse"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AvançoManualAutomático"
+          ],
+          "value": "manual"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TransiçãoDissolverCorteDeslizar"
+          ],
+          "value": "dissolve"
+        },
+        {
+          "id": "edge-source-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Origem+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "edge-target-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Destino+−"
+          ],
+          "value": "+"
+        }
+      ],
+      "screenshot": "hosted-settings-share-final-mobile360.png",
+      "screenshot_sha256": "dcc3738670f40b63e7e76dabb4167b38c8d879c6fed5f9bac7ef699ad2887385",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-share-final-mobile390",
+      "state": "Read-only map/share",
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Open read-only share on 390px after final hosted build"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "Exemplos",
+        "Sobrecarga de Filas"
+      ],
+      "selectControls": [
+        {
+          "id": "",
+          "name": "Selecionar mapa",
+          "labelledby": null,
+          "labels": [],
+          "value": "0"
+        }
+      ],
+      "screenshot": "hosted-share-final-mobile390.png",
+      "screenshot_sha256": "0a65c10e17502259c53443eab52d099598a75c392e1c44ee94f0249541758e05",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-player-final-mobile390",
+      "state": "Read-only presentation/player",
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Open read-only presentation/player on 390px after final hosted build"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "Exemplos",
+        "Sobrecarga de Filas",
+        "O backlog cresce"
+      ],
+      "selectControls": [
+        {
+          "id": "",
+          "name": "Selecionar mapa",
+          "labelledby": null,
+          "labels": [],
+          "value": "0"
+        }
+      ],
+      "screenshot": "hosted-player-final-mobile390.png",
+      "screenshot_sha256": "f85437181616ca52e5c9158b6e2b0c9758925402a6436066c7f200e9b187dd83",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-no-sidebar-final-mobile390",
+      "state": "Read-only share without sidebar",
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Open read-only share without sidebar on 390px after final hosted build"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "Exemplos",
+        "Sobrecarga de Filas"
+      ],
+      "selectControls": [
+        {
+          "id": "",
+          "name": "Selecionar mapa",
+          "labelledby": null,
+          "labels": [],
+          "value": "0"
+        }
+      ],
+      "screenshot": "hosted-no-sidebar-final-mobile390.png",
+      "screenshot_sha256": "d54de9d9f2ca23236a451019045da2dfce98e966785f3afc45dd92e64684d919",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-settings-share-final-mobile390",
+      "state": "Hosted share settings with secret values blurred",
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Open Compartilhar on 390px",
+        "Blur fields containing secret URLs before screenshot"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "primaryHeadings": [
+        "Projetos",
+        "Seus projetos e mapas",
+        "Inspector",
+        "Sobrecarga de Filas",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "Editar leitura",
+        "Compartilhar e conectar"
+      ],
+      "selectControls": [
+        {
+          "id": "route-quality",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Qualidade das rotasRascunhoEquilibradoPublicação"
+          ],
+          "value": "balanced"
+        },
+        {
+          "id": "view-style-preset",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Direção visual"
+          ],
+          "value": ""
+        },
+        {
+          "id": "view-node-shape",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "FormaCírculoRetânguloLosangoHexágono"
+          ],
+          "value": "ellipse"
+        },
+        {
+          "id": "view-edge-style",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TraçoContínuoTracejadoPontilhado"
+          ],
+          "value": "solid"
+        },
+        {
+          "id": "view-edge-arrow",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TerminalTriângulo editorialChevron abertoVee técnicoTriângulo clássicoCírculo"
+          ],
+          "value": "triangle-backcurve"
+        },
+        {
+          "id": "rule-object",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "ObjetoVariávelRelação"
+          ],
+          "value": "variable"
+        },
+        {
+          "id": "rule-attribute",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "CampoTagCampo customizadoTipoID"
+          ],
+          "value": "tag"
+        },
+        {
+          "id": "rule-action",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AçãoDestacarOcultarMostrar"
+          ],
+          "value": "highlight"
+        },
+        {
+          "id": "dock-node-shape",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "FormaCírculoRetânguloLosangoHexágono"
+          ],
+          "value": "ellipse"
+        },
+        {
+          "id": "dock-node-lock",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "PosiçãoManterFixarLiberar"
+          ],
+          "value": "keep"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "EnquadramentoPreencherConter"
+          ],
+          "value": "cover"
+        },
+        {
+          "id": "dock-source-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Origem+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "dock-target-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Destino+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "presentation-style-input",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Estilo da apresentaçãoLegenda cinematográficaExplicação contextualAtlas editorialMuda a direção visual, não a história nem os focos."
+          ],
+          "value": "lower-third"
+        },
+        {
+          "id": "story-inspector-type",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TipoFocoRevelarPercursoHandoffCompararIntervençãoConsequênciaPerguntaCustom"
+          ],
+          "value": "focus"
+        },
+        {
+          "id": "story-inspector-duration-preset",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "DuraçãoRápido · 3sPadrão · 5sContemplativo · 8sPersonalizado"
+          ],
+          "value": "5000"
+        },
+        {
+          "id": "story-inspector-source",
+          "name": "Variável de origem",
+          "labelledby": null,
+          "labels": [],
+          "value": ""
+        },
+        {
+          "id": "story-inspector-camera",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Intenção da câmeraHerdar da cenaMapa inteiroFoco semânticoConjunto de elementosSeguir percursoEnquadramento capturadoComparação"
+          ],
+          "value": "inherit"
+        },
+        {
+          "id": "story-inspector-advance",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AvançoManualAutomático"
+          ],
+          "value": "manual"
+        },
+        {
+          "id": "story-inspector-transition",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TransiçãoInstantâneaDissolverDeslizarTransformar palco"
+          ],
+          "value": "instant"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Variável de origem"
+          ],
+          "value": ""
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Papel na narrativaOrientarExplicar a passagemMostrar consequênciaMarcar intervenção"
+          ],
+          "value": "traverse"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "AvançoManualAutomático"
+          ],
+          "value": "manual"
+        },
+        {
+          "id": "",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "TransiçãoDissolverCorteDeslizar"
+          ],
+          "value": "dissolve"
+        },
+        {
+          "id": "edge-source-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Origem+−"
+          ],
+          "value": "+"
+        },
+        {
+          "id": "edge-target-sign",
+          "name": null,
+          "labelledby": null,
+          "labels": [
+            "Destino+−"
+          ],
+          "value": "+"
+        }
+      ],
+      "screenshot": "hosted-settings-share-final-mobile390.png",
+      "screenshot_sha256": "fe8254df768c7dbf3a906187ae194d070761c30dd25d8f8c83c86bd569acfd1a",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    }
+  ],
+  "http_and_console_errors": [],
+  "limitation": "All credential paths are redacted; the disposable workspace is in the isolated hosted data root."
+}

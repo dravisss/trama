@@ -29,15 +29,15 @@ const ICONS = {
 const MODES = [
   ["workspace", "Projetos"],
   ["map", "Editor"],
-  ["story", "Story Studio"],
+  ["story", "História"],
   ["present", "Apresentar"]
 ];
 
 function EditorViewControl({ viewSwitcher = {} }) {
   const options = [{ id: "", title: "Matcha padrão" }, ...(viewSwitcher.options || [])];
   return <div className="editor-title-view">
-    <span>Vista do canvas</span>
-    <Select id="active-view-select" aria-label="Vista do canvas" value={viewSwitcher.activeId || ""} onChange={event => viewSwitcher.onSelect?.(event.target.value)}>
+    <span>Vista do mapa</span>
+    <Select id="active-view-select" aria-label="Vista do mapa" value={viewSwitcher.activeId || ""} onChange={event => viewSwitcher.onSelect?.(event.target.value)}>
       {options.map(option => <option value={option.id} key={option.id}>{option.title}</option>)}
     </Select>
     <details className="editor-title-view-actions">
@@ -109,7 +109,7 @@ function ReactShell({ mode, view, callbacks, viewSwitcher, onModeChange, onActio
         </div>
         <div className="breadcrumb-shell">
           <details className="command-menu project-switcher" id="project-switcher">
-            <summary><span id="active-project-label">Projeto: {projectTitle}</span><small id="active-loop-label">Mapa: {activeMap?.title || "Nenhum"}</small></summary>
+            <summary aria-label={`Projeto ${projectTitle}: ações e arquivos`}><span id="active-project-label">Projeto: {projectTitle}</span><small id="active-loop-label">Mapa: {activeMap?.title || "Nenhum"}</small></summary>
             <div className="command-menu-panel project-menu-panel">
               <Button id="new-project-db" onClick={() => onAction?.("newProject")} size="sm" variant="quiet">Novo projeto</Button>
               <div className="local-projects" id="local-projects" />

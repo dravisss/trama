@@ -79,6 +79,7 @@ export const BASE_SECURITY_HEADERS = {
 
 export function resolveStaticPath(root, hostedPublicDir, pathname) {
   if (pathname.includes("\0")) return null;
+  if (pathname === "/favicon.ico" || pathname === "/favicon.svg") return resolve(hostedPublicDir, "favicon.svg");
   if (VENDOR_FILES[pathname]) return resolve(root, VENDOR_FILES[pathname]);
   if (ROOT_FILES.has(pathname)) return resolve(root, `.${pathname}`);
   if (pathname.startsWith("/hosted/")) return within(hostedPublicDir, pathname.slice("/hosted/".length));

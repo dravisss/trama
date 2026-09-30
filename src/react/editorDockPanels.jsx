@@ -118,7 +118,7 @@ function MapLoopBrowser({ loopBrowser = {} }) {
     <div className="editor-map-loops-heading">
       <div>
         <span className="dock-eyebrow">Estruturas encontradas</span>
-        <h3 id="editor-cycles-title">Loops e ciclos do mapa</h3>
+        <h3 id="editor-cycles-title">Circuitos do mapa</h3>
       </div>
       <span className="editor-map-loop-count">{loops.length} {loops.length === 1 ? "ciclo" : "ciclos"}</span>
     </div>
@@ -134,7 +134,7 @@ function MapLoopBrowser({ loopBrowser = {} }) {
         onClick={() => loopBrowser.onFocusLoop?.(loop.id)}
       >
         <strong className="loop-badge" style={{ ...(loop.visual?.badgeFill || loop.visual?.fill ? { background: loop.visual.badgeFill || loop.visual.fill } : {}), ...(loop.visual?.badgeColor || loop.visual?.color ? { color: loop.visual.badgeColor || loop.visual.color } : {}) }}>{loop.label}</strong>
-        <span className="editor-map-loop-copy"><b>{loop.path || "Ciclo sem título editorial"}</b><small>{loop.edgeCount} {loop.edgeCount === 1 ? "relação" : "relações"} · {loop.type === "balancing" ? "feedback negativo" : "feedback positivo"}</small></span>
+        <span className="editor-map-loop-copy"><b title={loop.path}>{loop.title || loop.path || "Ciclo sem título editorial"}</b><small>{loop.edgeCount} {loop.edgeCount === 1 ? "relação" : "relações"} · {loop.type === "balancing" ? "balanceamento" : "reforço"} · {loop.published ? "curado" : "encontrado"}</small></span>
         <Icon name="chevronDown" size="sm" className="editor-map-loop-open" />
       </Button>)}
     </div>
@@ -157,7 +157,7 @@ export function EditorDockPanels({ loopBrowser = {}, dataTable = {}, versionHist
               <Tooltip label="Editar descrição"><IconButton id="edit-loop-description" icon="book" onClick={() => actions.map?.onEditDescription?.()} type="button" className="icon-btn-tip" aria-label="Editar descrição" /></Tooltip>
             </div>
           </div>
-          <div className="markdown-view" id="scenario-description" />
+          <div className="markdown-view" id="scenario-description" tabIndex={0} />
         </section>
         <MapLoopBrowser loopBrowser={loopBrowser} />
         <div className="editor-map-tip"><Icon name="sparkles" /><p><strong>Organização do mapa</strong>Os ciclos ficam aqui para leitura e seleção; a autoria narrativa continua no Story Studio.</p></div>

@@ -20,10 +20,9 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
 
   return (
     <div className="projects-workspace">
-      <section className="projects-hero" aria-labelledby="workspace-home-title">
+      <section className="projects-hero">
         <div className="projects-hero-copy">
-          <span className="workspace-kicker">Continue de onde parou</span>
-          <h2 id="workspace-home-title">Seu trabalho sistêmico, em um só lugar</h2>
+          <h1 id="workspace-home-title">Seus projetos e mapas</h1>
           <p>{copy.heroText}</p>
         </div>
         <div className="projects-hero-actions">
@@ -37,7 +36,7 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
         <div className="projects-section-heading">
           <div>
             <span className="workspace-kicker">Projetos recentes</span>
-            <h3 id="workspace-projects-title">Biblioteca de projetos</h3>
+            <h3 id="workspace-projects-title" aria-level="2">Biblioteca de projetos</h3>
           </div>
           <span className="projects-library-count">{copy.libraryCount(projectCount)}</span>
         </div>
@@ -47,7 +46,7 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
             item={item}
             active={index === 0}
             previewModel={index === 0 ? project.previewModel : null}
-            onClick={() => index === 0 ? callbacks.onOpenMap?.(0) : callbacks.onOpenProjectPath?.(item.path)}
+            onClick={() => index === 0 ? document.querySelector("#workspace-maps-title")?.scrollIntoView({ block: "start", behavior: "smooth" }) : callbacks.onOpenProjectPath?.(item.path)}
           />)}
           <Button className="projects-new-card" aria-label="Criar novo projeto" onClick={() => callbacks.onNewProject?.()} variant="quiet" size="touch">
             <span className="projects-new-card-icon" aria-hidden="true"><Icon name="plus" /></span>
@@ -62,7 +61,7 @@ export function WorkspaceView({ view = {}, callbacks = {} }) {
           <div>
             <div className="projects-breadcrumb"><Icon name="folder" size="sm" /><span>Projetos</span><b>›</b><strong>{activeTitle}</strong></div>
             <span className="workspace-kicker">Projeto selecionado</span>
-            <h3 id="workspace-maps-title">{activeTitle}</h3>
+            <h3 id="workspace-maps-title" aria-level="2">{activeTitle}</h3>
             <p>{project.description || copy.defaultDescription}</p>
           </div>
           <div className="projects-selected-actions">
@@ -121,7 +120,7 @@ function MapCard({ map = {}, onOpen }) {
     <span className="projects-map-preview"><MapPreview model={map.model} label={`Prévia do mapa ${map.title || "sem título"}`} /></span>
     <span className="projects-map-kicker"><Icon name="map" size="sm" /> Mapa local</span>
     <strong>{map.title || "Mapa sem título"}</strong>
-    <small>{map.nodes || 0} variáveis · {map.edges || 0} relações · {map.loops || 0} ciclos</small>
+    <small>{map.nodes || 0} variáveis · {map.edges || 0} relações · {map.loops || 0} ciclos curados</small>
     <span className="projects-map-footer"><span className={map.hasPresentation ? "ready" : ""} />{map.storySteps ? `${map.storySteps} passos de apresentação` : "Sem apresentação"}<b>Abrir no editor <Icon name="arrowRight" size="sm" /></b></span>
   </Button>;
 }

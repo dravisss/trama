@@ -51,13 +51,21 @@ test("ações do dock de mapa usam o owner React", async ({ page }) => {
   await rail.getByRole("button", { name: "Mapa e descrição" }).click();
   await expect(page.locator("#rename-loop")).toBeVisible();
   await page.locator("#rename-loop").click({ position: { x: 2, y: 15 } });
-  await expect(page.locator("#command-dialog")).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Renomear mapa" })).toBeVisible();
   await expect(page.locator("#command-dialog").getByRole("heading", { name: "Renomear mapa" })).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.locator("#command-dialog")).toBeHidden();
 
   await page.locator("#edit-loop-description").click();
   await expect(page.locator("#loop-description-modal")).toBeVisible();
-  await page.locator("#cancel-loop-description").click();
+  const description = page.getByRole("dialog", { name: "Editar leitura" });
+  await expect(description).toBeVisible();
+  await description.getByRole("button", { name: "Salvar descrição" }).focus();
+  await page.keyboard.press("Tab");
+  await expect(page.locator("#close-loop-description")).toBeFocused();
+  await page.keyboard.press("Shift+Tab");
+  await expect(description.getByRole("button", { name: "Salvar descrição" })).toBeFocused();
+  await page.keyboard.press("Escape");
   await expect(page.locator("#loop-description-modal")).toBeHidden();
+  await expect(page.locator("#edit-loop-description")).toBeFocused();
 });

@@ -1253,6 +1253,7 @@ function renderWorkspaceTabs(nextQuery = loopFilterQuery) {
       summary,
       storyCount,
       loopCount,
+      loopCountKind: entry.model.loops?.length ? "curados" : "encontrados",
       nodeCount: entry.model.nodes?.length || 0
     });
   });
@@ -1288,7 +1289,7 @@ function updateLoopSelectorSummary() {
   const loopCount = displayLoopCount(entry.model);
   elements.activeLoopSelectLabel.textContent = tabLabel(entry, activeIndex);
   elements.activeLoopSelectMeta.textContent =
-    `${entry.model.nodes?.length || 0} variáveis · ${loopCount} ciclos · ${storyCount} passos`;
+    `${entry.model.nodes?.length || 0} variáveis · ${loopCount} ciclos ${entry.model.loops?.length ? "curados" : "encontrados"} · ${storyCount} passos`;
 }
 
 function displayLoopCount(model) {
@@ -1384,7 +1385,7 @@ function openDockPanel(panel) {
     content.hidden = content.dataset.dockContent !== panel;
   });
   elements.dockTitle.textContent = {
-    inspect: "Inspector",
+    inspect: "Detalhes",
     map: "Mapa e descrição",
     code: "Código do loop",
     style: "Vista visual",
@@ -2550,7 +2551,7 @@ function renderStoryInspector() {
   });
   const { scene, beat, chapter, hasTarget, isBeat, primaryLoop, loopLabel, beatCount, beatIndex, title, narration, timing, transition, camera, cameraInherited, cameraTarget, focus } = view;
   if (elements.storyInspectorTarget) elements.storyInspectorTarget.textContent = hasTarget
-    ? `${isBeat ? `Beat ${beatIndex} de ${beatCount}` : (primaryLoop ? "Cena do loop" : "Cena")} · ${title || "Sem título"}`
+    ? `${isBeat ? `Movimento ${beatIndex} de ${beatCount}` : (primaryLoop ? "Cena do circuito" : "Cena")} · ${title || "Sem título"}`
     : "Nenhuma cena selecionada";
   if (elements.storyCanvasSelectionTitle) elements.storyCanvasSelectionTitle.textContent = hasTarget
     ? `${isBeat ? "Beat" : "Cena"} · ${title || "Sem título"}`
@@ -2560,7 +2561,7 @@ function renderStoryInspector() {
     : "Selecione um beat na estrutura ou na timeline";
   updateStoryCanvasSelectionAction();
   if (elements.storyInspectorContext) elements.storyInspectorContext.textContent = hasTarget
-    ? `${loopLabel ? `Loop · ${loopLabel} · ${beatCount} beats` : `${chapter?.title || "Apresentação"} · ${scene.title}`}${isBeat ? ` · Beat ${beatIndex}` : ""}`
+    ? `${loopLabel ? `Circuito · ${loopLabel} · ${beatCount} movimentos` : `${chapter?.title || "Apresentação"} · ${scene.title}`}${isBeat ? ` · Movimento ${beatIndex}` : ""}`
     : "Selecione uma cena ou beat no storyboard para dirigir o palco.";
   populateSelect(elements.storyInspectorType, isBeat
     ? [["focus", "Foco"], ["reveal", "Revelar"], ["traverse", "Percurso"], ["handoff", "Handoff"], ["compare", "Comparar"], ["intervention", "Intervenção"], ["consequence", "Consequência"], ["question", "Pergunta"], ["custom", "Custom"]]
@@ -4485,6 +4486,8 @@ async function renameActiveLoop() {
   showToast("Loop renomeado.");
 }
 
+let loopDescriptionRestoreFocus = null;
+
 async function editActiveLoopDescription() {
   const entry = workspace[activeIndex];
   if (!entry) return;
@@ -4492,6 +4495,7 @@ async function editActiveLoopDescription() {
   elements.loopDescriptionInput.value =
     entry.description_md || entry.model.description || `## ${entry.label || entry.model.title}\n\n`;
   updateLoopDescriptionPreview();
+  loopDescriptionRestoreFocus = document.activeElement;
   elements.loopDescriptionModal.hidden = false;
   elements.loopDescriptionInput.focus();
 }
@@ -4524,6 +4528,8 @@ function updateLoopDescriptionPreview() {
 
 function closeLoopDescriptionModal() {
   elements.loopDescriptionModal.hidden = true;
+  loopDescriptionRestoreFocus?.focus?.();
+  loopDescriptionRestoreFocus = null;
 }
 
 async function duplicateActiveLoop() {
@@ -4857,6 +4863,7 @@ function renderLoopBrowser() {
     items.push({
       id: loop.id,
       label: loop.label,
+      title: curated?.title || "",
       path: loop.nodeIds.map(id => nodeLabels.get(id)).join(" → "),
       edgeCount: loop.edgeIds.length,
       type: loop.type,
@@ -4989,6 +4996,8 @@ function startPresentation(loopOverride = null, initialIndex = 0) {
   if (editing) setEditing(false);
   if (focusMode) setFocusMode(false);
   setPresenterMode(false);
+  clearTimeout(toastTimer);
+  elements.toast.hidden = true;
   presenterStartedAt = Date.now();
   currentPresentationFrame = null;
   activePresentationReducedMotion = presentation.settings?.reducedMotion === "always" ||

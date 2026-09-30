@@ -1,0 +1,486 @@
+{
+  "generated_at": "2026-09-30T02:43:59.832Z",
+  "server": {
+    "landing": "http://127.0.0.1:4186",
+    "hosted": "http://127.0.0.1:4194"
+  },
+  "disposable_workspace": true,
+  "edit_url": "http://127.0.0.1:4194/w/[REDACTED]",
+  "share_url": "http://127.0.0.1:4194/p/[REDACTED]",
+  "entries": [
+    {
+      "name": "landing-desktop",
+      "route": "http://127.0.0.1:4186",
+      "state": "Abrir landing local em /",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir landing local em /"
+      ],
+      "status": 200,
+      "title": "Trama — entenda as relações, descubra os ciclos",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "O que faz um problema\nse repetir?",
+        "Puxe um fio.\nVeja o que se move.",
+        "O problema parece ser a espera.",
+        "Tempo de espera",
+        "E se a tramafosse outra?",
+        "Um mapa para investigar.\nUma história para compartilhar.",
+        "Tudo começa\nentre duas coisas.",
+        "Até que o efeito\nvolta ao começo.",
+        "Não mostre tudo.\nConduza o olhar.",
+        "Pensar junto começa\npor tornar visível.",
+        "Na facilitação",
+        "Na educação",
+        "Na pesquisa",
+        "Antes de\npuxar o fio.",
+        "Que problema você\nquer compreender?"
+      ],
+      "visibleDialogs": [],
+      "screenshot": "landing-desktop.png",
+      "screenshot_sha256": "b145033f586d2b07aaac65ea8c6f7af349d109d0ad5e1bde0a63e5af28909a81",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-start-desktop",
+      "route": "http://127.0.0.1:4194",
+      "state": "Não submeter criação de workspace nesta tela",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir página inicial hosted",
+        "Não submeter criação de workspace nesta tela"
+      ],
+      "status": 200,
+      "title": "Trama — entenda as relações, descubra os ciclos",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "O que faz um problema\nse repetir?",
+        "Puxe um fio.\nVeja o que se move.",
+        "O problema parece ser a espera.",
+        "Tempo de espera",
+        "E se a tramafosse outra?",
+        "Um mapa para investigar.\nUma história para compartilhar.",
+        "Tudo começa\nentre duas coisas.",
+        "Até que o efeito\nvolta ao começo.",
+        "Não mostre tudo.\nConduza o olhar.",
+        "Pensar junto começa\npor tornar visível.",
+        "Na facilitação",
+        "Na educação",
+        "Na pesquisa",
+        "Antes de\npuxar o fio.",
+        "Que problema você\nquer compreender?"
+      ],
+      "visibleDialogs": [],
+      "screenshot": "hosted-start-desktop.png",
+      "screenshot_sha256": "03d2f772c97de4a03ea03bfc67bc023c67b7970383d3e1740e323b5406888a95",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "landing-mobile390",
+      "route": "http://127.0.0.1:4186",
+      "state": "Abrir landing local em /",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir landing local em /"
+      ],
+      "status": 200,
+      "title": "Trama — entenda as relações, descubra os ciclos",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "O que faz um problema se repetir?",
+        "Puxe um fio.\nVeja o que se move.",
+        "O problema parece ser a espera.",
+        "Tempo de espera",
+        "E se a tramafosse outra?",
+        "Um mapa para investigar.\nUma história para compartilhar.",
+        "Tudo começaentre duas coisas.",
+        "Até que o efeitovolta ao começo.",
+        "Não mostre tudo.Conduza o olhar.",
+        "Pensar junto começa\npor tornar visível.",
+        "Na facilitação",
+        "Na educação",
+        "Na pesquisa",
+        "Antes depuxar o fio.",
+        "Que problema você\nquer compreender?"
+      ],
+      "visibleDialogs": [],
+      "screenshot": "landing-mobile390.png",
+      "screenshot_sha256": "a8c9531f5622df99c6d835e419cbcb7b2317770508f9c23f838f5b70e098e95c",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-start-mobile390",
+      "route": "http://127.0.0.1:4194",
+      "state": "Não submeter criação de workspace nesta tela",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Abrir página inicial hosted",
+        "Não submeter criação de workspace nesta tela"
+      ],
+      "status": 200,
+      "title": "Trama — entenda as relações, descubra os ciclos",
+      "horizontalOverflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "headings": [
+        "O que faz um problema se repetir?",
+        "Puxe um fio.\nVeja o que se move.",
+        "O problema parece ser a espera.",
+        "Tempo de espera",
+        "E se a tramafosse outra?",
+        "Um mapa para investigar.\nUma história para compartilhar.",
+        "Tudo começaentre duas coisas.",
+        "Até que o efeitovolta ao começo.",
+        "Não mostre tudo.Conduza o olhar.",
+        "Pensar junto começa\npor tornar visível.",
+        "Na facilitação",
+        "Na educação",
+        "Na pesquisa",
+        "Antes depuxar o fio.",
+        "Que problema você\nquer compreender?"
+      ],
+      "visibleDialogs": [],
+      "screenshot": "hosted-start-mobile390.png",
+      "screenshot_sha256": "712081f439e892002e2e20aec7880598aa47e6585519c6f15678ddb3f5c7a4ce",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "landing-mobile360",
+      "route": "http://127.0.0.1:4186",
+      "state": "Abrir landing local em /",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir landing local em /"
+      ],
+      "status": 200,
+      "title": "Trama — entenda as relações, descubra os ciclos",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "O que faz um problema se repetir?",
+        "Puxe um fio.\nVeja o que se move.",
+        "O problema parece ser a espera.",
+        "Tempo de espera",
+        "E se a tramafosse outra?",
+        "Um mapa para investigar.\nUma história para compartilhar.",
+        "Tudo começaentre duas coisas.",
+        "Até que o efeitovolta ao começo.",
+        "Não mostre tudo.Conduza o olhar.",
+        "Pensar junto começa\npor tornar visível.",
+        "Na facilitação",
+        "Na educação",
+        "Na pesquisa",
+        "Antes depuxar o fio.",
+        "Que problema você\nquer compreender?"
+      ],
+      "visibleDialogs": [],
+      "screenshot": "landing-mobile360.png",
+      "screenshot_sha256": "108a3723fb98e939db25fe0b70208546bd0e718a8baf649467afa34ca6e3a81c",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-start-mobile360",
+      "route": "http://127.0.0.1:4194",
+      "state": "Não submeter criação de workspace nesta tela",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Abrir página inicial hosted",
+        "Não submeter criação de workspace nesta tela"
+      ],
+      "status": 200,
+      "title": "Trama — entenda as relações, descubra os ciclos",
+      "horizontalOverflow": false,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "headings": [
+        "O que faz um problema se repetir?",
+        "Puxe um fio.\nVeja o que se move.",
+        "O problema parece ser a espera.",
+        "Tempo de espera",
+        "E se a tramafosse outra?",
+        "Um mapa para investigar.\nUma história para compartilhar.",
+        "Tudo começaentre duas coisas.",
+        "Até que o efeitovolta ao começo.",
+        "Não mostre tudo.Conduza o olhar.",
+        "Pensar junto começa\npor tornar visível.",
+        "Na facilitação",
+        "Na educação",
+        "Na pesquisa",
+        "Antes depuxar o fio.",
+        "Que problema você\nquer compreender?"
+      ],
+      "visibleDialogs": [],
+      "screenshot": "hosted-start-mobile360.png",
+      "screenshot_sha256": "00ba43d2927c5c36d4f5cfa9032ac6c8fef0f6aea6d8b48bb1a10f86d05b6ce0",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-editor-map",
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "state": "hosted-editor-map",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Criar espaço descartável com exemplos",
+        "Abrir estado hosted-editor-map"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Projetos",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Exemplos",
+        "Inspector",
+        "Sobrecarga de Filas",
+        "O que este loop mostra",
+        "Loops e ciclos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "hosted-editor-map-desktop.png",
+      "screenshot_sha256": "c95525e4adc713224fe7329af0e572946981f1c84f9ae49b1074a8c4a82057d2",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-editor-story",
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "state": "hosted-editor-story",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Criar espaço descartável com exemplos",
+        "Abrir estado hosted-editor-story"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "story",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "História",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Exemplos",
+        "Storyboard",
+        "Sobrecarga de Filas",
+        "O que este loop mostra",
+        "Loops e ciclos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "hosted-editor-story-desktop.png",
+      "screenshot_sha256": "c95879d0a1e422db99fc888d55c778e3807f3e047bb5a2d3eae428fe7acb203f",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-editor-player",
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "state": "hosted-editor-player",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Criar espaço descartável com exemplos",
+        "Abrir estado hosted-editor-player"
+      ],
+      "status": 200,
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "present",
+      "overflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Apresentar",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Exemplos",
+        "O backlog cresce",
+        "Storyboard",
+        "Sobrecarga de Filas",
+        "O que este loop mostra",
+        "Loops e ciclos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "hosted-editor-player-desktop.png",
+      "screenshot_sha256": "a01ca210856acf72ea5f865d1683838f604ebfd1612e8075e93eb06c8df35004",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-share-desktop",
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "state": "Capturar hosted-share",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir link de leitura efêmero",
+        "Capturar hosted-share"
+      ],
+      "status": 200,
+      "title": "Exemplos — Trama",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Exemplos",
+        "Sobrecarga de Filas",
+        "O que este loop mostra",
+        "Clique em uma aresta"
+      ],
+      "visibleDialogs": [],
+      "screenshot": "hosted-share-desktop.png",
+      "screenshot_sha256": "1b7b1a38764c9104da05fcb4f9417a648618fa36f3de90365c081a246fc85d81",
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-presentation-desktop",
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "state": "Capturar hosted-presentation",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir link de leitura efêmero",
+        "Capturar hosted-presentation"
+      ],
+      "status": 200,
+      "title": "Exemplos — Trama",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Exemplos",
+        "Sobrecarga de Filas",
+        "O que este loop mostra",
+        "Clique em uma aresta",
+        "O backlog cresce"
+      ],
+      "visibleDialogs": [],
+      "screenshot": "hosted-presentation-desktop.png",
+      "screenshot_sha256": "43ebf5e7cfc27c36aa58d631d095908ad18a3fe15368890dc9f1b344ea8337d7",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-no-sidebar-desktop",
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "state": "Capturar hosted-no-sidebar",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir link de leitura efêmero",
+        "Capturar hosted-no-sidebar"
+      ],
+      "status": 200,
+      "title": "Exemplos — Trama",
+      "horizontalOverflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "headings": [
+        "Exemplos",
+        "Sobrecarga de Filas",
+        "O que este loop mostra",
+        "Clique em uma aresta"
+      ],
+      "visibleDialogs": [],
+      "screenshot": "hosted-no-sidebar-desktop.png",
+      "screenshot_sha256": "d0869c68b31eb895fd53b5b728a6e095cdea395125e00991cf23d732cbe68ac2",
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-share-settings-desktop",
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "state": "Modal Compartilhar aberto; valores secretos borrados por CSS",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Abrir workspace descartável",
+        "Abrir Compartilhar",
+        "Borrar campos que contenham links/tokens antes da captura"
+      ],
+      "status": 200,
+      "screenshot": "hosted-share-settings-desktop.png",
+      "screenshot_sha256": "82f47903e4023f906ac4a6bc7e36a14232add63fe71192bd9b678812b6bec9f6",
+      "visibleDialogs": [
+        "trama-share-dialog"
+      ],
+      "console_errors_and_warnings": []
+    }
+  ],
+  "limitations": [
+    "Secret workspace paths are redacted in this manifest; temporary tokens exist only in this runner's memory.",
+    "The workspace is isolated under /tmp/trama-ui-audit-hosted-2026-09-29 and is disposable.",
+    "No share token rotation, deletion or publication outside localhost was performed."
+  ]
+}

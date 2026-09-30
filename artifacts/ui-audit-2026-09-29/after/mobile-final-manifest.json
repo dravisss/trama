@@ -1,0 +1,393 @@
+{
+  "generated_at": "2026-09-30T02:56:15.031Z",
+  "target": "http://127.0.0.1:58810",
+  "records": [
+    {
+      "name": "workspace-final-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Open isolated QA fixture home",
+        "Capture after mobile grid correction"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "visibleWidth": 390,
+      "headings": [
+        "Projetos",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Inspector",
+        "Sobrecarga de Filas",
+        "Sobrecarga de Filas",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "workspace-final-mobile390.png",
+      "screenshot_sha256": "b7de87dd7da6bfb721096cc7bd10db78ae00536976c409b172e013f6df58c6e7",
+      "axe_violations": [
+        {
+          "id": "landmark-unique",
+          "impact": "moderate",
+          "nodes": 1
+        }
+      ],
+      "console_errors": []
+    },
+    {
+      "name": "map-final-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Select Flagship map from project library"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "visibleWidth": 390,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "map-final-mobile390.png",
+      "screenshot_sha256": "484eba18a0077fb9412935105a2d1dbd2e946d8ac5aecafd7f8058e3a4c10581",
+      "axe_violations": [],
+      "console_errors": []
+    },
+    {
+      "name": "story-navigation-final-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Tap História from mobile navigation"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "story",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "visibleWidth": 390,
+      "headings": [
+        "História",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Storyboard",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "story-navigation-final-mobile390.png",
+      "screenshot_sha256": "bdf86722040ed4321b07c342076b85be9cc5355c08dda3f6d268faff9f92e4f5",
+      "axe_violations": [],
+      "console_errors": []
+    },
+    {
+      "name": "present-navigation-final-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Tap Apresentar from mobile navigation"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "present",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "visibleWidth": 390,
+      "headings": [
+        "Apresentar",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Onde começa a história",
+        "Storyboard",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "present-navigation-final-mobile390.png",
+      "screenshot_sha256": "47cfebbdfc64f619bbf8e9a2aa2f2a8ff08a7efdbc450b110d1acb6059249ffe",
+      "axe_violations": [
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "nodes": 1
+        }
+      ],
+      "console_errors": [],
+      "navigation_controls": [
+        {
+          "mode": "workspace",
+          "visible": true,
+          "text": "Projetos"
+        },
+        {
+          "mode": "map",
+          "visible": true,
+          "text": "Editor"
+        },
+        {
+          "mode": "story",
+          "visible": true,
+          "text": "História"
+        },
+        {
+          "mode": "present",
+          "visible": true,
+          "text": "Apresentar"
+        }
+      ]
+    },
+    {
+      "name": "workspace-final-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Open isolated QA fixture home",
+        "Capture after mobile grid correction"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "visibleWidth": 360,
+      "headings": [
+        "Projetos",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Inspector",
+        "Sobrecarga de Filas",
+        "Sobrecarga de Filas",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "workspace-final-mobile360.png",
+      "screenshot_sha256": "535f6068a0bbbcac088e2d38d16e76f76a99723f0b46c58a55149db4e8f1982c",
+      "axe_violations": [
+        {
+          "id": "landmark-unique",
+          "impact": "moderate",
+          "nodes": 1
+        }
+      ],
+      "console_errors": []
+    },
+    {
+      "name": "map-final-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Select Flagship map from project library"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "map",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "visibleWidth": 360,
+      "headings": [
+        "Editor",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Mapa e descrição",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "map-final-mobile360.png",
+      "screenshot_sha256": "c0de60a8563e0611b731c5f1ac91175c9d590ac506469330e295c8d18873fb3e",
+      "axe_violations": [],
+      "console_errors": []
+    },
+    {
+      "name": "story-navigation-final-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Tap História from mobile navigation"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "story",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "visibleWidth": 360,
+      "headings": [
+        "História",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Storyboard",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "story-navigation-final-mobile360.png",
+      "screenshot_sha256": "8cac983a1c41e77541df00506ddffa3d6106ca0113ce1285b1b9dfd385f29122",
+      "axe_violations": [],
+      "console_errors": []
+    },
+    {
+      "name": "present-navigation-final-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Tap Apresentar from mobile navigation"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "present",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "visibleWidth": 360,
+      "headings": [
+        "Apresentar",
+        "Seus projetos e mapas",
+        "Biblioteca de projetos",
+        "Trama UI QA",
+        "Onde começa a história",
+        "Storyboard",
+        "Flagship — Crescimento sob pressão",
+        "Circuitos do mapa",
+        "Construa uma vista editorial",
+        "Elemento do mapa",
+        "Clique em uma aresta",
+        "Conte o sistema",
+        "Adicionar movimento",
+        "O que você quer mostrar?",
+        "Veja a composição antes de narrar",
+        "Escolha a passagem",
+        "Dê sentido ao movimento",
+        "Editar leitura"
+      ],
+      "screenshot": "present-navigation-final-mobile360.png",
+      "screenshot_sha256": "7a2c91ecf00984f0b8f0ee63c88925874c28f02917b8dd4c53e112c606d8dc30",
+      "axe_violations": [
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "nodes": 1
+        }
+      ],
+      "console_errors": [],
+      "navigation_controls": [
+        {
+          "mode": "workspace",
+          "visible": true,
+          "text": "Projetos"
+        },
+        {
+          "mode": "map",
+          "visible": true,
+          "text": "Editor"
+        },
+        {
+          "mode": "story",
+          "visible": true,
+          "text": "História"
+        },
+        {
+          "mode": "present",
+          "visible": true,
+          "text": "Apresentar"
+        }
+      ]
+    }
+  ],
+  "limitation": "Manual screen-reader and physical-device testing was not performed."
+}

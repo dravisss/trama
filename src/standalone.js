@@ -73,7 +73,7 @@ root.innerHTML = `
       <aside class="standalone-sidebar">
         <section class="standalone-section">
           <div class="standalone-section-title">Loop ativo</div>
-          <select class="standalone-loop-select"></select>
+          <select class="standalone-loop-select" aria-label="Selecionar mapa"></select>
         </section>
         <section class="standalone-section standalone-overview">
           <small class="standalone-eyebrow"></small>
@@ -105,7 +105,7 @@ root.innerHTML = `
           <img class="standalone-story-image" alt="" hidden>
           <div>
             <button data-story="previous">Anterior</button>
-            <button data-story="playback" aria-pressed="false" aria-label="Reproduzir apresentação" title="Reproduzir apresentação">▶</button>
+            <button data-story="playback" aria-pressed="false" aria-label="Reproduzir apresentação" title="Reproduzir apresentação">Reproduzir</button>
             <button data-story="next">Próximo</button>
             <button data-story="explore">Explorar mapa</button>
             <button data-story="resume" hidden>Retomar história</button>
@@ -538,7 +538,7 @@ function updateStandalonePlaybackControl(playing = false) {
   button.setAttribute("aria-pressed", String(playing));
   button.setAttribute("aria-label", playing ? "Pausar apresentação" : "Reproduzir apresentação");
   button.title = playing ? "Pausar apresentação" : "Reproduzir apresentação";
-  button.textContent = playing ? "Ⅱ" : "▶";
+  button.textContent = playing ? "Pausar" : "Reproduzir";
 }
 
 function applyStandaloneFocus(frame) {

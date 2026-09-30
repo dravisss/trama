@@ -1,0 +1,28 @@
+ M dist/app.iife.js
+ M dist/app.iife.js.map
+ M dist/atlas-embed-runtime.iife.js
+ M dist/cld-engine.iife.js
+ M dist/cld-engine.iife.js.map
+ M dist/landing/assets/landing.css
+ M dist/landing/assets/landing.js
+ M dist/react-app.iife.js
+ M dist/react-app.iife.js.map
+ M dist/standalone-runtime.iife.js
+ M docs/EXTENDING.md
+ M landing/cinema.js
+ M landing/demo.js
+ M landing/landing.css
+ M landing/main.js
+ M scripts/qa-landing.mjs
+ M server/hosted/public/hosted-ui.css
+ M server/hosted/public/hosted-ui.js
+ M src/react/editorDockPanels.jsx
+ M src/react/promotion.css
+ M src/react/prototypeParity.css
+ M src/routing/optimizer.js
+ M styles.css
+ M tests/landing.test.mjs
+ M tests/routing-optimizer.test.mjs
+?? .agents/skills/impeccable/
+?? .claude/
+?? artifacts/

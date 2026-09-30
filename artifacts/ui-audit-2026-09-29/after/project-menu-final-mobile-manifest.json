@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-09-30T03:00:52.673Z",
+  "target": "http://127.0.0.1:58810",
+  "records": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "summary_visible": true,
+      "summary_rect": {
+        "x": 305.546875,
+        "y": 20,
+        "width": 64.453125,
+        "height": 44
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "triggerRect": {
+        "x": 305.546875,
+        "y": 20,
+        "width": 64.453125,
+        "height": 44
+      },
+      "panelRect": {
+        "x": 8,
+        "y": 58,
+        "width": 374,
+        "height": 482
+      },
+      "panelPosition": "fixed",
+      "panelClientHeight": 480,
+      "panelScrollHeight": 480,
+      "menuOpen": true,
+      "overflow": false,
+      "menu_screenshot": "project-menu-final-390.png",
+      "menu_sha256": "72db3b35780a9579f95697e1c0c1b41381b65be21bdbe0b8099e5fb927845bca",
+      "edit_project_dialog_screenshot": "edit-project-final-390.png",
+      "edit_dialog_sha256": "7ace8dca7354f1514bdae5af349daeab1afb8fe8259dc52be6825f992297221f",
+      "steps": [
+        "Open Flagship map",
+        "Tap Projeto button",
+        "Verify fixed menu",
+        "Tap Editar projeto",
+        "Capture command dialog"
+      ],
+      "console_errors": []
+    },
+    {
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "summary_visible": true,
+      "summary_rect": {
+        "x": 275.546875,
+        "y": 20,
+        "width": 64.453125,
+        "height": 44
+      },
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "triggerRect": {
+        "x": 275.546875,
+        "y": 20,
+        "width": 64.453125,
+        "height": 44
+      },
+      "panelRect": {
+        "x": 8,
+        "y": 58,
+        "width": 344,
+        "height": 482
+      },
+      "panelPosition": "fixed",
+      "panelClientHeight": 480,
+      "panelScrollHeight": 480,
+      "menuOpen": true,
+      "overflow": false,
+      "menu_screenshot": "project-menu-final-360.png",
+      "menu_sha256": "0695babb63d65eb9a841b81ae605efa4dfd73042652008119317868f45b8e754",
+      "edit_project_dialog_screenshot": "edit-project-final-360.png",
+      "edit_dialog_sha256": "0aecdfa49cdb2be6245839d40e32dc5269a225236803cddea0903d05c07f1d8a",
+      "steps": [
+        "Open Flagship map",
+        "Tap Projeto button",
+        "Verify fixed menu",
+        "Tap Editar projeto",
+        "Capture command dialog"
+      ],
+      "console_errors": []
+    }
+  ]
+}

@@ -74,6 +74,22 @@ export function createWorkspaceDomBridge({
     // A native modal owns Escape and focus restoration. Background menus and
     // editor shortcuts must not react to the same keystroke.
     if (isCommandDialogOpen()) return;
+    const descriptionModal = elements.loopDescriptionModal;
+    if (descriptionModal && !descriptionModal.hidden) {
+      if (event.key === "Escape") {
+        event.preventDefault?.();
+        actions.closeLoopDescriptionModal?.();
+      } else if (event.key === "Tab") {
+        const controls = [...descriptionModal.querySelectorAll("button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), [tabindex='0']")].filter(control => !control.hidden);
+        const first = controls[0];
+        const last = controls.at(-1);
+        if ((event.shiftKey && documentRef.activeElement === first) || (!event.shiftKey && documentRef.activeElement === last)) {
+          event.preventDefault?.();
+          (event.shiftKey ? last : first)?.focus?.();
+        }
+      }
+      return;
+    }
     if (event.key === "Escape" && closeSavePopover({ restoreFocus: true })) {
       event.preventDefault?.();
       return;
@@ -84,8 +100,12 @@ export function createWorkspaceDomBridge({
     }
     actions.handleKeydown?.(event);
   });
+  on(documentRef, "focusin", event => {
+    const modal = elements.loopDescriptionModal;
+    if (modal && !modal.hidden && !modal.contains?.(event.target)) elements.loopDescriptionInput?.focus?.();
+  });
   on(documentRef, "pointerdown", event => {
-    if (isCommandDialogOpen()) return;
+    if (isCommandDialogOpen() || (elements.loopDescriptionModal && !elements.loopDescriptionModal.hidden)) return;
     const target = event.target;
     if (isSavePopoverOpen() && !elements.saveStatus?.contains?.(target) && !elements.savePopover?.contains?.(target)) {
       closeSavePopover();

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "./ui/Button.jsx";
+import { Icon } from "./ui/Icon.jsx";
 import { Input, Select, Textarea } from "./ui/Field.jsx";
 import { InspectorMovementVisual } from "./movementVisuals.jsx";
 
@@ -12,7 +13,7 @@ export function CausalMovementComposer({ movementInspector = {} } = {}) {
   return <div className="story-movement-composer">
     <div className="story-movement-composer-heading">
       <span id="story-movement-source-label" className="story-movement-source-label">Forma visual</span>
-      <span id="story-movement-hint" className="story-movement-hint">Selecione uma forma na timeline</span>
+      <span id="story-movement-hint" className="story-movement-hint">Selecione uma forma na sequência da história</span>
     </div>
     <div id="story-inspector-causal-svg" className="story-movement-visual" aria-label="Visualização do movimento"><InspectorMovementVisual {...movementInspector} /></div>
     <div id="story-inspector-source-picker" className="story-movement-source-picker" role="listbox" aria-label="Escolher variável de origem" hidden />
@@ -29,7 +30,7 @@ export function CausalMovementComposer({ movementInspector = {} } = {}) {
  */
 export function StoryInspectorPanel({ movementInspector = {} } = {}) {
   return <>
-    <p id="story-inspector-context" className="story-inspector-context">Escolha um movimento na timeline para editar o que será narrado.</p>
+    <p id="story-inspector-context" className="story-inspector-context">Escolha um movimento na sequência da história para editar o que será narrado.</p>
     <div className="story-v2-inspector-section story-v2-inspector-section-main">
       <div className="story-v2-section-label">Conteúdo do movimento</div>
       <div className="story-inspector-grid">
@@ -101,7 +102,7 @@ export function StoryInspectorPanel({ movementInspector = {} } = {}) {
     </details>
     <div className="story-v2-inspector-footer">
       <div className="story-inspector-actions story-inspector-edit-actions">
-        <Button unstyled type="button" id="story-inspector-duplicate"><span className="story-action-icon" aria-hidden="true">⧉</span>Duplicar movimento</Button>
+        <Button unstyled type="button" id="story-inspector-duplicate"><Icon name="copy" size="sm" />Duplicar movimento</Button>
       </div>
       <div className="story-inspector-actions story-inspector-destructive-actions">
         <Button unstyled type="button" id="story-inspector-remove"><svg className="story-action-svg" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 4.5h9M6 4.5V3h4v1.5M5 6l.5 7h5L11 6M7 7.5v4M9 7.5v4" /></svg>Remover movimento</Button>

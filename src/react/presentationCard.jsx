@@ -8,7 +8,7 @@ function PresentationCardMarkup({ actions = {} } = {}) {
       <aside className="presentation-card story-tooltip" id="presentation-card" hidden>
         <div className="presentation-progress" id="presentation-progress" />
         <div className="inspector-eyebrow" id="presentation-study-label">Apresentação guiada</div>
-        <h3 id="presentation-title" />
+        <h3 id="presentation-title" aria-level="2" />
         <div id="presentation-body" className="presentation-body" />
         <div id="presentation-relation-meta" className="presentation-relation-meta" hidden />
         <img id="presentation-image" alt="" hidden />

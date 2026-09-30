@@ -1,0 +1,631 @@
+{
+  "generated_at": "2026-09-30T03:28:17.934Z",
+  "project": "/Users/Ravi/Apps/LoopViewer",
+  "git_head_at_audit_start": "5ad557bf5a3a271a76bcc46654d40b2598a6b47a",
+  "servers": {
+    "local_fixture": "http://127.0.0.1:58810",
+    "landing": "http://127.0.0.1:4186",
+    "hosted_ephemeral": "http://127.0.0.1:4194"
+  },
+  "viewports": [
+    "1440x900",
+    "390x844",
+    "360x844"
+  ],
+  "screenshots": [
+    {
+      "filename": "dialog-edit-map-description-desktop.png",
+      "state": "dialog-edit-map-description-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 218573,
+      "sha256": "52fd6758c7bb231b2c35818983bb21c675a49294ea24e0857add865a3c5664fd"
+    },
+    {
+      "filename": "dialog-map-description-desktop.png",
+      "state": "dialog-map-description-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 258624,
+      "sha256": "4cb121aae6f49d466fa4aa499532cfa0074b64b3ed6e3ebf225a9d9af5316f4b"
+    },
+    {
+      "filename": "dialog-map-description-mobile390.png",
+      "state": "dialog-map-description-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 89633,
+      "sha256": "eddf6dcc94cb080286f361d8d66e9b66e0f6b530aaaf119b8ca129902aa47789"
+    },
+    {
+      "filename": "dialog-new-map-desktop.png",
+      "state": "dialog-new-map-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 274464,
+      "sha256": "5f590e147636f9fdb36c1d49fed4939f2f2759e7c1159f795d91c945a5752a0b"
+    },
+    {
+      "filename": "dialog-new-map-mobile390.png",
+      "state": "dialog-new-map-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 85158,
+      "sha256": "d4e6b2e61991932841c3316086d0b8e658018677e31786b4eb166fe4892adbf9"
+    },
+    {
+      "filename": "dialog-project-desktop.png",
+      "state": "dialog-project-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 248213,
+      "sha256": "a7079ebe5cf165bba8b9e99a2de7406397964d5cc4e377d1b35fd71608278d1a"
+    },
+    {
+      "filename": "dialog-project-metadata-desktop.png",
+      "state": "dialog-project-metadata-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 239521,
+      "sha256": "a8127f545bf3e764f45dca35ff31ee36c5b9dd54b0389d1d5af70d47979fd707"
+    },
+    {
+      "filename": "editor-history-desktop.png",
+      "state": "editor-history-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 124643,
+      "sha256": "db54265e8c8ed0a74150e0f8e19b41f4cace63d64b50842d06bb31ae6c8ad12f"
+    },
+    {
+      "filename": "editor-history-mobile390.png",
+      "state": "editor-history-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 44902,
+      "sha256": "9502d49400d50546c1d7e3ee80d487c8596b81eb166b95e17ee814027439ad38"
+    },
+    {
+      "filename": "editor-inspector-desktop.png",
+      "state": "editor-inspector-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 135370,
+      "sha256": "16e65f59770eb40fc63414fd9dc3c8d069f92dc6666e70b0388195b1c58f6f4e"
+    },
+    {
+      "filename": "editor-inspector-mobile390.png",
+      "state": "editor-inspector-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 54323,
+      "sha256": "a2edfab6624017e5f9fffed92e13e506e86b8a9abd0101259b30f56cfebac7ac"
+    },
+    {
+      "filename": "editor-markdown-desktop.png",
+      "state": "editor-markdown-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 180836,
+      "sha256": "f94358fb405bfcde60d104eba4eff3c3ca101e90c8e7a33c6ecdaf476151d30d"
+    },
+    {
+      "filename": "editor-markdown-mobile390.png",
+      "state": "editor-markdown-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 83553,
+      "sha256": "c0d4fe746614f78c5b51706b8b564acbd62727702290be5128ad3d5f0dee31d3"
+    },
+    {
+      "filename": "editor-style-desktop.png",
+      "state": "editor-style-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 149935,
+      "sha256": "9831185dfc98ba97c874221297932ef7f856dd7190736e19b8afce5fe53e798a"
+    },
+    {
+      "filename": "editor-style-mobile390.png",
+      "state": "editor-style-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 64268,
+      "sha256": "32f2aa6c0ac97f3de6812da849c0e6bdc925f0b910623c577c11deb460d47222"
+    },
+    {
+      "filename": "editor-table-desktop.png",
+      "state": "editor-table-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 84617,
+      "sha256": "fe2d13bd56577130d14b976d07af1a1f143a841d282282ca0622b2857832dd27"
+    },
+    {
+      "filename": "editor-table-mobile390.png",
+      "state": "editor-table-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 50672,
+      "sha256": "9d89f58610c74a2ad35fd2ee1b54cfff95501bd4538151ee3712df017fa082b0"
+    },
+    {
+      "filename": "hosted-editor-map-desktop.png",
+      "state": "hosted-editor-map-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 235223,
+      "sha256": "c95525e4adc713224fe7329af0e572946981f1c84f9ae49b1074a8c4a82057d2"
+    },
+    {
+      "filename": "hosted-editor-player-desktop.png",
+      "state": "hosted-editor-player-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 103153,
+      "sha256": "a01ca210856acf72ea5f865d1683838f604ebfd1612e8075e93eb06c8df35004"
+    },
+    {
+      "filename": "hosted-editor-story-desktop.png",
+      "state": "hosted-editor-story-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 243547,
+      "sha256": "c95879d0a1e422db99fc888d55c778e3807f3e047bb5a2d3eae428fe7acb203f"
+    },
+    {
+      "filename": "hosted-no-sidebar-desktop.png",
+      "state": "hosted-no-sidebar-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 162344,
+      "sha256": "d0869c68b31eb895fd53b5b728a6e095cdea395125e00991cf23d732cbe68ac2"
+    },
+    {
+      "filename": "hosted-presentation-desktop.png",
+      "state": "hosted-presentation-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 136245,
+      "sha256": "43ebf5e7cfc27c36aa58d631d095908ad18a3fe15368890dc9f1b344ea8337d7"
+    },
+    {
+      "filename": "hosted-share-desktop.png",
+      "state": "hosted-share-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 233878,
+      "sha256": "1b7b1a38764c9104da05fcb4f9417a648618fa36f3de90365c081a246fc85d81"
+    },
+    {
+      "filename": "hosted-share-settings-desktop.png",
+      "state": "hosted-share-settings-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 328521,
+      "sha256": "82f47903e4023f906ac4a6bc7e36a14232add63fe71192bd9b678812b6bec9f6"
+    },
+    {
+      "filename": "hosted-start-desktop.png",
+      "state": "hosted-start-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 1422354,
+      "sha256": "03d2f772c97de4a03ea03bfc67bc023c67b7970383d3e1740e323b5406888a95"
+    },
+    {
+      "filename": "hosted-start-mobile360.png",
+      "state": "hosted-start-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 582119,
+      "sha256": "00ba43d2927c5c36d4f5cfa9032ac6c8fef0f6aea6d8b48bb1a10f86d05b6ce0"
+    },
+    {
+      "filename": "hosted-start-mobile390.png",
+      "state": "hosted-start-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 615292,
+      "sha256": "712081f439e892002e2e20aec7880598aa47e6585519c6f15678ddb3f5c7a4ce"
+    },
+    {
+      "filename": "landing-desktop.png",
+      "state": "landing-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 1415180,
+      "sha256": "b145033f586d2b07aaac65ea8c6f7af349d109d0ad5e1bde0a63e5af28909a81"
+    },
+    {
+      "filename": "landing-mobile360.png",
+      "state": "landing-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 576759,
+      "sha256": "108a3723fb98e939db25fe0b70208546bd0e718a8baf649467afa34ca6e3a81c"
+    },
+    {
+      "filename": "landing-mobile390.png",
+      "state": "landing-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 610284,
+      "sha256": "a8c9531f5622df99c6d835e419cbcb7b2317770508f9c23f838f5b70e098e95c"
+    },
+    {
+      "filename": "map-desktop.png",
+      "state": "map-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 188237,
+      "sha256": "18faa2c402db13901e0e39ff2ccbf52853257997572b350983568d15b17a526d"
+    },
+    {
+      "filename": "map-mobile360.png",
+      "state": "map-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 50107,
+      "sha256": "77ef5d5f51456a8a3e770c7301afbbb839299fa646fb867dc157775b0eb13825"
+    },
+    {
+      "filename": "map-mobile390.png",
+      "state": "map-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 53409,
+      "sha256": "0fb78f831fc9640d9c6e13ade2daedffd7ebfd60733b8298f2333c2698777874"
+    },
+    {
+      "filename": "menu-export-desktop.png",
+      "state": "menu-export-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 212567,
+      "sha256": "888656c59c7ada962e0d3307fc135227dd01015511a07c9aa044c67606c5a2e4"
+    },
+    {
+      "filename": "menu-export-mobile390.png",
+      "state": "menu-export-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 59088,
+      "sha256": "3f180967a9a12ecf5cb26110c92af5bddbca946e625f190b5f7cd4d1805bc75b"
+    },
+    {
+      "filename": "menu-project-desktop.png",
+      "state": "menu-project-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 209431,
+      "sha256": "6903c7a4d93caacf5e2a4b2ab39137bf0579886d882c75e59556744f60137903"
+    },
+    {
+      "filename": "panel-details-desktop.png",
+      "state": "panel-details-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 140755,
+      "sha256": "87f16abb296d70ae19d243718d6ab64e339be87f03afc269f067033241cbd1e5"
+    },
+    {
+      "filename": "panel-details-mobile360.png",
+      "state": "panel-details-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 57993,
+      "sha256": "a15266417ad800626e92a0389709682bdd65834d9a7d19415dc3f312f89c0d7d"
+    },
+    {
+      "filename": "panel-details-mobile390.png",
+      "state": "panel-details-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 57977,
+      "sha256": "e6859d73132306dac986bed33d69a350fbb90bfa6027c48a5efb477f7e504bd3"
+    },
+    {
+      "filename": "panel-history-desktop.png",
+      "state": "panel-history-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 128797,
+      "sha256": "d3d0de323351f2e3f404970fecec610d460f79ba2ba02f84ce8199e4a73bb465"
+    },
+    {
+      "filename": "panel-history-mobile360.png",
+      "state": "panel-history-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 46949,
+      "sha256": "04a90f943a51939b63db9ef7ba4d2535a0b639702928e97121a34ce421ae4b8e"
+    },
+    {
+      "filename": "panel-history-mobile390.png",
+      "state": "panel-history-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 48275,
+      "sha256": "5fc5a9c529e085e46e70a17bf78db5590a3ad10b435baf94a6fa8c77302e38b9"
+    },
+    {
+      "filename": "panel-markdown-desktop.png",
+      "state": "panel-markdown-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 185192,
+      "sha256": "a9c42d4604f9976908d0559891942088e4a75fb4e60b40c631f4788e862d5520"
+    },
+    {
+      "filename": "panel-markdown-mobile360.png",
+      "state": "panel-markdown-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 77636,
+      "sha256": "26697524fe0cdb51847cdd739651aa8ce965c91e60315c3c363c813a38f91977"
+    },
+    {
+      "filename": "panel-markdown-mobile390.png",
+      "state": "panel-markdown-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 80376,
+      "sha256": "99f038e72130c6a776c75c6ca867489a2d30599b2ae5d364d7381a0710563b14"
+    },
+    {
+      "filename": "panel-style-desktop.png",
+      "state": "panel-style-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 158059,
+      "sha256": "5ab401aa65d4beaadda4db7c8c0d5385ddab59a64605d8a570c76ae7f81292d6"
+    },
+    {
+      "filename": "panel-style-mobile360.png",
+      "state": "panel-style-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 69840,
+      "sha256": "6c50467afea8cbf678fbdb1e56f6e2ae89603972ff95700da914ac3f61c254c5"
+    },
+    {
+      "filename": "panel-style-mobile390.png",
+      "state": "panel-style-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 70794,
+      "sha256": "eefa4632de7e8d39794911431d81f12840526ca6406d8b8be17ecbc2c1974df3"
+    },
+    {
+      "filename": "panel-table-desktop.png",
+      "state": "panel-table-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 89414,
+      "sha256": "7c0323cbafac8b76a1035eab59428b9b4b4b6247bb5e79a4477ceca0d8fee047"
+    },
+    {
+      "filename": "panel-table-mobile360.png",
+      "state": "panel-table-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 48244,
+      "sha256": "10d177cac25eecf6f7b81b1ea56f5c5cc687589ebeccd059685b40300177bafd"
+    },
+    {
+      "filename": "panel-table-mobile390.png",
+      "state": "panel-table-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 53679,
+      "sha256": "acdac68a0a7c88e611f8f1824ecf7fb84be30bea56d66373eae457a0ad8d9eb2"
+    },
+    {
+      "filename": "present-desktop.png",
+      "state": "present-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 139679,
+      "sha256": "64ac020af682fa4891103563239ce12e8f8a5ca55444f86b8514711afe983140"
+    },
+    {
+      "filename": "present-mobile360.png",
+      "state": "present-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 58597,
+      "sha256": "4415c07de1fcc2ba81cebdb3939f01c09562cf24e3048911a4f5ac31c15099c0"
+    },
+    {
+      "filename": "present-mobile390.png",
+      "state": "present-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 62551,
+      "sha256": "51bf2690789f2af0106f1e4bc1bb8329db8f15150608d05026b14706e0a52353"
+    },
+    {
+      "filename": "story-desktop.png",
+      "state": "story-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 141993,
+      "sha256": "74b1d29a0a25f7013d386a74a3c7a29c269b2049381efea64aca773abf91ae56"
+    },
+    {
+      "filename": "story-mobile360.png",
+      "state": "story-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 56393,
+      "sha256": "bd296a4608ec6b1b7a03b70733eb382c52c97925b6c9717cc228841004fe7cd1"
+    },
+    {
+      "filename": "story-mobile390.png",
+      "state": "story-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 60953,
+      "sha256": "7b1b687eaa29c5bb7d83520394667a4d123b5a8a0aec895cf773280e6b4a8a1d"
+    },
+    {
+      "filename": "workspace-desktop.png",
+      "state": "workspace-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "bytes": 239602,
+      "sha256": "ea93c70ec83f986fda486d84fb34f8d4e74370209e18093c51d1e77ad3eb6c4e"
+    },
+    {
+      "filename": "workspace-mobile360.png",
+      "state": "workspace-mobile360",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "bytes": 120593,
+      "sha256": "4f4605485c5b66eb3060f4b5ba9ef5efc7e0db316fa1bc1fe1584eca99cc8f66"
+    },
+    {
+      "filename": "workspace-mobile390.png",
+      "state": "workspace-mobile390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 128064,
+      "sha256": "3738a6fa5a8eb6bd06af4c579c971bfd2fe309ed6d8a0f2fc651baaecd3bd7c4"
+    }
+  ],
+  "screenshot_count": 60,
+  "sources": [
+    "capture.mjs",
+    "capture-hosted.mjs",
+    "capture-local-remainder.mjs",
+    "finalize-before.mjs"
+  ],
+  "limitations": [
+    "before is a historical, mixed capture: early screenshots came from the prior dist, then later files may include builds updated during the capture window.",
+    "Before dialog/menu variants are incomplete at compact widths; after contains corrected mobile captures.",
+    "The initial before runner was interrupted, so its first attempt did not generate one consolidated local manifest. This final manifest inventories all retained screenshots.",
+    "Hosted paths containing edit/share secrets are redacted. No real workspace/token was opened."
+  ],
+  "secret_handling": "Hosted /w and /p paths are redacted from JSON; share settings screenshots blur secret link input values."
+}

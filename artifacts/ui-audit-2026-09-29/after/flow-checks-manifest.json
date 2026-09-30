@@ -1,0 +1,156 @@
+{
+  "generated_at": "2026-09-30T02:53:56.047Z",
+  "target": "http://127.0.0.1:58810",
+  "data_scope": "ephemeral local Playwright fixture database only",
+  "records": [
+    {
+      "state": "map with zoom-in clicked",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "zoom_controls": [
+        {
+          "id": "canvas-zoom-out",
+          "visible": true,
+          "parent": "map-controls",
+          "rect": {
+            "x": 834.046875,
+            "y": 832,
+            "width": 36,
+            "height": 44
+          }
+        },
+        {
+          "id": "canvas-zoom-in",
+          "visible": true,
+          "parent": "map-controls",
+          "rect": {
+            "x": 876.046875,
+            "y": 832,
+            "width": 36,
+            "height": 44
+          }
+        }
+      ],
+      "overflow": false,
+      "axe_violations": [],
+      "screenshot": "zoom-desktop.png",
+      "screenshot_sha256": "57102b2c3a9918560c8bc0023daa38c0a2c48814b21e169f1dc9822c302ff25d",
+      "console_errors": []
+    },
+    {
+      "state": "standalone export from More actions menu",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Open map",
+        "Open .edit-toolbar-more > summary",
+        "Click #export-standalone",
+        "Save downloaded fixture HTML under after/"
+      ],
+      "screenshot": "menu-export-verified-desktop.png",
+      "screenshot_sha256": "d5e3880e6dd1da672c659d18b4cf15bb790ab2a97befa6cf2653b7d3a15e78fb",
+      "download": "flagship-growth-trama.html",
+      "size_bytes": {}
+    },
+    {
+      "state": "map with zoom-in clicked",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "zoom_controls": [
+        {
+          "id": "canvas-zoom-out",
+          "visible": true,
+          "parent": "map-controls",
+          "rect": {
+            "x": 149.875,
+            "y": 782,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "canvas-zoom-in",
+          "visible": true,
+          "parent": "map-controls",
+          "rect": {
+            "x": 199.875,
+            "y": 782,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "overflow": false,
+      "axe_violations": [],
+      "screenshot": "zoom-mobile390.png",
+      "screenshot_sha256": "ba2aaed16988a9dcbcd91169ca42bfc3866628f35cd7f1535eab5f0b6efb8257",
+      "console_errors": []
+    },
+    {
+      "state": "map with zoom-in clicked",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "zoom_controls": [
+        {
+          "id": "canvas-zoom-out",
+          "visible": true,
+          "parent": "map-controls",
+          "rect": {
+            "x": 119.875,
+            "y": 782,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "id": "canvas-zoom-in",
+          "visible": true,
+          "parent": "map-controls",
+          "rect": {
+            "x": 169.875,
+            "y": 782,
+            "width": 44,
+            "height": 44
+          }
+        }
+      ],
+      "overflow": false,
+      "axe_violations": [],
+      "screenshot": "zoom-mobile360.png",
+      "screenshot_sha256": "9029c35cc6698b95d0c91e4656a8c8bd4e19edf93680f4b62f02e1003e5a2ec0",
+      "console_errors": []
+    },
+    {
+      "state": "import markdown from repository seed into isolated UI QA database",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Go to workspace",
+        "Choose Import Markdown",
+        "Select seeds/sobrecarga-filas.loop.md",
+        "Read back only the disposable QA project API"
+      ],
+      "screenshot": "import-markdown-fixture-desktop.png",
+      "screenshot_sha256": "ef1a7aa12bd7ca10eea3f8e7da973785cc129ffeda247b187db0c453e71db1bb",
+      "resulting_map_count": 5,
+      "map_titles": [
+        "Sobrecarga de Filas",
+        "Flagship — Crescimento sob pressão",
+        "Routing QA 16",
+        "Routing QA 32",
+        "Routing QA 8"
+      ],
+      "console_errors": []
+    }
+  ]
+}

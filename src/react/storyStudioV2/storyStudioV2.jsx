@@ -34,7 +34,7 @@ export function StoryStudioV2Frame({ movementInspector = {} } = {}) {
     <section data-dock-content="story" data-story-ui="v2" className="story-studio-v2" hidden>
       <header className="story-v2-header">
         <div className="story-v2-heading">
-          <span className="story-v2-kicker">Story Studio</span>
+          <span className="story-v2-kicker">História</span>
           <h2>Conte o sistema</h2>
           <p>Monte uma narrativa causal a partir dos movimentos do mapa.</p>
         </div>
@@ -92,7 +92,7 @@ export function StoryStudioV2Frame({ movementInspector = {} } = {}) {
           </div>
           <Button unstyled type="button" id="story-mobile-inspector-close" className="story-mobile-inspector-close" aria-label="Fechar editor do movimento" title="Fechar editor do movimento">Fechar</Button>
           <div className="story-v2-tabs" role="tablist" aria-label="Editor da apresentação">
-            <Button unstyled type="button" id="story-sidebar-inspector" className="active" role="tab" aria-selected="true" aria-controls="story-inspector-basic">Inspector</Button>
+            <Button unstyled type="button" id="story-sidebar-inspector" className="active" role="tab" aria-selected="true" aria-controls="story-inspector-basic">Detalhes</Button>
             <Button unstyled type="button" id="story-sidebar-markdown" role="tab" aria-selected="false" aria-controls="presentation-markdown-panel">Markdown</Button>
           </div>
         </header>

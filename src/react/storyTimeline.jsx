@@ -59,6 +59,7 @@ function usePointerDrag(payload, { targetSelector, ignoreSelector, onDrop } = {}
       document.removeEventListener("pointermove", move);
       document.removeEventListener("pointerup", up);
       document.removeEventListener("pointercancel", cancel);
+      window.removeEventListener("blur", cancel);
       document.removeEventListener("mousemove", move);
       document.removeEventListener("mouseup", up);
       element.classList.remove("is-pointer-dragging");
@@ -105,6 +106,7 @@ function usePointerDrag(payload, { targetSelector, ignoreSelector, onDrop } = {}
       document.addEventListener("pointermove", move, { passive: false });
       document.addEventListener("pointerup", up, { once: true });
       document.addEventListener("pointercancel", cancel, { once: true });
+      window.addEventListener("blur", cancel, { once: true });
       document.addEventListener("mousemove", move, { passive: false });
       document.addEventListener("mouseup", up, { once: true });
     };
@@ -278,11 +280,11 @@ export function StoryTimelineShell({ status = "Nenhum movimento selecionado", ti
     <Input unstyled id="story-timeline-scrubber" type="range" min="0" max={Math.max(0, totalFrames - 1)} value={Math.max(0, currentIndex)} step="1" aria-label="Selecionar movimento na timeline" readOnly />
     <div id="react-story-timeline-root" className="story-timeline-track react-story-timeline-track" aria-live="polite"><StoryTimeline presentation={presentation} timeline={timeline} currentIndex={currentIndex} getBeatTitle={getBeatTitle} actions={actions} /></div>
     <div className="story-timeline-actions">
-      <Button unstyled type="button" id="story-timeline-first" aria-label="Primeiro movimento">|‹</Button>
+      <Button unstyled type="button" id="story-timeline-first" aria-label="Primeiro movimento"><Icon name="skipFirst" size="sm" /></Button>
       <Button unstyled type="button" id="story-timeline-previous">Anterior</Button>
-      <Button unstyled type="button" id="story-timeline-preview">Prévia deste movimento</Button>
+      <Button unstyled type="button" id="story-timeline-preview" aria-label="Prévia deste movimento">Prévia</Button>
       <Button unstyled type="button" id="story-timeline-next">Próximo</Button>
-      <Button unstyled type="button" id="story-timeline-last" aria-label="Último movimento">›|</Button>
+      <Button unstyled type="button" id="story-timeline-last" aria-label="Último movimento"><Icon name="skipLast" size="sm" /></Button>
     </div>
   </section>;
 }

@@ -1,5 +1,19 @@
 import { test, expect } from "../support/qa-test.mjs";
 
+test("mobile project menu exposes project editing and restores focus", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 844 });
+  await page.goto(`${process.env.TRAMA_UI_QA_URL}/?qa=1`);
+  await page.getByRole("button", { name: /Flagship — Crescimento sob pressão/ }).click();
+  const trigger = page.locator("#project-switcher > summary");
+  await trigger.click();
+  await expect(page.locator("#edit-project-metadata")).toBeVisible();
+  await page.locator("#edit-project-metadata").click();
+  await expect(page.locator("#command-dialog")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#command-dialog")).not.toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
 function qaBaseURL() {
   const baseURL = process.env.TRAMA_UI_QA_URL;
   if (!baseURL) throw new Error("TRAMA_UI_QA_URL was not initialized by Playwright global setup.");

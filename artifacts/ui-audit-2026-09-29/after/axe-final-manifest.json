@@ -1,0 +1,143 @@
+{
+  "generated_at": "2026-09-30T03:17:16.149Z",
+  "target": "http://127.0.0.1:58810",
+  "records": [
+    {
+      "viewport": "desktop",
+      "state": "workspace",
+      "mode": "workspace",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalOverflow": false,
+      "violations": [
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "nodes": 1,
+          "description": "Ensure the order of headings is semantically correct"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "state": "map",
+      "mode": "map",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalOverflow": false,
+      "violations": []
+    },
+    {
+      "viewport": "desktop",
+      "state": "project-menu",
+      "mode": "map",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalOverflow": false,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 3,
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "state": "edit-project-dialog",
+      "mode": "map",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalOverflow": false,
+      "violations": []
+    },
+    {
+      "viewport": "desktop",
+      "state": "story",
+      "mode": "story",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalOverflow": false,
+      "violations": []
+    },
+    {
+      "viewport": "desktop",
+      "state": "present",
+      "mode": "present",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalOverflow": false,
+      "violations": []
+    },
+    {
+      "viewport": "mobile390",
+      "state": "workspace",
+      "mode": "workspace",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "violations": [
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "nodes": 1,
+          "description": "Ensure the order of headings is semantically correct"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile390",
+      "state": "map",
+      "mode": "map",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "violations": []
+    },
+    {
+      "viewport": "mobile390",
+      "state": "project-menu",
+      "mode": "map",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 3,
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile390",
+      "state": "edit-project-dialog",
+      "mode": "map",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "violations": []
+    },
+    {
+      "viewport": "mobile390",
+      "state": "story",
+      "mode": "story",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "violations": []
+    },
+    {
+      "viewport": "mobile390",
+      "state": "present",
+      "mode": "present",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "violations": []
+    }
+  ],
+  "historical_findings": "Earlier after captures recorded landmark-unique, summary-name, color-contrast and heading-order. New build includes fixes; final scan below supersedes those snapshots where clean."
+}

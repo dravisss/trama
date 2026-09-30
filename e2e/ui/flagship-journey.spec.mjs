@@ -104,7 +104,7 @@ test("flagship desktop cobre a jornada local-first completa até o standalone of
   // deliberately not a direct call to the exporter: it proves the user path.
   await page.locator("[data-react-ui-mode='map']").click();
   const moreActions = page.locator(".edit-toolbar-more");
-  await moreActions.locator("summary").click();
+  await moreActions.locator(":scope > summary").click();
   const downloadPromise = page.waitForEvent("download");
   await page.locator("#export-standalone").click();
   const download = await downloadPromise;
@@ -132,7 +132,7 @@ test("flagship desktop cobre a jornada local-first completa até o standalone of
 test("flagship mobile preserva os controles críticos de edição, Apresentar e Story Studio", async ({ page }) => {
   await openFlagship(page, { width: 390, height: 844 });
   await selectDemandOnCanvas(page, { inspectorVisible: false });
-  await page.getByRole("navigation", { name: "Painéis do editor" }).getByRole("button", { name: "Inspector" }).click();
+  await page.getByRole("navigation", { name: "Painéis do editor" }).getByRole("button", { name: "Detalhes" }).click();
   const label = page.locator("#dock-element-label");
   await expect(label).toBeVisible();
   await label.fill("Demanda móvel");

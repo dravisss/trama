@@ -33,6 +33,16 @@ body.story-mode .trama-workspace-actions { display: none; }
   cursor: pointer;
 }
 
+/* Docked in the header: flows with the toolbar instead of floating over it. */
+.trama-share-trigger.docked {
+  position: static;
+  min-height: 32px;
+  padding: 0 14px;
+  font-size: 13px;
+  box-shadow: none;
+  flex: none;
+}
+
 .trama-share-trigger:focus-visible,
 .trama-share-dialog button:focus-visible,
 .trama-share-dialog input:focus-visible,
@@ -78,8 +88,11 @@ body[data-ui-mode="present"] .trama-notice { display: none; }
 .trama-share-dialog section:last-child h3 { flex-basis: 100%; }
 
 .trama-close {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
   border: 0;
   border-radius: 50%;
   background: transparent;

@@ -1,0 +1,252 @@
+{
+  "generated_at": "2026-09-30T02:58:29.903Z",
+  "target": "http://127.0.0.1:58810",
+  "observations": [
+    "On compact widths, #project-switcher is hidden; the topbar hamburger toggles the editor dock. Project open/create actions remain available from the Projetos workspace library."
+  ],
+  "records": [
+    {
+      "name": "editor-dock-hamburger-390",
+      "state": "Open editor dock via topbar hamburger",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Open Flagship map",
+        "Tap #sidebar-toggle"
+      ],
+      "mode": "map",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "axe_violations": [
+        {
+          "id": "summary-name",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "screenshot": "editor-dock-hamburger-390.png",
+      "screenshot_sha256": "12b11c4350a3d6e91c020142e0141b62412b607c857fa2aaf4ab8581cd8de4a1"
+    },
+    {
+      "name": "project-library-mobile-390",
+      "state": "Project library navigation path",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Tap Projetos from mobile app navigation",
+        "Verify Open project and New project actions are visible"
+      ],
+      "mode": "workspace",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "axe_violations": [
+        {
+          "id": "landmark-unique",
+          "impact": "moderate",
+          "nodes": 1
+        },
+        {
+          "id": "summary-name",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "screenshot": "project-library-mobile-390.png",
+      "screenshot_sha256": "05f10f315e4d401003601e19e2bb09ebdef5609d822c227b8146f816e6c02434"
+    },
+    {
+      "name": "editor-dock-hamburger-360",
+      "state": "Open editor dock via topbar hamburger",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Open Flagship map",
+        "Tap #sidebar-toggle"
+      ],
+      "mode": "map",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "axe_violations": [
+        {
+          "id": "summary-name",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "screenshot": "editor-dock-hamburger-360.png",
+      "screenshot_sha256": "27c5687c959ed97b7db697ffdbb04f8114c8df445f42a2b64fffa310d52e41b9"
+    },
+    {
+      "name": "project-library-mobile-360",
+      "state": "Project library navigation path",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Tap Projetos from mobile app navigation",
+        "Verify Open project and New project actions are visible"
+      ],
+      "mode": "workspace",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "axe_violations": [
+        {
+          "id": "landmark-unique",
+          "impact": "moderate",
+          "nodes": 1
+        },
+        {
+          "id": "summary-name",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "screenshot": "project-library-mobile-360.png",
+      "screenshot_sha256": "2f1bc64b7d517dbd894ab7dcd80958c25d5e9648f780be369010fcc3e8d904e7"
+    },
+    {
+      "name": "export-menu-final-desktop",
+      "state": "More actions menu open",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Open Flagship map",
+        "Click the exact More actions summary selector"
+      ],
+      "mode": "map",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalOverflow": false,
+      "axe_violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "screenshot": "export-menu-final-desktop.png",
+      "screenshot_sha256": "6d9e85fd392d963d8008dd36647759066c959e61618946574110e1def238814c"
+    },
+    {
+      "name": "standalone-export-desktop",
+      "state": "Export standalone HTML",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        "Open More actions",
+        "Click Export standalone",
+        "Save to after evidence folder"
+      ],
+      "download": "flagship-growth-trama.html",
+      "saved_as": "/Users/Ravi/Apps/LoopViewer/artifacts/ui-audit-2026-09-29/after/standalone-desktop-flagship-growth-trama.html",
+      "bytes": 1321467
+    },
+    {
+      "name": "export-menu-final-mobile390",
+      "state": "More actions menu open",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Open Flagship map",
+        "Click the exact More actions summary selector"
+      ],
+      "mode": "map",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "axe_violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1
+        },
+        {
+          "id": "summary-name",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "screenshot": "export-menu-final-mobile390.png",
+      "screenshot_sha256": "51db959aeabc63ec65cc219ccb60c36a944222b35ad55c6b1260eb4fb8b07518"
+    },
+    {
+      "name": "standalone-export-mobile390",
+      "state": "Export standalone HTML",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "steps": [
+        "Open More actions",
+        "Click Export standalone",
+        "Save to after evidence folder"
+      ],
+      "download": "flagship-growth-trama.html",
+      "saved_as": "/Users/Ravi/Apps/LoopViewer/artifacts/ui-audit-2026-09-29/after/standalone-mobile390-flagship-growth-trama.html",
+      "bytes": 1321467
+    },
+    {
+      "name": "export-menu-final-mobile360",
+      "state": "More actions menu open",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Open Flagship map",
+        "Click the exact More actions summary selector"
+      ],
+      "mode": "map",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "axe_violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1
+        },
+        {
+          "id": "summary-name",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "screenshot": "export-menu-final-mobile360.png",
+      "screenshot_sha256": "0d854b1ff55fe93b332bd5b51199b3d70eb5ae7c92971bd35d4059624f516774"
+    },
+    {
+      "name": "standalone-export-mobile360",
+      "state": "Export standalone HTML",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "steps": [
+        "Open More actions",
+        "Click Export standalone",
+        "Save to after evidence folder"
+      ],
+      "download": "flagship-growth-trama.html",
+      "saved_as": "/Users/Ravi/Apps/LoopViewer/artifacts/ui-audit-2026-09-29/after/standalone-mobile360-flagship-growth-trama.html",
+      "bytes": 1321467
+    }
+  ]
+}

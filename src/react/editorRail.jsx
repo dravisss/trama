@@ -4,7 +4,7 @@ import { Icon } from "./ui/Icon.jsx";
 
 const RAIL_ITEMS = [
   ["map", "Mapa e descrição", <><path d="M4 5h6l2 2h8v12H4z" /><path d="M8 11h8M8 15h6" /></>],
-  ["inspect", "Inspector", <><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="2" /></>],
+  ["inspect", "Detalhes", <><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="2" /></>],
   ["code", "Código Markdown", <><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" /></>],
   ["style", "Estilo da vista", <><path d="M12 3a9 9 0 1 0 9 9h-9z" /><path d="M12 3v9h9" /></>],
   ["table", "Tabela de dados", <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 10h18M9 4v16M15 4v16" /></>],
@@ -13,7 +13,7 @@ const RAIL_ITEMS = [
 
 const RAIL_TAB_LABELS = {
   map: "Mapa",
-  inspect: "Inspector",
+  inspect: "Detalhes",
   code: "Markdown",
   style: "Estilo",
   table: "Dados",

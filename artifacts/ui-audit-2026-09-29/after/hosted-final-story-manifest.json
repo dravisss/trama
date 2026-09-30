@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-09-30T02:55:02.545Z",
+  "route": "http://127.0.0.1:4194/w/[REDACTED]",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "steps": [
+    "Create examples workspace in isolated hosted server",
+    "Open Story Studio",
+    "Record the first-use notice",
+    "Click Entendi",
+    "Wait two requestAnimationFrame callbacks and 500 ms",
+    "Capture settled composition"
+  ],
+  "first_use_banner_seen": true,
+  "stable_state": {
+    "title": "Trama — Mapas sistêmicos",
+    "mode": "story",
+    "cameraStable": null,
+    "mapRect": {
+      "x": 80,
+      "y": 142,
+      "width": 933,
+      "height": 490
+    },
+    "scrollWidth": 1440,
+    "clientWidth": 1440
+  },
+  "screenshot": "hosted-story-stable-after-first-use-desktop.png",
+  "screenshot_sha256": "861cb9156d1eedcc86c4dfe69903b0a22e9009161b13872aeab15fad24355ba7",
+  "console_errors_and_warnings": []
+}

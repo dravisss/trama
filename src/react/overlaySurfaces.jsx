@@ -5,12 +5,12 @@ import { Input, Select, Textarea } from "./ui/Field.jsx";
 /** Transitional overlay markup owned by the single React composition root. */
 function OverlaySurfacesMarkup() {
   return <>
-    <div className="modal-backdrop" id="loop-description-modal" hidden>
+    <div className="modal-backdrop" id="loop-description-modal" role="dialog" aria-modal="true" aria-labelledby="loop-description-title" hidden>
       <form className="modal-card" id="loop-description-form">
         <div className="modal-header">
           <div>
             <div className="sidebar-section-title">Descrição do loop</div>
-            <h2>Editar leitura</h2>
+            <h2 id="loop-description-title">Editar leitura</h2>
           </div>
           <Button unstyled type="button" id="close-loop-description">Fechar</Button>
         </div>
@@ -27,7 +27,7 @@ function OverlaySurfacesMarkup() {
       </form>
     </div>
 
-    <dialog className="command-dialog" id="command-dialog">
+    <dialog className="command-dialog" id="command-dialog" aria-labelledby="command-dialog-title" aria-describedby="command-dialog-description">
       <form method="dialog" id="command-dialog-form">
         <div className="modal-header">
           <div><div className="sidebar-section-title">Trama</div><h2 id="command-dialog-title" /></div>

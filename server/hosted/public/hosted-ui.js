@@ -85,7 +85,7 @@ function mount(ctx) {
     close.type = "button";
     close.className = "trama-close";
     close.setAttribute("aria-label", "Fechar");
-    close.textContent = "×";
+    close.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>';
     close.addEventListener("click", () => dialog.close());
     header.append(title, close);
 

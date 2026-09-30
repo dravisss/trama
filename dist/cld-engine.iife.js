@@ -3964,7 +3964,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
             height: boundingBox.h
           },
           rect: safeRect,
-          padding
+          padding: clampFitPadding(padding, safeRect)
         });
         if (viewport) {
           this.cy.animate({ zoom: viewport.zoom, pan: viewport.pan }, { duration });

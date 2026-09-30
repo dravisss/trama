@@ -1,0 +1,454 @@
+{
+  "generated_at": "2026-09-30T03:03:16.087Z",
+  "server": "http://127.0.0.1:4194",
+  "disposable_workspace": true,
+  "routes": {
+    "edit": "http://127.0.0.1:4194/w/[REDACTED]",
+    "share": "http://127.0.0.1:4194/p/[REDACTED]"
+  },
+  "records": [
+    {
+      "name": "hosted-first-use-notice-mobile390",
+      "state": "Initial keep-secret-link notice",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "steps": [
+        "Open newly created isolated workspace",
+        "Capture initial notice before dismissing"
+      ],
+      "screenshot": "hosted-first-use-notice-mobile390.png",
+      "screenshot_sha256": "f2e4cf5478d6840a7531db50e392dd5e7f2e631f1ecfbf5aef48ed4f1f9a85fe"
+    },
+    {
+      "name": "hosted-editor-map-mobile390",
+      "state": "Hosted workspace editor / map mode",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "steps": [
+        "Open disposable examples workspace",
+        "Wait two animation frames plus 500 ms"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "dialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "hosted-editor-map-mobile390.png",
+      "screenshot_sha256": "afea4dc823f9d10cf1b9ed65f90153518f53e3394d45705161634f817caf2c39",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-editor-story-mobile390",
+      "state": "Hosted Story Studio settled after first-use notice",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "steps": [
+        "Tap História",
+        "Dismiss Entendi notice if present",
+        "Wait two animation frames plus 500 ms"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "story",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "dialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "hosted-editor-story-mobile390.png",
+      "screenshot_sha256": "ff0a10943203197800def2edbc0d267c12b434e6440abaf63fedbc9bcaf5c182",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-editor-player-mobile390",
+      "state": "Hosted presentation player",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "steps": [
+        "Tap Apresentar",
+        "Wait for settled view"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "present",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "dialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "hosted-editor-player-mobile390.png",
+      "screenshot_sha256": "fbec1c2b4e24b2d94918183aa4c2e9dc52f1f4bf97023f45112cd56370c41d1c",
+      "axe_violations": [
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "nodes": 1
+        }
+      ],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-settings-share-mobile390",
+      "state": "Hosted Share settings modal with secret fields blurred",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "steps": [
+        "Open Compartilhar",
+        "Blur every input in the modal",
+        "Capture link/settings surfaces"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "dialogs": [
+        "loop-description-modal",
+        "trama-share-dialog"
+      ],
+      "screenshot": "hosted-settings-share-mobile390.png",
+      "screenshot_sha256": "f9dfef6680e757887ecfa58a5fe2b5a1213d17f68a0569bb268d4d76047f7643",
+      "axe_violations": [],
+      "console_errors_and_warnings": []
+    },
+    {
+      "name": "hosted-share-mobile390",
+      "state": "Read-only hosted share page",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "steps": [
+        "Open disposable read-only share URL"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "dialogs": [],
+      "screenshot": "hosted-share-mobile390.png",
+      "screenshot_sha256": "a93c7150a99eba85ce3a5845e166e7b94906d3146cf7c5602474124ce4fd6793",
+      "axe_violations": [
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1
+        }
+      ],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-player-mobile390",
+      "state": "Read-only presentation embed",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "steps": [
+        "Open read-only presentation mode"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "dialogs": [],
+      "screenshot": "hosted-player-mobile390.png",
+      "screenshot_sha256": "2fdf9ee93ebd796fd9b8d3766c6ac30e0da7304f234461bd97e30b9b19a7f782",
+      "axe_violations": [
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1
+        }
+      ],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-no-sidebar-mobile390",
+      "state": "Read-only share without sidebar",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "steps": [
+        "Open read-only share with sidebar=0"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "dialogs": [],
+      "screenshot": "hosted-no-sidebar-mobile390.png",
+      "screenshot_sha256": "d54de9d9f2ca23236a451019045da2dfce98e966785f3afc45dd92e64684d919",
+      "axe_violations": [],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-editor-map-mobile360",
+      "state": "Hosted workspace editor / map mode",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "steps": [
+        "Open disposable examples workspace",
+        "Wait two animation frames plus 500 ms"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "dialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "hosted-editor-map-mobile360.png",
+      "screenshot_sha256": "4ab09926dbdf76fec801ffe82428c8968b02905915305ad3f6b4cc1b9d6bb340",
+      "axe_violations": [],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-editor-story-mobile360",
+      "state": "Hosted Story Studio settled after first-use notice",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "steps": [
+        "Tap História",
+        "Dismiss Entendi notice if present",
+        "Wait two animation frames plus 500 ms"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "story",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "dialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "hosted-editor-story-mobile360.png",
+      "screenshot_sha256": "13ea6cac1f4c7303cda18d292b5644eefbaf29e0b43f2c68ed3e9d2b68fb2d26",
+      "axe_violations": [],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-editor-player-mobile360",
+      "state": "Hosted presentation player",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "steps": [
+        "Tap Apresentar",
+        "Wait for settled view"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "present",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "dialogs": [
+        "loop-description-modal"
+      ],
+      "screenshot": "hosted-editor-player-mobile360.png",
+      "screenshot_sha256": "5204f8fe356aef630e1ab1110eedbcc1aa67204a43a929c3850f51c3c14c1070",
+      "axe_violations": [
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "nodes": 1
+        }
+      ],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-settings-share-mobile360",
+      "state": "Hosted Share settings modal with secret fields blurred",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/w/[REDACTED]",
+      "steps": [
+        "Open Compartilhar",
+        "Blur every input in the modal",
+        "Capture link/settings surfaces"
+      ],
+      "title": "Trama — Mapas sistêmicos",
+      "mode": "workspace",
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "dialogs": [
+        "loop-description-modal",
+        "trama-share-dialog"
+      ],
+      "screenshot": "hosted-settings-share-mobile360.png",
+      "screenshot_sha256": "b36217ea0b72d539e814ecfc18df454803d7da9fff74a338789e05121228e695",
+      "axe_violations": [],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-share-mobile360",
+      "state": "Read-only hosted share page",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "steps": [
+        "Open disposable read-only share URL"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "dialogs": [],
+      "screenshot": "hosted-share-mobile360.png",
+      "screenshot_sha256": "a2aa68f109b32598fd4203ced73ff5a1b51a1a5432e98214ca2c8147e2192794",
+      "axe_violations": [
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1
+        }
+      ],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-player-mobile360",
+      "state": "Read-only presentation embed",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "steps": [
+        "Open read-only presentation mode"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "dialogs": [],
+      "screenshot": "hosted-player-mobile360.png",
+      "screenshot_sha256": "51e0e74ac58018c3d28cadbf89eeaf708c4db102dcc95939e96c40db30b131da",
+      "axe_violations": [
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1
+        }
+      ],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    },
+    {
+      "name": "hosted-no-sidebar-mobile360",
+      "state": "Read-only share without sidebar",
+      "viewport": {
+        "width": 360,
+        "height": 844
+      },
+      "route": "http://127.0.0.1:4194/p/[REDACTED]",
+      "steps": [
+        "Open read-only share with sidebar=0"
+      ],
+      "title": "Exemplos — Trama",
+      "mode": null,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false,
+      "dialogs": [],
+      "screenshot": "hosted-no-sidebar-mobile360.png",
+      "screenshot_sha256": "838c760bcf040173fbc0fab194f928fab82ac53795cb262999f1441e9c685e9f",
+      "axe_violations": [],
+      "console_errors_and_warnings": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "The edit and share tokens remain only in this process and are redacted from this manifest.",
+    "Screenshots are local-only and never published."
+  ]
+}

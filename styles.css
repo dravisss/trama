@@ -1007,11 +1007,11 @@ body.story-studio-focus .editor-dock.story-studio-open .dock-panel { width: min(
   stroke-width: 2.5px;
   paint-order: stroke fill;
   stroke-linejoin: round;
-  font-weight: 600;
+  font-weight: 800;
   text-anchor: middle;
   dominant-baseline: central;
 }
-.cld-edge-sign.balancing { fill: var(--lv-foundation-color-editorialTones-tone596452); }
+.cld-edge-sign.balancing { fill: var(--lv-foundation-color-forest950); }
 .cld-edge-sign.story-current-sign {
   fill: var(--lv-foundation-color-productPrimary);
   animation: sign-pulse 1200ms ease-in-out infinite;
@@ -2368,7 +2368,7 @@ body.redesigned-ui.explore-mode .explore-detail-panel { display: flex; }
 .movement-preview-copy p { max-width: 230px; margin: 8px 0 0; color: var(--lv-foundation-color-editorialTones-tone718072); font-size: 12px; line-height: 1.45; }
 .movement-preview-visual { display: grid; min-height: 166px; align-content: center; gap: 5px; padding: 11px 14px 8px; border: 1px solid rgba(88,122,84,.25); border-radius: 16px; background: radial-gradient(circle at 50% 48%, rgba(255,255,255,.88), rgba(245,248,238,.64)); }
 .movement-preview-visual svg { width: 100%; height: 125px; overflow: visible; }
-.movement-preview-visual svg text { fill: var(--lv-foundation-color-editorialTones-tone35513b); font-family: "Inter", system-ui, sans-serif; font-size: 12px; font-weight: 800; }
+.movement-preview-visual svg text { fill: var(--lv-foundation-color-editorialTones-tone35513b); font-family: "Noto Sans", system-ui, sans-serif; font-size: 12px; font-weight: 800; }
 .movement-preview-visual svg rect { fill: var(--lv-foundation-color-editorialTones-tonefbfaf2); stroke: var(--lv-foundation-color-editorialTones-tonea8bea0); stroke-width: 1.5; }
 .movement-preview-visual svg g.active rect { fill: var(--lv-foundation-color-editorialTones-tonee0eed9); stroke: var(--lv-foundation-color-editorialTones-tone335d3e); stroke-width: 2; }
 .movement-preview-visual svg path, .movement-preview-visual svg line { fill: none; stroke: var(--lv-foundation-color-editorialTones-tone709c62); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
