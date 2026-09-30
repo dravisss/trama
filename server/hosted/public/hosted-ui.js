@@ -12,7 +12,25 @@ function mount(ctx) {
   trigger.className = "trama-share-trigger";
   trigger.textContent = "Compartilhar";
   trigger.setAttribute("aria-haspopup", "dialog");
-  document.body.append(trigger);
+  // Keep sharing in the application header, in normal document flow.
+  // The shell can be replaced when switching modes, so reattach when needed.
+  trigger.hidden = true;
+  const dockTrigger = () => {
+    const header = document.querySelector(".topbar");
+    if (!header) { trigger.hidden = true; return; }
+    let actions = header.querySelector(".trama-workspace-actions");
+    if (!actions) {
+      actions = document.createElement("div");
+      actions.className = "trama-workspace-actions";
+      actions.setAttribute("aria-label", "Ações do espaço");
+      header.append(actions);
+    }
+    if (trigger.parentElement !== actions) actions.append(trigger);
+    trigger.hidden = false;
+  };
+  const shellObserver = new MutationObserver(dockTrigger);
+  shellObserver.observe(document.body, { childList: true, subtree: true });
+  dockTrigger();
 
   const dialog = document.createElement("dialog");
   dialog.className = "trama-share-dialog";
