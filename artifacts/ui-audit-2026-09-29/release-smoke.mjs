@@ -36,6 +36,8 @@ try {
     if (await page.getByRole('button', { name: 'Entendi', exact: true }).isVisible()) await page.getByRole('button', { name: 'Entendi', exact: true }).click();
     await page.locator('#workspace-map-list').waitFor();
     await audit('workspace');
+    const titleHeight = await page.locator('.projects-map-card .ui-button-label > strong').first().evaluate(el => el.getBoundingClientRect().height);
+    assert.ok(titleHeight > 18, 'Map title must remain visible');
     await page.getByRole('button', { name: 'Compartilhar', exact: true }).click();
     await page.locator('.trama-share-dialog[open]').waitFor();
     await page.addStyleTag({ content: '.trama-share-dialog input { filter: blur(10px) !important; }' });
@@ -49,6 +51,8 @@ try {
     }
     await page.goto(workspace.share_url, { waitUntil: 'networkidle' });
     await audit('public-share');
+    await page.getByRole('button', { name: 'Fechar painel', exact: true }).click();
+    await audit('public-map');
     await context.close();
   }
 } finally {

@@ -27,6 +27,17 @@ for (const viewport of VIEWPORTS) {
       // baseline. Wait for the owning bridge to dismiss one before capture.
       await expect(page.locator("#toast")).toBeHidden();
       await assertUiContracts(page, mode);
+      if (mode === "workspace") {
+        const cards = await page.locator(".projects-map-card").evaluateAll(items => items.map(card => {
+          const title = card.querySelector(".ui-button-label > strong").getBoundingClientRect();
+          const metadata = card.querySelector(".ui-button-label > small").getBoundingClientRect();
+          return { titleHeight: title.height, titleBottom: title.bottom, metadataTop: metadata.top };
+        }));
+        for (const card of cards) {
+          expect(card.titleHeight).toBeGreaterThan(18);
+          expect(card.metadataTop).toBeGreaterThanOrEqual(card.titleBottom);
+        }
+      }
       // The responsive shell can finish its final grid commit after the
       // semantic camera marker; capture only after that composition settles.
       await page.waitForTimeout(350);
