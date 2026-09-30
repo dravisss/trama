@@ -105,6 +105,12 @@ async function handleApi(request, response) {
     }
     const bundle = JSON.parse(await readFile(qaFixturePath, "utf8"));
     store.importBundle(bundle);
+    // Imports receive real creation times. Equalize them only in this QA-only
+    // reset so millisecond boundaries cannot reorder visual fixture cards.
+    for (const table of ["loops", "maps", "views"]) {
+      store.db.prepare(`UPDATE ${table} SET created_at = ?, updated_at = ?`)
+        .run(bundle.exported_at, bundle.exported_at);
+    }
     qaFixtureGeneration += 1;
     if (qaDebug) console.log(`[qa-generation] reset -> ${qaFixtureGeneration}`);
     sendProject(response);

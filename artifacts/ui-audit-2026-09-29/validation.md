@@ -18,3 +18,9 @@ Todas as falhas reais identificadas e documentadas nesta auditoria foram corrigi
 Testes em Chrome/Playwright e dados descartáveis, com1440×900,390×844 e360×844 e snapshots de tablet. Não foram realizados ensaios em dispositivos físicos ou leitores de tela físicos. Nenhuma afirmação de perfeição universal ou validação de produção decorre destes resultados.
 
 O histórico before/after inclui rodadas intermediárias. Consulte os manifestos finais e confirmation para distinguir achados resolvidos de registros anteriores. O estado Git anterior foi preservado em pre-existing.patch/pre-existing-status.txt.
+
+## Fechamento de release
+
+Após integrar os quatro commits remotos, a ordem de cards da fixture variou por timestamps de importação. O reset exclusivo de QA equaliza esses timestamps; os13 testes de baseline e3 de axe passaram sem trocar imagens nessa confirmação. A inspeção hospedada adicional corrigiu contraste das abas públicas, escala tipográfica, controles de reprodução, alvos mobile, painel que cobria comandos e separação de título/métricas nos cards. Somente os3 snapshots de biblioteca foram atualizados após esta correção visual deliberada.
+
+O runner release-smoke.mjs exercitou18 estados (biblioteca, compartilhar, mapa, história, apresentar e share público em1440/390/360), sem violações axe serious/critical, erros de console ou overflow. Workspace descartável removido. Evidências em release-local. A exportação offline passou nos2 testes.

@@ -1,0 +1,151 @@
+{
+  "base": "http://127.0.0.1:58811",
+  "checkedAt": "2026-09-30T03:42:24.297Z",
+  "results": [
+    {
+      "state": "workspace",
+      "width": 1440,
+      "viewport": 1440,
+      "document": 1440,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "share-dialog",
+      "width": 1440,
+      "viewport": 1440,
+      "document": 1440,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "map",
+      "width": 1440,
+      "viewport": 1440,
+      "document": 1440,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "story",
+      "width": 1440,
+      "viewport": 1440,
+      "document": 1440,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "present",
+      "width": 1440,
+      "viewport": 1440,
+      "document": 1440,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "public-share",
+      "width": 1440,
+      "viewport": 1440,
+      "document": 1440,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "workspace",
+      "width": 390,
+      "viewport": 390,
+      "document": 390,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "share-dialog",
+      "width": 390,
+      "viewport": 390,
+      "document": 390,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "map",
+      "width": 390,
+      "viewport": 390,
+      "document": 390,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "story",
+      "width": 390,
+      "viewport": 390,
+      "document": 390,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "present",
+      "width": 390,
+      "viewport": 390,
+      "document": 390,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "public-share",
+      "width": 390,
+      "viewport": 390,
+      "document": 390,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "workspace",
+      "width": 360,
+      "viewport": 360,
+      "document": 360,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "share-dialog",
+      "width": 360,
+      "viewport": 360,
+      "document": 360,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "map",
+      "width": 360,
+      "viewport": 360,
+      "document": 360,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "story",
+      "width": 360,
+      "viewport": 360,
+      "document": 360,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "present",
+      "width": 360,
+      "viewport": 360,
+      "document": 360,
+      "violations": [],
+      "errors": []
+    },
+    {
+      "state": "public-share",
+      "width": 360,
+      "viewport": 360,
+      "document": 360,
+      "violations": [],
+      "errors": []
+    }
+  ],
+  "cleanupStatus": 200
+}

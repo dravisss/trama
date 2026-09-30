@@ -21,3 +21,6 @@
 *.log
 *.png
 .DS_Store
+
+# Audit evidence is versioned for review, not shipped in the server image.
+/artifacts
