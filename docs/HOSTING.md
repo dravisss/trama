@@ -190,3 +190,17 @@ Tests: `npm test` includes `tests/hosted/*.test.mjs`. They cover:
 - the REST, MCP and CLI flows;
 - quotas and rate limits;
 - retention and token hashing.
+
+## Automatic releases
+
+The `VPS release` Actions workflow validates pushes to `main` with `npm run check`
+and `npm run check:landing`. A host-side watcher can poll GitHub's public API and
+release only the successful run matching the current `main` SHA. No inbound SSH
+access or VPS credential in GitHub is required. The existing UI CI remains separate.
+
+The production watcher is maintained in the private operations repository. It serializes
+releases, builds before restarting, checks local and public endpoints, and restores the
+previous image if a release fails. It keeps the current source tree and one rollback
+image; its dedicated build cache is capped. Data and environment files stay outside
+the source tree. Host failures appear in the watcher's systemd journal; an approved
+Actions run alone does not confirm a successful production deployment.
