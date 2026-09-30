@@ -26,6 +26,7 @@ try {
   }
   browser = await chromium.launch({ headless: true, ...(process.env.TRAMA_CHROMIUM_PATH ? { executablePath: process.env.TRAMA_CHROMIUM_PATH } : { channel: "chromium" }) });
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1, acceptDownloads: true });
+  context.setDefaultTimeout(30000);
   const page = await context.newPage();
   page.on("pageerror", error => report.errors.push(error.message));
   page.on("console", message => { if (message.type() === "error") report.errors.push(message.text()); });
@@ -36,6 +37,7 @@ try {
   await page.evaluate(() => document.fonts.ready);
   await page.locator("#graph canvas").first().waitFor();
   for (const [name, width, height] of [["desktop", 1440, 1000], ["user-1280", 1280, 720], ["tablet", 1024, 900], ["user-830", 830, 863], ["mobile", 390, 844]]) {
+    console.log(`QA viewport: ${name}`);
     await page.setViewportSize({ width, height });
     // Exercise real lazy loading before a full-page evidence capture.
     await page.locator(".paper-sculpture img").scrollIntoViewIfNeeded();
@@ -63,6 +65,7 @@ try {
     }, progress);
   }
   for (let index = 0; index < 5; index++) {
+    console.log(`QA story beat: ${index + 1}`);
     await storyScroll(index * .2 + .04);
     await page.waitForFunction(index => document.querySelector("#step-number").textContent === String(index + 1), index);
     if (index === 1) {
@@ -133,6 +136,7 @@ try {
   const tapNode = async id => { await page.waitForTimeout(400); await page.evaluate(id => document.querySelector(".cld-canvas")._cyreg.cy.getElementById(id).emit("tap"), id); };
   const counts = () => page.evaluate(() => { const cy = document.querySelector(".cld-canvas")._cyreg.cy; return { nodes: cy.nodes().length, edges: cy.edges().length }; });
   // Real canvas clicks, using the renderer's coordinates as the hit target.
+  console.log("QA canvas relation selection");
   await clickCanvas("e02", "edge");
   assert.match(await page.locator("#explore-text").textContent(), /canais paralelos/);
   await clickCanvas("espera");
