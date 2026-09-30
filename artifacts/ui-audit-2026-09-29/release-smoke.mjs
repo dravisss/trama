@@ -19,8 +19,16 @@ try {
     const context = await browser.newContext({ viewport: { width, height: 900 } });
     const page = await context.newPage();
     const errors = [];
+    const blockedAnalytics = [];
     page.on('pageerror', e => errors.push(e.message));
-    page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+    page.on('console', m => {
+      if (m.type() !== 'error') return;
+      const message = m.text();
+      // Cloudflare injects analytics at the edge. The editor/share CSP
+      // intentionally rejects this third-party script; do not relax it.
+      if (message.includes('https://static.cloudflareinsights.com/beacon.min.js') && message.includes('Content Security Policy')) blockedAnalytics.push(message);
+      else errors.push(message);
+    });
     const audit = async state => {
       await page.waitForTimeout(500);
       const dimensions = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }));
@@ -28,7 +36,7 @@ try {
       const axe = await new AxeBuilder({ page }).analyze();
       const violations = axe.violations.filter(v => ['serious', 'critical'].includes(v.impact)).map(v => ({ id: v.id, targets: v.nodes.map(n => ({ target: n.target, summary: n.failureSummary })) }));
       await page.screenshot({ path: `${output}/${state}-${width}.png`, animations: 'disabled' });
-      results.push({ state, width, ...dimensions, violations, errors: [...errors] });
+      results.push({ state, width, ...dimensions, violations, errors: [...errors], blockedAnalytics: [...blockedAnalytics] });
       assert.deepEqual(violations, [], `${state} axe at ${width}: ${JSON.stringify(violations)}`);
       assert.deepEqual(errors, [], `${state} console at ${width}`);
     };
