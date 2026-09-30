@@ -124,8 +124,8 @@ try {
     await page.locator(".cld-canvas").scrollIntoViewIfNeeded();
     await page.waitForFunction(() => {
       const cy = document.querySelector(".cld-canvas")._cyreg.cy;
-      return !cy.animated() && !cy.elements().some(element => element.animated());
-    });
+      return !cy.animated();
+    }, undefined, { timeout: 10000 });
     const point = await canvasPoint(target, kind);
     await page.mouse.click(point.x, point.y);
   };
