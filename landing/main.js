@@ -72,6 +72,11 @@ function styleGraph() {
     { selector: "edge.focused", style: { width: 2.5, opacity: 1 } },
     { selector: ".faded", style: { opacity: 0.18 } }
   ]).update();
+  // Reserve the inside of the ring for side labels. Endpoint labels below
+  // an image otherwise intersect the outgoing arc, especially on phones.
+  for (const [id, offset] of [["atalhos", -140], ["canais", -140], ["passagens", 140], ["coordenacao", 140]]) {
+    engine.cy.getElementById(id).style({ "text-valign": "center", "text-halign": "center", "text-margin-x": offset, "text-margin-y": id === "atalhos" || id === "coordenacao" ? 40 : 0, "text-max-width": 120 });
+  }
   engine.cy.userZoomingEnabled(false);
   engine.cy.boxSelectionEnabled(false);
   engine.cy.userPanningEnabled(mode !== "story");
@@ -436,7 +441,7 @@ async function start() {
     const data = createLandingDemo(mapSource, storySource);
     original = clone(data.model); draft = clone(data.model);
     await Promise.all([document.fonts.load('500 14px "Noto Sans"'), document.fonts.load('500 22px "Noto Serif"')]);
-    engine = createCLD({ container: $("#graph"), model: responsiveCopy(original), editable: false, assetResolver: assetUrl, theme: matchaTheme, densityProfile: { minimumSignSize: 9 }, rendererOptions: { pixelRatio: Math.min(devicePixelRatio || 1, 2), userZoomingEnabled: false, boxSelectionEnabled: false } });
+    engine = createCLD({ container: $("#graph"), model: responsiveCopy(original), editable: false, assetResolver: assetUrl, theme: matchaTheme, densityProfile: { minimumSignSize: 9, routingCurvatureRange: [0.28, 0.32] }, rendererOptions: { pixelRatio: Math.min(devicePixelRatio || 1, 2), userZoomingEnabled: false, boxSelectionEnabled: false } });
     controller = new PresentationController({ compiled: data.compiled, context: { model: original } });
     data.compiled.timeline.forEach(frame => {
       const button = document.createElement("button"); button.type = "button"; button.setAttribute("aria-label", `Passo ${frame.index + 1}: ${frame.beat.title}`);

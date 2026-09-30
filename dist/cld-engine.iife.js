@@ -2154,13 +2154,13 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       });
     }
     for (const edge of automaticEdges) {
-      chooseBest(edge, candidates(edge, center, quality, loopSignsByEdge.get(edge.id()), budget), paths, distances, loopPairs, routeMeta, budget);
+      chooseBest(edge, candidates(edge, center, quality, loopSignsByEdge.get(edge.id()), budget, profile.routingCurvatureRange), paths, distances, loopPairs, routeMeta, budget);
     }
     const routingPasses = budget.routingPasses;
     for (let pass = 0; pass < routingPasses; pass++) {
       const ordered = pass % 2 ? [...automaticEdges].reverse() : automaticEdges;
       for (const edge of ordered) {
-        chooseBest(edge, candidates(edge, center, quality, loopSignsByEdge.get(edge.id()), budget), paths, distances, loopPairs, routeMeta, budget);
+        chooseBest(edge, candidates(edge, center, quality, loopSignsByEdge.get(edge.id()), budget, profile.routingCurvatureRange), paths, distances, loopPairs, routeMeta, budget);
       }
     }
     cy.batch(() => {
@@ -2463,7 +2463,7 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
       routingPasses: boundedBalanced ? 1 : Math.min(profile.routingPasses, veryDense ? 2 : dense ? 3 : profile.routingPasses)
     };
   }
-  function candidates(edge, center, quality, loopSigns = null, budget = {}) {
+  function candidates(edge, center, quality, loopSigns = null, budget = {}, curvatureRange) {
     const source = edge.source().position();
     const target = edge.target().position();
     const midpoint = { x: (source.x + target.x) / 2, y: (source.y + target.y) / 2 };
@@ -2473,7 +2473,15 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
     const naturalSign = vector.x * toward.y - vector.y * toward.x >= 0 ? -1 : 1;
     const loopSignList = preferredLoopSigns(loopSigns, naturalSign);
     const outwardSign = loopSignList.length ? loopSignList[0] : naturalSign;
-    const scale = Math.max(45, Math.min(190, Math.hypot(vector.x, vector.y) * 0.38));
+    const chord = Math.hypot(vector.x, vector.y);
+    if (Array.isArray(curvatureRange) && curvatureRange.length === 2 && curvatureRange.every((value) => Number.isFinite(value) && value >= 0.085 && value <= 0.55) && curvatureRange[0] <= curvatureRange[1]) {
+      const [minimum, maximum] = curvatureRange;
+      return [...new Set([minimum, (minimum + maximum) / 2, maximum].flatMap((factor) => {
+        const value = Math.round(chord * factor);
+        return [outwardSign * value, -outwardSign * value];
+      }))];
+    }
+    const scale = Math.max(45, Math.min(190, chord * 0.38));
     const factors = budget.candidateFactors || (quality === "draft" ? [0.18, 0.25, 0.34, 0.44, 0.56, 0.7] : quality === "publish" ? [0.18, 0.25, 0.34, 0.44, 0.56, 0.7, 0.84, 1.02, 1.2, 1.4, 1.64, 1.86] : [0.18, 0.25, 0.34, 0.44, 0.56, 0.7, 0.84, 1.04, 1.3, 1.58]);
     return [...new Set(factors.flatMap((factor) => {
       const value = Math.round(scale * factor);

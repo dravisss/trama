@@ -29,7 +29,7 @@ export function createLandingDemo(mapSource, storySource) {
     })),
     edges: relations.map(([, id, source, target, signs = "++", description]) => {
       if (!imported.edges.some(edge => edge.source === source && edge.target === target)) throw new Error(`A relação ${id} diverge do diagrama.`);
-      return { id, source, target, sourceSign: signs[0], targetSign: signs[1], description, route: { controlPointDistance: 42, locked: true } };
+      return { id, source, target, sourceSign: signs[0], targetSign: signs[1], description };
     }),
     loops: [{ id: "r1", title: "O ciclo dos atalhos", type: "reinforcing", edgeIds: relations.map(match => match[1]), description: "O uso recorrente de atalhos amplia a coordenação e alimenta a espera que motivou o próprio atalho." }]
   });

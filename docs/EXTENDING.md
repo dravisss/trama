@@ -169,3 +169,14 @@ engine.updateNode("BLD", {
 ```
 
 Ao criar o engine, injete `assetResolver(assetId)` para retornar uma URL local ou data URL. Nunca coloque bytes no modelo. Para o workflow completo e a validação do lote, use `.agents/skills/node-images-for-trama/`.
+
+### Curvatura editorial em composições espaçadas
+
+Uma composição autoral com espaço reservado para textos pode passar
+`densityProfile: { routingCurvatureRange: [0.28, 0.32] }` ao motor. Os valores
+são a distância do controle dividida pelo comprimento da relação, entre
+0.085 e 0.55, em ordem crescente. O roteador compara três curvaturas nos dois
+lados e continua decidindo por colisões, cruzamentos e continuidade do loop.
+Sem essa opção, a busca automática mantém seus candidatos habituais. Use o
+intervalo somente após conferir os corredores entre imagens e rótulos; ele
+não garante que um layout apertado tenha uma solução sem colisões.

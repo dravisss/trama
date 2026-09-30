@@ -190,3 +190,19 @@ test("dense routing keeps its balanced search bounded", () => {
   assert.equal(result.distances.size, model.edges.length);
   cy.destroy();
 });
+
+
+test("editorial curvature range uses router scoring without changing default routing", () => {
+  const cy = buildDeterministicCycle();
+  placeNodes(cy, { a: { x: 0, y: 0 }, b: { x: 280, y: 0 }, c: { x: 140, y: 243 } });
+  const result = optimizeRoutes(cy, { routingPasses: 2, routingCurvatureRange: [0.28, 0.32] }, { quality: "publish", loopEdgeIds: [["ab", "bc", "ca"]] });
+  for (const edge of cy.edges()) {
+    const a = edge.source().position(), b = edge.target().position();
+    const length = Math.hypot(b.x - a.x, b.y - a.y);
+    const curvature = Math.abs(result.distances.get(edge.id())) / length;
+    assert.ok(curvature >= 0.28 - 0.5 / length && curvature <= 0.32 + 0.5 / length);
+    assert.ok(result.distances.get(edge.id()) < 0, "clockwise cycle stays outward");
+    assert.equal(edge.data("route").locked, false);
+  }
+  cy.destroy();
+});

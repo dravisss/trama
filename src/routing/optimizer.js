@@ -26,14 +26,14 @@ export function optimizeRoutes(cy, profile, { quality = "balanced", respectLocks
   }
 
   for (const edge of automaticEdges) {
-    chooseBest(edge, candidates(edge, center, quality, loopSignsByEdge.get(edge.id()), budget), paths, distances, loopPairs, routeMeta, budget);
+    chooseBest(edge, candidates(edge, center, quality, loopSignsByEdge.get(edge.id()), budget, profile.routingCurvatureRange), paths, distances, loopPairs, routeMeta, budget);
   }
 
   const routingPasses = budget.routingPasses;
   for (let pass = 0; pass < routingPasses; pass++) {
     const ordered = pass % 2 ? [...automaticEdges].reverse() : automaticEdges;
     for (const edge of ordered) {
-      chooseBest(edge, candidates(edge, center, quality, loopSignsByEdge.get(edge.id()), budget), paths, distances, loopPairs, routeMeta, budget);
+      chooseBest(edge, candidates(edge, center, quality, loopSignsByEdge.get(edge.id()), budget, profile.routingCurvatureRange), paths, distances, loopPairs, routeMeta, budget);
     }
   }
 
@@ -386,7 +386,7 @@ function routingBudget(edgeCount, quality, profile) {
   };
 }
 
-function candidates(edge, center, quality, loopSigns = null, budget = {}) {
+function candidates(edge, center, quality, loopSigns = null, budget = {}, curvatureRange) {
   const source = edge.source().position();
   const target = edge.target().position();
   const midpoint = { x: (source.x + target.x) / 2, y: (source.y + target.y) / 2 };
@@ -399,7 +399,19 @@ function candidates(edge, center, quality, loopSigns = null, budget = {}) {
   // Keep a loop-derived side in that case instead of silently falling back to
   // the local graph centroid, which is often inside one of the loops.
   const outwardSign = loopSignList.length ? loopSignList[0] : naturalSign;
-  const scale = Math.max(45, Math.min(190, Math.hypot(vector.x, vector.y) * 0.38));
+  const chord = Math.hypot(vector.x, vector.y);
+  // An authored, spacious diagram can request a consistent editorial arc.
+  // Candidate scoring still owns side selection and obstacle avoidance.
+  if (Array.isArray(curvatureRange) && curvatureRange.length === 2 &&
+      curvatureRange.every(value => Number.isFinite(value) && value >= 0.085 && value <= 0.55) &&
+      curvatureRange[0] <= curvatureRange[1]) {
+    const [minimum, maximum] = curvatureRange;
+    return [...new Set([minimum, (minimum + maximum) / 2, maximum].flatMap(factor => {
+      const value = Math.round(chord * factor);
+      return [outwardSign * value, -outwardSign * value];
+    }))];
+  }
+  const scale = Math.max(45, Math.min(190, chord * 0.38));
   const factors = budget.candidateFactors || (quality === "draft"
     ? [0.18, 0.25, 0.34, 0.44, 0.56, 0.7]
     : quality === "publish"

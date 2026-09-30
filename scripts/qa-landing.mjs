@@ -48,6 +48,53 @@ try {
     // ResizeObserver settles the semantic camera; two animation frames plus
     // its bounded debounce cover layout without arbitrary multi-second sleeps.
     await page.waitForTimeout(250);
+    const diagramCollisions = await page.evaluate(() => {
+      const collisions = new Set();
+      for (const svg of document.querySelectorAll("#atlas,#cycle-study,#relation-study,#narrative-study")) {
+        const texts = [...svg.querySelectorAll("text")].filter(text => getComputedStyle(text).display !== "none").map(text => ({ text: text.textContent, box: text.getBBox(), role: text.getAttribute("class") }));
+        const images = [...svg.querySelectorAll("image")].map(image => ({ x: Number(image.getAttribute("x")) + Number(image.getAttribute("width")) / 2, y: Number(image.getAttribute("y")) + Number(image.getAttribute("height")) / 2, radius: Number(image.getAttribute("width")) / 2 }));
+        for (let i = 0; i < texts.length; i++) for (let j = i + 1; j < texts.length; j++) {
+          // Separate SVG lines of one heading intentionally share font line boxes.
+          if (texts[i].role === texts[j].role && ["atlas-center-title", "study-title"].includes(texts[i].role)) continue;
+          const a = texts[i].box, b = texts[j].box;
+          if (a.x < b.x + b.width + 4 && a.x + a.width + 4 > b.x && a.y < b.y + b.height + 4 && a.y + a.height + 4 > b.y) collisions.add(`${svg.id}: labels ${texts[i].text} and ${texts[j].text}`);
+        }
+        for (const { text, box } of texts) for (const image of images) {
+          const x = Math.max(box.x, Math.min(image.x, box.x + box.width));
+          const y = Math.max(box.y, Math.min(image.y, box.y + box.height));
+          if (Math.hypot(image.x - x, image.y - y) < image.radius + 4) collisions.add(`${svg.id}: label ${text} touches image`);
+        }
+        for (const path of svg.querySelectorAll(".atlas-edge,.study-edge")) {
+          const length = path.getTotalLength();
+          for (let sample = 0; sample <= 200; sample++) {
+            const point = path.getPointAtLength(length * sample / 200);
+            for (const { text, box } of texts) {
+              if (point.x > box.x - 4 && point.x < box.x + box.width + 4 && point.y > box.y - 4 && point.y < box.y + box.height + 4) collisions.add(`${svg.id}: text ${text}`);
+            }
+            for (const image of images) if (Math.hypot(point.x - image.x, point.y - image.y) < image.radius + 4) collisions.add(`${svg.id}: image`);
+          }
+        }
+      }
+      const cy = document.querySelector(".cld-canvas")._cyreg.cy;
+      const labels = cy.nodes().map(node => ({ id: node.id(), box: node.boundingBox({ includeNodes: false, includeLabels: true, includeOverlays: false }) }));
+      for (let i = 0; i < labels.length; i++) for (let j = i + 1; j < labels.length; j++) {
+        const a = labels[i].box, b = labels[j].box;
+        if (a.x1 < b.x2 + 4 && a.x2 + 4 > b.x1 && a.y1 < b.y2 + 4 && a.y2 + 4 > b.y1) collisions.add(`demo: labels ${labels[i].id} and ${labels[j].id}`);
+      }
+      for (const edge of cy.edges()) {
+        const a = edge.sourceEndpoint(), b = edge.targetEndpoint(), c = edge.controlPoints()[0];
+        for (let sample = 0; sample <= 200; sample++) {
+          const t = sample / 200, m = 1 - t;
+          const x = m * m * a.x + 2 * m * t * c.x + t * t * b.x, y = m * m * a.y + 2 * m * t * c.y + t * t * b.y;
+          for (const node of cy.nodes()) {
+            const box = node.boundingBox({ includeNodes: false, includeLabels: true, includeOverlays: false });
+            if (x > box.x1 - 4 && x < box.x2 + 4 && y > box.y1 - 4 && y < box.y2 + 4) collisions.add(`demo: ${edge.id()} crosses ${node.id()} label`);
+          }
+        }
+      }
+      return [...collisions];
+    });
+    assert.deepEqual(diagramCollisions, [], `${name}: diagram clearance`);
     const sizes = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth, documentHeight: document.documentElement.scrollHeight }));
     assert.ok(sizes.document <= width, `${name} horizontal overflow: ${sizes.document}`);
     await page.screenshot({ path: resolve(output, `${name}.png`), fullPage: true, animations: "disabled" });
