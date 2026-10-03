@@ -2635,15 +2635,19 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
     }), { settings: {}, rules: [] });
   }
   function buildViewLegend(view) {
+    const seen = /* @__PURE__ */ new Set();
     return (view?.rules || []).flatMap((rule) => {
       const selector = rule.selector || {};
       if (!selector.attribute) return [];
       const properties = rule.properties || {};
       const visual = properties.fill || properties.color || properties["stroke-color"] || properties["badge-fill"];
       if (!visual && !properties.shape && !properties.highlight) return [];
+      const label = properties.legend || (selector.attribute === "type" ? { reinforcing: "Refor\xE7o", balancing: "Balanceamento" }[selector.value] || selector.value : `${selector.attribute}: ${selector.value}`);
+      if (seen.has(label)) return [];
+      seen.add(label);
       return [{
         id: `${selector.type}-${selector.attribute}-${selector.value}`,
-        label: properties.legend || `${selector.attribute}: ${selector.value}`,
+        label,
         type: selector.type,
         color: visual || "#7a8a72",
         shape: properties.shape || (selector.type === "relation" ? "line" : "ellipse")
@@ -4730,7 +4734,9 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
     const collection = collectCameraElements(cy, plan);
     if (!collection?.length || typeof cy.getFitViewport !== "function") return null;
     const requestedPadding = plan.camera.padding || padding;
-    const effectivePadding = rect ? clampFitPadding(requestedPadding, rect) : requestedPadding;
+    const effectivePadding = rect ? clampFitPadding(requestedPadding, rect, {
+      maximumRatio: plan.isMap ? 0.12 : 0.08
+    }) : requestedPadding;
     const box = collection.boundingBox({ includeLabels: true });
     const viewport = rect ? fitViewportToRect({
       boundingBox: { x: box.x1, y: box.y1, width: box.w, height: box.h },

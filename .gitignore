@@ -20,3 +20,7 @@ playwright.tmp.config.mjs
 
 # Impeccable local design-tool config (internal)
 .impeccable/
+
+# Disposable visual audit evidence
+artifacts/audit-*/
+artifacts/ui-capture/

@@ -6,6 +6,8 @@ test("Story Studio mantém uma apresentação longa em uma timeline horizontal s
   await page.getByRole("button", { name: /Flagship — Crescimento sob pressão/ }).click();
   await page.locator("[data-react-ui-mode='story']").click();
 
+  await page.locator("#story-timeline-overview").click();
+
   const track = page.locator(".story-timeline-track");
   const scenes = page.locator(".story-timeline-scene");
   await expect(track).toBeVisible();

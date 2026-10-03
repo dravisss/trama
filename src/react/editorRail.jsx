@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "./ui/Button.jsx";
+import { Select } from "./ui/Field.jsx";
 import { Icon } from "./ui/Icon.jsx";
 
 const RAIL_ITEMS = [
@@ -22,7 +23,12 @@ const RAIL_TAB_LABELS = {
 
 export function EditorUtilityRail({ activePanel = "map", onOpenPanel, onClose } = {}) {
   return <nav className="utility-rail" aria-label="Painéis do editor">
-    {RAIL_ITEMS.map(([panel, label, icon]) => <Button key={panel} data-dock-panel={panel} aria-label={label} title={label} aria-pressed={activePanel === panel} className={activePanel === panel ? "active" : ""} onClick={() => onOpenPanel?.(panel)} size="icon" variant="quiet">
+    <label className="editor-panel-picker">Painel
+      <Select aria-label="Painel do editor" value={activePanel} onChange={event => onOpenPanel?.(event.target.value)}>
+        {RAIL_ITEMS.map(([panel, label]) => <option value={panel} key={panel}>{label}</option>)}
+      </Select>
+    </label>
+    {RAIL_ITEMS.map(([panel, label, icon]) => <Button key={panel} data-dock-panel={panel} aria-label={label} title={label} aria-pressed={activePanel === panel} aria-current={activePanel === panel ? "page" : undefined} className={activePanel === panel ? "active" : ""} onClick={() => onOpenPanel?.(panel)} size="icon" variant="quiet">
       <span className="rail-glyph" aria-hidden="true"><svg viewBox="0 0 24 24">{icon}</svg></span>
       <span className="rail-label">{RAIL_TAB_LABELS[panel] || label}</span>
     </Button>)}

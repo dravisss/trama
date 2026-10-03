@@ -12,12 +12,13 @@ async function openStory(page, width = 390) {
   await page.getByRole("button", { name: "História" }).click();
   await expect(page.locator("body")).toHaveAttribute("data-ui-mode", "story");
   await expect(page.locator("#story-timeline-shell")).toBeVisible();
-  await expect(page.locator(".story-timeline-card-main").first()).toBeVisible();
+  await expect(page.locator("button[data-story-surface=map]")).toBeVisible();
 }
 
 test("story actions fit a 360px viewport with touch targets", async ({ page }) => {
   await openStory(page, 360);
-  const boxes = await page.locator(".story-timeline-actions button, .story-timeline-create-actions button").evaluateAll(nodes => nodes.map(node => {
+  await page.locator("button[data-story-surface=timeline]").click();
+  const boxes = await page.locator(".story-timeline-actions button:visible, .story-timeline-create-actions button:visible, .story-surface-switch button:visible").evaluateAll(nodes => nodes.map(node => {
     const box = node.getBoundingClientRect();
     return { id: node.id, left: box.left, right: box.right, bottom: box.bottom, width: box.width, height: box.height };
   }));
@@ -33,17 +34,17 @@ test("story actions fit a 360px viewport with touch targets", async ({ page }) =
 test("Story Studio móvel abre o inspector como folha e devolve foco", async ({ page }) => {
   await openStory(page);
 
-  const toggle = page.locator("#story-mobile-inspector-toggle");
+  const toggle = page.locator("button[data-story-surface=movement]");
   await toggle.focus();
   await toggle.click();
   await expect(page.locator("body")).toHaveClass(/story-inspector-mobile-open/);
-  await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#story-mobile-inspector-close")).toBeVisible();
   await expect(page.locator("#story-mobile-inspector-close")).toBeFocused();
 
   await page.locator("#story-mobile-inspector-close").click();
   await expect(page.locator("body")).not.toHaveClass(/story-inspector-mobile-open/);
-  await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  await expect(toggle).toHaveAttribute("aria-pressed", "false");
   await expect(toggle).toBeFocused();
 
   await toggle.click();

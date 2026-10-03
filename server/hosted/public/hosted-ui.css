@@ -151,3 +151,9 @@ body[data-ui-mode="present"] .trama-notice { display: none; }
   .trama-share-trigger { min-height: 44px; padding-inline: 12px; }
   .trama-notice { top: 12px; bottom: auto; }
 }
+
+.trama-share-dialog[open]{display:flex;flex-direction:column;max-height:calc(100dvh - 32px);overflow:hidden}
+.trama-share-dialog header{flex:0 0 auto;position:static}
+.trama-share-body{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-bottom:env(safe-area-inset-bottom)}
+.trama-share-body button{min-height:44px}
+@media(max-width:430px){.trama-row{flex-wrap:wrap}.trama-row input{flex-basis:100%}.trama-share-dialog{width:calc(100vw - 16px)}.trama-share-dialog section{padding:12px}}

@@ -106,9 +106,9 @@ export function StyleBuilderPanel({ styleBuilder = {}, actions = {} }) {
       <Button unstyled type="button" id="add-view-rule" onClick={() => actions.onAddRule?.()}>Adicionar regra</Button>
     </div>
     <label className="sr-only" htmlFor="loop-style-editor">Código visual CSS-like</label>
+    <div className={`dock-status${styleBuilder.error ? " error" : ""}`} id="loop-style-status" role="status" aria-live="polite">{styleBuilder.status || "Vista válida"}</div>
     <LineNumberedTextarea id="loop-style-editor" label="Código visual CSS-like" defaultValue={styleBuilder.editorValue || DEFAULT_STYLE_SOURCE} />
-    <div className={`dock-status${styleBuilder.error ? " error" : ""}`} id="loop-style-status">{styleBuilder.status || "Vista válida"}</div>
-    <Button unstyled type="button" className="dock-primary" id="apply-loop-style" onClick={() => actions.onApply?.()}>Aplicar prévia</Button>
+    <Button unstyled type="button" className="dock-primary" id="apply-loop-style" disabled={Boolean(styleBuilder.error)} onClick={() => actions.onApply?.()}>Aplicar prévia</Button>
   </div>;
 }
 

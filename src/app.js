@@ -1,3 +1,4 @@
+import { sourceDiagnostic } from "./app/sourceDiagnostics.js";
 import { createCLD } from "./CLDEngine.js";
 import { applySavedLayout, cloneModel, extractLayout } from "./app/layoutStorage.js";
 import { createEmptyModel, normalizeModel, slugId, validateModel } from "./core/model.js";
@@ -439,6 +440,8 @@ let projectAssets = [];
 let presentationController = null;
 let presentationGeneration = 0;
 let boundCy = null;
+let userMovedCamera = false;
+let styleSourceDraftRevision = 0;
 let fitFrame = null;
 let fitTimer = null;
 let cameraStableTimer = null;
@@ -690,6 +693,8 @@ let presentationCameraGeneration = 0;
 
 function fitCanvas(options = {}) {
   if (!engine?.cy) return;
+  if (options.automatic && userMovedCamera) { engine.cy.resize(); return; }
+  if (!options.automatic) userMovedCamera = false;
   engine.cy.resize();
   const safeRect = measureCanvasSafeRect({
     canvas: engine.canvas,
@@ -706,6 +711,8 @@ function fitCanvas(options = {}) {
     ]
   });
   if (qaEnabled && qaRoot && safeRect) qaRoot.dataset.qaSafeRect = JSON.stringify(safeRect);
+  // Layout changes supersede earlier shell fits without changing the engine API.
+  engine.cy.stop(true, false);
   engine.fit({ ...options, safeRect });
 }
 
@@ -747,7 +754,7 @@ const workspaceDomBridge = createWorkspaceDomBridge({
     importJsonFile,
     setWorkspaceMode,
     toggleSavePopover,
-    retrySave: () => persistActiveLoop(),
+    retrySave: retryProjectSave,
     startRouteDrag,
     startConnectionDrag,
     savePopoverChanges,
@@ -985,10 +992,8 @@ const engineBridge = createEngineBridge({
       selectedNodeIds = nodeIds;
       selectedEdgeIds = edgeIds;
       lastStorySelectionFocus = focusForCurrentSelection();
-      if (selectedNodeIds.length > 1) {
-        selectedNodeId = selectedNodeIds.at(-1);
-        selectedEdgeId = null;
-      }
+      selectedNodeId = selectedNodeIds.at(-1) || null;
+      selectedEdgeId = selectedNodeId ? null : (selectedEdgeIds.at(-1) || null);
       if (workspaceMode !== "story") renderDockInspector();
       updateStoryCanvasSelectionAction();
     },
@@ -1305,6 +1310,7 @@ function selectModel(index, { preserveCurrent = true } = {}) {
     syncWorkspaceFromEngine(previousIndex);
     schedulePersistActiveLoop(previousIndex, { delay: 80 });
   }
+  userMovedCamera = false;
   activeIndex = index;
   appCommands.selectModel(index);
   selectedNodeId = null;
@@ -1377,6 +1383,7 @@ function setEditorDockCollapsed(collapsed = false) {
 
 function openDockPanel(panel) {
   activeDockPanel = panel;
+  document.body.dataset.editorPanel = panel;
   appCommands.openDockPanel(panel);
   setEditorDockCollapsed(false);
   document.body.classList.toggle("editor-data-workspace", panel === "table");
@@ -1387,7 +1394,7 @@ function openDockPanel(panel) {
   elements.dockTitle.textContent = {
     inspect: "Detalhes",
     map: "Mapa e descrição",
-    code: "Código do loop",
+    code: "Markdown do mapa",
     style: "Vista visual",
     story: "Storyboard",
     table: "Tabela de dados",
@@ -1400,12 +1407,13 @@ function openDockPanel(panel) {
   }
   if (panel === "code") syncLoopSourceDraftControls();
   if (panel === "style") {
+    const draftRevision = styleSourceDraftRevision;
     hydrateViewBuilder(workspace[activeIndex]?.view);
     // The dock composition is committed by React after the imperative bridge
     // publishes the panel intent. Rehydrate once after that commit so an old
     // uncontrolled/default snapshot cannot replace the persisted view preset.
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      if (activeDockPanel === "style") hydrateViewBuilder(workspace[activeIndex]?.view);
+      if (activeDockPanel === "style" && styleSourceDraftRevision === draftRevision) hydrateViewBuilder(workspace[activeIndex]?.view);
     }));
   }
   if (panel === "story") renderDockStory();
@@ -1742,7 +1750,7 @@ function resolvedViewForEntry(entry) {
     return resolveView(entry.view, entry.views || []);
   } catch (error) {
     console.error(error);
-    showToast("A view base não pôde ser resolvida.");
+    showToast("A vista base não pôde ser resolvida.");
     return entry.view;
   }
 }
@@ -1751,12 +1759,17 @@ async function createNewView() {
   const entry = workspace[activeIndex];
   if (!entry) return;
   const number = (entry.views?.length || 0) + 1;
-  const view = compileLoopStyle(`@view "View ${number}"\n\nvariable { shape: ellipse; }\n`);
+  const choice = await openCommandDialog({title: "Nova vista", submitLabel: "Criar vista",
+    description: "Uma vista muda a aparência do mapa sem duplicar suas variáveis e relações.",
+    fields: [{name: "title", label: "Nome da vista", value: `Vista ${number}`, required: true}]});
+  if (!choice) return;
+  const view = compileLoopStyle("variable { shape: ellipse; }\n");
+  view.title = choice.title;
   await createPersistedView(entry, { ...view, map_id: entry.mapId || entry.id });
 }
 
 async function createPersistedView(entry, view) {
-  await persistCreatedView(entry, view, () => createView.execute({ view }), "Nova view criada sem duplicar o mapa.");
+  await persistCreatedView(entry, view, () => createView.execute({ view }), "Nova vista criada sem duplicar o mapa.");
 }
 
 async function persistCreatedView(entry, view, persist, successMessage) {
@@ -1777,7 +1790,7 @@ async function persistCreatedView(entry, view, persist, successMessage) {
     showToast(successMessage);
   } catch (error) {
     handleApiError(error);
-    showToast("Não foi possível criar a view.");
+    showToast("Não foi possível criar a vista.");
   }
 }
 
@@ -1786,18 +1799,18 @@ async function duplicateActiveView() {
   if (!entry?.view) return;
   const source = { ...entry.view, map_id: entry.mapId || entry.id };
   const view = duplicateView.draft({ view: source });
-  await persistCreatedView(entry, view, () => duplicateView.execute({ view: source }), "View duplicada sem duplicar o mapa.");
+  await persistCreatedView(entry, view, () => duplicateView.execute({ view: source }), "Vista duplicada sem duplicar o mapa.");
 }
 
 async function deriveActiveView() {
   const entry = workspace[activeIndex];
   if (!entry?.view) {
-    showToast("Selecione uma view para criar uma derivação.");
+    showToast("Selecione uma vista para criar uma derivação.");
     return;
   }
   const source = { ...entry.view, map_id: entry.mapId || entry.id };
   const view = deriveView.draft({ view: source });
-  await persistCreatedView(entry, view, () => deriveView.execute({ view: source }), "View derivada sem duplicar o mapa.");
+  await persistCreatedView(entry, view, () => deriveView.execute({ view: source }), "Vista derivada sem duplicar o mapa.");
 }
 
 async function deleteActiveView() {
@@ -1817,10 +1830,10 @@ async function deleteActiveView() {
       reroute: !onlyPolarityVisibilityChanged(view, nextView || {})
     });
     renderViewSwitcher();
-    showToast("View removida. O mapa foi preservado.");
+    showToast("Vista removida. O mapa foi preservado.");
   } catch (error) {
     handleApiError(error);
-    showToast("Não foi possível remover a view.");
+    showToast("Não foi possível remover a vista.");
   }
 }
 
@@ -2007,7 +2020,7 @@ function styleControlValue(id, fallback = "") {
 
 function setStyleStatus(message, error = false) {
   if (reactApp?.renderStyleBuilder) {
-    reactApp.renderStyleBuilder({ status: message, error });
+    reactApp.renderStyleBuilder({ status: message, error, editorValue: styleControlValue("loop-style-editor") });
     return;
   }
   const status = styleControl("loop-style-status");
@@ -2072,6 +2085,9 @@ function cloneJson(value) {
 
 function compileLoopSourceModel(source) {
   const compiled = compileLoopMarkdown(source);
+  if (!compiled.nodes.length) {
+    throw new Error("Linha 1: inclua pelo menos uma variável na seção Variables. Corrija a fonte e tente novamente.");
+  }
   const current = engine.getModel({ includePositions: true, includeRoutes: true });
   const nodesById = new Map((current?.nodes || []).map(node => [node.id, node]));
   const edgesById = new Map((current?.edges || []).map(edge => [edge.id, edge]));
@@ -2094,8 +2110,15 @@ function compileLoopSourceModel(source) {
   return { compiled, model };
 }
 
+function validateMapSourceDraft() {
+  try { compileLoopSourceModel(elements.loopSourceEditor.value); elements.applyLoopSource.disabled = false; if (elements.loopSourceStatus.classList.contains("error")) setDockStatus(elements.loopSourceStatus, "Fonte válida · pronta para prévia"); return true; }
+  catch (error) { elements.applyLoopSource.disabled = true; setDockStatus(elements.loopSourceStatus, sourceErrorMessage(error), true); return false; }
+}
+function sourceErrorMessage(error) { return sourceDiagnostic(error); }
+
 function syncLoopSourceDraftControls() {
   if (!elements.discardLoopSource) return;
+  validateMapSourceDraft();
   elements.discardLoopSource.disabled = !loopSourcePreview;
   elements.applyLoopSource.textContent = loopSourcePreview
     ? "Aplicar prévia ao mapa"
@@ -2107,7 +2130,7 @@ function previewLoopSource() {
     const entry = workspace[activeIndex];
     if (!loopSourcePreview) {
       loopSourcePreview = {
-        source: elements.loopSourceEditor.value,
+        source: serializeLoopMarkdown(engine.getModel()),
         model: cloneModel(engine.getModel({ includePositions: true, includeRoutes: true })),
         view: cloneJson(engine.view),
         entry: entry ? {
@@ -2132,9 +2155,9 @@ function previewLoopSource() {
     setDockStatus(elements.loopSourceStatus, "Prévia ativa · nada foi salvo");
   } catch (error) {
     previewingLoopSource = false;
-    const first = error.errors?.[0];
-    setDockStatus(elements.loopSourceStatus,
-      first ? `Linha ${first.line}: ${first.message}` : error.message, true);
+    syncLoopSourceDraftControls();
+    elements.applyLoopSource.disabled = true;
+    setDockStatus(elements.loopSourceStatus, sourceErrorMessage(error), true);
   }
 }
 
@@ -2172,7 +2195,7 @@ function applyLoopSource() {
     const previousTitle = entry?.model?.title || entry?.label || "";
     const previousDescription = entry?.description_md || "";
     const generatedDescription = !previousDescription ||
-      previousDescription.trim() === `## ${previousTitle}\n\nDescreva aqui a história e o recorte deste loop.`;
+      previousDescription.trim() === `## ${previousTitle}\n\nDescreva aqui a história e o recorte deste mapa.`;
     previewingLoopSource = false;
     loopSourcePreview = null;
     syncLoopSourceDraftControls();
@@ -2182,7 +2205,7 @@ function applyLoopSource() {
     entry.label = model.title;
     entry.summary = compiled.description || (generatedDescription ? "" : entry.summary);
     entry.description_md = compiled.description || (generatedDescription
-      ? `## ${model.title}\n\nDescreva aqui a história e o recorte deste loop.`
+      ? `## ${model.title}\n\nDescreva aqui a história e o recorte deste mapa.`
       : entry.description_md);
     entry.source = source;
     renderWorkspaceTabs();
@@ -2276,6 +2299,10 @@ function exportLoopStyle() {
   downloadText(`${slugId(entry?.view?.title || "matcha", "view")}.loop.css`, source, "text/css");
 }
 
+function validateStyleSourceDraft() {
+  try { compileLoopStyle(styleControlValue("loop-style-editor")); setStyleStatus("Fonte válida · pronta para prévia"); return true; }
+  catch (error) { setStyleStatus(sourceErrorMessage(error), true); return false; }
+}
 async function applyLoopStyle() {
   try {
     const compiled = compileLoopStyle(styleControlValue("loop-style-editor"));
@@ -2302,9 +2329,8 @@ async function applyLoopStyle() {
     setStyleStatus("Vista válida e aplicada");
     return true;
   } catch (error) {
-    const first = error.errors?.[0];
     setStyleStatus(
-      first ? `Linha ${first.line}: ${first.message}` : error.message, true);
+      sourceErrorMessage(error), true);
     return false;
   }
 }
@@ -2989,7 +3015,7 @@ function removeSelectedStoryScene() {
   selectedStorySceneId = fallback?.id || null;
   selectedStoryBeatId = fallback?.beats?.[0]?.id || null;
   applyPresentationStructureEdit(next, "Cena removida");
-  showToast("Cena removida. O loop e as variáveis permaneceram intactos.");
+  showToast("Cena removida. O mapa e as variáveis permaneceram intactos.");
 }
 
 function removeTimelineBeat(sceneId, beatId) {
@@ -3429,10 +3455,15 @@ async function duplicateActivePresentation() {
     showToast("Salve uma história no projeto antes de duplicar.");
     return;
   }
+  const choice = await openCommandDialog({
+    title: "Duplicar história", description: "Crie uma cópia independente desta história. O mapa permanece compartilhado.",
+    submitLabel: "Duplicar", fields: [{ name: "title", label: "Nome da cópia", value: `${activePresentationRecord.title} · cópia`, required: true }]
+  });
+  if (!choice) return;
   try {
     const result = await apiFetch(`/api/presentations/${encodeURIComponent(activePresentationRecord.id)}/duplicate`, {
       method: "POST",
-      body: { title: `${activePresentationRecord.title} · cópia` }
+      body: { title: choice.title }
     });
     projectPresentations = [result.presentation, ...projectPresentations];
     selectProjectPresentation(result.presentation);
@@ -3445,7 +3476,10 @@ async function duplicateActivePresentation() {
 
 async function deleteActivePresentation() {
   if (!activePresentationRecord || !apiAvailable) return;
-  if (!window.confirm(`Remover “${activePresentationRecord.title || activePresentationRecord.id}”?`)) return;
+  const choice = await openCommandDialog({ title: "Remover história?",
+    description: `A história “${activePresentationRecord.title || activePresentationRecord.id}” será removida. O mapa será preservado.`,
+    submitLabel: "Remover história", danger: true });
+  if (!choice) return;
   try {
     await apiFetch(`/api/presentations/${encodeURIComponent(activePresentationRecord.id)}`, { method: "DELETE" });
     projectPresentations = projectPresentations.filter(item => item.id !== activePresentationRecord.id);
@@ -3904,6 +3938,7 @@ function renderPresentationLint(result) {
     ? `${errors} erro(s) bloqueador(es) · ${warnings} aviso(s) · score ${result.scores?.overall ?? "—"}`
     : warnings ? `Pronto para revisar · ${warnings} aviso(s) · score ${result.scores?.overall ?? "—"}` : `Story Lint: pronto para apresentar · score ${result.scores?.overall ?? "—"}`;
   elements.storyLintStatus.classList.toggle("error", errors > 0);
+  elements.applyPresentationFixes = document.querySelector("#apply-presentation-fixes");
   if (elements.applyPresentationFixes) {
     elements.applyPresentationFixes.disabled = !result.safeFixes?.length;
     elements.applyPresentationFixes.textContent = result.safeFixes?.length
@@ -3990,8 +4025,12 @@ function schedulePersistActiveLoop(index = activeIndex, { delay = 350 } = {}) {
 async function persistActiveLoop(index = activeIndex) {
   const entry = workspace[index];
   if (!entry) return null;
-  if (!apiAvailable || !entry.persisted) {
+  if (!entry.persisted) {
     setSaveStatus("saved", "Salvo localmente");
+    return null;
+  }
+  if (!apiAvailable) {
+    setSaveStatus("error", "Servidor offline");
     return null;
   }
   // SQLite accepts last-write-wins updates. Serialize writes per loop so a
@@ -4028,6 +4067,19 @@ async function persistActiveLoop(index = activeIndex) {
     return null;
   });
   return task;
+}
+
+async function retryProjectSave() {
+  try {
+    setSaveStatus("saving", "Tentando salvar");
+    await apiFetch("/api/project");
+    apiAvailable = true;
+    await persistActiveLoop();
+  } catch (error) {
+    lastSaveError = error;
+    handleApiError(error);
+    setSaveStatus("error", "Erro ao salvar");
+  }
 }
 
 function preserveSelectedMapView(persistedEntry, previousEntry) {
@@ -4086,6 +4138,12 @@ function bindCanvasEditing() {
   if (!engine.cy || boundCy === engine.cy) return;
   boundCy = engine.cy;
   const dragStarts = new Map();
+  engine.canvas.addEventListener("wheel", () => {
+    if (!storyMode) { userMovedCamera = true; cancelScheduledFit(); engine.cy.stop(true, false); }
+  }, { passive: true, capture: true });
+  engine.cy.on("dragpan scrollzoom pinchzoom", () => {
+    if (!storyMode) { userMovedCamera = true; cancelScheduledFit(); engine.cy.stop(true, false); }
+  });
   engine.cy.on("render", () => {
     positionRouteHandle();
     positionConnectionHandle();
@@ -4253,7 +4311,7 @@ async function createNewDiagram() {
     kind: "draft",
     label: title,
     summary: "",
-    description_md: `## ${title}\n\nDescreva aqui a história e o recorte deste loop.`,
+    description_md: `## ${title}\n\nDescreva aqui a história e o recorte deste mapa.`,
     model
   };
   const created = await createLoopEntry(entry);
@@ -4271,8 +4329,8 @@ async function createLoopEntry(entry) {
   } catch (error) {
     handleApiError(error);
     showToast(apiAvailable
-      ? "Não foi possível salvar no SQLite; usando loop local."
-      : "Servidor local offline; usando loop local.");
+      ? "Não foi possível salvar no SQLite; usando mapa local."
+      : "Servidor local offline; usando mapa local.");
     return entry;
   }
 }
@@ -4483,7 +4541,7 @@ async function renameActiveLoop() {
   await persistActiveLoop();
   renderWorkspaceTabs();
   updateScenarioPanel(engine.model);
-  showToast("Loop renomeado.");
+  showToast("Mapa renomeado.");
 }
 
 let loopDescriptionRestoreFocus = null;
@@ -4495,7 +4553,7 @@ async function editActiveLoopDescription() {
   elements.loopDescriptionInput.value =
     entry.description_md || entry.model.description || `## ${entry.label || entry.model.title}\n\n`;
   updateLoopDescriptionPreview();
-  loopDescriptionRestoreFocus = document.activeElement;
+  loopDescriptionRestoreFocus = document.querySelector("#edit-loop-description") || document.activeElement;
   elements.loopDescriptionModal.hidden = false;
   elements.loopDescriptionInput.focus();
 }
@@ -4528,7 +4586,9 @@ function updateLoopDescriptionPreview() {
 
 function closeLoopDescriptionModal() {
   elements.loopDescriptionModal.hidden = true;
-  loopDescriptionRestoreFocus?.focus?.();
+  const currentOpener = loopDescriptionRestoreFocus?.id
+    ? document.getElementById(loopDescriptionRestoreFocus.id) : loopDescriptionRestoreFocus;
+  currentOpener?.focus?.();
   loopDescriptionRestoreFocus = null;
 }
 
@@ -4541,7 +4601,7 @@ async function duplicateActiveLoop() {
       workspace.unshift(loopRecordToEntry(data.loop));
       renderWorkspaceTabs();
       selectModel(0, { preserveCurrent: false });
-      showToast("Loop duplicado.");
+      showToast("Mapa duplicado.");
       return;
     } catch (error) {
       handleApiError(error);
@@ -4564,14 +4624,14 @@ async function duplicateActiveLoop() {
 
 async function deleteActiveLoop() {
   if (workspace.length <= 1) {
-    showToast("O projeto precisa manter pelo menos um loop.");
+    showToast("O projeto precisa manter pelo menos um mapa.");
     return;
   }
   const entry = workspace[activeIndex];
   if (!entry) return;
   const confirmed = await openCommandDialog({
     title: "Remover mapa",
-    description: `O mapa “${entry.label}” e suas views serão removidos deste projeto.`,
+    description: `O mapa “${entry.label}” e suas vistas serão removidos deste projeto.`,
     submitLabel: "Remover mapa",
     danger: true
   });
@@ -4582,15 +4642,15 @@ async function deleteActiveLoop() {
     } catch (error) {
       handleApiError(error);
       showToast(apiAvailable
-        ? "Não foi possível remover o loop."
-        : "Servidor local offline. O loop não foi removido do projeto.");
+        ? "Não foi possível remover o mapa."
+        : "Servidor local offline. O mapa não foi removido do projeto.");
       return;
     }
   }
   workspace.splice(activeIndex, 1);
   renderWorkspaceTabs();
   selectModel(Math.max(0, activeIndex - 1), { preserveCurrent: false });
-  showToast("Loop removido.");
+  showToast("Mapa removido.");
 }
 
 function exportJson() {
@@ -4617,9 +4677,7 @@ function setEditing(enabled) {
   renderLoopBrowser();
   updateEditToolbar();
   if (editing) scheduleFit({ padding: 45, duration: 180 });
-  showToast(editing
-    ? "Modo edição ativo: duplo clique cria nó; selecione um nó para editar ou conectar."
-    : layoutDirty ? "Edição encerrada. Exporte JSON para preservar tudo." : "Modo edição encerrado.");
+  if (!editing) showToast(layoutDirty ? "Edição encerrada. Exporte JSON para preservar tudo." : "Modo edição encerrado.");
 }
 
 function setWorkspaceMode(mode = "map") {
@@ -4740,16 +4798,18 @@ function setStoryMobileInspector(open) {
     elements.storyMobileInspectorToggle?.setAttribute("aria-expanded", "true");
     openDockPanel("story");
     window.requestAnimationFrame?.(() => elements.storyMobileInspectorClose?.focus?.());
-    showToast("Editor do beat aberto.");
     return;
   }
   if (!document.body.classList.contains("story-inspector-mobile-open")) return;
   document.body.classList.remove("story-inspector-mobile-open");
+  if (document.body.dataset.storySurface === "movement") {
+    document.body.dataset.storySurface = "map";
+    document.querySelectorAll("button[data-story-surface]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.storySurface === "map")));
+  }
   elements.storyMobileInspectorToggle?.setAttribute("aria-expanded", "false");
   const restore = storyMobileInspectorOpener || elements.storyMobileInspectorToggle;
   storyMobileInspectorOpener = null;
   window.requestAnimationFrame?.(() => restore?.focus?.());
-  showToast("Editor do beat fechado.");
 }
 
 function toggleStoryMobileInspector() {
@@ -4990,7 +5050,7 @@ function startPresentation(loopOverride = null, initialIndex = 0) {
   const compiled = compilePresentation(presentation, presentationContext());
   if (!compiled.timeline.length || compiled.errors.length) {
     activateWorkspaceChrome(workspaceMode === "present" ? previousWorkspaceMode : workspaceMode);
-    showToast("Este loop ainda não tem apresentação.");
+    showToast("Este mapa ainda não tem apresentação.");
     return;
   }
   if (editing) setEditing(false);
@@ -5091,7 +5151,7 @@ function scheduleFit(options, settledFit = null) {
     fitFrame = null;
     if (generation !== fitGeneration) return;
     if (storyMode || !engine.cy) return;
-    fitCanvas(options);
+    fitCanvas({ ...options, automatic: true });
     engine.cy.resize();
     engine.cy.forceRender?.();
     if (settledFit?.delay) {
@@ -5099,7 +5159,7 @@ function scheduleFit(options, settledFit = null) {
         fitTimer = null;
         if (generation !== fitGeneration || storyMode || !engine.cy) return;
         engine.cy.resize();
-        fitCanvas(settledFit.options || options);
+        fitCanvas({ ...(settledFit.options || options), automatic: true });
         engine.cy.forceRender?.();
         scheduleCameraStable(settledFit.options || options, generation);
       }, settledFit.delay);
@@ -5108,7 +5168,7 @@ function scheduleFit(options, settledFit = null) {
     requestAnimationFrame(() => {
       if (generation !== fitGeneration || storyMode || !engine.cy) return;
       engine.cy.resize();
-      fitCanvas(options);
+      fitCanvas({ ...options, automatic: true });
       engine.cy.forceRender?.();
       scheduleCameraStable(options, generation);
     });
@@ -5134,18 +5194,22 @@ function markQaCameraPending(generation) {
 function scheduleCameraStable(options, generation) {
   if (!qaEnabled || !qaRoot) return;
   if (cameraStableTimer) window.clearTimeout(cameraStableTimer);
-  const duration = Math.max(0, Number(options?.duration) || 0);
+  const duration = Math.max(0, Number(options?.duration ?? 420) || 0);
   cameraStableTimer = window.setTimeout(() => {
     cameraStableTimer = null;
     requestAnimationFrame(() => {
       if (generation !== fitGeneration || storyMode || !engine.cy) return;
+      if (engine.cy.animated()) { scheduleCameraStable({ duration: 32 }, generation); return; }
       qaRoot.dataset.qaCameraStable = `${workspaceMode}:stable:${generation}:${engine.cy.zoom().toFixed(4)}:${Math.round(engine.cy.pan().x)}:${Math.round(engine.cy.pan().y)}`;
     });
   }, duration + 32);
 }
 
 function zoomCanvas(factor) {
+  userMovedCamera = true;
+  cancelScheduledFit();
   if (!engine.cy) return;
+  engine.cy.stop(true, false);
   const current = engine.cy.zoom();
   const next = Math.max(engine.cy.minZoom(), Math.min(engine.cy.maxZoom(), current * factor));
   engine.cy.animate({
@@ -5870,7 +5934,7 @@ function focusStoryCamera(frame) {
       return;
     }
     const result = getCameraViewport(engine.cy, plan, {
-      padding: 68,
+      padding: 34,
       rect: safeRect,
       maxZoom: presentationCameraMaxZoom(plan)
     });
@@ -6787,7 +6851,7 @@ function updateScenarioPanel(model) {
   elements.presentToggle.classList.toggle("primary-action", storyMode || storyCount > 0);
   elements.presentToggle.title = storyCount
     ? `${storyCount} passos disponíveis`
-    : "Este loop ainda não tem apresentação";
+    : "Este mapa ainda não tem apresentação";
   updateLoopSelectorSummary();
   document.querySelector("#scenario-eyebrow").textContent =
     model.eyebrow || project?.title || "Mapa ativo";
@@ -6795,7 +6859,7 @@ function updateScenarioPanel(model) {
   document.querySelector("#scenario-description").innerHTML = renderMarkdown(
     workspace[activeIndex]?.description_md ||
     model.description ||
-    "Este loop ainda não possui descrição. Use **Editar descrição** para registrar o contexto."
+    "Este mapa ainda não possui descrição. Use **Editar descrição** para registrar o contexto."
   );
 
 }
@@ -6855,7 +6919,7 @@ function renderLocalProjects(projects = []) {
     button.dataset.projectPath = item.path;
     button.dataset.projectMessage = "Projeto aberto.";
     const metrics = item.metrics
-      ? `${item.metrics.maps} mapas · ${item.metrics.views} views · ${item.metrics.presentations} apresentações`
+      ? `${item.metrics.maps} mapas · ${item.metrics.views} vistas · ${item.metrics.presentations} apresentações`
       : item.file || item.path;
     button.append(
       element("small", "", item.active ? "Aberto agora" : metrics),
@@ -6963,7 +7027,7 @@ function setSaveStatus(state, message) {
   elements.saveStatus.classList.add(state);
   const path = project?.path ? ` em ${project.path}` : "";
   const detail = state === "error"
-    ? `${lastSaveError?.message || "Falha desconhecida"}${path}`
+    ? `As alterações deste mapa ainda não foram salvas. ${isNetworkError(lastSaveError) ? "O servidor está indisponível." : lastSaveError?.message || "Falha desconhecida"}${path}`
     : `${message}${path}`;
   elements.savePopoverMessage.textContent = detail;
   elements.retrySave.hidden = state !== "error";
@@ -7028,6 +7092,15 @@ function element(tag, className, text) {
   return node;
 }
 
+const canvasLayoutObserver = new ResizeObserver(() => {
+  if (storyMode) {
+    engine.cy?.resize();
+    if (currentPresentationFrame) requestAnimationFrame(() => focusStoryCamera(currentPresentationFrame));
+  } else if (["map", "explore", "story"].includes(workspaceMode)) {
+    scheduleFit({ padding: 34, duration: 0, automatic: true });
+  }
+});
+canvasLayoutObserver.observe(engine.canvas.parentElement);
 let responsiveFitTimer = null;
 window.addEventListener("resize", () => {
   window.clearTimeout(responsiveFitTimer);
@@ -7039,11 +7112,34 @@ window.addEventListener("resize", () => {
     }
     if (storyMode || !engine.cy || !["map", "explore", "story"].includes(workspaceMode)) return;
     engine.cy.resize();
-    fitCanvas({ padding: workspaceMode === "story" ? 34 : 42, duration: 180 });
+    fitCanvas({ padding: workspaceMode === "story" ? 34 : 42, duration: 180, automatic: true });
     engine.cy.forceRender?.();
   }, 180);
 });
 
+document.addEventListener("input", event => {
+  if (event.target.id === "loop-source-editor") validateMapSourceDraft();
+  if (event.target.id === "loop-style-editor") { styleSourceDraftRevision += 1; validateStyleSourceDraft(); }
+});
+document.addEventListener("toggle", event => {
+  if (event.target.matches?.("details[open]")) {
+    elements.toast.hidden = true;
+  }
+}, true);
+document.addEventListener("click", event => {
+  if (event.target.closest?.("#story-desktop-inspector-toggle")) {
+    const collapsed = !document.body.classList.contains("editor-dock-collapsed");
+    setEditorDockCollapsed(collapsed);
+    document.querySelector("#story-desktop-inspector-toggle")?.setAttribute("aria-expanded", String(!collapsed));
+    return;
+  }
+  const mode = event.target.closest?.("button[data-story-surface]")?.dataset.storySurface;
+  if (!mode) return;
+  document.body.dataset.storySurface = mode;
+  document.querySelectorAll("button[data-story-surface]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.storySurface === mode)));
+  if (mode === "movement") setStoryMobileInspector(true);
+  else setStoryMobileInspector(false);
+});
 const tramaDemo = {
   engine,
   qa: qaRuntime,

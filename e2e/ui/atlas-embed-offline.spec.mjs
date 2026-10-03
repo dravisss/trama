@@ -1,3 +1,4 @@
+import { exportOffline } from "../support/export-offline.mjs";
 import { test, expect, qaBaseURL } from "../support/qa-test.mjs";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -8,7 +9,7 @@ import { buildUnifiedUiFixture } from "../../qa/fixtures/unified-ui-fixture.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 
-test("Atlas embed is self-contained, preserves the selected style and enables Play only after preparation", async ({ page }) => {
+test("Atlas embed is self-contained, preserves the selected style and enables Play only after preparation", async ({ page, browserName }) => {
   const fixture = buildUnifiedUiFixture();
   const model = fixture.maps.at(-1).model;
   const presentation = {
@@ -40,7 +41,7 @@ test("Atlas embed is self-contained, preserves the selected style and enables Pl
       const protocol = new URL(request.url()).protocol;
       if (!['file:', 'data:', 'blob:', 'about:'].includes(protocol)) externalRequests.push(request.url());
     });
-    await page.context().setOffline(true);
+    await exportOffline(page.context(), true, browserName);
     await page.goto(pathToFileURL(path).href, { waitUntil: "domcontentloaded" });
     await expect(page.locator(".atlas-embed-poster")).toBeVisible();
     await expect(page.locator(".atlas-embed-poster img")).toHaveAttribute("src", /^data:image\/svg\+xml/);
@@ -57,12 +58,12 @@ test("Atlas embed is self-contained, preserves the selected style and enables Pl
     await expect(page.locator(".atlas-embed-poster")).toBeHidden();
     await expect(page.locator(".atlas-embed-story h1")).not.toHaveText("");
   } finally {
-    await page.context().setOffline(false);
+    await exportOffline(page.context(), false, browserName);
     await rm(directory, { recursive: true, force: true });
   }
 });
 
-test("Atlas poster keeps the first focused route legible across editorial viewports", async ({ page }, testInfo) => {
+test("Atlas poster keeps the first focused route legible across editorial viewports", async ({ page, browserName }, testInfo) => {
   // Four complete offline boots plus DPR3 screenshots exercise the real
   // publication pipeline, so this proof intentionally exceeds the suite's
   // single-viewport default timeout on slower software-rendered Chromium.
@@ -134,7 +135,7 @@ test("Atlas poster keeps the first focused route legible across editorial viewpo
   }
 });
 
-test("Atlas enables Play from WebP overviews, upgrades focus by beat, and keeps a later failure local", async ({ page }) => {
+test("Atlas enables Play from WebP overviews, upgrades focus by beat, and keeps a later failure local", async ({ page, browserName }) => {
   const [runtime, styles] = await Promise.all([
     readFile(resolve(root, "dist/atlas-embed-runtime.iife.js"), "utf8"),
     Promise.all([
@@ -176,7 +177,7 @@ test("Atlas enables Play from WebP overviews, upgrades focus by beat, and keeps 
   const path = resolve(directory, "atlas-lazy.html");
   await writeFile(path, html, "utf8");
   try {
-    await page.context().setOffline(true);
+    await exportOffline(page.context(), true, browserName);
     await page.goto(`${pathToFileURL(path).href}?atlas-qa=1`, { waitUntil: "domcontentloaded" });
     await expect(page.locator(".atlas-embed-shell")).toHaveAttribute("data-state", "ready");
     await expect(page.locator('[data-action="play"]')).toBeEnabled();
@@ -194,12 +195,12 @@ test("Atlas enables Play from WebP overviews, upgrades focus by beat, and keeps 
     await expect(page.locator(".atlas-embed-shell")).toHaveAttribute("data-state", "playing");
     await expect(page.getByRole("button", { name: "Anterior" })).toBeEnabled();
   } finally {
-    await page.context().setOffline(false);
+    await exportOffline(page.context(), false, browserName);
     await rm(directory, { recursive: true, force: true });
   }
 });
 
-test("Atlas cancels superseded camera motion, anchors an edge card and honours keyboard navigation", async ({ page }) => {
+test("Atlas cancels superseded camera motion, anchors an edge card and honours keyboard navigation", async ({ page, browserName }) => {
   const [runtime, styles] = await Promise.all([
     readFile(resolve(root, "dist/atlas-embed-runtime.iife.js"), "utf8"),
     Promise.all([
@@ -245,7 +246,7 @@ test("Atlas cancels superseded camera motion, anchors an edge card and honours k
   await writeFile(path, html, "utf8");
   try {
     await page.emulateMedia({ reducedMotion: "no-preference" });
-    await page.context().setOffline(true);
+    await exportOffline(page.context(), true, browserName);
     await page.goto(`${pathToFileURL(path).href}?atlas-qa=1`, { waitUntil: "domcontentloaded" });
     await page.getByRole("button", { name: "Começar leitura" }).click();
     await page.keyboard.press("ArrowRight");
@@ -332,12 +333,12 @@ test("Atlas cancels superseded camera motion, anchors an edge card and honours k
     expect(new Set(qa.samples.map(sample => sample.connector).filter(Boolean)).size).toBeGreaterThan(2);
     expect(qa.events.filter(event => event.type === "decode-start" && event.motion === "moving")).toEqual([]);
   } finally {
-    await page.context().setOffline(false);
+    await exportOffline(page.context(), false, browserName);
     await rm(directory, { recursive: true, force: true });
   }
 });
 
-test("Atlas embed keeps Play blocked and exposes recovery when a critical HD asset cannot decode", async ({ page }) => {
+test("Atlas embed keeps Play blocked and exposes recovery when a critical HD asset cannot decode", async ({ page, browserName }) => {
   const [runtime, styles] = await Promise.all([
     readFile(resolve(root, "dist/atlas-embed-runtime.iife.js"), "utf8"),
     Promise.all([
@@ -361,18 +362,18 @@ test("Atlas embed keeps Play blocked and exposes recovery when a critical HD ass
   const path = resolve(directory, "atlas-broken.html");
   await writeFile(path, html, "utf8");
   try {
-    await page.context().setOffline(true);
+    await exportOffline(page.context(), true, browserName);
     await page.goto(pathToFileURL(path).href, { waitUntil: "domcontentloaded" });
     await expect(page.locator(".atlas-embed-shell")).toHaveAttribute("data-state", "failed");
     await expect(page.locator('[data-action="play"]')).toBeDisabled();
     await expect(page.locator('[data-action="retry"]')).toBeVisible();
   } finally {
-    await page.context().setOffline(false);
+    await exportOffline(page.context(), false, browserName);
     await rm(directory, { recursive: true, force: true });
   }
 });
 
-test("Story Studio exports its selected Atlas style through the product command", async ({ page }) => {
+test("Story Studio exports its selected Atlas style through the product command", async ({ page, browserName }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(`${qaBaseURL()}/?qa=1`, { waitUntil: "domcontentloaded" });
   await page.getByRole("button", { name: /Flagship — Crescimento sob pressão/ }).click();
@@ -394,12 +395,12 @@ test("Story Studio exports its selected Atlas style through the product command"
   await download.saveAs(htmlPath);
   const offlinePage = await page.context().newPage();
   try {
-    await offlinePage.context().setOffline(true);
+    await exportOffline(offlinePage.context(),true,browserName);
     await offlinePage.goto(pathToFileURL(htmlPath).href, { waitUntil: "domcontentloaded" });
     await expect(offlinePage.locator("#trama-atlas-embed")).toHaveAttribute("data-presentation-style", "atlas-editorial");
     await expect(offlinePage.locator('[data-action="play"]')).toBeEnabled();
   } finally {
-    await offlinePage.context().setOffline(false);
+    await exportOffline(offlinePage.context(),false,browserName);
     await offlinePage.close();
   }
 });

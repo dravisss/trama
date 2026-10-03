@@ -29,7 +29,10 @@
     "check": "npm run test && npm run qa:story && npm run build",
     "serve": "node --no-warnings server.mjs",
     "serve:hosted": "node --no-warnings server-hosted.mjs",
-    "trama": "node cli/trama.mjs"
+    "trama": "node cli/trama.mjs",
+    "capture:ui": "npm run build && playwright test --config playwright.capture.config.mjs",
+    "test:audit": "npm run build && playwright test e2e/ui/audit-corrections.spec.mjs",
+    "test:audit:matrix": "npm run build && playwright test --config playwright.audit.config.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

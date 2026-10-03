@@ -159,7 +159,9 @@ export function getCameraViewport(cy, plan, { padding = 68, maxZoom, rect = null
   // Presentation V2 stores a screen-space padding intent. A lower-third or
   // Story Studio dock can narrow the live safe rectangle, so cap that intent
   // relative to the actual geometry instead of shrinking the map to a sliver.
-  const effectivePadding = rect ? clampFitPadding(requestedPadding, rect) : requestedPadding;
+  const effectivePadding = rect ? clampFitPadding(requestedPadding, rect, {
+    maximumRatio: plan.isMap ? 0.12 : 0.08
+  }) : requestedPadding;
   const box = collection.boundingBox({ includeLabels: true });
   const viewport = rect
     ? fitViewportToRect({

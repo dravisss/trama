@@ -90,7 +90,7 @@ test("flagship desktop cobre a jornada local-first completa até o standalone of
 
   await page.locator("[data-react-ui-mode='story']").click();
   await expect(page.locator("#story-timeline-shell")).toBeVisible();
-  await page.locator(".story-timeline-card-main").first().click();
+
   const storyTitle = page.locator("#story-inspector-title");
   await expect(storyTitle).toBeVisible();
   await storyTitle.fill("A pergunta revisada");
@@ -132,7 +132,8 @@ test("flagship desktop cobre a jornada local-first completa até o standalone of
 test("flagship mobile preserva os controles críticos de edição, Apresentar e Story Studio", async ({ page }) => {
   await openFlagship(page, { width: 390, height: 844 });
   await selectDemandOnCanvas(page, { inspectorVisible: false });
-  await page.getByRole("navigation", { name: "Painéis do editor" }).getByRole("button", { name: "Detalhes" }).click();
+  await page.locator("#sidebar-toggle").click();
+  await page.getByLabel("Painel do editor", {exact:true}).selectOption("inspect");
   const label = page.locator("#dock-element-label");
   await expect(label).toBeVisible();
   await label.fill("Demanda móvel");
@@ -144,10 +145,10 @@ test("flagship mobile preserva os controles críticos de edição, Apresentar e 
   await page.keyboard.press("Escape");
 
   await page.locator("[data-react-ui-mode='story']").click();
-  const inspectorToggle = page.locator("#story-mobile-inspector-toggle");
+  const inspectorToggle = page.locator("button[data-story-surface=movement]");
   await inspectorToggle.click();
   await expect(page.locator("body")).toHaveClass(/story-inspector-mobile-open/);
-  await page.locator(".story-timeline-card-main").first().click();
+
   const storyTitle = page.locator("#story-inspector-title");
   await storyTitle.fill("Movimento móvel revisado");
   await storyTitle.press("Enter");

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/Button.jsx";
 import { Input } from "./ui/Field.jsx";
 import { Icon } from "./ui/Icon.jsx";
@@ -175,7 +175,7 @@ function StoryBeatCard({ scene, beat, beatIndex, frameIndex, active, title, acti
   </article>;
 }
 
-function StoryScene({ chapter, scene, sceneIndex, displayIndex = sceneIndex, frameIndexByBeat, currentIndex, getBeatTitle, actions }) {
+function StoryScene({ chapter, scene, sceneIndex, displayIndex = sceneIndex, frameIndexByBeat, currentIndex, getBeatTitle, actions, hidden = false }) {
   const sceneDuration = (scene.beats || []).reduce((sum, beat) => sum + durationFor(scene, beat), 0) || Number(scene.timing?.durationMs || 5000);
   const dragPayload = { kind: "scene", sceneId: scene.id, chapterId: chapter.id };
   const pointerRef = usePointerDrag(dragPayload, {
@@ -192,6 +192,7 @@ function StoryScene({ chapter, scene, sceneIndex, displayIndex = sceneIndex, fra
   return <section
     ref={pointerRef}
     className="story-timeline-scene"
+    hidden={hidden}
     data-scene-id={scene.id}
     data-chapter-id={chapter.id}
     onDragOver={event => {
@@ -244,19 +245,20 @@ function StoryScene({ chapter, scene, sceneIndex, displayIndex = sceneIndex, fra
   </section>;
 }
 
-function StoryTimeline({ presentation = {}, timeline = [], currentIndex = -1, getBeatTitle, actions }) {
+function StoryTimeline({ presentation = {}, timeline = [], currentIndex = -1, getBeatTitle, actions, overview = false }) {
   const frameIndexByBeat = new Map(timeline.map((frame, frameIndex) => [frame.beatId, frameIndex]));
+  const currentSceneId = timeline[currentIndex]?.sceneId || presentation.chapters?.[0]?.scenes?.[0]?.id;
   return <>
     {(presentation.chapters || []).map((chapter, chapterIndex) => {
       const sceneOffset = (presentation.chapters || []).slice(0, chapterIndex).reduce((count, previousChapter) => count + (previousChapter.scenes || []).length, 0);
       const chapterDuration = (chapter.scenes || []).reduce((sum, scene) => sum + ((scene.beats || []).reduce((beatSum, beat) => beatSum + durationFor(scene, beat), 0) || Number(scene.timing?.durationMs || 5000)), 0);
       return <section className="story-timeline-chapter" data-chapter-id={chapter.id} key={chapter.id}>
         <header className="story-timeline-chapter-header"><strong>{chapterIndex + 1} · {chapter.title}</strong><time>{formatDuration(chapterDuration)}</time></header>
-        {(chapter.scenes || []).map((scene, sceneIndex) => <StoryScene key={scene.id} chapter={chapter} scene={scene} sceneIndex={sceneIndex} displayIndex={sceneOffset + sceneIndex} frameIndexByBeat={frameIndexByBeat} currentIndex={currentIndex} getBeatTitle={getBeatTitle} actions={actions} />)}
+        {(chapter.scenes || []).map((scene, sceneIndex) => <StoryScene key={scene.id} hidden={!overview && scene.id !== currentSceneId} chapter={chapter} scene={scene} sceneIndex={sceneIndex} displayIndex={sceneOffset + sceneIndex} frameIndexByBeat={frameIndexByBeat} currentIndex={currentIndex} getBeatTitle={getBeatTitle} actions={actions} />)}
       </section>;
     })}
     <Button unstyled type="button" className="story-timeline-add-scene-inline" onClick={() => actions.addScene?.()}>+ Cena manual</Button>
-    {!presentation.chapters?.length ? <div className="story-timeline-empty-state">Crie uma cena para começar a contar este loop.</div> : null}
+    {!presentation.chapters?.length ? <div className="story-timeline-empty-state">Crie uma cena para começar a contar este mapa.</div> : null}
   </>;
 }
 
@@ -267,10 +269,18 @@ function StoryTimeline({ presentation = {}, timeline = [], currentIndex = -1, ge
  * second static timeline from drifting away from the storyboard cards.
  */
 export function StoryTimelineShell({ status = "Nenhum movimento selecionado", time = "00:00", currentIndex = -1, totalFrames = 0, presentation = {}, timeline = [], getBeatTitle, actions = {} } = {}) {
+  const [overview, setOverview] = useState(false);
   return <section id="story-timeline-shell" data-story-ui="v2" className="story-timeline story-timeline-v2" aria-label="Timeline da apresentação">
     <div className="story-timeline-header">
       <div><span className="dock-eyebrow">Timeline</span><strong id="story-timeline-status">{status}</strong></div>
+      <div className="story-surface-switch" aria-label="Área de trabalho da história">
+        <Button unstyled data-story-surface="map" aria-pressed="true">Mapa</Button>
+        <Button unstyled data-story-surface="movement" aria-pressed="false">Movimento</Button>
+        <Button unstyled data-story-surface="timeline" aria-pressed="false">Timeline</Button>
+      </div>
       <div className="story-timeline-create-actions">
+        <Button unstyled type="button" id="story-timeline-overview" aria-pressed={overview} onClick={() => setOverview(value => !value)}>{overview ? "Cena atual" : "Ver todas as cenas"}</Button>
+        <Button unstyled type="button" id="story-desktop-inspector-toggle" aria-controls="editor-dock" aria-expanded="true">Painel do movimento</Button>
         <Button unstyled type="button" id="story-timeline-add-scene" className="story-timeline-add-scene">+ Cena de loop</Button>
         <Button unstyled type="button" id="story-timeline-add-manual-scene" className="story-timeline-add-manual-scene">+ Cena manual</Button>
       <Button unstyled type="button" id="story-mobile-inspector-toggle" className="story-timeline-edit-mobile" aria-label="Abrir editor do movimento" aria-controls="editor-dock" aria-expanded="false" title="Abrir editor do movimento">Editar movimento</Button>
@@ -278,7 +288,7 @@ export function StoryTimelineShell({ status = "Nenhum movimento selecionado", ti
       <span id="story-timeline-time">{time}</span>
     </div>
     <Input unstyled id="story-timeline-scrubber" type="range" min="0" max={Math.max(0, totalFrames - 1)} value={Math.max(0, currentIndex)} step="1" aria-label="Selecionar movimento na timeline" readOnly />
-    <div id="react-story-timeline-root" className="story-timeline-track react-story-timeline-track" aria-live="polite"><StoryTimeline presentation={presentation} timeline={timeline} currentIndex={currentIndex} getBeatTitle={getBeatTitle} actions={actions} /></div>
+    <div id="react-story-timeline-root" className="story-timeline-track react-story-timeline-track" data-overview={overview} aria-live="polite"><StoryTimeline presentation={presentation} timeline={timeline} currentIndex={currentIndex} getBeatTitle={getBeatTitle} actions={actions} overview={overview} /></div>
     <div className="story-timeline-actions">
       <Button unstyled type="button" id="story-timeline-first" aria-label="Primeiro movimento"><Icon name="skipFirst" size="sm" /></Button>
       <Button unstyled type="button" id="story-timeline-previous">Anterior</Button>

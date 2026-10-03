@@ -31,15 +31,21 @@ export function resolveView(view, views = []) {
 }
 
 export function buildViewLegend(view) {
+  const seen = new Set();
   return (view?.rules || []).flatMap(rule => {
     const selector = rule.selector || {};
     if (!selector.attribute) return [];
     const properties = rule.properties || {};
     const visual = properties.fill || properties.color || properties["stroke-color"] || properties["badge-fill"];
     if (!visual && !properties.shape && !properties.highlight) return [];
+    const label = properties.legend || (selector.attribute === "type"
+      ? ({ reinforcing: "Reforço", balancing: "Balanceamento" }[selector.value] || selector.value)
+      : `${selector.attribute}: ${selector.value}`);
+    if (seen.has(label)) return [];
+    seen.add(label);
     return [{
       id: `${selector.type}-${selector.attribute}-${selector.value}`,
-      label: properties.legend || `${selector.attribute}: ${selector.value}`,
+      label,
       type: selector.type,
       color: visual || "#7a8a72",
       shape: properties.shape || (selector.type === "relation" ? "line" : "ellipse")

@@ -53,14 +53,16 @@ test("CreateView cria uma view sem duplicar o mapa e restaura após reload", asy
     request.method() === "POST" && request.url().endsWith("/api/views"));
 
   await actions.locator("#new-view").click();
+  await expect(page.locator("#command-dialog[open]")).toBeVisible();
+  await page.locator("#command-dialog-submit").click();
   const request = await createRequest;
-  await expect(activeViewSelect(page).locator("option:checked")).toHaveText("View 3");
-  await expect(page.locator("#toast")).toContainText("Nova view criada");
+  await expect(activeViewSelect(page).locator("option:checked")).toHaveText("Vista 3");
+  await expect(page.locator("#toast")).toContainText("Nova vista criada");
   expect(request.postDataJSON()).toMatchObject({ map_id: "flagship-growth" });
 
   await page.reload({ waitUntil: "domcontentloaded" });
   await page.getByRole("button", { name: /Flagship — Crescimento sob pressão/ }).click();
-  await expect(activeViewSelect(page)).toContainText("View 3");
+  await expect(activeViewSelect(page)).toContainText("Vista 3");
 });
 
 test("DuplicateView cria uma cópia independente no mesmo mapa", async ({ page }) => {
@@ -73,7 +75,7 @@ test("DuplicateView cria uma cópia independente no mesmo mapa", async ({ page }
   await actions.locator("#duplicate-view").click();
   const request = await createRequest;
   await expect(activeViewSelect(page).locator("option:checked")).toHaveText(`${currentTitle} cópia`);
-  await expect(page.locator("#toast")).toContainText("View duplicada");
+  await expect(page.locator("#toast")).toContainText("Vista duplicada");
   expect(request.postDataJSON()).toMatchObject({
     map_id: "flagship-growth",
     title: `${currentTitle} cópia`
@@ -91,7 +93,7 @@ test("DeriveView cria uma view que herda a ativa sem duplicar regras", async ({ 
   await actions.locator("#derive-view").click();
   const request = await createRequest;
   await expect(activeViewSelect(page).locator("option:checked")).toHaveText(`${currentTitle} derivada`);
-  await expect(page.locator("#toast")).toContainText("View derivada");
+  await expect(page.locator("#toast")).toContainText("Vista derivada");
   expect(request.postDataJSON()).toMatchObject({
     map_id: "flagship-growth",
     title: `${currentTitle} derivada`,
@@ -106,6 +108,7 @@ test("DeleteView remove a view criada e preserva o mapa ativo", async ({ page })
   const createResponse = page.waitForResponse(response =>
     response.request().method() === "POST" && response.url().endsWith("/api/views"));
   await actions.locator("#new-view").click();
+  await page.locator("#command-dialog-submit").click();
   const response = await createResponse;
   const createdTitle = (await response.json()).view?.title;
   expect(createdTitle).toBeTruthy();
@@ -113,6 +116,7 @@ test("DeleteView remove a view criada e preserva o mapa ativo", async ({ page })
 
   const deleteRequest = page.waitForRequest(request =>
     request.method() === "DELETE" && /\/api\/views\/[^/]+$/.test(request.url()));
+  await openViewActions(page);
   await actions.locator("#delete-view").click();
   const request = await deleteRequest;
   // Deleting the active view can choose any remaining view in the same map.
@@ -121,7 +125,7 @@ test("DeleteView remove a view criada e preserva o mapa ativo", async ({ page })
   await expect(activeViewSelect(page).locator("option:checked")).not.toHaveText(createdTitle);
   await expect(activeViewSelect(page)).not.toHaveValue("");
   await expect(activeViewSelect(page)).not.toContainText(createdTitle);
-  await expect(page.locator("#toast")).toContainText("View removida");
+  await expect(page.locator("#toast")).toContainText("Vista removida");
   await expect(page.locator("#cld-root")).toHaveAttribute("data-qa-fingerprint", /.+/);
   expect(request.method()).toBe("DELETE");
 });

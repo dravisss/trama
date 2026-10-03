@@ -82,6 +82,7 @@ function ReactShell({ mode, view, callbacks, viewSwitcher, onModeChange, onActio
               data-react-ui-mode={value}
               className={mode === value ? "active" : ""}
               aria-pressed={mode === value}
+              aria-current={mode === value ? "page" : undefined}
               aria-label={label}
               disabled={workspaceHydrating && value !== "workspace"}
               onClick={() => onModeChange?.(value)}
@@ -127,7 +128,7 @@ function ReactShell({ mode, view, callbacks, viewSwitcher, onModeChange, onActio
           <div className="save-popover" id="save-popover" hidden>
             <strong>Status do projeto</strong>
             <p id="save-popover-message">Tudo salvo.</p>
-            <Button id="retry-save" size="sm" variant="secondary">Tentar novamente</Button>
+            <Button hidden id="retry-save" size="sm" variant="secondary">Tentar novamente</Button>
           </div>
         </div>
         {mode === "map" ? null : <div className="actions command-bar">

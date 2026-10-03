@@ -1,3 +1,4 @@
+import { Icon } from "./ui/Icon.jsx";
 import React from "react";
 import { Button } from "./ui/Button.jsx";
 import { Input, Select, Textarea } from "./ui/Field.jsx";
@@ -9,10 +10,10 @@ function OverlaySurfacesMarkup() {
       <form className="modal-card" id="loop-description-form">
         <div className="modal-header">
           <div>
-            <div className="sidebar-section-title">Descrição do loop</div>
-            <h2 id="loop-description-title">Editar leitura</h2>
+            <div className="sidebar-section-title">Descrição do mapa</div>
+            <h2 id="loop-description-title">Editar descrição do mapa</h2>
           </div>
-          <Button unstyled type="button" id="close-loop-description">Fechar</Button>
+          <Button unstyled type="button" id="close-loop-description" aria-label="Fechar"><Icon name="close" /></Button>
         </div>
         <label>Resumo curto<Input unstyled id="loop-summary-input" type="text" maxLength="180" /></label>
         <label>Markdown<Textarea unstyled id="loop-description-input" /></label>
@@ -31,7 +32,7 @@ function OverlaySurfacesMarkup() {
       <form method="dialog" id="command-dialog-form">
         <div className="modal-header">
           <div><div className="sidebar-section-title">Trama</div><h2 id="command-dialog-title" /></div>
-          <Button unstyled type="button" id="command-dialog-close">Fechar</Button>
+          <Button unstyled type="button" id="command-dialog-close" aria-label="Fechar"><Icon name="close" /></Button>
         </div>
         <p id="command-dialog-description" />
         <div id="command-dialog-fields" />

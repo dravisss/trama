@@ -7703,6 +7703,26 @@
     }
   });
 
+  // src/app/sourceDiagnostics.js
+  function sourceDiagnostic(error) {
+    const first = error.errors?.[0];
+    let message = first?.message || error.message;
+    const exact = {
+      "Unrecognized style syntax.": "Sintaxe de estilo n\xE3o reconhecida. Use @view, @settings ou um seletor variable/relation.",
+      "Invalid frontmatter entry.": "Metadado inv\xE1lido. Use chave: valor entre os delimitadores ---.",
+      "Frontmatter is not closed.": "Feche os metadados com uma linha ---.",
+      "Expected '- id: Label'.": "Vari\xE1vel inv\xE1lida. Use - id: Nome na se\xE7\xE3o Variables.",
+      "Expected 'source SIGN target'.": "Rela\xE7\xE3o inv\xE1lida. Use origem ++ destino ou origem +- destino na se\xE7\xE3o Relations.",
+      "Story sections belong in a separate Presentation Markdown document.": "Escreva a hist\xF3ria em um documento Markdown separado do mapa.",
+      "Loop property requires a loop heading.": "Declare o t\xEDtulo do loop antes de suas propriedades.",
+      "Loop fields must be valid inline JSON.": "Os campos do loop precisam conter JSON v\xE1lido.",
+      "Unknown loop property.": "Propriedade de loop desconhecida. Revise a sintaxe da se\xE7\xE3o Loops.",
+      "Fields suffix must be a valid JSON object after '::'.": "Use um objeto JSON v\xE1lido ap\xF3s ::."
+    };
+    message = exact[message] || message.replace(/^Unknown source variable '(.+)'\.$/, "Vari\xE1vel de origem '$1' n\xE3o encontrada. Declare-a em Variables.").replace(/^Unknown target variable '(.+)'\.$/, "Vari\xE1vel de destino '$1' n\xE3o encontrada. Declare-a em Variables.").replace(/^Unknown relation '(.+)'\.$/, "Rela\xE7\xE3o '$1' n\xE3o encontrada. Declare-a em Relations.").replace(/^Unknown property '(.+)' for (.+)\.$/, "Propriedade '$1' n\xE3o reconhecida para $2. Revise o nome da propriedade.").replace(/^Unknown selector '(.+)'\.$/, "Seletor '$1' n\xE3o reconhecido. Use variable, relation, loop, scene ou canvas.").replace(/^Invalid declaration '(.+)'\.$/, "Declara\xE7\xE3o '$1' inv\xE1lida. Use propriedade: valor;").replace(/^Duplicate relation '(.+)' \(first declared on line (\d+)\)\. Declare at most one relation per ordered pair\.$/, "Rela\xE7\xE3o '$1' duplicada; primeira declara\xE7\xE3o na linha $2. Mantenha uma rela\xE7\xE3o por par ordenado.");
+    return `${first?.line ? `Linha ${first.line}: ` : ""}${message} O \xFAltimo mapa v\xE1lido foi preservado. Corrija a fonte para aplicar.`;
+  }
+
   // src/core/loops.js
   var LOOP_TYPES = /* @__PURE__ */ new Set(["reinforcing", "balancing"]);
   var discoveryCache = /* @__PURE__ */ new WeakMap();
@@ -10179,15 +10199,19 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
     }), { settings: {}, rules: [] });
   }
   function buildViewLegend(view) {
+    const seen = /* @__PURE__ */ new Set();
     return (view?.rules || []).flatMap((rule) => {
       const selector = rule.selector || {};
       if (!selector.attribute) return [];
       const properties = rule.properties || {};
       const visual = properties.fill || properties.color || properties["stroke-color"] || properties["badge-fill"];
       if (!visual && !properties.shape && !properties.highlight) return [];
+      const label = properties.legend || (selector.attribute === "type" ? { reinforcing: "Refor\xE7o", balancing: "Balanceamento" }[selector.value] || selector.value : `${selector.attribute}: ${selector.value}`);
+      if (seen.has(label)) return [];
+      seen.add(label);
       return [{
         id: `${selector.type}-${selector.attribute}-${selector.value}`,
-        label: properties.legend || `${selector.attribute}: ${selector.value}`,
+        label,
         type: selector.type,
         color: visual || "#7a8a72",
         shape: properties.shape || (selector.type === "relation" ? "line" : "ellipse")
@@ -13164,7 +13188,9 @@ ${errors.map((error) => `- ${error}`).join("\n")}`);
     const collection = collectCameraElements(cy, plan);
     if (!collection?.length || typeof cy.getFitViewport !== "function") return null;
     const requestedPadding = plan.camera.padding || padding;
-    const effectivePadding = rect ? clampFitPadding(requestedPadding, rect) : requestedPadding;
+    const effectivePadding = rect ? clampFitPadding(requestedPadding, rect, {
+      maximumRatio: plan.isMap ? 0.12 : 0.08
+    }) : requestedPadding;
     const box = collection.boundingBox({ includeLabels: true });
     const viewport = rect ? fitViewportToRect({
       boundingBox: { x: box.x1, y: box.y1, width: box.w, height: box.h },
@@ -16736,14 +16762,24 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
         const handleClose = () => {
           elements2.form.onsubmit = null;
           elements2.dialog.removeEventListener("close", handleClose);
+          let nextInteraction = false;
+          const recordInteraction = () => {
+            nextInteraction = true;
+          };
+          document.addEventListener("pointerdown", recordInteraction, true);
+          document.addEventListener("keydown", recordInteraction, true);
           const restoreFocus = () => {
-            const target = resolveRestoreFocus?.();
+            document.removeEventListener("pointerdown", recordInteraction, true);
+            document.removeEventListener("keydown", recordInteraction, true);
+            if (nextInteraction || document.querySelector("dialog[open], .modal-backdrop:not([hidden])")) return;
+            const originalTarget = resolveRestoreFocus?.();
+            const target = originalTarget?.id ? document.getElementById(originalTarget.id) : originalTarget;
             const ownerMenu = target?.closest?.("details");
             const focusTarget = ownerMenu?.querySelector?.("summary") || target;
             if (ownerMenu) ownerMenu.open = false;
             focusTarget?.focus?.();
           };
-          window.setTimeout(restoreFocus, 150);
+          window.requestAnimationFrame(restoreFocus);
           if (!submitted) {
             resolve(null);
             return;
@@ -16755,6 +16791,11 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
           resolve(values);
         };
         elements2.dialog.addEventListener("close", handleClose, { once: true });
+        const openerMenu = activeAtOpen?.closest?.("details");
+        if (openerMenu) {
+          openerMenu.open = false;
+          openerMenu.querySelector("summary")?.focus?.();
+        }
         openDialog();
         if (typeof onReady === "function") onReady({ fields: elements2.fields, form: elements2.form, dialog: elements2.dialog });
         requestAnimationFrame(() => elements2.fields.querySelector("input, textarea")?.focus());
@@ -17050,13 +17091,21 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
       on(tab, "click", () => setEditorMode(tab.dataset.storyMode));
       on(tab, "keydown", (event) => handleTablistKeydown(event, elements2.storyModeTabs, (current) => setEditorMode(current.dataset.storyMode)));
     });
+    const menuActions = {
+      "validate-presentation": "validate",
+      "apply-presentation-fixes": "applyFixes",
+      "duplicate-presentation": "duplicate",
+      "delete-presentation": "removePresentation",
+      "export-presentation-source": "exportSource"
+    };
+    on(documentRef, "click", (event) => {
+      const button = event.target?.closest?.("button");
+      const action = menuActions[button?.id];
+      if (action && !button.disabled) actions[action]?.();
+    });
     on(elements2.dockPresent, "click", () => actions.present?.());
     on(elements2.generatePresentation, "click", () => actions.generate?.());
-    on(elements2.validatePresentation, "click", () => actions.validate?.());
-    on(elements2.applyPresentationFixes, "click", () => actions.applyFixes?.());
     on(elements2.savePresentation, "click", () => actions.save?.());
-    on(elements2.duplicatePresentation, "click", () => actions.duplicate?.());
-    on(elements2.deletePresentation, "click", () => actions.removePresentation?.());
     on(elements2.addSelectionBeat, "click", () => actions.addSelectionBeat?.());
     on(elements2.captureCanvasScene, "click", () => actions.captureCanvasScene?.());
     on(elements2.addQueryBeat, "click", () => actions.addQueryBeat?.());
@@ -17092,7 +17141,6 @@ ${errors.map((error) => `- line ${error.line}: ${error.message}`).join("\n")}`);
     });
     on(elements2.validatePresentationSource, "click", () => actions.validateSource?.(false));
     on(elements2.applyPresentationSource, "click", () => actions.applySource?.());
-    on(elements2.exportPresentationSource, "click", () => actions.exportSource?.());
     on(elements2.exportPresentationHtml, "click", () => actions.exportHtml?.());
     on(elements2.presentationSourceEditor, "input", (event) => actions.updateSourceDraft?.(event.currentTarget.value));
     on(elements2.presentationTitleInput, "change", (event) => actions.updateTitle?.(event.currentTarget.value));
@@ -19763,6 +19811,8 @@ ${styles}</style>
   var presentationController = null;
   var presentationGeneration = 0;
   var boundCy = null;
+  var userMovedCamera = false;
+  var styleSourceDraftRevision = 0;
   var fitFrame = null;
   var fitTimer = null;
   var cameraStableTimer = null;
@@ -19977,6 +20027,11 @@ ${styles}</style>
   var presentationCameraGeneration = 0;
   function fitCanvas(options = {}) {
     if (!engine?.cy) return;
+    if (options.automatic && userMovedCamera) {
+      engine.cy.resize();
+      return;
+    }
+    if (!options.automatic) userMovedCamera = false;
     engine.cy.resize();
     const safeRect = measureCanvasSafeRect({
       canvas: engine.canvas,
@@ -19993,6 +20048,7 @@ ${styles}</style>
       ]
     });
     if (qaEnabled && qaRoot && safeRect) qaRoot.dataset.qaSafeRect = JSON.stringify(safeRect);
+    engine.cy.stop(true, false);
     engine.fit({ ...options, safeRect });
   }
   function presentationCameraOverlays() {
@@ -20024,7 +20080,7 @@ ${styles}</style>
       importJsonFile,
       setWorkspaceMode,
       toggleSavePopover,
-      retrySave: () => persistActiveLoop(),
+      retrySave: retryProjectSave,
       startRouteDrag,
       startConnectionDrag,
       savePopoverChanges,
@@ -20262,10 +20318,8 @@ ${styles}</style>
         selectedNodeIds = nodeIds;
         selectedEdgeIds = edgeIds;
         lastStorySelectionFocus = focusForCurrentSelection();
-        if (selectedNodeIds.length > 1) {
-          selectedNodeId = selectedNodeIds.at(-1);
-          selectedEdgeId = null;
-        }
+        selectedNodeId = selectedNodeIds.at(-1) || null;
+        selectedEdgeId = selectedNodeId ? null : selectedEdgeIds.at(-1) || null;
         if (workspaceMode !== "story") renderDockInspector();
         updateStoryCanvasSelectionAction();
       },
@@ -20558,6 +20612,7 @@ ${styles}</style>
       syncWorkspaceFromEngine(previousIndex);
       schedulePersistActiveLoop(previousIndex, { delay: 80 });
     }
+    userMovedCamera = false;
     activeIndex = index;
     appCommands.selectModel(index);
     selectedNodeId = null;
@@ -20618,6 +20673,7 @@ ${styles}</style>
   }
   function openDockPanel(panel) {
     activeDockPanel = panel;
+    document.body.dataset.editorPanel = panel;
     appCommands.openDockPanel(panel);
     setEditorDockCollapsed(false);
     document.body.classList.toggle("editor-data-workspace", panel === "table");
@@ -20628,7 +20684,7 @@ ${styles}</style>
     elements.dockTitle.textContent = {
       inspect: "Detalhes",
       map: "Mapa e descri\xE7\xE3o",
-      code: "C\xF3digo do loop",
+      code: "Markdown do mapa",
       style: "Vista visual",
       story: "Storyboard",
       table: "Tabela de dados",
@@ -20641,9 +20697,10 @@ ${styles}</style>
     }
     if (panel === "code") syncLoopSourceDraftControls();
     if (panel === "style") {
+      const draftRevision = styleSourceDraftRevision;
       hydrateViewBuilder(workspace[activeIndex]?.view);
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        if (activeDockPanel === "style") hydrateViewBuilder(workspace[activeIndex]?.view);
+        if (activeDockPanel === "style" && styleSourceDraftRevision === draftRevision) hydrateViewBuilder(workspace[activeIndex]?.view);
       }));
     }
     if (panel === "story") renderDockStory();
@@ -20956,7 +21013,7 @@ ${styles}</style>
       return resolveView(entry.view, entry.views || []);
     } catch (error) {
       console.error(error);
-      showToast("A view base n\xE3o p\xF4de ser resolvida.");
+      showToast("A vista base n\xE3o p\xF4de ser resolvida.");
       return entry.view;
     }
   }
@@ -20964,14 +21021,19 @@ ${styles}</style>
     const entry = workspace[activeIndex];
     if (!entry) return;
     const number = (entry.views?.length || 0) + 1;
-    const view = compileLoopStyle(`@view "View ${number}"
-
-variable { shape: ellipse; }
-`);
+    const choice = await openCommandDialog({
+      title: "Nova vista",
+      submitLabel: "Criar vista",
+      description: "Uma vista muda a apar\xEAncia do mapa sem duplicar suas vari\xE1veis e rela\xE7\xF5es.",
+      fields: [{ name: "title", label: "Nome da vista", value: `Vista ${number}`, required: true }]
+    });
+    if (!choice) return;
+    const view = compileLoopStyle("variable { shape: ellipse; }\n");
+    view.title = choice.title;
     await createPersistedView(entry, { ...view, map_id: entry.mapId || entry.id });
   }
   async function createPersistedView(entry, view) {
-    await persistCreatedView(entry, view, () => createView.execute({ view }), "Nova view criada sem duplicar o mapa.");
+    await persistCreatedView(entry, view, () => createView.execute({ view }), "Nova vista criada sem duplicar o mapa.");
   }
   async function persistCreatedView(entry, view, persist, successMessage) {
     try {
@@ -20991,7 +21053,7 @@ variable { shape: ellipse; }
       showToast(successMessage);
     } catch (error) {
       handleApiError(error);
-      showToast("N\xE3o foi poss\xEDvel criar a view.");
+      showToast("N\xE3o foi poss\xEDvel criar a vista.");
     }
   }
   async function duplicateActiveView() {
@@ -20999,17 +21061,17 @@ variable { shape: ellipse; }
     if (!entry?.view) return;
     const source = { ...entry.view, map_id: entry.mapId || entry.id };
     const view = duplicateView.draft({ view: source });
-    await persistCreatedView(entry, view, () => duplicateView.execute({ view: source }), "View duplicada sem duplicar o mapa.");
+    await persistCreatedView(entry, view, () => duplicateView.execute({ view: source }), "Vista duplicada sem duplicar o mapa.");
   }
   async function deriveActiveView() {
     const entry = workspace[activeIndex];
     if (!entry?.view) {
-      showToast("Selecione uma view para criar uma deriva\xE7\xE3o.");
+      showToast("Selecione uma vista para criar uma deriva\xE7\xE3o.");
       return;
     }
     const source = { ...entry.view, map_id: entry.mapId || entry.id };
     const view = deriveView.draft({ view: source });
-    await persistCreatedView(entry, view, () => deriveView.execute({ view: source }), "View derivada sem duplicar o mapa.");
+    await persistCreatedView(entry, view, () => deriveView.execute({ view: source }), "Vista derivada sem duplicar o mapa.");
   }
   async function deleteActiveView() {
     const entry = workspace[activeIndex];
@@ -21028,10 +21090,10 @@ variable { shape: ellipse; }
         reroute: !onlyPolarityVisibilityChanged(view, nextView || {})
       });
       renderViewSwitcher();
-      showToast("View removida. O mapa foi preservado.");
+      showToast("Vista removida. O mapa foi preservado.");
     } catch (error) {
       handleApiError(error);
-      showToast("N\xE3o foi poss\xEDvel remover a view.");
+      showToast("N\xE3o foi poss\xEDvel remover a vista.");
     }
   }
   function renderDataTable() {
@@ -21211,7 +21273,7 @@ variable { shape: ellipse; }
   }
   function setStyleStatus(message, error = false) {
     if (reactApp?.renderStyleBuilder) {
-      reactApp.renderStyleBuilder({ status: message, error });
+      reactApp.renderStyleBuilder({ status: message, error, editorValue: styleControlValue("loop-style-editor") });
       return;
     }
     const status = styleControl("loop-style-status");
@@ -21270,6 +21332,9 @@ variable { shape: ellipse; }
   }
   function compileLoopSourceModel(source) {
     const compiled = compileLoopMarkdown(source);
+    if (!compiled.nodes.length) {
+      throw new Error("Linha 1: inclua pelo menos uma vari\xE1vel na se\xE7\xE3o Variables. Corrija a fonte e tente novamente.");
+    }
     const current = engine.getModel({ includePositions: true, includeRoutes: true });
     const nodesById = new Map((current?.nodes || []).map((node) => [node.id, node]));
     const edgesById = new Map((current?.edges || []).map((edge) => [edge.id, edge]));
@@ -21291,8 +21356,24 @@ variable { shape: ellipse; }
     };
     return { compiled, model };
   }
+  function validateMapSourceDraft() {
+    try {
+      compileLoopSourceModel(elements.loopSourceEditor.value);
+      elements.applyLoopSource.disabled = false;
+      if (elements.loopSourceStatus.classList.contains("error")) setDockStatus(elements.loopSourceStatus, "Fonte v\xE1lida \xB7 pronta para pr\xE9via");
+      return true;
+    } catch (error) {
+      elements.applyLoopSource.disabled = true;
+      setDockStatus(elements.loopSourceStatus, sourceErrorMessage(error), true);
+      return false;
+    }
+  }
+  function sourceErrorMessage(error) {
+    return sourceDiagnostic(error);
+  }
   function syncLoopSourceDraftControls() {
     if (!elements.discardLoopSource) return;
+    validateMapSourceDraft();
     elements.discardLoopSource.disabled = !loopSourcePreview;
     elements.applyLoopSource.textContent = loopSourcePreview ? "Aplicar pr\xE9via ao mapa" : "Aplicar ao canvas";
   }
@@ -21301,7 +21382,7 @@ variable { shape: ellipse; }
       const entry = workspace[activeIndex];
       if (!loopSourcePreview) {
         loopSourcePreview = {
-          source: elements.loopSourceEditor.value,
+          source: serializeLoopMarkdown(engine.getModel()),
           model: cloneModel2(engine.getModel({ includePositions: true, includeRoutes: true })),
           view: cloneJson(engine.view),
           entry: entry ? {
@@ -21326,12 +21407,9 @@ variable { shape: ellipse; }
       setDockStatus(elements.loopSourceStatus, "Pr\xE9via ativa \xB7 nada foi salvo");
     } catch (error) {
       previewingLoopSource = false;
-      const first = error.errors?.[0];
-      setDockStatus(
-        elements.loopSourceStatus,
-        first ? `Linha ${first.line}: ${first.message}` : error.message,
-        true
-      );
+      syncLoopSourceDraftControls();
+      elements.applyLoopSource.disabled = true;
+      setDockStatus(elements.loopSourceStatus, sourceErrorMessage(error), true);
     }
   }
   function discardLoopSourcePreview({ silent = false } = {}) {
@@ -21368,7 +21446,7 @@ variable { shape: ellipse; }
       const previousDescription = entry?.description_md || "";
       const generatedDescription = !previousDescription || previousDescription.trim() === `## ${previousTitle}
 
-Descreva aqui a hist\xF3ria e o recorte deste loop.`;
+Descreva aqui a hist\xF3ria e o recorte deste mapa.`;
       previewingLoopSource = false;
       loopSourcePreview = null;
       syncLoopSourceDraftControls();
@@ -21379,7 +21457,7 @@ Descreva aqui a hist\xF3ria e o recorte deste loop.`;
       entry.summary = compiled.description || (generatedDescription ? "" : entry.summary);
       entry.description_md = compiled.description || (generatedDescription ? `## ${model.title}
 
-Descreva aqui a hist\xF3ria e o recorte deste loop.` : entry.description_md);
+Descreva aqui a hist\xF3ria e o recorte deste mapa.` : entry.description_md);
       entry.source = source;
       renderWorkspaceTabs();
       refreshPanels();
@@ -21476,6 +21554,16 @@ Mapa importado de ${file.name}.`,
     const source = styleControlValue("loop-style-editor") || serializeLoopStyle(entry?.view || { title: "Matcha" });
     downloadText(`${slugId(entry?.view?.title || "matcha", "view")}.loop.css`, source, "text/css");
   }
+  function validateStyleSourceDraft() {
+    try {
+      compileLoopStyle(styleControlValue("loop-style-editor"));
+      setStyleStatus("Fonte v\xE1lida \xB7 pronta para pr\xE9via");
+      return true;
+    } catch (error) {
+      setStyleStatus(sourceErrorMessage(error), true);
+      return false;
+    }
+  }
   async function applyLoopStyle() {
     try {
       const compiled = compileLoopStyle(styleControlValue("loop-style-editor"));
@@ -21499,9 +21587,8 @@ Mapa importado de ${file.name}.`,
       setStyleStatus("Vista v\xE1lida e aplicada");
       return true;
     } catch (error) {
-      const first = error.errors?.[0];
       setStyleStatus(
-        first ? `Linha ${first.line}: ${first.message}` : error.message,
+        sourceErrorMessage(error),
         true
       );
       return false;
@@ -22110,7 +22197,7 @@ Mapa importado de ${file.name}.`,
     selectedStorySceneId = fallback?.id || null;
     selectedStoryBeatId = fallback?.beats?.[0]?.id || null;
     applyPresentationStructureEdit(next2, "Cena removida");
-    showToast("Cena removida. O loop e as vari\xE1veis permaneceram intactos.");
+    showToast("Cena removida. O mapa e as vari\xE1veis permaneceram intactos.");
   }
   function removeTimelineBeat(sceneId, beatId) {
     if (!sceneId || !beatId) return;
@@ -22517,10 +22604,17 @@ Mapa importado de ${file.name}.`,
       showToast("Salve uma hist\xF3ria no projeto antes de duplicar.");
       return;
     }
+    const choice = await openCommandDialog({
+      title: "Duplicar hist\xF3ria",
+      description: "Crie uma c\xF3pia independente desta hist\xF3ria. O mapa permanece compartilhado.",
+      submitLabel: "Duplicar",
+      fields: [{ name: "title", label: "Nome da c\xF3pia", value: `${activePresentationRecord.title} \xB7 c\xF3pia`, required: true }]
+    });
+    if (!choice) return;
     try {
       const result = await apiFetch(`/api/presentations/${encodeURIComponent(activePresentationRecord.id)}/duplicate`, {
         method: "POST",
-        body: { title: `${activePresentationRecord.title} \xB7 c\xF3pia` }
+        body: { title: choice.title }
       });
       projectPresentations = [result.presentation, ...projectPresentations];
       selectProjectPresentation(result.presentation);
@@ -22532,7 +22626,13 @@ Mapa importado de ${file.name}.`,
   }
   async function deleteActivePresentation() {
     if (!activePresentationRecord || !apiAvailable) return;
-    if (!window.confirm(`Remover \u201C${activePresentationRecord.title || activePresentationRecord.id}\u201D?`)) return;
+    const choice = await openCommandDialog({
+      title: "Remover hist\xF3ria?",
+      description: `A hist\xF3ria \u201C${activePresentationRecord.title || activePresentationRecord.id}\u201D ser\xE1 removida. O mapa ser\xE1 preservado.`,
+      submitLabel: "Remover hist\xF3ria",
+      danger: true
+    });
+    if (!choice) return;
     try {
       await apiFetch(`/api/presentations/${encodeURIComponent(activePresentationRecord.id)}`, { method: "DELETE" });
       projectPresentations = projectPresentations.filter((item) => item.id !== activePresentationRecord.id);
@@ -22837,6 +22937,7 @@ Mapa importado de ${file.name}.`,
     const warnings = result.warnings.length;
     elements.storyLintStatus.textContent = errors ? `${errors} erro(s) bloqueador(es) \xB7 ${warnings} aviso(s) \xB7 score ${result.scores?.overall ?? "\u2014"}` : warnings ? `Pronto para revisar \xB7 ${warnings} aviso(s) \xB7 score ${result.scores?.overall ?? "\u2014"}` : `Story Lint: pronto para apresentar \xB7 score ${result.scores?.overall ?? "\u2014"}`;
     elements.storyLintStatus.classList.toggle("error", errors > 0);
+    elements.applyPresentationFixes = document.querySelector("#apply-presentation-fixes");
     if (elements.applyPresentationFixes) {
       elements.applyPresentationFixes.disabled = !result.safeFixes?.length;
       elements.applyPresentationFixes.textContent = result.safeFixes?.length ? `Aplicar ${result.safeFixes.length} corre\xE7\xE3o(\xF5es) seguras` : "Aplicar corre\xE7\xF5es seguras";
@@ -22917,8 +23018,12 @@ Mapa importado de ${file.name}.`,
   async function persistActiveLoop(index = activeIndex) {
     const entry = workspace[index];
     if (!entry) return null;
-    if (!apiAvailable || !entry.persisted) {
+    if (!entry.persisted) {
       setSaveStatus("saved", "Salvo localmente");
+      return null;
+    }
+    if (!apiAvailable) {
+      setSaveStatus("error", "Servidor offline");
       return null;
     }
     const revision = (entry.saveRevision || 0) + 1;
@@ -22947,6 +23052,18 @@ Mapa importado de ${file.name}.`,
       return null;
     });
     return task;
+  }
+  async function retryProjectSave() {
+    try {
+      setSaveStatus("saving", "Tentando salvar");
+      await apiFetch("/api/project");
+      apiAvailable = true;
+      await persistActiveLoop();
+    } catch (error) {
+      lastSaveError = error;
+      handleApiError(error);
+      setSaveStatus("error", "Erro ao salvar");
+    }
   }
   function preserveSelectedMapView(persistedEntry, previousEntry) {
     const selected2 = (previousEntry?.views || []).find((view) => view.id === previousEntry.viewId);
@@ -22999,6 +23116,20 @@ Mapa importado de ${file.name}.`,
     if (!engine.cy || boundCy === engine.cy) return;
     boundCy = engine.cy;
     const dragStarts = /* @__PURE__ */ new Map();
+    engine.canvas.addEventListener("wheel", () => {
+      if (!storyMode) {
+        userMovedCamera = true;
+        cancelScheduledFit();
+        engine.cy.stop(true, false);
+      }
+    }, { passive: true, capture: true });
+    engine.cy.on("dragpan scrollzoom pinchzoom", () => {
+      if (!storyMode) {
+        userMovedCamera = true;
+        cancelScheduledFit();
+        engine.cy.stop(true, false);
+      }
+    });
     engine.cy.on("render", () => {
       positionRouteHandle();
       positionConnectionHandle();
@@ -23145,7 +23276,7 @@ Mapa importado de ${file.name}.`,
       summary: "",
       description_md: `## ${title}
 
-Descreva aqui a hist\xF3ria e o recorte deste loop.`,
+Descreva aqui a hist\xF3ria e o recorte deste mapa.`,
       model
     };
     const created = await createLoopEntry(entry);
@@ -23161,7 +23292,7 @@ Descreva aqui a hist\xF3ria e o recorte deste loop.`,
       return await workspacePersistence.createLoop(entry);
     } catch (error) {
       handleApiError(error);
-      showToast(apiAvailable ? "N\xE3o foi poss\xEDvel salvar no SQLite; usando loop local." : "Servidor local offline; usando loop local.");
+      showToast(apiAvailable ? "N\xE3o foi poss\xEDvel salvar no SQLite; usando mapa local." : "Servidor local offline; usando mapa local.");
       return entry;
     }
   }
@@ -23360,7 +23491,7 @@ Descreva o objetivo deste projeto.`
     await persistActiveLoop();
     renderWorkspaceTabs();
     updateScenarioPanel(engine.model);
-    showToast("Loop renomeado.");
+    showToast("Mapa renomeado.");
   }
   var loopDescriptionRestoreFocus = null;
   async function editActiveLoopDescription() {
@@ -23371,7 +23502,7 @@ Descreva o objetivo deste projeto.`
 
 `;
     updateLoopDescriptionPreview();
-    loopDescriptionRestoreFocus = document.activeElement;
+    loopDescriptionRestoreFocus = document.querySelector("#edit-loop-description") || document.activeElement;
     elements.loopDescriptionModal.hidden = false;
     elements.loopDescriptionInput.focus();
   }
@@ -23402,7 +23533,8 @@ Descreva o objetivo deste projeto.`
   }
   function closeLoopDescriptionModal() {
     elements.loopDescriptionModal.hidden = true;
-    loopDescriptionRestoreFocus?.focus?.();
+    const currentOpener = loopDescriptionRestoreFocus?.id ? document.getElementById(loopDescriptionRestoreFocus.id) : loopDescriptionRestoreFocus;
+    currentOpener?.focus?.();
     loopDescriptionRestoreFocus = null;
   }
   async function duplicateActiveLoop() {
@@ -23414,7 +23546,7 @@ Descreva o objetivo deste projeto.`
         workspace.unshift(loopRecordToEntry(data.loop));
         renderWorkspaceTabs();
         selectModel(0, { preserveCurrent: false });
-        showToast("Loop duplicado.");
+        showToast("Mapa duplicado.");
         return;
       } catch (error) {
         handleApiError(error);
@@ -23436,14 +23568,14 @@ Descreva o objetivo deste projeto.`
   }
   async function deleteActiveLoop() {
     if (workspace.length <= 1) {
-      showToast("O projeto precisa manter pelo menos um loop.");
+      showToast("O projeto precisa manter pelo menos um mapa.");
       return;
     }
     const entry = workspace[activeIndex];
     if (!entry) return;
     const confirmed = await openCommandDialog({
       title: "Remover mapa",
-      description: `O mapa \u201C${entry.label}\u201D e suas views ser\xE3o removidos deste projeto.`,
+      description: `O mapa \u201C${entry.label}\u201D e suas vistas ser\xE3o removidos deste projeto.`,
       submitLabel: "Remover mapa",
       danger: true
     });
@@ -23453,14 +23585,14 @@ Descreva o objetivo deste projeto.`
         await apiFetch(`/api/loops/${encodeURIComponent(entry.id)}`, { method: "DELETE" });
       } catch (error) {
         handleApiError(error);
-        showToast(apiAvailable ? "N\xE3o foi poss\xEDvel remover o loop." : "Servidor local offline. O loop n\xE3o foi removido do projeto.");
+        showToast(apiAvailable ? "N\xE3o foi poss\xEDvel remover o mapa." : "Servidor local offline. O mapa n\xE3o foi removido do projeto.");
         return;
       }
     }
     workspace.splice(activeIndex, 1);
     renderWorkspaceTabs();
     selectModel(Math.max(0, activeIndex - 1), { preserveCurrent: false });
-    showToast("Loop removido.");
+    showToast("Mapa removido.");
   }
   function exportJson() {
     const model = engine.getModel({ includePositions: true, includeRoutes: true });
@@ -23485,7 +23617,7 @@ Descreva o objetivo deste projeto.`
     renderLoopBrowser();
     updateEditToolbar();
     if (editing) scheduleFit({ padding: 45, duration: 180 });
-    showToast(editing ? "Modo edi\xE7\xE3o ativo: duplo clique cria n\xF3; selecione um n\xF3 para editar ou conectar." : layoutDirty ? "Edi\xE7\xE3o encerrada. Exporte JSON para preservar tudo." : "Modo edi\xE7\xE3o encerrado.");
+    if (!editing) showToast(layoutDirty ? "Edi\xE7\xE3o encerrada. Exporte JSON para preservar tudo." : "Modo edi\xE7\xE3o encerrado.");
   }
   function setWorkspaceMode(mode = "map") {
     const nextMode = ["workspace", "map", "story", "present"].includes(mode) ? mode : "map";
@@ -23573,16 +23705,18 @@ Descreva o objetivo deste projeto.`
       elements.storyMobileInspectorToggle?.setAttribute("aria-expanded", "true");
       openDockPanel("story");
       window.requestAnimationFrame?.(() => elements.storyMobileInspectorClose?.focus?.());
-      showToast("Editor do beat aberto.");
       return;
     }
     if (!document.body.classList.contains("story-inspector-mobile-open")) return;
     document.body.classList.remove("story-inspector-mobile-open");
+    if (document.body.dataset.storySurface === "movement") {
+      document.body.dataset.storySurface = "map";
+      document.querySelectorAll("button[data-story-surface]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.storySurface === "map")));
+    }
     elements.storyMobileInspectorToggle?.setAttribute("aria-expanded", "false");
     const restore = storyMobileInspectorOpener || elements.storyMobileInspectorToggle;
     storyMobileInspectorOpener = null;
     window.requestAnimationFrame?.(() => restore?.focus?.());
-    showToast("Editor do beat fechado.");
   }
   function toggleStoryMobileInspector() {
     setStoryMobileInspector(!document.body.classList.contains("story-inspector-mobile-open"));
@@ -23811,7 +23945,7 @@ Descreva o objetivo deste projeto.`
     const compiled = compilePresentation(presentation, presentationContext());
     if (!compiled.timeline.length || compiled.errors.length) {
       activateWorkspaceChrome(workspaceMode === "present" ? previousWorkspaceMode : workspaceMode);
-      showToast("Este loop ainda n\xE3o tem apresenta\xE7\xE3o.");
+      showToast("Este mapa ainda n\xE3o tem apresenta\xE7\xE3o.");
       return;
     }
     if (editing) setEditing(false);
@@ -23894,7 +24028,7 @@ Descreva o objetivo deste projeto.`
       fitFrame = null;
       if (generation !== fitGeneration) return;
       if (storyMode || !engine.cy) return;
-      fitCanvas(options);
+      fitCanvas({ ...options, automatic: true });
       engine.cy.resize();
       engine.cy.forceRender?.();
       if (settledFit?.delay) {
@@ -23902,7 +24036,7 @@ Descreva o objetivo deste projeto.`
           fitTimer = null;
           if (generation !== fitGeneration || storyMode || !engine.cy) return;
           engine.cy.resize();
-          fitCanvas(settledFit.options || options);
+          fitCanvas({ ...settledFit.options || options, automatic: true });
           engine.cy.forceRender?.();
           scheduleCameraStable(settledFit.options || options, generation);
         }, settledFit.delay);
@@ -23911,7 +24045,7 @@ Descreva o objetivo deste projeto.`
       requestAnimationFrame(() => {
         if (generation !== fitGeneration || storyMode || !engine.cy) return;
         engine.cy.resize();
-        fitCanvas(options);
+        fitCanvas({ ...options, automatic: true });
         engine.cy.forceRender?.();
         scheduleCameraStable(options, generation);
       });
@@ -23934,17 +24068,24 @@ Descreva o objetivo deste projeto.`
   function scheduleCameraStable(options, generation) {
     if (!qaEnabled || !qaRoot) return;
     if (cameraStableTimer) window.clearTimeout(cameraStableTimer);
-    const duration = Math.max(0, Number(options?.duration) || 0);
+    const duration = Math.max(0, Number(options?.duration ?? 420) || 0);
     cameraStableTimer = window.setTimeout(() => {
       cameraStableTimer = null;
       requestAnimationFrame(() => {
         if (generation !== fitGeneration || storyMode || !engine.cy) return;
+        if (engine.cy.animated()) {
+          scheduleCameraStable({ duration: 32 }, generation);
+          return;
+        }
         qaRoot.dataset.qaCameraStable = `${workspaceMode}:stable:${generation}:${engine.cy.zoom().toFixed(4)}:${Math.round(engine.cy.pan().x)}:${Math.round(engine.cy.pan().y)}`;
       });
     }, duration + 32);
   }
   function zoomCanvas(factor) {
+    userMovedCamera = true;
+    cancelScheduledFit();
     if (!engine.cy) return;
+    engine.cy.stop(true, false);
     const current = engine.cy.zoom();
     const next2 = Math.max(engine.cy.minZoom(), Math.min(engine.cy.maxZoom(), current * factor));
     engine.cy.animate({
@@ -24531,7 +24672,7 @@ Descreva o objetivo deste projeto.`
         return;
       }
       const result = getCameraViewport(engine.cy, plan, {
-        padding: 68,
+        padding: 34,
         rect: safeRect,
         maxZoom: presentationCameraMaxZoom2(plan)
       });
@@ -25223,12 +25364,12 @@ Descreva o objetivo deste projeto.`
     elements.activeProjectLabel.textContent = `Projeto: ${project?.title || "Projeto local"}`;
     elements.activeLoopLabel.textContent = `Mapa: ${projectDisplayName(model) || model.id}`;
     elements.presentToggle.classList.toggle("primary-action", storyMode || storyCount > 0);
-    elements.presentToggle.title = storyCount ? `${storyCount} passos dispon\xEDveis` : "Este loop ainda n\xE3o tem apresenta\xE7\xE3o";
+    elements.presentToggle.title = storyCount ? `${storyCount} passos dispon\xEDveis` : "Este mapa ainda n\xE3o tem apresenta\xE7\xE3o";
     updateLoopSelectorSummary();
     document.querySelector("#scenario-eyebrow").textContent = model.eyebrow || project?.title || "Mapa ativo";
     document.querySelector("#scenario-title").textContent = projectHeading(model) || model.id;
     document.querySelector("#scenario-description").innerHTML = renderMarkdown(
-      workspace[activeIndex]?.description_md || model.description || "Este loop ainda n\xE3o possui descri\xE7\xE3o. Use **Editar descri\xE7\xE3o** para registrar o contexto."
+      workspace[activeIndex]?.description_md || model.description || "Este mapa ainda n\xE3o possui descri\xE7\xE3o. Use **Editar descri\xE7\xE3o** para registrar o contexto."
     );
   }
   function projectDisplayName(model) {
@@ -25276,7 +25417,7 @@ Descreva o objetivo deste projeto.`
       button.title = item.path;
       button.dataset.projectPath = item.path;
       button.dataset.projectMessage = "Projeto aberto.";
-      const metrics = item.metrics ? `${item.metrics.maps} mapas \xB7 ${item.metrics.views} views \xB7 ${item.metrics.presentations} apresenta\xE7\xF5es` : item.file || item.path;
+      const metrics = item.metrics ? `${item.metrics.maps} mapas \xB7 ${item.metrics.views} vistas \xB7 ${item.metrics.presentations} apresenta\xE7\xF5es` : item.file || item.path;
       button.append(
         element2("small", "", item.active ? "Aberto agora" : metrics),
         element2("small", "project-file", item.file || item.path)
@@ -25361,7 +25502,7 @@ Descreva o objetivo deste projeto.`
     elements.saveStatus.classList.remove("saving", "saved", "error", "dirty");
     elements.saveStatus.classList.add(state);
     const path = project?.path ? ` em ${project.path}` : "";
-    const detail = state === "error" ? `${lastSaveError?.message || "Falha desconhecida"}${path}` : `${message}${path}`;
+    const detail = state === "error" ? `As altera\xE7\xF5es deste mapa ainda n\xE3o foram salvas. ${isNetworkError(lastSaveError) ? "O servidor est\xE1 indispon\xEDvel." : lastSaveError?.message || "Falha desconhecida"}${path}` : `${message}${path}`;
     elements.savePopoverMessage.textContent = detail;
     elements.retrySave.hidden = state !== "error";
   }
@@ -25406,6 +25547,15 @@ Descreva o objetivo deste projeto.`
     if (text !== void 0) node.textContent = text;
     return node;
   }
+  var canvasLayoutObserver = new ResizeObserver(() => {
+    if (storyMode) {
+      engine.cy?.resize();
+      if (currentPresentationFrame) requestAnimationFrame(() => focusStoryCamera(currentPresentationFrame));
+    } else if (["map", "explore", "story"].includes(workspaceMode)) {
+      scheduleFit({ padding: 34, duration: 0, automatic: true });
+    }
+  });
+  canvasLayoutObserver.observe(engine.canvas.parentElement);
   var responsiveFitTimer = null;
   window.addEventListener("resize", () => {
     window.clearTimeout(responsiveFitTimer);
@@ -25417,9 +25567,35 @@ Descreva o objetivo deste projeto.`
       }
       if (storyMode || !engine.cy || !["map", "explore", "story"].includes(workspaceMode)) return;
       engine.cy.resize();
-      fitCanvas({ padding: workspaceMode === "story" ? 34 : 42, duration: 180 });
+      fitCanvas({ padding: workspaceMode === "story" ? 34 : 42, duration: 180, automatic: true });
       engine.cy.forceRender?.();
     }, 180);
+  });
+  document.addEventListener("input", (event) => {
+    if (event.target.id === "loop-source-editor") validateMapSourceDraft();
+    if (event.target.id === "loop-style-editor") {
+      styleSourceDraftRevision += 1;
+      validateStyleSourceDraft();
+    }
+  });
+  document.addEventListener("toggle", (event) => {
+    if (event.target.matches?.("details[open]")) {
+      elements.toast.hidden = true;
+    }
+  }, true);
+  document.addEventListener("click", (event) => {
+    if (event.target.closest?.("#story-desktop-inspector-toggle")) {
+      const collapsed = !document.body.classList.contains("editor-dock-collapsed");
+      setEditorDockCollapsed(collapsed);
+      document.querySelector("#story-desktop-inspector-toggle")?.setAttribute("aria-expanded", String(!collapsed));
+      return;
+    }
+    const mode = event.target.closest?.("button[data-story-surface]")?.dataset.storySurface;
+    if (!mode) return;
+    document.body.dataset.storySurface = mode;
+    document.querySelectorAll("button[data-story-surface]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.storySurface === mode)));
+    if (mode === "movement") setStoryMobileInspector(true);
+    else setStoryMobileInspector(false);
   });
   var tramaDemo = {
     engine,

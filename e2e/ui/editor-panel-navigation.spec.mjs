@@ -58,7 +58,7 @@ test("ações do dock de mapa usam o owner React", async ({ page }) => {
 
   await page.locator("#edit-loop-description").click();
   await expect(page.locator("#loop-description-modal")).toBeVisible();
-  const description = page.getByRole("dialog", { name: "Editar leitura" });
+  const description = page.getByRole("dialog", { name: "Editar descrição do mapa" });
   await expect(description).toBeVisible();
   await description.getByRole("button", { name: "Salvar descrição" }).focus();
   await page.keyboard.press("Tab");

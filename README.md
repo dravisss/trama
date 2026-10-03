@@ -298,3 +298,7 @@ Leitura recomendada:
 
 [MIT](LICENSE). As fontes Noto incluídas mantêm seus próprios arquivos de licença em
 `assets/fonts/`.
+
+### Correções da auditoria de interface
+
+O [registro de aceite](docs/UI_AUDIT_CORRECTIONS.md) relaciona TRM-01–TRM-25 a implementação e testes. O [glossário](docs/DOMAIN_GLOSSARY.md) define o vocabulário de projeto, mapa, vista, loop e história. `npm run test:audit:matrix` verifica os contratos em Chromium, Firefox e WebKit; `npm run capture:ui` gera o corpus com asserts semânticos.

@@ -52,13 +52,20 @@ export function createStoryStudioDomBridge({ elements = {}, actions = {}, docume
     on(tab, "keydown", event => handleTablistKeydown(event, elements.storyModeTabs, current => setEditorMode(current.dataset.storyMode)));
   });
 
+  const menuActions = {
+    "validate-presentation": "validate", "apply-presentation-fixes": "applyFixes",
+    "duplicate-presentation": "duplicate", "delete-presentation": "removePresentation",
+    "export-presentation-source": "exportSource"
+  };
+  on(documentRef, "click", event => {
+    const button = event.target?.closest?.("button");
+    const action = menuActions[button?.id];
+    if (action && !button.disabled) actions[action]?.();
+  });
+
   on(elements.dockPresent, "click", () => actions.present?.());
   on(elements.generatePresentation, "click", () => actions.generate?.());
-  on(elements.validatePresentation, "click", () => actions.validate?.());
-  on(elements.applyPresentationFixes, "click", () => actions.applyFixes?.());
   on(elements.savePresentation, "click", () => actions.save?.());
-  on(elements.duplicatePresentation, "click", () => actions.duplicate?.());
-  on(elements.deletePresentation, "click", () => actions.removePresentation?.());
   on(elements.addSelectionBeat, "click", () => actions.addSelectionBeat?.());
   on(elements.captureCanvasScene, "click", () => actions.captureCanvasScene?.());
   on(elements.addQueryBeat, "click", () => actions.addQueryBeat?.());
@@ -96,7 +103,6 @@ export function createStoryStudioDomBridge({ elements = {}, actions = {}, docume
 
   on(elements.validatePresentationSource, "click", () => actions.validateSource?.(false));
   on(elements.applyPresentationSource, "click", () => actions.applySource?.());
-  on(elements.exportPresentationSource, "click", () => actions.exportSource?.());
   on(elements.exportPresentationHtml, "click", () => actions.exportHtml?.());
   on(elements.presentationSourceEditor, "input", event => actions.updateSourceDraft?.(event.currentTarget.value));
   on(elements.presentationTitleInput, "change", event => actions.updateTitle?.(event.currentTarget.value));

@@ -68,8 +68,17 @@ export function createCommandDialogController(elements) {
         elements.dialog.removeEventListener("close", handleClose);
         // Native dialog finishes its own focus cleanup after `close`; defer
         // restoration to the next task so that cleanup cannot overwrite it.
+        let nextInteraction = false;
+        const recordInteraction = () => { nextInteraction = true; };
+        document.addEventListener("pointerdown", recordInteraction, true);
+        document.addEventListener("keydown", recordInteraction, true);
         const restoreFocus = () => {
-          const target = resolveRestoreFocus?.();
+          document.removeEventListener("pointerdown", recordInteraction, true);
+          document.removeEventListener("keydown", recordInteraction, true);
+          // A follow-up action owns focus once the user has started it.
+          if (nextInteraction || document.querySelector('dialog[open], .modal-backdrop:not([hidden])')) return;
+          const originalTarget = resolveRestoreFocus?.();
+          const target = originalTarget?.id ? document.getElementById(originalTarget.id) : originalTarget;
           // A trigger inside a <details> menu is hidden when the menu closes.
           // Return focus to the visible summary instead of a hidden control.
           const ownerMenu = target?.closest?.("details");
@@ -80,7 +89,7 @@ export function createCommandDialogController(elements) {
         // Let native dialog cleanup finish before restoring focus. Chromium
         // can restore the original hidden trigger after the close event and
         // reopen its <details> owner, so this runs after that cleanup turn.
-        window.setTimeout(restoreFocus, 150);
+        window.requestAnimationFrame(restoreFocus);
         if (!submitted) {
           resolve(null);
           return;
@@ -92,6 +101,13 @@ export function createCommandDialogController(elements) {
         resolve(values);
       };
       elements.dialog.addEventListener("close", handleClose, { once: true });
+      // Native dialog remembers the visible menu summary as its return target.
+      // Remembering a hidden menu item can reopen the menu during close cleanup.
+      const openerMenu = activeAtOpen?.closest?.("details");
+      if (openerMenu) {
+        openerMenu.open = false;
+        openerMenu.querySelector("summary")?.focus?.();
+      }
       openDialog();
       if (typeof onReady === "function") onReady({ fields: elements.fields, form: elements.form, dialog: elements.dialog });
       requestAnimationFrame(() => elements.fields.querySelector("input, textarea")?.focus());

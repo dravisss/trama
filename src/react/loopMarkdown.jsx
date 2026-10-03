@@ -12,18 +12,18 @@ import { Icon } from "./ui/Icon.jsx";
  */
 export function LoopMarkdownPanel() {
   return <>
-    <p className="dock-help">Fonte semântica Mermaid-like. Aplicar atualiza o canvas preservando o arquivo como texto editável.</p>
+    <p className="dock-help">Markdown do mapa com variáveis e relações causais. Aplicar atualiza o canvas preservando a fonte editável.</p>
     <div className="code-file-bar">
-      <div className="code-file-identity"><Icon name="code" size="sm" /><span><strong>Mapa atual · .loop.md</strong><small>Markdown · Mermaid-like</small></span></div>
+      <div className="code-file-identity"><Icon name="code" size="sm" /><span><strong>Mapa atual · .loop.md</strong><small>Markdown causal</small></span></div>
       <div className="code-file-actions">
         <Button type="button" id="import-loop-source" unstyled title="Importar .loop.md / Mermaid">Importar</Button>
         <Button type="button" id="export-loop-source" unstyled title="Exportar .loop.md">Exportar</Button>
       </div>
       <Input unstyled id="loop-source-file" type="file" accept=".md,.loop.md,text/markdown,text/plain" hidden />
     </div>
-    <label className="sr-only" htmlFor="loop-source-editor">Código Markdown do loop</label>
-    <LineNumberedTextarea id="loop-source-editor" label="Código Markdown do loop" defaultValue="" />
-    <div className="dock-status" id="loop-source-status">Documento válido</div>
+    <label className="sr-only" htmlFor="loop-source-editor">Código Markdown do mapa</label>
+    <div className="dock-status" id="loop-source-status" role="status" aria-live="polite">Documento válido</div>
+    <LineNumberedTextarea id="loop-source-editor" label="Código Markdown do mapa" defaultValue="" />
     <div className="code-draft-actions">
       <Button type="button" id="preview-loop-source" unstyled>Pré-visualizar</Button>
       <Button type="button" id="discard-loop-source" unstyled disabled>Descartar prévia</Button>

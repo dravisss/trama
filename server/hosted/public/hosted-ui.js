@@ -49,6 +49,8 @@ function mount(ctx) {
     const input = document.createElement("input");
     input.id = id;
     input.readOnly = true;
+    input.type = secret ? "password" : "text";
+    input.autocomplete = "off";
     input.value = value || "";
     input.addEventListener("focus", () => input.select());
     const copy = document.createElement("button");
@@ -65,7 +67,20 @@ function mount(ctx) {
       copy.textContent = "Copiado";
       setTimeout(() => { copy.textContent = "Copiar"; }, 1600);
     });
-    row.append(input, copy);
+    row.append(input);
+    if (secret) {
+      const reveal = document.createElement("button");
+      reveal.type = "button"; reveal.className = "trama-secondary";
+      reveal.textContent = "Revelar"; reveal.setAttribute("aria-pressed", "false");
+      reveal.addEventListener("click", () => {
+        const visible = input.type === "password";
+        input.type = visible ? "text" : "password";
+        reveal.textContent = visible ? "Ocultar" : "Revelar";
+        reveal.setAttribute("aria-pressed", String(visible));
+      });
+      row.append(reveal);
+    }
+    row.append(copy);
     wrapper.append(labelEl, row);
     if (hint) {
       const small = document.createElement("small");
@@ -162,7 +177,9 @@ function mount(ctx) {
     });
     backup.append(download, remove);
 
-    dialog.append(header, read, edit, agents, backup);
+    const body = document.createElement("div"); body.className = "trama-share-body";
+    body.append(read, edit, agents, backup);
+    dialog.append(header, body);
   }
 
   function heading(text) {

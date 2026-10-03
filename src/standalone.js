@@ -55,6 +55,7 @@ let standaloneAtlasCardSideState = null;
 const root = document.querySelector("#trama-standalone, #loopviewer-standalone");
 if (payload.embed?.sidebar === false) document.body.classList.add("standalone-no-sidebar");
 if (payload.embed?.presentationOnly) document.body.classList.add("standalone-presentation-only");
+if (payload.embed?.presentationOnly && payload.embed?.sidebar !== false) document.body.classList.add("standalone-guided");
 root.innerHTML = `
   <main class="standalone-shell">
     <header class="standalone-header">
@@ -72,7 +73,7 @@ root.innerHTML = `
     <section class="standalone-stage">
       <aside class="standalone-sidebar">
         <section class="standalone-section">
-          <div class="standalone-section-title">Loop ativo</div>
+          <div class="standalone-section-title">Mapa ativo</div>
           <select class="standalone-loop-select" aria-label="Selecionar mapa"></select>
         </section>
         <section class="standalone-section standalone-overview">
@@ -94,6 +95,7 @@ root.innerHTML = `
       </aside>
       <div class="standalone-map">
         <div id="standalone-graph"></div>
+        <p class="standalone-empty" role="status" hidden>Este mapa ainda não possui variáveis ou relações.</p>
         <div class="standalone-view-controls" hidden></div>
         <div class="standalone-view-legend" hidden></div>
         <svg class="standalone-story-connector" aria-hidden="true"></svg>
@@ -135,6 +137,11 @@ const elements = {
   viewControls: root.querySelector(".standalone-view-controls"),
   viewLegend: root.querySelector(".standalone-view-legend")
 };
+
+if (globalThis.matchMedia?.("(max-width: 820px)").matches || payload.embed?.presentationOnly) {
+  elements.shell.classList.add("sidebar-hidden");
+  elements.toggleSidebar.textContent = "Informações do mapa";
+}
 
 function standaloneSafeRect() {
   return measureCanvasSafeRect({
@@ -277,7 +284,12 @@ function selectEntry(index, { first = false } = {}) {
   renderLoops();
   renderStoryList();
   renderViewTools();
-  requestAnimationFrame(() => fitStandalone({ padding: 70, duration: 160 }));
+  requestAnimationFrame(() => {
+    if (currentPresentationFrame && !elements.storyCard.hidden) {
+      engine.cy.stop(true, false);
+      focusStoryCamera(currentPresentationFrame);
+    } else fitStandalone({ padding: 70, duration: 160 });
+  });
 }
 
 function renderViewTools() {
@@ -329,11 +341,12 @@ function renderStandaloneLegend() {
 
 function renderOverview(entry) {
   const model = entry.model;
+  root.querySelector(".standalone-empty").hidden = model.nodes.length > 0;
   const storyCount = compilePresentation(currentPresentation, { model }).timeline.length;
   const loopCount = model.loops?.length || 0;
   elements.eyebrow.textContent = payload.project?.title || "Trama";
   elements.title.textContent = entry.title || model.title || model.id;
-  elements.markdown.innerHTML = renderMarkdown(entry.description_md || model.description || "Este loop não possui descrição editorial.");
+  elements.markdown.innerHTML = renderMarkdown(entry.description_md || model.description || "Este mapa não possui descrição editorial.");
   elements.metrics.textContent = `${model.nodes.length} variáveis · ${model.edges.length} relações · ${loopCount} ciclos · ${storyCount} passos`;
 }
 
@@ -380,8 +393,8 @@ function renderNode(id) {
 function renderRelationPlaceholder() {
   elements.relationPane.replaceChildren(
     element("small", "standalone-pane-eyebrow", "Relações"),
-    element("h3", "", "Clique em uma aresta"),
-    element("p", "", "Você verá as variáveis conectadas, os sinais nas duas pontas e a explicação causal da relação.")
+    element("h3", "", engine.model.edges.length ? "Selecione uma relação" : "Este mapa ainda não possui relações"),
+    element("p", "", engine.model.edges.length ? "Você verá as variáveis conectadas, os sinais nas duas pontas e a explicação causal da relação." : "O mapa compartilhado está vazio. Volte quando seu autor adicionar conteúdo.")
   );
 }
 
@@ -417,7 +430,7 @@ function renderStoryList() {
   elements.storyPane.replaceChildren();
   const compiled = compilePresentation(currentPresentation, { model: engine.model });
   if (!compiled.timeline.length) {
-    elements.storyPane.append(element("p", "", "Este loop exportado ainda não possui apresentação."));
+    elements.storyPane.append(element("p", "", "Este mapa exportado ainda não possui apresentação."));
     return;
   }
   elements.storyPane.append(element("p", "", `${compiled.timeline.length} beats disponíveis. Use Apresentar ou as setas do teclado.`));

@@ -41,7 +41,7 @@ test("Presentation V2 can run the reversible relation-tooltip study", async ({ p
   await expect(page.locator("#presentation-tooltip-connector .presentation-tooltip-line")).toHaveCount(0);
   await expect(page.locator("#presentation-explore")).toHaveCount(0);
   await expect(page.locator("#presentation-resume")).toHaveCount(0);
-  await expect(page.locator("#presentation-presenter-toggle")).toBeHidden();
+  await expect(page.locator("#presentation-presenter-toggle")).toBeVisible();
   const stageBox = await page.locator("#map-area").boundingBox();
   const cardBox = await activePresentationCard(page).boundingBox();
   const previousBox = await activePresentationCard(page).locator("#presentation-previous").boundingBox();

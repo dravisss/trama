@@ -57,7 +57,7 @@ export function StoryStudioV2Frame({ movementInspector = {} } = {}) {
               title="Mais ações"
               onClick={() => setMoreOpen(open => !open)}
             ><Icon name="more" size="sm" /></Button>
-            {moreOpen ? <div id="story-v2-more-menu" className="story-v2-more-menu" role="menu" aria-label="Mais ações da história">
+            {<div hidden={!moreOpen} id="story-v2-more-menu" className="story-v2-more-menu" role="menu" aria-label="Mais ações da história">
               <div className="story-v2-menu-label">Histórias deste projeto</div>
               <div className="presentation-library story-v2-library" id="presentation-library" />
               <div className="story-v2-menu-divider" />
@@ -66,7 +66,7 @@ export function StoryStudioV2Frame({ movementInspector = {} } = {}) {
               <Button unstyled type="button" id="export-presentation-source">Exportar .story.md</Button>
               <Button unstyled type="button" id="duplicate-presentation">Duplicar história</Button>
               <Button unstyled type="button" id="delete-presentation" className="story-v2-danger-action">Remover história</Button>
-            </div> : null}
+            </div>}
           </div>
         </div>
       </header>

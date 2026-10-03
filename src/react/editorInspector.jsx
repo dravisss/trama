@@ -87,9 +87,10 @@ export function EditorInspectorPanel({ inspector = {}, onSubmit } = {}) {
         </div>
       </div>
       <div id="dock-edge-fields" hidden={!edge}>
+        <p className="edge-endpoints">Origem: <strong>{edge?.source}</strong> → Destino: <strong>{edge?.target}</strong></p>
         <div className="dock-field-grid">
-          <label>Origem<Select unstyled id="dock-source-sign" name="sourceSign" defaultValue={edge?.sourceSign || "+"}><option value="+">+</option><option value="−">−</option></Select></label>
-          <label>Destino<Select unstyled id="dock-target-sign" name="targetSign" defaultValue={edge?.targetSign || "+"}><option value="+">+</option><option value="−">−</option></Select></label>
+          <label>Sinal da origem<Select unstyled id="dock-source-sign" name="sourceSign" defaultValue={edge?.sourceSign || "+"}><option value="+">+</option><option value="−">−</option></Select></label>
+          <label>Sinal do destino<Select unstyled id="dock-target-sign" name="targetSign" defaultValue={edge?.targetSign || "+"}><option value="+">+</option><option value="−">−</option></Select></label>
         </div>
         <label>Descrição<Textarea unstyled id="dock-element-description" name="description" defaultValue={edge?.description || ""} /></label>
       </div>
